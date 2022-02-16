@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Elastic Tutoriel</title><link>https://maxime-cls.github.io/elastic-tutorial/</link><description>Recent content on Elastic Tutoriel</description><generator>Hugo -- gohugo.io</generator><language>fr-FR</language><lastBuildDate>Fri, 26 Jun 2020 15:17:20 +0200</lastBuildDate><atom:link href="https://maxime-cls.github.io/elastic-tutorial/index.xml" rel="self" type="application/rss+xml"/><item><title>Installation</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/prerequis/installation/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/prerequis/installation/</guid><description>Prérequis Ubuntu ou Debian Docker Exécuter la commande ci-dessous sudo sysctl -w vm.max_map_count=262144
+Exécution dans Docker avec TLS activé Si les fonctions de sécurité sont activées, vous devez configurer le chiffrement TLS (Transport Layer Security) pour la couche de transport d&amp;rsquo;Elasticsearch. Bien qu&amp;rsquo;il soit possible d&amp;rsquo;utiliser une licence d&amp;rsquo;essai sans configurer TLS, nous vous conseillons de sécuriser votre pile dès le départ.
+Pour obtenir un cluster Elasticsearch et Kibana opérationnel dans Docker avec la sécurité activée, vous pouvez utiliser Docker Compose :</description></item><item><title>Installation de l'Agent Elastic</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/elastic-agent/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/elastic-agent/</guid><description>Modifier la configuration par défaut des agents elastic via le serveur fleet sur l&amp;rsquo;interface Kibana :
+Management -&amp;gt; Fleet
+Cliquez sur Fleet settings
+Fleet Server Hosts
+https://fleet-server:8220
+Elasticsearch Output Configuration (YAML)
+ssl.certificate_authorities: [&amp;quot;/usr/share/elasticsearch/config/certificates/ca/ca.crt&amp;quot;]
+Définissez KIBANA_FLEET_PASSWORD dans le fichier elastic-docker-tls.yml avec le mot de passe généré pour l&amp;rsquo;utilisateur elastic.
+elastic-agent:
+image: docker.elastic.co/beats/elastic-agent-complete:${VERSION}
+container_name: elastic-agent
+restart: always
+user: root # note, synthetic browser monitors require this set to `elastic-agent`
+environment:
+FLEET_ENROLL: 1
+FLEET_URL: &amp;quot;https://fleet-server:8220&amp;quot;
+FLEET_TOKEN_POLICY_NAME: &amp;quot;Default policy&amp;quot;
+FLEET_CA: $CERTS_DIR/ca/ca.</description></item></channel></rss>
