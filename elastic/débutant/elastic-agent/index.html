@@ -7,18 +7,18 @@
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
 <title>Installation de l'Agent Elastic :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645005359 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645005359></script>
+<link href=/elastic-tutorial/css/nucleus.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645005806 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645005806></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/elastic-tutorial/elastic/d%C3%A9butant/elastic-agent/>
@@ -32,10 +32,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645005359></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645005359></script>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645005806></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645005806></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645005359></script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645005806></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -147,12 +147,12 @@ Installation de l'Agent Elastic
 <p>Modifier la configuration par défaut des agents elastic via le serveur fleet sur l&rsquo;interface Kibana :</p>
 <p><strong>Management</strong> -> <strong>Fleet</strong></p>
 <p>Cliquez sur <strong>Fleet settings</strong></p>
-<p><img src=/images/attachments/debutant/fleet_settings.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/fleet_settings.png alt=image.png></p>
 <p><strong>Fleet Server Hosts</strong></p>
 <pre tabindex=0><code>https://fleet-server:8220
 </code></pre><p><strong>Elasticsearch Output Configuration (YAML)</strong></p>
 <pre tabindex=0><code>ssl.certificate_authorities: [&quot;/usr/share/elasticsearch/config/certificates/ca/ca.crt&quot;]
-</code></pre><p><img src=/images/attachments/debutant/fleet_settings_configuration.png alt=image.png></p>
+</code></pre><p><img src=/elastic-tutorial/images/attachments/debutant/fleet_settings_configuration.png alt=image.png></p>
 <p>Définissez KIBANA_FLEET_PASSWORD dans le fichier elastic-docker-tls.yml avec le mot de passe généré pour l&rsquo;utilisateur elastic.</p>
 <pre tabindex=0><code>  elastic-agent:
     image: docker.elastic.co/beats/elastic-agent-complete:${VERSION}
@@ -183,22 +183,22 @@ Installation de l'Agent Elastic
        - elastic
 
 </code></pre><p>Après quelques minutes vous devez voir apparaitre l&rsquo;agent elastic sur l&rsquo;interface Kibana.</p>
-<p><img src=/images/attachments/debutant/fleet_agent_elastic.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/fleet_agent_elastic.png alt=image.png></p>
 <h3 id=intégration-du-module-docker>Intégration du module Docker</h3>
 <p>Cliquez sur <strong>Agent policies</strong> on niveau de l&rsquo;interface Kibana (Fleet).</p>
-<p><img src=/images/attachments/debutant/agent_policies.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/agent_policies.png alt=image.png></p>
 <p>Cliquez sur <strong>Default Policy</strong>.</p>
-<p><img src=/images/attachments/debutant/default_policy.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/default_policy.png alt=image.png></p>
 <p>Cliquez sur <strong>Add Integration</strong>.</p>
-<p><img src=/images/attachments/debutant/add_integration.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/add_integration.png alt=image.png></p>
 <p>Recherchez dans la barre <strong>docker</strong>.</p>
-<p><img src=/images/attachments/debutant/search_integration_docker.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/search_integration_docker.png alt=image.png></p>
 <p>Ajoutez le module Docker.</p>
-<p><img src=/images/attachments/debutant/add_docker_integration.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/add_docker_integration.png alt=image.png></p>
 <p>Sauvegarder votre choix.</p>
-<p><img src=/images/attachments/debutant/add_docker_integration_save.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/add_docker_integration_save.png alt=image.png></p>
 <p>Vous devez obtenir ce résultat dans l&rsquo;interface Kibana.</p>
-<p><img src=/images/attachments/debutant/new_default_policy.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/new_default_policy.png alt=image.png></p>
 <footer class=footline>
 </footer>
 </div>
@@ -211,17 +211,17 @@ Installation de l'Agent Elastic
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645005359></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645005359></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645005359></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645005359></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645005359></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645005359></script>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645005806></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645005806></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645005806></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645005806></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645005806></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645005806></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645005359></script>
-<script src=/elastic-tutorial/js/learn.js?1645005359></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645005359></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645005359></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645005806></script>
+<script src=/elastic-tutorial/js/learn.js?1645005806></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645005806></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645005806></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

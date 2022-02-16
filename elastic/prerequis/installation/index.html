@@ -7,18 +7,18 @@
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
 <title>Installation :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645005359 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645005359 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645005359></script>
+<link href=/elastic-tutorial/css/nucleus.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645005806 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645005806 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645005806></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/elastic-tutorial/elastic/prerequis/installation/>
@@ -32,10 +32,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645005359></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645005359></script>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645005806></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645005806></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645005359></script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645005806></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -159,7 +159,7 @@ Installation
 <strong>.env</strong> définit des variables d&rsquo;environnement pour spécifier la version d&rsquo;Elasticsearch et l&rsquo;emplacement où les certificats Elasticsearch seront créés.
 <strong>create-certs.yml</strong> est un fichier Docker Compose qui lance un conteneur pour générer les certificats pour Elasticsearch et Kibana.
 <strong>elastic-docker-tls.yml</strong> est un fichier Docker Compose qui met en place un cluster Elasticsearch à trois nœuds et une instance Kibana avec TLS activé afin que vous puissiez voir comment les choses fonctionnent. Cette configuration tout-en-un est un moyen pratique de mettre en place votre premier cluster de développement avant de construire un déploiement distribué avec plusieurs hôtes.</p>
-<p>instances.yml :</p>
+<p><strong>instances.yml</strong> :</p>
 <pre tabindex=0><code>instances:
   - name: es01
     dns:
@@ -196,12 +196,13 @@ Installation
     dns:
       - fleet-server
       - localhost
-</code></pre><p>.env:</p>
+</code></pre><p><strong>.env</strong>:</p>
 <pre tabindex=0><code>COMPOSE_PROJECT_NAME=es
 CERTS_DIR=/usr/share/elasticsearch/config/certificates
 VERSION=7.17.0
 create-certs.yml:
-</code></pre><pre tabindex=0><code>version: '2.2'
+</code></pre><p><strong>create-certs.yml</strong>:</p>
+<pre tabindex=0><code>version: '2.2'
 
 services:
   create_certs:
@@ -230,7 +231,7 @@ volumes:
 networks:
   elastic:
     driver: bridge
-</code></pre><p>elastic-docker-tls.yml:</p>
+</code></pre><p><strong>elastic-docker-tls.yml</strong>:</p>
 <pre tabindex=0><code>version: '2.2'
 
 services:
@@ -493,7 +494,7 @@ PASSWORD remote_monitoring_user = wfliiMix1pep0Gnm6Ah8
 Changed password for user elastic
 PASSWORD elastic = fLzlyoIb8RsCT639v7HH
 </code></pre><p>Prenez note des mots de passe générés. Vous devez configurer le mot de passe de l&rsquo;utilisateur kibana_system dans le fichier compose pour permettre à Kibana de se connecter à Elasticsearch, et vous aurez besoin du mot de passe du superutilisateur elastic pour vous connecter à Kibana et soumettre des requêtes à Elasticsearch.</p>
-<p>Définissez ELASTICSEARCH_PASSWORD dans le fichier elastic-docker-tls.yml avec le mot de passe généré pour l&rsquo;utilisateur kibana_system.</p>
+<p>Définissez <strong>ELASTICSEARCH_PASSWORD</strong> dans le fichier <strong>elastic-docker-tls.yml</strong> avec le mot de passe généré pour l&rsquo;utilisateur kibana_system.</p>
 <pre tabindex=0><code> kib01:
     image: docker.elastic.co/kibana/kibana:${VERSION}
     container_name: kib01
@@ -514,7 +515,7 @@ PASSWORD elastic = fLzlyoIb8RsCT639v7HH
       - certs:$CERTS_DIR
     networks:
       - elastic
-</code></pre><p>Définissez ELASTICSEARCH_PASSWORD et KIBANA_PASSWORD dans le fichier elastic-docker-tls.yml avec le mot de passe généré pour l&rsquo;utilisateur elastic.</p>
+</code></pre><p>Définissez <strong>ELASTICSEARCH_PASSWORD</strong> et <strong>KIBANA_PASSWORD</strong> dans le fichier <strong>elastic-docker-tls.yml</strong> avec le mot de passe généré pour l&rsquo;utilisateur elastic.</p>
 <pre tabindex=0><code>fleet-server:
     image: docker.elastic.co/beats/elastic-agent:${VERSION}
     container_name: fleet-server
@@ -541,18 +542,18 @@ PASSWORD elastic = fLzlyoIb8RsCT639v7HH
 </code></pre><p>Utilisez docker-compose pour redémarrer le cluster et Kibana :</p>
 <pre tabindex=0><code>docker-compose stop
 docker-compose -f elastic-docker-tls.yml up -d
-</code></pre><p>Ouvrez Kibana pour charger les données de l&rsquo;échantillon et interagir avec le cluster : https://localhost:5601.</p>
-<p><img src=/images/attachments/prerequis/kibana_connexion.png alt=image.png></p>
+</code></pre><p>Ouvrez Kibana pour charger les données de l&rsquo;échantillon et interagir avec le cluster : <a href=https://localhost:5601>Kibana</a></p>
+<p><img src=/elastic-tutorial/images/attachments/prerequis/kibana_connexion.png alt=image.png></p>
 <p>Comme SSL est également activé pour les communications entre Kibana et les navigateurs clients, vous devez accéder à Kibana via le protocole HTTPS.</p>
 <p>Vérifiez la connexion entre le serveur Fleet et Kibana :</p>
 <p><strong>Management</strong> -> <strong>Fleet</strong></p>
-<p><img src=/images/attachments/prerequis/fleet.png alt=image.png></p>
+<p><img src=/elastic-tutorial/elastic-tutorial/images/attachments/prerequis/fleet.png alt=image.png></p>
 <p>Ouvrez le menu de droit et cliquez sur &ldquo;Stack Monitorng&rdquo;</p>
-<p><img src=/images/attachments/prerequis/stack_monitoring.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/prerequis/stack_monitoring.png alt=image.png></p>
 <p>Cliquez sur l&rsquo;option &ldquo;Or, set up with self monitoring&rdquo;</p>
-<p><img src=/images/attachments/prerequis/enable_monitoring.png alt=image.png></p>
-<p><img src=/images/attachments/prerequis/turn_on_monitoring.png alt=image.png></p>
-<p><img src=/images/attachments/prerequis/monitoring.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/prerequis/enable_monitoring.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/prerequis/turn_on_monitoring.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/prerequis/monitoring.png alt=image.png></p>
 <footer class=footline>
 </footer>
 </div>
@@ -565,17 +566,17 @@ docker-compose -f elastic-docker-tls.yml up -d
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645005359></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645005359></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645005359></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645005359></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645005359></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645005359></script>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645005806></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645005806></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645005806></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645005806></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645005806></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645005806></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645005359></script>
-<script src=/elastic-tutorial/js/learn.js?1645005359></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645005359></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645005359></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645005806></script>
+<script src=/elastic-tutorial/js/learn.js?1645005806></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645005806></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645005806></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>
