@@ -1,0 +1,506 @@
+<!doctype html><html lang=en class="js csstransforms3d">
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.92.2">
+<meta name=description content="Tutoriel sur Elastic">
+<meta name=author content="Maxime Calves">
+<link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
+<title>Lab - Logs :: Elastic Tutoriel</title>
+<link href=/elastic-tutorial/css/nucleus.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645365907 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645365907></script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
+</head>
+<body data-url=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/>
+<nav id=sidebar class=showVisitedLinks>
+<div id=header-wrapper>
+<div id=header>
+<img src=../../../../elastic-tutorial/media/logo.png>
+</div>
+<div class=searchbox>
+<label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span>
+</div>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645365907></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645365907></script>
+<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645365907></script>
+</div>
+<div class=highlightable>
+<ul class=topics>
+<li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
+parent">
+<a href=/elastic-tutorial/elastic/>
+Elastic
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item>
+<a href=/elastic-tutorial/elastic/prerequis/>
+Prérequis
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/prerequis/installation/ title=Installation class=dd-item>
+<a href=/elastic-tutorial/elastic/prerequis/installation/>
+Installation
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class="dd-item
+parent">
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/>
+Débutant
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/ title="Lab - Logs" class="dd-item active">
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/>
+Lab - Logs
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
+Lab - Metrics
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
+Elementaire
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/>
+Intermediare
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/apm/ title=APM class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/apm/>
+APM
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/fleet/ title=APM class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/fleet/>
+APM
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/>
+Avancé
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<section id=prefooter>
+<hr>
+<ul>
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+</ul>
+</section>
+<section id=footer>
+<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p>
+</section>
+</div>
+</nav>
+<section id=body>
+<div id=overlay></div>
+<div class="padding highlightable">
+<div>
+<div id=top-bar>
+<div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
+<span id=sidebar-toggle-span>
+<a href=# id=sidebar-toggle data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</a>
+</span>
+<span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links>
+<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/d%C3%A9butant/>Débutant</a> > Lab - Logs
+</span>
+</div>
+<div class=progress>
+<div class=wrapper>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#déployer-un-agent-beats>Déployer un agent beats</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id=head-tags>
+</div>
+<div id=body-inner>
+<h1>
+Lab - Logs
+</h1>
+<p>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez lire les fichiers journaux NGINX avec Filebeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller les journaux NGINX.</p>
+<h3 id=déployer-un-agent-beats>Déployer un agent beats</h3>
+<pre tabindex=0><code>mkdir -P beats/conf
+</code></pre><pre tabindex=0><code>vim beats/beats-docker.yml
+</code></pre><p><strong>beats-docker.yml</strong></p>
+<pre tabindex=0><code>version: '2.2'
+services:
+    filebeat:
+        image: docker.elastic.co/beats/filebeat:${VERSION}
+        container_name: filebeat
+        restart: unless-stopped
+        entrypoint: &quot;filebeat -e -strict.perms=false&quot;
+        user: root
+        volumes:
+        - &quot;./conf/filebeat.yml:/usr/share/filebeat/filebeat.yml:rw&quot;
+        - &quot;/var/lib/docker/containers:/var/lib/docker/containers:ro&quot;
+        - &quot;/var/run/docker.sock:/var/run/docker.sock:ro&quot;
+        - &quot;/var/log:/tmp:ro&quot;
+        - certs:$CERTS_DIR
+        networks:
+        - elastic
+
+volumes:
+  certs:
+    driver: local
+
+networks:
+    elastic:
+        driver: bridge
+</code></pre><pre tabindex=0><code>vim beats/conf/filebeat.yml
+</code></pre><pre tabindex=0><code>######################## Filebeat Configuration ############################
+
+# This file is a full configuration example documenting all non-deprecated
+# options in comments. For a shorter configuration example, that contains only
+# the most common options, please see filebeat.yml in the same directory.
+#
+# You can find the full configuration reference here:
+# https://www.elastic.co/guide/en/beats/filebeat/index.html
+
+
+#==========================  Modules configuration ============================
+filebeat.modules:
+
+#------------------------------- System Module -------------------------------
+- module: system
+  # Syslog
+  syslog:
+    enabled: true
+
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+    #var.paths:
+
+    # Convert the timestamp to UTC. Requires Elasticsearch &gt;= 6.1.
+    #var.convert_timezone: false
+
+    # Input configuration (advanced). Any input configuration option
+    # can be added under this section.
+    #input:
+
+  # Authorization logs
+  auth:
+    enabled: true
+
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+    #var.paths:
+
+    # Convert the timestamp to UTC. Requires Elasticsearch &gt;= 6.1.
+    #var.convert_timezone: false
+
+    # Input configuration (advanced). Any input configuration option
+    # can be added under this section.
+    #input:
+
+
+#=========================== Filebeat inputs =============================
+
+# List of inputs to fetch data.
+filebeat.inputs:
+# Each - is an input. Most options can be set at the input level, so
+# you can use different inputs for various configurations.
+# Below are the input specific configurations.
+
+# Type of the files. Based on this the way the file is read is decided.
+# The different types cannot be mixed in one input
+#
+# Possible options are:
+# * log: Reads every line of the log file (default)
+# * stdin: Reads the standard in
+
+#------------------------------ Log input --------------------------------
+- type: log
+
+  # Change to true to enable this input configuration.
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  # To fetch all &quot;.log&quot; files from a specific level of subdirectories
+  # /var/log/*/*.log can be used.
+  # For each file found under this path, a harvester is started.
+  # Make sure not file is defined twice as this can lead to unexpected behaviour.
+  paths:
+    - &quot;/var/lib/docker/containers/*/*-json.log&quot;
+    - '/tmp/*.log'
+
+#========================== Filebeat autodiscover ==============================
+
+# Autodiscover allows you to detect changes in the system and spawn new modules
+# or inputs as they happen.
+
+filebeat.autodiscover:
+  # List of enabled autodiscover providers
+  providers:
+    - type: docker
+      hints.enabled: true
+
+#================================ Processors ===================================
+
+#
+# The following example enriches each event with docker metadata, it matches
+# given fields to an existing container id and adds info from that container:
+#
+processors:
+- add_docker_metadata: ~
+- add_locale:
+        format: offset
+- add_host_metadata:
+        netinfo.enabled: true
+#    host: &quot;unix:///var/run/docker.sock&quot;
+#    match_fields: [&quot;system.process.cgroup.id&quot;]
+#    match_pids: [&quot;process.pid&quot;, &quot;process.ppid&quot;]
+#    match_source: true
+#    match_source_index: 4
+#    match_short_id: false
+#    cleanup_timeout: 60
+#    # To connect to Docker over TLS you must specify a client and CA certificate.
+#    #ssl:
+#    #  certificate_authority: &quot;/etc/pki/root/ca.pem&quot;
+#    #  certificate:           &quot;/etc/pki/client/cert.pem&quot;
+#    #  key:                   &quot;/etc/pki/client/cert.key&quot;
+#
+# The following example enriches each event with docker metadata, it matches
+# container id from log path available in `source` field (by default it expects
+# it to be /var/lib/docker/containers/*/*.log).
+#
+#processors:
+#- add_docker_metadata: ~
+#- add_host_metadata: ~
+
+#================================ Outputs ======================================
+
+# Configure what output to use when sending the data collected by the beat.
+
+#-------------------------- Elasticsearch output -------------------------------
+output.elasticsearch:
+  # Boolean flag to enable or disable the output module.
+  enabled: true
+
+  # Array of hosts to connect to.
+  # Scheme and port can be left out and will be set to the default (http and 9200)
+  # In case you specify and additional path, the scheme is required: http://localhost:9200/path
+  # IPv6 addresses should always be defined as: https://[2001:db8::1]:9200
+  hosts: [&quot;es01:9200&quot;]
+
+  # Set gzip compression level.
+  #compression_level: 0
+
+  # Optional protocol and basic auth credentials.
+  protocol: &quot;https&quot;
+  username: &quot;beats_system&quot;
+  password: &quot;ITklPCO1oTCWQIMdpWFT&quot;
+
+  # Use SSL settings for HTTPS.
+  ssl.enabled: true
+
+  # SSL configuration. By default is off.
+  # List of root certificates for HTTPS server verifications
+  ssl.certificate_authorities: [&quot;/usr/share/elasticsearch/config/certificates/ca/ca.crt&quot;]
+
+#============================== Dashboards =====================================
+# These settings control loading the sample dashboards to the Kibana index. Loading
+# the dashboards are disabled by default and can be enabled either by setting the
+# options here, or by using the `-setup` CLI flag or the `setup` command.
+setup.dashboards.enabled: true
+
+#============================== Template =====================================
+
+# A template is used to set the mapping in Elasticsearch
+# By default template loading is enabled and the template is loaded.
+# These settings can be adjusted to load your own template or overwrite existing ones.
+
+# Set to false to disable template loading.
+#setup.template.enabled: true
+
+# Template name. By default the template name is &quot;filebeat-%{[beat.version]}&quot;
+# The template name and pattern has to be set in case the elasticsearch index pattern is modified.
+setup.template.name: &quot;logs-%{[beat.version]}&quot;
+
+# Template pattern. By default the template pattern is &quot;-%{[beat.version]}-*&quot; to apply to the default index settings.
+# The first part is the version of the beat and then -* is used to match all daily indices.
+# The template name and pattern has to be set in case the elasticsearch index pattern is modified.
+setup.template.pattern: &quot;logs-%{[beat.version]}-*&quot;
+
+# Path to fields.yml file to generate the template
+#setup.template.fields: &quot;${path.config}/fields.yml&quot;
+
+# Overwrite existing template
+#setup.template.overwrite: false
+
+# Elasticsearch template settings
+setup.template.settings:
+
+  # A dictionary of settings to place into the settings.index dictionary
+  # of the Elasticsearch template. For more details, please check
+  # https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html
+  #index:
+    number_of_shards: 1
+    #codec: best_compression
+    #number_of_routing_shards: 30
+
+  # A dictionary of settings for the _source field. For more details, please check
+  # https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-source-field.html
+  #_source:
+    #enabled: false
+
+#============================== Kibana =====================================
+
+# Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
+# This requires a Kibana endpoint configuration.
+setup.kibana:
+
+  # Kibana Host
+  # Scheme and port can be left out and will be set to the default (http and 5601)
+  # In case you specify and additional path, the scheme is required: http://localhost:5601/path
+  # IPv6 addresses should always be defined as: https://[2001:db8::1]:5601
+  host: &quot;kib01:5601&quot;
+
+  # Optional protocol and basic auth credentials.
+  protocol: &quot;https&quot;
+  username: &quot;elastic&quot;
+  password: &quot;ASf3lYu7xoKMeesYuMPc&quot;
+
+  # Use SSL settings for HTTPS. Default is true.
+  ssl.enabled: true
+  ssl.certificate_authorities: [&quot;/usr/share/elasticsearch/config/certificates/ca/ca.crt&quot;]
+
+#================================ Logging ======================================
+# There are four options for the log output: file, stderr, syslog, eventlog
+# The file output is the default.
+
+# Sets log level. The default log level is info.
+# Available log levels are: error, warning, info, debug
+logging.level: info
+
+# Send all logging output to syslog. The default is false.
+logging.to_syslog: true
+
+# Send all logging output to Windows Event Logs. The default is false.
+logging.to_eventlog: true
+
+# If enabled, filebeat periodically logs its internal metrics that have changed
+# in the last period. For each metric that changed, the delta from the value at
+# the beginning of the period is logged. Also, the total values for
+# all non-zero internal metrics are logged on shutdown. The default is true.
+logging.metrics.enabled: true
+
+# The period after which to log the internal metrics. The default is 30s.
+logging.metrics.period: 30s
+
+# Logging to rotating files. Set logging.to_files to false to disable logging to
+# files.
+logging.to_files: true
+logging.files:
+  # Configure the path where the logs are written. The default is the logs directory
+  # under the home path (the binary location).
+  path: /var/log/filebeat
+
+  # The name of the files where the logs are written to.
+  name: filebeat
+</code></pre><pre tabindex=0><code>docker-compose -f beats/beats-docker.yml up -d
+</code></pre><pre tabindex=0><code>vim app/artificial_load.sh
+</code></pre><pre tabindex=0><code>#!/bin/bash
+
+COUNTER=0
+
+while [  $COUNTER -lt 10000 ] ;
+do
+ curl -s --header &quot;X-Forwarded-For: 5.198.223.255&quot; localhost &gt; /dev/null
+ curl -s localhost/owners/find &gt; /dev/null
+ curl -s localhost/owners?lastName= &gt; /dev/null
+ curl -s localhost/owners/1 &gt; /dev/null
+ curl -s localhost/owners/4 &gt; /dev/null
+ curl -s localhost/owners/6 &gt; /dev/null
+ curl -s localhost/owners/8 &gt; /dev/null
+ curl -s localhost/vets.html &gt; /dev/null
+ curl -s localhost/oups &gt; /dev/null
+ let COUNTER=COUNTER+1
+done
+</code></pre><pre tabindex=0><code>chmod +x app/artificial_load.sh
+</code></pre><p>Maintenant, ouvrez une nouvelle fenêtre de terminal et exécutez le script suivant pour simuler la charge sur votre serveur NGINX.</p>
+<pre tabindex=0><code>./app/artificial_load.sh
+</code></pre><p>Lancer Kibana pour commencer à explorer les tableaux de bord qui ont été inclus dans le processus de configuration.</p>
+<p>Accédez à Dashboard via le menu principal</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/dashboard-menu.png alt=image.png></p>
+<p>Recherchez nginx et ouvrez le tableau de bord ECS Filebeat Nginx Overview.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-dashboards.png alt=image.png></p>
+<p>Vous verrez quelque chose de similaire à la page ci-dessous.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-nginx-dashboard.png alt=image.png></p>
+<p>Faites défiler vers le bas et vérifiez quel est le navigateur le plus utilisé. Vous remarquerez que ce devrait être curl car il est utilisé par le script de simulation de charge.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-nginx-most-used-browser.png alt=image.png></p>
+<p>Maintenant, cliquez sur Nginx access and error logs en haut du tableau de bord actuel pour voir le tableau de bord avec les journaux d&rsquo;accès et d&rsquo;erreurs que Filebeat a collecté de NGINX.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-nginx-dashboard2.png alt=image.png></p>
+<p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez lire les fichiers journaux NGINX avec Filebeat et les indexer dans Elasticsearch. Vous avez également exploré les tableaux de bord Kibana et vu comment vous pouvez facilement surveiller les journaux NGINX.</p>
+<footer class=footline>
+</footer>
+</div>
+</div>
+<div id=navigation>
+<a class="nav nav-prev" href=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+</div>
+</section>
+<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
+</div>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645365907></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645365907></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645365907></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645365907></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645365907></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645365907></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645365907></script>
+<script src=/elastic-tutorial/js/learn.js?1645365907></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645365907></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645365907></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+</body>
+</html>

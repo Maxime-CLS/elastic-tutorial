@@ -1,18 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Débutant on Elastic Tutoriel</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/</link><description>Recent content in Débutant on Elastic Tutoriel</description><generator>Hugo -- gohugo.io</generator><language>fr-FR</language><lastBuildDate>Mon, 04 May 2020 08:52:59 +0200</lastBuildDate><atom:link href="https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/index.xml" rel="self" type="application/rss+xml"/><item><title>Installation de l'Agent Elastic</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/elastic-agent/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/elastic-agent/</guid><description>Modifier la configuration par défaut des agents elastic via le serveur fleet sur l&amp;rsquo;interface Kibana :
-Management -&amp;gt; Fleet
-Cliquez sur Fleet settings
-Fleet Server Hosts
-https://fleet-server:8220
-Elasticsearch Output Configuration (YAML)
-ssl.certificate_authorities: [&amp;quot;/usr/share/elasticsearch/config/certificates/ca/ca.crt&amp;quot;]
-Définissez KIBANA_FLEET_PASSWORD dans le fichier elastic-docker-tls.yml avec le mot de passe généré pour l&amp;rsquo;utilisateur elastic.
-elastic-agent:
-image: docker.elastic.co/beats/elastic-agent-complete:${VERSION}
-container_name: elastic-agent
-restart: always
-user: root # note, synthetic browser monitors require this set to `elastic-agent`
-environment:
-FLEET_ENROLL: 1
-FLEET_URL: &amp;quot;https://fleet-server:8220&amp;quot;
-FLEET_TOKEN_POLICY_NAME: &amp;quot;Default policy&amp;quot;
-FLEET_CA: $CERTS_DIR/ca/ca.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Débutant on Elastic Tutoriel</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/</link><description>Recent content in Débutant on Elastic Tutoriel</description><generator>Hugo -- gohugo.io</generator><language>fr-FR</language><lastBuildDate>Mon, 04 May 2020 08:52:59 +0200</lastBuildDate><atom:link href="https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/index.xml" rel="self" type="application/rss+xml"/><item><title>Lab - Logs</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/</guid><description>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez lire les fichiers journaux NGINX avec Filebeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller les journaux NGINX.
+Déployer un agent beats mkdir -P beats/conf
+vim beats/beats-docker.yml
+beats-docker.yml
+version: '2.2'
+services:
+filebeat:
+image: docker.elastic.co/beats/filebeat:${VERSION}
+container_name: filebeat
+restart: unless-stopped
+entrypoint: &amp;quot;filebeat -e -strict.perms=false&amp;quot;
+user: root
+volumes:
+- &amp;quot;.</description></item><item><title>Lab - Metrics</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/</guid><description>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques système et NGINX avec Metricbeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
+Déployer un agent beats Ajoutez le service Metricbeat à la suite du service FIlebeat
+vim beats/beats-docker.yml
+beats-docker.yml
+version: '2.2'
+services:
+filebeat:
+image: docker.elastic.co/beats/filebeat:${VERSION}
+container_name: filebeat
+restart: unless-stopped
+entrypoint: &amp;quot;filebeat -e -strict.</description></item></channel></rss>

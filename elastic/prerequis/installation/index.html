@@ -7,18 +7,18 @@
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
 <title>Installation :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645008649 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645008649 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645008649 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645008649 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645008649 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645008649 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645008649 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645008649 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645008649 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645008649 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645008649 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645008649></script>
+<link href=/elastic-tutorial/css/nucleus.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645365907 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645365907 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645365907></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/elastic-tutorial/elastic/prerequis/installation/>
@@ -32,10 +32,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645008649></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645008649></script>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645365907></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645365907></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645008649></script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645365907></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -67,9 +67,15 @@ Débutant
 <i class="fas fa-check read-icon"></i>
 </a>
 <ul>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/elastic-agent/ title="Installation de l'Agent Elastic" class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/elastic-agent/>
-Installation de l'Agent Elastic
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/ title="Lab - Logs" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/>
+Lab - Logs
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
+Lab - Metrics
 <i class="fas fa-check read-icon"></i>
 </a>
 </li>
@@ -86,6 +92,20 @@ Elementaire
 Intermediare
 <i class="fas fa-check read-icon"></i>
 </a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/apm/ title=APM class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/apm/>
+APM
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/fleet/ title=APM class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/fleet/>
+APM
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
 </li>
 <li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/>
@@ -129,7 +149,8 @@ Avancé
 <ul>
 <li><a href=#prérequis>Prérequis</a>
 <ul>
-<li><a href=#exécution-dans-docker-avec-tls-activé>Exécution dans Docker avec TLS activé</a></li>
+<li><a href=#déployer-la-stack-elasticsearch-kibana-dans-docker-avec-tls-activé>Déployer la stack Elasticsearch Kibana dans Docker avec TLS activé</a></li>
+<li><a href=#déloyer-une-application-blanche>Déloyer une application blanche</a></li>
 </ul>
 </li>
 </ul>
@@ -151,7 +172,7 @@ Installation
 <li>Exécuter la commande ci-dessous</li>
 </ul>
 <pre tabindex=0><code>sudo sysctl -w vm.max_map_count=262144
-</code></pre><h3 id=exécution-dans-docker-avec-tls-activé>Exécution dans Docker avec TLS activé</h3>
+</code></pre><h3 id=déployer-la-stack-elasticsearch-kibana-dans-docker-avec-tls-activé>Déployer la stack Elasticsearch Kibana dans Docker avec TLS activé</h3>
 <p>Si les fonctions de sécurité sont activées, vous devez configurer le chiffrement TLS (Transport Layer Security) pour la couche de transport d&rsquo;Elasticsearch. Bien qu&rsquo;il soit possible d&rsquo;utiliser une licence d&rsquo;essai sans configurer TLS, nous vous conseillons de sécuriser votre pile dès le départ.</p>
 <p>Pour obtenir un cluster Elasticsearch et Kibana opérationnel dans Docker avec la sécurité activée, vous pouvez utiliser Docker Compose :</p>
 <p>Créez les fichiers de composition et de configuration suivants. Ces fichiers sont également disponibles dans le dépôt elastic/stack-docs sur GitHub.</p>
@@ -200,7 +221,6 @@ Installation
 <pre tabindex=0><code>COMPOSE_PROJECT_NAME=es
 CERTS_DIR=/usr/share/elasticsearch/config/certificates
 VERSION=7.17.0
-create-certs.yml:
 </code></pre><p><strong>create-certs.yml</strong>:</p>
 <pre tabindex=0><code>version: '2.2'
 
@@ -369,53 +389,6 @@ services:
       - certs:$CERTS_DIR
     networks:
       - elastic
-  package-registry:
-    image: docker.elastic.co/package-registry/distribution:${VERSION}
-    container_name: package-registry
-    ports:
-      - 443
-    environment:
-       - EPR_ADDRESS=0.0.0.0:443
-       - EPR_TLS_KEY=$CERTS_DIR/package-registry/package-registry.key
-       - EPR_TLS_CERT=$CERTS_DIR/package-registry/package-registry.crt
-    healthcheck:
-      test: curl --cacert $CERTS_DIR/ca/ca.crt -s https://localhost/health &gt;/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      retries: 100
-      interval: 5s
-    volumes:
-        - certs:$CERTS_DIR
-    networks:
-       - elastic
-  fleet-server:
-    image: docker.elastic.co/beats/elastic-agent:${VERSION}
-    container_name: fleet-server
-    ports:
-      - 8220:8220
-    healthcheck:
-      test: [&quot;CMD-SHELL&quot;, &quot;curl -s -k https://localhost:8220/api/status | grep -q 'HEALTHY'&quot;]
-      retries: 300
-      interval: 1s
-    environment:
-      FLEET_SERVER_ENABLE: &quot;1&quot;
-      ELASTICSEARCH_HOST: &quot;https://es01:9200&quot;
-      ELASTICSEARCH_CA: $CERTS_DIR/ca/ca.crt
-      ELASTICSEARCH_USERNAME: elastic
-      ELASTICSEARCH_PASSWORD: CHANGEME
-      FLEET_URL: &quot;https://fleet-server:8220&quot;
-      FLEET_SERVER_CERT: $CERTS_DIR/fleet-server/fleet-server.crt
-      FLEET_SERVER_CERT_KEY: $CERTS_DIR/fleet-server/fleet-server.key
-      KIBANA_FLEET_SETUP: &quot;true&quot;
-      KIBANA_HOST: &quot;https://kib01:5601&quot;
-      KIBANA_USERNAME: elastic
-      KIBANA_PASSWORD: CHANGEME
-      KIBANA_CA: $CERTS_DIR/ca/ca.crt
-    depends_on:
-      es01: { condition: service_healthy }
-      kib01: { condition: service_healthy }
-    volumes:
-      - certs:$CERTS_DIR
-    networks:
-        - elastic
 
 volumes:
   data01:
@@ -494,66 +467,141 @@ PASSWORD remote_monitoring_user = wfliiMix1pep0Gnm6Ah8
 Changed password for user elastic
 PASSWORD elastic = fLzlyoIb8RsCT639v7HH
 </code></pre><p>Prenez note des mots de passe générés. Vous devez configurer le mot de passe de l&rsquo;utilisateur kibana_system dans le fichier compose pour permettre à Kibana de se connecter à Elasticsearch, et vous aurez besoin du mot de passe du superutilisateur elastic pour vous connecter à Kibana et soumettre des requêtes à Elasticsearch.</p>
-<p>Définissez <strong>ELASTICSEARCH_PASSWORD</strong> dans le fichier <strong>elastic-docker-tls.yml</strong> avec le mot de passe généré pour l&rsquo;utilisateur kibana_system.</p>
-<pre tabindex=0><code> kib01:
-    image: docker.elastic.co/kibana/kibana:${VERSION}
-    container_name: kib01
-    depends_on: {&quot;es01&quot;: {&quot;condition&quot;: &quot;service_healthy&quot;}}
-    ports:
-      - 5601:5601
-    environment:
-      SERVERNAME: localhost
-      ELASTICSEARCH_URL: https://es01:9200
-      ELASTICSEARCH_HOSTS: https://es01:9200
-      ELASTICSEARCH_USERNAME: kibana_system
-      ELASTICSEARCH_PASSWORD: CHANGEME
-      ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES: $CERTS_DIR/ca/ca.crt
-      SERVER_SSL_ENABLED: &quot;true&quot;
-      SERVER_SSL_KEY: $CERTS_DIR/kib01/kib01.key
-      SERVER_SSL_CERTIFICATE: $CERTS_DIR/kib01/kib01.crt
-    volumes:
-      - certs:$CERTS_DIR
-    networks:
-      - elastic
-</code></pre><p>Définissez <strong>ELASTICSEARCH_PASSWORD</strong> et <strong>KIBANA_PASSWORD</strong> dans le fichier <strong>elastic-docker-tls.yml</strong> avec le mot de passe généré pour l&rsquo;utilisateur elastic.</p>
-<pre tabindex=0><code>fleet-server:
-    image: docker.elastic.co/beats/elastic-agent:${VERSION}
-    container_name: fleet-server
-    ports:
-      - 8220:8220
-    healthcheck:
-      test: [&quot;CMD-SHELL&quot;, &quot;curl -s -k https://localhost:8220/api/status | grep -q 'HEALTHY'&quot;]
-      retries: 300
-      interval: 1s
-    environment:
-      FLEET_SERVER_ENABLE: &quot;1&quot;
-      ELASTICSEARCH_HOST: &quot;https://es01:9200&quot;
-      ELASTICSEARCH_CA: $CERTS_DIR/ca/ca.crt
-      ELASTICSEARCH_USERNAME: elastic
-      ELASTICSEARCH_PASSWORD: CHANGEME
-      FLEET_URL: &quot;https://fleet-server:8220&quot;
-      FLEET_SERVER_CERT: $CERTS_DIR/fleet-server/fleet-server.crt
-      FLEET_SERVER_CERT_KEY: $CERTS_DIR/fleet-server/fleet-server.key
-      KIBANA_FLEET_SETUP: &quot;true&quot;
-      KIBANA_HOST: &quot;https://kib01:5601&quot;
-      KIBANA_USERNAME: elastic
-      KIBANA_PASSWORD: CHANGEME
-      KIBANA_CA: $CERTS_DIR/ca/ca.crt
+<p>Définissez les variables d&rsquo;authentification dans le fichier <strong>.env</strong>.</p>
+<pre tabindex=0><code>COMPOSE_PROJECT_NAME=es
+CERTS_DIR=/usr/share/elasticsearch/config/certificates
+VERSION=7.17.0
+### Credentials
+USER_APM_SYSTEM=apm_system
+PASSWORD_APM_SYSTEM=tE7F2LePRNPgUC4SN0nT
+USER_KIBANA_SYSTEM=kibana_system
+PASSWORD_KIBANA_SYSTEM=zJE8y8KlV79dv6OCmfpF
+USER_KIBANA=kibana
+PASSWORD_KIBANA=zJE8y8KlV79dv6OCmfpF
+USER_BEATS_SYSTEM=beats_system
+PASSWORD_BEATS_SYSTEM=ITklPCO1oTCWQIMdpWFT
+USER_ELASTIC=elastic
+PASSWORD_ELASTIC=ASf3lYu7xoKMeesYuMPc
 </code></pre><p>Utilisez docker-compose pour redémarrer le cluster et Kibana :</p>
 <pre tabindex=0><code>docker-compose stop
 docker-compose -f elastic-docker-tls.yml up -d
 </code></pre><p>Ouvrez Kibana pour charger les données de l&rsquo;échantillon et interagir avec le cluster : <a href=https://localhost:5601>Kibana</a></p>
 <p><img src=/elastic-tutorial/images/attachments/prerequis/kibana_connexion.png alt=image.png></p>
 <p>Comme SSL est également activé pour les communications entre Kibana et les navigateurs clients, vous devez accéder à Kibana via le protocole HTTPS.</p>
-<p>Vérifiez la connexion entre le serveur Fleet et Kibana :</p>
-<p><strong>Management</strong> -> <strong>Fleet</strong></p>
-<p><img src=/elastic-tutorial/images/attachments/prerequis/fleet.png alt=image.png></p>
 <p>Ouvrez le menu de droit et cliquez sur &ldquo;Stack Monitorng&rdquo;</p>
 <p><img src=/elastic-tutorial/images/attachments/prerequis/stack_monitoring.png alt=image.png></p>
 <p>Cliquez sur l&rsquo;option &ldquo;Or, set up with self monitoring&rdquo;</p>
 <p><img src=/elastic-tutorial/images/attachments/prerequis/enable_monitoring.png alt=image.png></p>
 <p><img src=/elastic-tutorial/images/attachments/prerequis/turn_on_monitoring.png alt=image.png></p>
 <p><img src=/elastic-tutorial/images/attachments/prerequis/monitoring.png alt=image.png></p>
+<h3 id=déloyer-une-application-blanche>Déloyer une application blanche</h3>
+<pre tabindex=0><code>mkdir -P app/conf
+vim app/petclinic.yml
+</code></pre><p><strong>petclinic.yml</strong></p>
+<pre tabindex=0><code>version: '2.2'
+
+services:
+  nginx:
+    image: nginx:1.17.3
+    container_name: nginx
+    labels:
+      &quot;co.elastic.logs/module&quot;: &quot;nginx&quot;
+      &quot;co.elastic.logs/fileset.stdout&quot;: &quot;access&quot;
+      &quot;co.elastic.logs/fileset.stderr&quot;: &quot;error&quot;
+      &quot;co.elastic.metrics/module&quot;: &quot;nginx&quot;
+      &quot;co.elastic.metrics/hosts&quot;: &quot;nginx:80&quot;
+      &quot;co.elastic.metrics/metricsets&quot;: &quot;stubstatus&quot;
+    ports:
+      - 80:80
+    volumes:
+      - ./conf/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - elastic
+  petclinic:
+    image: docker.io/michaelhyatt/elastic-k8s-o11y-workshop-petclinic:1.25.0
+    container_name: petclinic
+    labels:
+      &quot;co.elastic.metrics/module&quot;: &quot;prometheus&quot;
+      &quot;co.elastic.metrics/hosts&quot;: &quot;$${data.host}:$${data.port}&quot;
+      &quot;co.elastic.metrics/metrics_path&quot;: &quot;/metrics/prometheus&quot;
+      &quot;co.elastic.metrics/period&quot;: &quot;1m&quot;
+    environment:
+      ELASTIC_APM_SERVER_URLS: &quot;http://apm-server:8200&quot;
+      ELASTIC_APM_SERVER_URLS_FOR_RUM: &quot;http://localhost:8200&quot;
+      ELASTIC_APM_SECRET_TOKEN: &quot;&quot;
+      ELASTIC_APM_SERVICE_NAME: &quot;spring-petclinic-monolith&quot;
+      ELASTIC_APM_APPLICATION_PACKAGES: &quot;org.springframework.samples&quot;
+      ELASTIC_APM_ENABLE_LOG_CORRELATION: &quot;true&quot;
+      ELASTIC_APM_CAPTURE_JMX_METRICS: &gt;
+        object_name[java.lang:type=GarbageCollector,name=*] attribute[CollectionCount:metric_name=collection_count] attribute[CollectionTime:metric_name=collection_time],
+        object_name[java.lang:type=Memory] attribute[HeapMemoryUsage:metric_name=heap]
+      JAVA_OPTS: &gt;
+        -Xms100m
+        -Xmx256m
+        -Dspring.profiles.active=mysql
+        -Ddatabase=mysql
+        -Dspring.datasource.username=root
+        -Dspring.datasource.password=petclinic
+        -Dspring.datasource.initialization-mode=always
+        -Dspring.datasource.url=jdbc:mysql://mysql:3306/petclinic?autoReconnect=true&amp;useSSL=false
+        -XX:+StartAttachListener
+    ports:
+      - 8080:8080
+    networks:
+      - elastic
+
+  mysql:
+    image: mysql:5.7.27
+    container_name: mysql
+    labels:
+      &quot;co.elastic.logs/module&quot;: &quot;mysql&quot;
+      &quot;co.elastic.metrics/module&quot;: &quot;mysql&quot;
+      &quot;co.elastic.metrics/hosts&quot;: &quot;root:petclinic@tcp($${data.host}:3306)/&quot;
+    environment:
+      MYSQL_ROOT_PASSWORD: petclinic
+      MYSQL_DATABASE: petclinic
+    ports:
+      - 3306
+    networks:
+      - elastic
+
+networks:
+  elastic:
+    driver: bridge
+</code></pre><pre tabindex=0><code>vim app/conf/default.conf
+</code></pre><p><strong>default.conf</strong></p>
+<pre tabindex=0><code>server {
+        listen       80;
+        server_name  localhost;
+        location /intake {
+          if ($request_method = 'OPTIONS') {
+            # This is a bit too wide, would be enough to replace it with only APM server url for CORS support.
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'Accept:,Accept-Encoding,Accept-Language:,Cache-Control,Connection,DNT,Pragma,Host,Referer,Upgrade-Insecure-Requests,User-Agent,elastic-apm-traceparent';
+            add_header 'Access-Control-Max-Age' 1728000;
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Content-Type' 'text/plain; charset=utf-8';
+            add_header 'Content-Length' 0;
+            return 200;
+          }
+        }
+        location / {
+          proxy_pass http://petclinic:8080/;
+        }
+        location /server-status {
+         	stub_status;
+        	allow all; # A bit too wide
+         	# deny all;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+</code></pre><pre tabindex=0><code>docker-compose -f app/petclinic.yml up -d
+</code></pre><p>Accédez à la application blanche en cliquant <a href=http://localhost>ici</a></p>
+<p><img src=/elastic-tutorial/images/attachments/prerequis/petclinic.png alt=image.png></p>
 <footer class=footline>
 </footer>
 </div>
@@ -566,17 +614,17 @@ docker-compose -f elastic-docker-tls.yml up -d
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645008649></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645008649></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645008649></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645008649></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645008649></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645008649></script>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645365907></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645365907></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645365907></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645365907></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645365907></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645365907></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645008649></script>
-<script src=/elastic-tutorial/js/learn.js?1645008649></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645008649></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645008649></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645365907></script>
+<script src=/elastic-tutorial/js/learn.js?1645365907></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645365907></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645365907></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>
