@@ -6,19 +6,19 @@
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Privilèges :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645472208 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645472208 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645472208 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645472208 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645472208 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645472208 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645472208 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645472208 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645472208 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645472208 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645472208 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645472208></script>
+<title>Lab - Habilitation :: Elastic Tutoriel</title>
+<link href=/elastic-tutorial/css/nucleus.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645476384 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645476384></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/>
@@ -32,10 +32,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645472208></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645472208></script>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645476384></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645476384></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645472208></script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645476384></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -99,9 +99,15 @@ Elementaire
 <i class="fas fa-check read-icon"></i>
 </a>
 <ul>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title=Privilèges class="dd-item active">
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title="Lab - Habilitation" class="dd-item active">
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/>
-Privilèges
+Lab - Habilitation
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
+Lab - Index Lifecycle Policy
 <i class="fas fa-check read-icon"></i>
 </a>
 </li>
@@ -113,9 +119,9 @@ Intermediare
 <i class="fas fa-check read-icon"></i>
 </a>
 <ul>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/fleet/ title=APM class=dd-item>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/fleet/ title="Fleet & Elastic Agent" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/fleet/>
-APM
+Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i>
 </a>
 </li>
@@ -154,7 +160,7 @@ Avancé
 </span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
 <span class=links>
-<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>Elementaire</a> > Privilèges
+<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>Elementaire</a> > Lab - Habilitation
 </span>
 </div>
 <div class=progress>
@@ -176,10 +182,11 @@ Avancé
 </div>
 <div id=body-inner>
 <h1>
-Privilèges
+Lab - Habilitation
 </h1>
 <h3 id=roles-kibana>Roles Kibana</h3>
 <p>Les rôles sont un ensemble de privilèges qui vous permettent d&rsquo;effectuer des actions dans Kibana et Elasticsearch. Les utilisateurs ne reçoivent pas directement de privilèges, mais se voient plutôt attribuer un ou plusieurs rôles qui décrivent le niveau d&rsquo;accès souhaité. Lorsque vous attribuez plusieurs rôles à un utilisateur, ce dernier reçoit une union des privilèges des rôles. Cela signifie que vous ne pouvez pas réduire les privilèges d&rsquo;un utilisateur en lui attribuant un rôle supplémentaire. Vous devez plutôt supprimer ou modifier l&rsquo;un de ses rôles existants.</p>
+<p><img src=https://www.elastic.co/guide/en/elasticsearch/reference/current/security/authorization/images/authorization.png alt=role></p>
 <h4 id=user-observability>User Observability</h4>
 <p>Vous allez créer un role pour les utilisateurs qui doivent consulter les différentes informations de leurs applications sur le menu <strong>Observability</strong>.
 Cette création sera faite via API d&rsquo;Elasticsearch. Pour cela vous allez ouvrir un dans le menu Kibana Management -> DevTool.</p>
@@ -458,46 +465,60 @@ Cette création sera faite via API d&rsquo;Elasticsearch. Pour cela vous allez o
   }
 }
 </code></pre><p>Maintenant ouvrez une page de votre navigateur privé pour vous connectez à Kibana avec cet utilisateur : <a href=https://localhost:5601>Accerder à Kibana</a></p>
-<p><img src=/elastic-tutorial/images/attachments/elementaire/user_authentification.png alt=image.png></p>
+<p><img src=/elastic-tutorial/images/attachments/elementaire/admin_login.png alt=image.png></p>
 <p>Sélectionnez dans le menu <strong>Observability</strong></p>
 <p><img src=/elastic-tutorial/images/attachments/elementaire/user_menu.png alt=image.png></p>
 <p>Puis observer que l&rsquo;utilisateur ne voit pas les données de type <strong>APM</strong> et <strong>Uptime</strong>.</p>
-<p><img src=/elastic-tutorial/images/attachments/elementaire/bug_user_habilitation.png alt=image.png></p>
-<p>A vous de corriger les habilitations de l&rsquo;utilisateur pour la lecture de données manquantes, voici quelque lien utile pour votre problème :</p>
+<p><img src=/elastic-tutorial/images/attachments/elementaire/admin_observability.png alt=image.png></p>
+<pre tabindex=0><code>GET apm-*/_search
+GET metricbeat-*/_search
+GET filebeat-*/_search
+GET heartbeat-*/_search
+</code></pre><p>Maintenant l&rsquo;administrateur souhaite créer un index dans Elasticsearch afin de regrouper les données en un point d&rsquo;accès</p>
+<pre tabindex=0><code>PUT my-index-observability
+</code></pre><pre tabindex=0><code>{
+  &quot;error&quot; : {
+    &quot;root_cause&quot; : [
+      {
+        &quot;type&quot; : &quot;security_exception&quot;,
+        &quot;reason&quot; : &quot;action [indices:admin/create] is unauthorized for user [admin_observability] with roles [admin_observability], this action is granted by the index privileges [create_index,manage,all]&quot;
+      }
+    ],
+    &quot;type&quot; : &quot;security_exception&quot;,
+    &quot;reason&quot; : &quot;action [indices:admin/create] is unauthorized for user [admin_observability] with roles [admin_observability], this action is granted by the index privileges [create_index,manage,all]&quot;
+  },
+  &quot;status&quot; : 403
+}
+</code></pre><p>A vous de corriger les habilitations de l&rsquo;administrateur pour la création d&rsquo;un index, voici quelque lien utile pour votre problème :</p>
 <ul>
 <li><a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</a></li>
 <li><a href=https://www.elastic.co/guide/en/kibana/current/kibana-role-management.html>https://www.elastic.co/guide/en/kibana/current/kibana-role-management.html</a></li>
 <li><a href=https://www.elastic.co/guide/en/elasticsearch/reference/8.0/security-privileges.html#privileges-list-indices>https://www.elastic.co/guide/en/elasticsearch/reference/8.0/security-privileges.html#privileges-list-indices</a></li>
 </ul>
-<pre tabindex=0><code>GET apm-*/_search
-GET metricbeat-*/_search
-GET filebeat-*/_search
-GET heartbeat-*/_search
-</code></pre><pre tabindex=0><code>PUT observability
-</code></pre>
+<p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez créer et mettre à jour des roles pour vos utilisateurs. Vous avez également exploré les différentes habilitations possibles sur Elasticsearch.</p>
 <footer class=footline>
 </footer>
 </div>
 </div>
 <div id=navigation>
 <a class="nav nav-prev" href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire> <i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/intermediare/ title=Intermediare style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
 </div>
 </section>
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645472208></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645472208></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645472208></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645472208></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645472208></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645472208></script>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645476384></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645476384></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645476384></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645476384></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645476384></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645476384></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645472208></script>
-<script src=/elastic-tutorial/js/learn.js?1645472208></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645472208></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645472208></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645476384></script>
+<script src=/elastic-tutorial/js/learn.js?1645476384></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645476384></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645476384></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

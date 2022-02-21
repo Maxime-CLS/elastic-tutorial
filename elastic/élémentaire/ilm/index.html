@@ -1,0 +1,821 @@
+<!doctype html><html lang=en class="js csstransforms3d">
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.92.2">
+<meta name=description content="Tutoriel sur Elastic">
+<meta name=author content="Maxime Calves">
+<link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
+<title>Lab - Index Lifecycle Policy :: Elastic Tutoriel</title>
+<link href=/elastic-tutorial/css/nucleus.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645476384 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645476384 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645476384></script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
+</head>
+<body data-url=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
+<nav id=sidebar class=showVisitedLinks>
+<div id=header-wrapper>
+<div id=header>
+<img src=../../../../elastic-tutorial/media/logo.png>
+</div>
+<div class=searchbox>
+<label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span>
+</div>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645476384></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645476384></script>
+<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645476384></script>
+</div>
+<div class=highlightable>
+<ul class=topics>
+<li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
+parent">
+<a href=/elastic-tutorial/elastic/>
+Elastic
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item>
+<a href=/elastic-tutorial/elastic/prerequis/>
+Prérequis
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/prerequis/installation/ title=Installation class=dd-item>
+<a href=/elastic-tutorial/elastic/prerequis/installation/>
+Installation
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/>
+Débutant
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/ title="Lab - Logs" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/>
+Lab - Logs
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
+Lab - Metrics
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
+Lab - APM
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
+Lab - Uptime
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class="dd-item
+parent">
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
+Elementaire
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title="Lab - Habilitation" class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/>
+Lab - Habilitation
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class="dd-item active">
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
+Lab - Index Lifecycle Policy
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/>
+Intermediare
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/fleet/ title="Fleet & Elastic Agent" class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/fleet/>
+Fleet & Elastic Agent
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/>
+Avancé
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<section id=prefooter>
+<hr>
+<ul>
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+</ul>
+</section>
+<section id=footer>
+<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p>
+</section>
+</div>
+</nav>
+<section id=body>
+<div id=overlay></div>
+<div class="padding highlightable">
+<div>
+<div id=top-bar>
+<div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
+<span id=sidebar-toggle-span>
+<a href=# id=sidebar-toggle data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</a>
+</span>
+<span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links>
+<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>Elementaire</a> > Lab - Index Lifecycle Policy
+</span>
+</div>
+<div class=progress>
+<div class=wrapper>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#ilm-settings>ILM Settings</a></li>
+<li><a href=#ilm-policy>ILM Policy</a></li>
+<li><a href=#components-template>Components Template</a></li>
+<li><a href=#index-template>Index Template</a></li>
+<li><a href=#créer-votre-data-stream>Créer votre Data Stream</a></li>
+<li><a href=#ajouter-des-données-dans-le-data-stream>Ajouter des données dans le Data Stream</a></li>
+<li><a href=#mettre-à-jours-les-données-data-stream>Mettre à jours les données Data Stream</a></li>
+<li><a href=#ilm-check>ILM Check</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id=head-tags>
+</div>
+<div id=body-inner>
+<h1>
+Lab - Index Lifecycle Policy
+</h1>
+<p>Vous pouvez configurer des politiques de gestion du cycle de vie des index (ILM) pour gérer automatiquement les index en fonction de vos exigences en matière de performances, de résilience et de rétention. Par exemple, vous pouvez utiliser ILM pour :</p>
+<ul>
+<li>Faire tourner un nouvel index lorsqu&rsquo;un index atteint une certaine taille ou un certain nombre de documents.</li>
+<li>créer un nouvel index chaque jour, semaine ou mois et archiver les précédents</li>
+<li>supprimer les index périmés pour appliquer les normes de conservation des données.</li>
+</ul>
+<p>Vous pouvez créer et gérer les politiques de cycle de vie des index via Kibana Management ou les API ILM. Lorsque vous activez la gestion du cycle de vie des index pour Beats ou le plugin de sortie Logstash Elasticsearch, des politiques par défaut sont configurées automatiquement.</p>
+<p>La mise en place de règle de gestion permet :</p>
+<ul>
+<li>Augmenter les <strong>performances</strong> de recherche et/ou de visualisation</li>
+<li>Obtenir une meilleure <strong>résilience</strong> de ses données</li>
+<li>De définir des standards de <strong>rétention</strong>.</li>
+</ul>
+<p>L&rsquo;avantage de la fonctionnalité ILM est d&rsquo;automatiser cette gestion avec des règles simple d&rsquo;usage.</p>
+<p><img src=https://www.elastic.co/guide/en/elasticsearch/reference/current/images/ilm/index-lifecycle-policies.png alt=ILM></p>
+<h3 id=ilm-settings>ILM Settings</h3>
+<p>Par défaut sur votre cluster la fonctionnalité ILM est configuré à un interval de vérification de 10 minutes.</p>
+<p>Ce paramètre peut être modifié dans des contexts <strong>hors prod</strong>.</p>
+<pre tabindex=0><code>GET _cluster/settings
+
+PUT _cluster/settings
+{
+	&quot;persistent&quot;:{
+		&quot;indices.lifecycle.poll_interval&quot;: &quot;1s&quot;
+	}
+}
+</code></pre><pre tabindex=0><code>{
+  &quot;acknowledged&quot; : true,
+  &quot;persistent&quot; : {
+    &quot;indices&quot; : {
+      &quot;lifecycle&quot; : {
+        &quot;poll_interval&quot; : &quot;1s&quot;
+      }
+    }
+  },
+  &quot;transient&quot; : { }
+}
+</code></pre><h3 id=ilm-policy>ILM Policy</h3>
+<p>La définition d&rsquo;une règle intègre plusieurs paramètres :</p>
+<ul>
+<li>Phase : Il existe plusieurs type de phase hot, warm et cold.</li>
+<li>Rollover : Le roulement d&rsquo;un index s&rsquo;applique avec au moins un de ces paramètres : max_age, max_size, max_docs.</li>
+<li>Delete : La rétention d&rsquo;un index avec la fonction de suppression.</li>
+</ul>
+<p>Il est recommander d&rsquo;effectuer dans la phase <strong>hot</strong> une rotation d&rsquo;index sur les paramètres suivant :</p>
+<ul>
+<li>Logs :
+<ul>
+<li>max_age : 15d</li>
+<li>max_size : 45gb</li>
+</ul>
+</li>
+<li>Metric :
+<ul>
+<li>max_age : 15d</li>
+<li>max_size : 40gb</li>
+</ul>
+</li>
+</ul>
+<p>Et une deuxième recommandation est d&rsquo;effectuer une retention d&rsquo;index égale à 90 jours.</p>
+<p>Cela permet d&rsquo;augmenter les performances de l&rsquo;index et d&rsquo;optimiser les recherches.</p>
+<p>Pour notre besoin d&rsquo;aujourd&rsquo;hui, nous allons préparer une ILM avec une phase très courte. Ouvrez dans le menu Kibana le DevTool.</p>
+<pre tabindex=0><code>PUT _ilm/policy/observability-policy
+{
+  &quot;policy&quot;: {
+    &quot;phases&quot;: {
+      &quot;hot&quot;: {
+        &quot;actions&quot;: {
+          &quot;rollover&quot;: {
+            &quot;max_docs&quot;: 10
+          },
+          &quot;set_priority&quot;: {
+            &quot;priority&quot;: 50
+          }
+        }
+      },
+      &quot;delete&quot;: {
+        &quot;min_age&quot;: &quot;60d&quot;,
+        &quot;actions&quot;: {
+          &quot;delete&quot;: {}
+        }
+      }
+    }
+  }
+}
+</code></pre><pre tabindex=0><code>{
+  &quot;acknowledged&quot; : true
+}
+</code></pre><h3 id=components-template>Components Template</h3>
+<h4 id=settings>Settings</h4>
+<p>Nous allons configurer des paramètres par défaut pour tous les index ELasticsearch qui seront créé.</p>
+<p>Il est recommandé d&rsquo;avoir les paramètres de réplications suivant :</p>
+<ul>
+<li>shard : 1</li>
+<li>replicas : 1</li>
+</ul>
+<pre tabindex=0><code>PUT _component_template/observability-settings
+{
+  &quot;template&quot;: {
+    &quot;settings&quot;: {
+      &quot;number_of_shards&quot;: 1,
+      &quot;number_of_replicas&quot;: 1,
+      &quot;index.lifecycle.name&quot;: &quot;observability-policy&quot;
+    }
+  },
+  &quot;_meta&quot;: {
+    &quot;description&quot;: &quot;Settings for Observability data&quot;
+  }
+}
+</code></pre><pre tabindex=0><code>{
+  &quot;acknowledged&quot; : true
+}
+</code></pre><h4 id=mapping>Mapping</h4>
+<p>NOus allons configurer un mapping des champs par défaut pour toutes les données d&rsquo;observabilité.</p>
+<pre tabindex=0><code>PUT _component_template/observability-mappings
+{
+  &quot;template&quot;: {
+    &quot;mappings&quot;: {
+      &quot;properties&quot;: {
+        &quot;@timestamp&quot;: {
+          &quot;type&quot;: &quot;date&quot;,
+          &quot;format&quot;: &quot;date_optional_time||epoch_millis&quot;
+        },
+        &quot;message&quot;: {
+          &quot;type&quot;: &quot;wildcard&quot;
+        }
+      }
+    }
+  },
+  &quot;_meta&quot;: {
+    &quot;description&quot;: &quot;Mappings for @timestamp and message fields&quot;
+  }
+}
+</code></pre><pre tabindex=0><code>{
+  &quot;acknowledged&quot; : true
+}
+</code></pre><h3 id=index-template>Index Template</h3>
+<p>L&rsquo;index template est une fonctionnalité permettant de définir des paramètres par défaut à vos index.
+Cela permet d&rsquo;automatiser la gestion des index en appliquant des configurations de réplications, de règles de gestion automatiquement.</p>
+<pre tabindex=0><code>PUT _index_template/observability-template
+{
+  &quot;index_patterns&quot;: [&quot;observability-*&quot;],
+  &quot;data_stream&quot;: { },
+  &quot;composed_of&quot;: [ &quot;observability-mappings&quot;, &quot;observability-settings&quot; ],
+  &quot;priority&quot;: 500,
+  &quot;_meta&quot;: {
+    &quot;description&quot;: &quot;Template for my time series data&quot;
+  }
+}
+</code></pre><pre tabindex=0><code>{
+  &quot;acknowledged&quot; : true
+}
+</code></pre><h3 id=créer-votre-data-stream>Créer votre Data Stream</h3>
+<pre tabindex=0><code>PUT _data_stream/observability-time-series
+</code></pre><pre tabindex=0><code>{
+  &quot;acknowledged&quot; : true
+}
+</code></pre><h3 id=ajouter-des-données-dans-le-data-stream>Ajouter des données dans le Data Stream</h3>
+<pre tabindex=0><code>PUT observability-time-series/_bulk
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:21:15.000Z&quot;,&quot;message&quot;:&quot;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&quot;GET /images/bg.jpg HTTP/1.0\&quot; 200 24736&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:25:42.000Z&quot;,&quot;message&quot;:&quot;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&quot;GET /favicon.ico HTTP/1.0\&quot; 200 3638&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:21:15.000Z&quot;,&quot;message&quot;:&quot;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&quot;GET /images/bg.jpg HTTP/1.0\&quot; 200 24736&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:25:42.000Z&quot;,&quot;message&quot;:&quot;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&quot;GET /favicon.ico HTTP/1.0\&quot; 200 3638&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:21:15.000Z&quot;,&quot;message&quot;:&quot;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&quot;GET /images/bg.jpg HTTP/1.0\&quot; 200 24736&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:25:42.000Z&quot;,&quot;message&quot;:&quot;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&quot;GET /favicon.ico HTTP/1.0\&quot; 200 3638&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:21:15.000Z&quot;,&quot;message&quot;:&quot;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&quot;GET /images/bg.jpg HTTP/1.0\&quot; 200 24736&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:25:42.000Z&quot;,&quot;message&quot;:&quot;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&quot;GET /favicon.ico HTTP/1.0\&quot; 200 3638&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:21:15.000Z&quot;,&quot;message&quot;:&quot;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&quot;GET /images/bg.jpg HTTP/1.0\&quot; 200 24736&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:25:42.000Z&quot;,&quot;message&quot;:&quot;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&quot;GET /favicon.ico HTTP/1.0\&quot; 200 3638&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:21:15.000Z&quot;,&quot;message&quot;:&quot;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&quot;GET /images/bg.jpg HTTP/1.0\&quot; 200 24736&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:25:42.000Z&quot;,&quot;message&quot;:&quot;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&quot;GET /favicon.ico HTTP/1.0\&quot; 200 3638&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:21:15.000Z&quot;,&quot;message&quot;:&quot;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&quot;GET /images/bg.jpg HTTP/1.0\&quot; 200 24736&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:25:42.000Z&quot;,&quot;message&quot;:&quot;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&quot;GET /favicon.ico HTTP/1.0\&quot; 200 3638&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:21:15.000Z&quot;,&quot;message&quot;:&quot;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&quot;GET /images/bg.jpg HTTP/1.0\&quot; 200 24736&quot;}
+{&quot;create&quot;:{}}
+{&quot;@timestamp&quot;:&quot;2099-05-06T16:25:42.000Z&quot;,&quot;message&quot;:&quot;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&quot;GET /favicon.ico HTTP/1.0\&quot; 200 3638&quot;}
+</code></pre><pre tabindex=0><code>{
+  &quot;took&quot; : 12,
+  &quot;errors&quot; : false,
+  &quot;items&quot; : [
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;HggBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 0,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;HwgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 1,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;IAgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 2,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;IQgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 3,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;IggBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 4,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;IwgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 5,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;JAgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 6,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;JQgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 7,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;JggBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 8,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;JwgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 9,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;KAgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 10,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;KQgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 11,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;KggBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 12,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;KwgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 13,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;LAgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 14,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    },
+    {
+      &quot;create&quot; : {
+        &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;LQgBHn8BzEvhAp6LaS34&quot;,
+        &quot;_version&quot; : 1,
+        &quot;result&quot; : &quot;created&quot;,
+        &quot;_shards&quot; : {
+          &quot;total&quot; : 2,
+          &quot;successful&quot; : 2,
+          &quot;failed&quot; : 0
+        },
+        &quot;_seq_no&quot; : 15,
+        &quot;_primary_term&quot; : 1,
+        &quot;status&quot; : 201
+      }
+    }
+  ]
+}
+</code></pre><h3 id=mettre-à-jours-les-données-data-stream>Mettre à jours les données Data Stream</h3>
+<pre tabindex=0><code>POST observability-time-series/_doc
+{
+  &quot;@timestamp&quot;: &quot;2099-05-06T16:21:15.000Z&quot;,
+  &quot;message&quot;: &quot;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&quot;GET /images/bg.jpg HTTP/1.0\&quot; 200 24736&quot;
+}
+</code></pre><pre tabindex=0><code>{
+  &quot;_index&quot; : &quot;.ds-observability-time-series-2022.02.21-000002&quot;,
+  &quot;_type&quot; : &quot;_doc&quot;,
+  &quot;_id&quot; : &quot;ZQgCHn8BzEvhAp6LozUb&quot;,
+  &quot;_version&quot; : 1,
+  &quot;result&quot; : &quot;created&quot;,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 2,
+    &quot;successful&quot; : 2,
+    &quot;failed&quot; : 0
+  },
+  &quot;_seq_no&quot; : 0,
+  &quot;_primary_term&quot; : 1
+}
+</code></pre><p>On constate que le nom de l&rsquo;index est différent <strong>.ds-observability-time-series-2022.02.21-000002</strong>, il y a eu une rotation automatique de l&rsquo;index. On constate alors que la politique de rotation est bien appliquée.</p>
+<h3 id=ilm-check>ILM Check</h3>
+<pre tabindex=0><code>GET _ilm/status
+</code></pre><pre tabindex=0><code>{
+  &quot;operation_mode&quot; : &quot;RUNNING&quot;
+}
+</code></pre><pre tabindex=0><code>GET _ilm/policy/observability-policy
+</code></pre><pre tabindex=0><code>{
+  &quot;observability-policy&quot; : {
+    &quot;version&quot; : 1,
+    &quot;modified_date&quot; : &quot;2022-02-21T20:35:02.304Z&quot;,
+    &quot;policy&quot; : {
+      &quot;phases&quot; : {
+        &quot;hot&quot; : {
+          &quot;min_age&quot; : &quot;0ms&quot;,
+          &quot;actions&quot; : {
+            &quot;rollover&quot; : {
+              &quot;max_docs&quot; : 10
+            },
+            &quot;set_priority&quot; : {
+              &quot;priority&quot; : 50
+            }
+          }
+        },
+        &quot;delete&quot; : {
+          &quot;min_age&quot; : &quot;60d&quot;,
+          &quot;actions&quot; : {
+            &quot;delete&quot; : {
+              &quot;delete_searchable_snapshot&quot; : true
+            }
+          }
+        }
+      }
+    },
+    &quot;in_use_by&quot; : {
+      &quot;indices&quot; : [
+        &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+        &quot;.ds-observability-time-series-2022.02.21-000002&quot;
+      ],
+      &quot;data_streams&quot; : [
+        &quot;observability-time-series&quot;
+      ],
+      &quot;composable_templates&quot; : [
+        &quot;observability-template&quot;
+      ]
+    }
+  }
+}
+</code></pre><p>On retrouve la configuration de notre ILM ainsi que les index rattachés.</p>
+<pre tabindex=0><code>GET observability-time-series/_ilm/explain
+</code></pre><pre tabindex=0><code>{
+  &quot;indices&quot; : {
+    &quot;.ds-observability-time-series-2022.02.21-000001&quot; : {
+      &quot;index&quot; : &quot;.ds-observability-time-series-2022.02.21-000001&quot;,
+      &quot;managed&quot; : true,
+      &quot;policy&quot; : &quot;observability-policy&quot;,
+      &quot;lifecycle_date_millis&quot; : 1645475884407,
+      &quot;age&quot; : &quot;4.91m&quot;,
+      &quot;phase&quot; : &quot;hot&quot;,
+      &quot;phase_time_millis&quot; : 1645475859767,
+      &quot;action&quot; : &quot;complete&quot;,
+      &quot;action_time_millis&quot; : 1645475885210,
+      &quot;step&quot; : &quot;complete&quot;,
+      &quot;step_time_millis&quot; : 1645475885210,
+      &quot;phase_execution&quot; : {
+        &quot;policy&quot; : &quot;observability-policy&quot;,
+        &quot;phase_definition&quot; : {
+          &quot;min_age&quot; : &quot;0ms&quot;,
+          &quot;actions&quot; : {
+            &quot;rollover&quot; : {
+              &quot;max_docs&quot; : 10
+            },
+            &quot;set_priority&quot; : {
+              &quot;priority&quot; : 50
+            }
+          }
+        },
+        &quot;version&quot; : 1,
+        &quot;modified_date_in_millis&quot; : 1645475702304
+      }
+    },
+    &quot;.ds-observability-time-series-2022.02.21-000002&quot; : {
+      &quot;index&quot; : &quot;.ds-observability-time-series-2022.02.21-000002&quot;,
+      &quot;managed&quot; : true,
+      &quot;policy&quot; : &quot;observability-policy&quot;,
+      &quot;lifecycle_date_millis&quot; : 1645475884525,
+      &quot;age&quot; : &quot;4.91m&quot;,
+      &quot;phase&quot; : &quot;hot&quot;,
+      &quot;phase_time_millis&quot; : 1645475884809,
+      &quot;action&quot; : &quot;rollover&quot;,
+      &quot;action_time_millis&quot; : 1645475885210,
+      &quot;step&quot; : &quot;check-rollover-ready&quot;,
+      &quot;step_time_millis&quot; : 1645475885210,
+      &quot;phase_execution&quot; : {
+        &quot;policy&quot; : &quot;observability-policy&quot;,
+        &quot;phase_definition&quot; : {
+          &quot;min_age&quot; : &quot;0ms&quot;,
+          &quot;actions&quot; : {
+            &quot;rollover&quot; : {
+              &quot;max_docs&quot; : 10
+            },
+            &quot;set_priority&quot; : {
+              &quot;priority&quot; : 50
+            }
+          }
+        },
+        &quot;version&quot; : 1,
+        &quot;modified_date_in_millis&quot; : 1645475702304
+      }
+    }
+  }
+}
+</code></pre><p>On peut observer les différentes informations de nos index concernant ILM appliquée deçu.</p>
+<footer class=footline>
+</footer>
+</div>
+</div>
+<div id=navigation>
+<a class="nav nav-prev" href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title="Lab - Habilitation"> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/intermediare/ title=Intermediare style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+</div>
+</section>
+<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
+</div>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645476384></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645476384></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645476384></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645476384></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645476384></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645476384></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645476384></script>
+<script src=/elastic-tutorial/js/learn.js?1645476384></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645476384></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645476384></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+</body>
+</html>
