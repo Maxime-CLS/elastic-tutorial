@@ -1,31 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Intermediare on Elastic Tutoriel</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/intermediare/</link><description>Recent content in Intermediare on Elastic Tutoriel</description><generator>Hugo -- gohugo.io</generator><language>fr-FR</language><lastBuildDate>Mon, 04 May 2020 08:52:59 +0200</lastBuildDate><atom:link href="https://maxime-cls.github.io/elastic-tutorial/elastic/intermediare/index.xml" rel="self" type="application/rss+xml"/><item><title>APM</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/intermediare/apm/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/intermediare/apm/</guid><description>Serveur APM Ajoutez le service APM ci-dessous dans le fichier elastic-docker-tls.yml :
-apm-server:
-image: docker.elastic.co/apm/apm-server:${VERSION}
-container_name: apm-server
-depends_on:
-es01: { condition: service_healthy }
-kib01: { condition: service_healthy }
-cap_add: [&amp;quot;CHOWN&amp;quot;, &amp;quot;DAC_OVERRIDE&amp;quot;, &amp;quot;SETGID&amp;quot;, &amp;quot;SETUID&amp;quot;]
-cap_drop: [&amp;quot;ALL&amp;quot;]
-ports:
-- 8200:8200
-volumes:
-- certs:$CERTS_DIR
-networks:
-- elastic
-command: &amp;gt;
-apm-server -e
--E apm-server.rum.enabled=true
--E setup.kibana.host=kib01:5601
--E setup.template.settings.index.number_of_replicas=1
--E apm-server.kibana.enabled=true
--E apm-server.kibana.host=kib01:5601
--E apm-server.kibana.protocol=https
--E apm-server.kibana.username=$USER_ELASTIC
--E apm-server.kibana.password=$PASSWORD_ELASTIC
--E apm-server.kibana.ssl.enabled=true
--E apm-server.kibana.ssl.certificate_authorities=[&amp;quot;$CERTS_DIR/ca/ca.crt&amp;quot;]
--E output.</description></item><item><title>APM</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/intermediare/fleet/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/intermediare/fleet/</guid><description>Serveur Fleet Ajoutez les deux services ci-dessous dans le fichier elastic-docker-tls.yml :
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Intermediare on Elastic Tutoriel</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/intermediare/</link><description>Recent content in Intermediare on Elastic Tutoriel</description><generator>Hugo -- gohugo.io</generator><language>fr-FR</language><lastBuildDate>Mon, 04 May 2020 08:52:59 +0200</lastBuildDate><atom:link href="https://maxime-cls.github.io/elastic-tutorial/elastic/intermediare/index.xml" rel="self" type="application/rss+xml"/><item><title>APM</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/intermediare/fleet/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/intermediare/fleet/</guid><description>Serveur Fleet Ajoutez les deux services ci-dessous dans le fichier elastic-docker-tls.yml :
 package-registry:
 image: docker.elastic.co/package-registry/distribution:${VERSION}
 container_name: package-registry

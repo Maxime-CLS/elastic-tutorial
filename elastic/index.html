@@ -7,18 +7,18 @@
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
 <title>Elastic :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645365907 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645365907 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645365907 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645365907 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645365907 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645365907 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645365907 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645365907 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645365907 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645365907 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645365907 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645365907></script>
+<link href=/elastic-tutorial/css/nucleus.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645472208 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645472208></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/elastic-tutorial/elastic/>
@@ -32,10 +32,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645365907></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645365907></script>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645472208></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645472208></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645365907></script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645472208></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -79,6 +79,18 @@ Lab - Metrics
 <i class="fas fa-check read-icon"></i>
 </a>
 </li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
+Lab - APM
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
+Lab - Uptime
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
 </ul>
 </li>
 <li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
@@ -86,6 +98,14 @@ Lab - Metrics
 Elementaire
 <i class="fas fa-check read-icon"></i>
 </a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title=Privilèges class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/>
+Privilèges
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
 </li>
 <li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/>
@@ -93,12 +113,6 @@ Intermediare
 <i class="fas fa-check read-icon"></i>
 </a>
 <ul>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/apm/ title=APM class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/apm/>
-APM
-<i class="fas fa-check read-icon"></i>
-</a>
-</li>
 <li data-nav-id=/elastic-tutorial/elastic/intermediare/fleet/ title=APM class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/fleet/>
 APM
@@ -168,17 +182,17 @@ Elastic
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645365907></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645365907></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645365907></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645365907></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645365907></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645365907></script>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645472208></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645472208></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645472208></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645472208></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645472208></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645472208></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645365907></script>
-<script src=/elastic-tutorial/js/learn.js?1645365907></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645365907></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645365907></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645472208></script>
+<script src=/elastic-tutorial/js/learn.js?1645472208></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645472208></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645472208></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

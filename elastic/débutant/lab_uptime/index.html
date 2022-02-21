@@ -6,7 +6,7 @@
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Prérequis :: Elastic Tutoriel</title>
+<title>Lab - Uptime :: Elastic Tutoriel</title>
 <link href=/elastic-tutorial/css/nucleus.css?1645472208 rel=stylesheet>
 <link href=/elastic-tutorial/css/fontawesome-all.min.css?1645472208 rel=stylesheet>
 <link href=/elastic-tutorial/css/hybrid.css?1645472208 rel=stylesheet>
@@ -21,7 +21,7 @@
 <script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645472208></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
-<body data-url=/elastic-tutorial/elastic/prerequis/>
+<body data-url=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
 <div id=header>
@@ -46,9 +46,7 @@ Elastic
 <i class="fas fa-check read-icon"></i>
 </a>
 <ul>
-<li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class="dd-item
-parent
-active">
+<li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item>
 <a href=/elastic-tutorial/elastic/prerequis/>
 Prérequis
 <i class="fas fa-check read-icon"></i>
@@ -62,7 +60,8 @@ Installation
 </li>
 </ul>
 </li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class="dd-item
+parent">
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/>
 Débutant
 <i class="fas fa-check read-icon"></i>
@@ -86,7 +85,7 @@ Lab - APM
 <i class="fas fa-check read-icon"></i>
 </a>
 </li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class="dd-item active">
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
 Lab - Uptime
 <i class="fas fa-check read-icon"></i>
@@ -155,12 +154,20 @@ Avancé
 </span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
 <span class=links>
-<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > Prérequis
+<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/d%C3%A9butant/>Débutant</a> > Lab - Uptime
 </span>
 </div>
 <div class=progress>
 <div class=wrapper>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#déployer-un-agent-beats>Déployer un agent beats</a></li>
+</ul>
+</li>
+</ul>
+</nav>
 </div>
 </div>
 </div>
@@ -169,15 +176,144 @@ Avancé
 </div>
 <div id=body-inner>
 <h1>
-Prérequis
+Lab - Uptime
 </h1>
+<p>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques des disponibilités des services avec Heratbeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.</p>
+<h3 id=déployer-un-agent-beats>Déployer un agent beats</h3>
+<p>Ajoutez le service <strong>Heartbeat</strong> à la suite du service <strong>Beats</strong></p>
+<pre tabindex=0><code>vim beats/beats-docker.yml
+</code></pre><p><strong>beats-docker.yml</strong></p>
+<pre tabindex=0><code>version: '2.2'
+services:
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:${VERSION}
+    container_name: filebeat
+    restart: unless-stopped
+    entrypoint: &quot;filebeat -e -strict.perms=false&quot;
+    user: root
+    volumes:
+    - &quot;./conf/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro&quot;
+    - &quot;/var/lib/docker/containers:/var/lib/docker/containers:ro&quot;
+    - &quot;/var/run/docker.sock:/var/run/docker.sock:ro&quot;
+    - &quot;/var/log:/tmp:ro&quot;
+    - certs:$CERTS_DIR
+    networks:
+    - elastic
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:${VERSION}
+    container_name: metricbeat
+    restart: unless-stopped
+    entrypoint: &quot;metricbeat -e -strict.perms=false&quot;
+    user: root
+    volumes:
+    - &quot;./conf/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro&quot;
+    - &quot;/proc:/hostfs/proc:ro&quot;
+    - &quot;/sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro&quot;
+    - &quot;/:/hostfs:ro&quot;
+    - &quot;/var/run/docker.sock:/var/run/docker.sock:ro&quot;
+    - certs:$CERTS_DIR
+    networks:
+    - elastic
+  heartbeat:
+    image: docker.elastic.co/beats/heartbeat:${VERSION}
+    container_name: heartbeat
+    restart: unless-stopped
+    entrypoint: &quot;heartbeat -e -strict.perms=false&quot;
+    user: root
+    volumes:
+    - &quot;./conf/heartbeat.yml:/usr/share/heartbeat/heartbeat.yml:ro&quot;
+    - &quot;/var/run/docker.sock:/var/run/docker.socki:ro&quot;
+    - certs:$CERTS_DIR
+    networks:
+    - elastic
+
+
+volumes:
+  certs:
+    driver: local
+
+networks:
+    elastic:
+        driver: bridge
+</code></pre><pre tabindex=0><code>vim beats/conf/heartbeat.yml
+</code></pre><pre tabindex=0><code>heartbeat.monitors:
+- type: http
+  id: nginx-service-status
+  name: Nginx Status
+  schedule: '@every 10s'
+  urls:
+    - http://nginx
+  timeout: 30s
+  check.response:
+    status: 200
+    body:
+      - &quot;Welcome&quot;
+- type: http
+  id: petclinic-service-status
+  name: Petclinic Status
+  schedule: '@every 10s'
+  urls:
+      - http://petclinic:8080/metrics/prometheus
+  timeout: 30s
+  check.response:
+    status: 200
+    body:
+      - &quot;jvm_memory_committed_bytes&quot;
+- type: tcp
+  id: mysql-service-status
+  name: MySQL Status
+  schedule: '@every 10s'
+  hosts: [&quot;tcp://mysql:3306&quot;]
+
+processors:
+- add_cloud_metadata: ~
+- add_docker_metadata: ~
+
+output.elasticsearch:
+  hosts: 'https://es01:9200'
+  username: &quot;elastic&quot;
+  password: &quot;CHANGEME&quot;
+  ssl.certificate_authorities: [&quot;/usr/share/elasticsearch/config/certificates/ca/ca.crt&quot;]
+</code></pre><p>Changer la valeur du champs <strong>password</strong> avec la valeur du mot de passe générer automatiquement.</p>
+<pre tabindex=0><code>docker-compose -f beats/beats-docker.yml up -d
+</code></pre><pre tabindex=0><code>vim app/artificial_load.sh
+</code></pre><pre tabindex=0><code>#!/bin/bash
+
+COUNTER=0
+
+while [  $COUNTER -lt 10000 ] ;
+do
+ curl -s --header &quot;X-Forwarded-For: 5.198.223.255&quot; localhost &gt; /dev/null
+ curl -s localhost/owners/find &gt; /dev/null
+ curl -s localhost/owners?lastName= &gt; /dev/null
+ curl -s localhost/owners/1 &gt; /dev/null
+ curl -s localhost/owners/4 &gt; /dev/null
+ curl -s localhost/owners/6 &gt; /dev/null
+ curl -s localhost/owners/8 &gt; /dev/null
+ curl -s localhost/vets.html &gt; /dev/null
+ curl -s localhost/oups &gt; /dev/null
+ let COUNTER=COUNTER+1
+done
+</code></pre><pre tabindex=0><code>chmod +x app/artificial_load.sh
+</code></pre><p>Maintenant, ouvrez une nouvelle fenêtre de terminal et exécutez le script suivant pour simuler la charge sur votre serveur NGINX.</p>
+<pre tabindex=0><code>./app/artificial_load.sh
+</code></pre><p>Naviguer dans l&rsquo;application Petclinic quelque instant pour générer un traffic utilisateur sur un navigateur web.</p>
+<p>Lancez Kibana pour commencer à explorer les tableaux de bord qui ont été inclus dans le menu <strong>Observability</strong></p>
+<p>Cliquez sur le bouton <strong>View app</strong></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/observability_uptime.png alt=image.png></p>
+<p>Vous pouvez observer que l&rsquo;agent beat réalise 3 vérification de disponibilité. Un pour chaque service de l&rsquo;application.</p>
+<p>Cliquez sur le monitor <strong>Nginx Status</strong></p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/uptime_monitors.png alt=image.png></p>
+<p>Vous avez maintenant un vue détaillée du service nginx comme les temps de réponses, la disponibilité, etc&mldr;</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/uptime_nginx_monitor.png alt=image.png></p>
+<p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez obtenir des mesures des vos services liée à l&rsquo;application Petclinic avec Heartbeat et les indexer dans Elasticsearch. Vous avez également exploré les tableaux de bord Kibana et vu avec quelle facilité vous pouvez surveiller ces mesures.</p>
 <footer class=footline>
 </footer>
 </div>
 </div>
 <div id=navigation>
-<a class="nav nav-prev" href=/elastic-tutorial/elastic/ title=Elastic> <i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/prerequis/installation/ title=Installation style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+<a class="nav nav-prev" href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM"> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire style=margin-right:0><i class="fa fa-chevron-right"></i></a>
 </div>
 </section>
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>

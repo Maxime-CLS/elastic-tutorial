@@ -1,0 +1,287 @@
+<!doctype html><html lang=en class="js csstransforms3d">
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.92.2">
+<meta name=description content="Tutoriel sur Elastic">
+<meta name=author content="Maxime Calves">
+<link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
+<title>Lab - APM :: Elastic Tutoriel</title>
+<link href=/elastic-tutorial/css/nucleus.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645472208 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645472208 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645472208></script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
+</head>
+<body data-url=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
+<nav id=sidebar class=showVisitedLinks>
+<div id=header-wrapper>
+<div id=header>
+<img src=../../../../elastic-tutorial/media/logo.png>
+</div>
+<div class=searchbox>
+<label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span>
+</div>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645472208></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645472208></script>
+<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645472208></script>
+</div>
+<div class=highlightable>
+<ul class=topics>
+<li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
+parent">
+<a href=/elastic-tutorial/elastic/>
+Elastic
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item>
+<a href=/elastic-tutorial/elastic/prerequis/>
+Prérequis
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/prerequis/installation/ title=Installation class=dd-item>
+<a href=/elastic-tutorial/elastic/prerequis/installation/>
+Installation
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class="dd-item
+parent">
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/>
+Débutant
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/ title="Lab - Logs" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/>
+Lab - Logs
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
+Lab - Metrics
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class="dd-item active">
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
+Lab - APM
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
+Lab - Uptime
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
+Elementaire
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title=Privilèges class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/>
+Privilèges
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/>
+Intermediare
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/fleet/ title=APM class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/fleet/>
+APM
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/>
+Avancé
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<section id=prefooter>
+<hr>
+<ul>
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+</ul>
+</section>
+<section id=footer>
+<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p>
+</section>
+</div>
+</nav>
+<section id=body>
+<div id=overlay></div>
+<div class="padding highlightable">
+<div>
+<div id=top-bar>
+<div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
+<span id=sidebar-toggle-span>
+<a href=# id=sidebar-toggle data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</a>
+</span>
+<span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links>
+<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/d%C3%A9butant/>Débutant</a> > Lab - APM
+</span>
+</div>
+<div class=progress>
+<div class=wrapper>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#serveur-apm>Serveur APM</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id=head-tags>
+</div>
+<div id=body-inner>
+<h1>
+Lab - APM
+</h1>
+<h3 id=serveur-apm>Serveur APM</h3>
+<p>Objectif : Dans ce laboratoire, vous apprendrez comment il est facile d&rsquo;utiliser APM pour instrumenter les applications afin de collecter des informations détaillées sur les performances ainsi que les erreurs et les envoyer à votre déploiement Elasticsearch. Vous explorerez également l&rsquo;application APM Kibana et verrez avec quelle facilité vous pouvez surveiller les performances des applications.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/apm-lab-architecture.png alt=image.png></p>
+<p>Ajoutez le service APM ci-dessous dans le fichier <strong>elastic-docker-tls.yml</strong> :</p>
+<pre tabindex=0><code>  apm-server:
+    image: docker.elastic.co/apm/apm-server:${VERSION}
+    container_name: apm-server
+    depends_on:
+      es01: { condition: service_healthy }
+      kib01: { condition: service_healthy }
+    cap_add: [&quot;CHOWN&quot;, &quot;DAC_OVERRIDE&quot;, &quot;SETGID&quot;, &quot;SETUID&quot;]
+    cap_drop: [&quot;ALL&quot;]
+    ports:
+    - 8200:8200
+    volumes:
+       - certs:$CERTS_DIR
+    networks:
+    - elastic
+    command: &gt;
+       apm-server -e
+         -E apm-server.rum.enabled=true
+         -E setup.kibana.host=kib01:5601
+         -E setup.template.settings.index.number_of_replicas=1
+         -E apm-server.kibana.enabled=true
+         -E apm-server.kibana.host=kib01:5601
+         -E apm-server.kibana.protocol=https
+         -E apm-server.kibana.username=$USER_ELASTIC
+         -E apm-server.kibana.password=$PASSWORD_ELASTIC
+         -E apm-server.kibana.ssl.enabled=true
+         -E apm-server.kibana.ssl.certificate_authorities=[&quot;$CERTS_DIR/ca/ca.crt&quot;]
+         -E output.elasticsearch.hosts=[&quot;https://es01:9200&quot;]
+         -E output.elasticsearch.username=$USER_ELASTIC
+         -E output.elasticsearch.password=$PASSWORD_ELASTIC
+         -E output.elasticsearch.ssl.certificate_authorities=[&quot;$CERTS_DIR/ca/ca.crt&quot;]
+    healthcheck:
+      interval: 10s
+      retries: 12
+      test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:8200/
+</code></pre><pre tabindex=0><code>docker-compose -f elastic-docker-tls.yml up -d
+</code></pre><p>L&rsquo;application Petclinic contient des variables d&rsquo;environnement pour contacter le serveur APM :</p>
+<pre tabindex=0><code>  petclinic:
+    image: docker.io/michaelhyatt/elastic-k8s-o11y-workshop-petclinic:1.25.0
+    container_name: petclinic
+    labels:
+      &quot;co.elastic.metrics/module&quot;: &quot;prometheus&quot;
+      &quot;co.elastic.metrics/hosts&quot;: &quot;$${data.host}:$${data.port}&quot;
+      &quot;co.elastic.metrics/metrics_path&quot;: &quot;/metrics/prometheus&quot;
+      &quot;co.elastic.metrics/period&quot;: &quot;1m&quot;
+    environment:
+      ELASTIC_APM_SERVER_URLS: &quot;http://apm-server:8200&quot;
+      ELASTIC_APM_SERVER_URLS_FOR_RUM: &quot;http://localhost:8200&quot;
+      ELASTIC_APM_SECRET_TOKEN: &quot;&quot;
+      ELASTIC_APM_SERVICE_NAME: &quot;spring-petclinic-monolith&quot;
+      ELASTIC_APM_APPLICATION_PACKAGES: &quot;org.springframework.samples&quot;
+      ELASTIC_APM_ENABLE_LOG_CORRELATION: &quot;true&quot;
+      ELASTIC_APM_CAPTURE_JMX_METRICS: &gt;
+        object_name[java.lang:type=GarbageCollector,name=*] attribute[CollectionCount:metric_name=collection_count] attribute[CollectionTime:metric_name=collection_time],
+        object_name[java.lang:type=Memory] attribute[HeapMemoryUsage:metric_name=heap]
+</code></pre><p>Ces variables d&rsquo;environnent font des références aux agents APM installés dans le code de l&rsquo;application.</p>
+<p>Maintenant que les trois microservices sont en cours d&rsquo;exécution, accédez à la page Web de Petclinic et vous devriez voir la page d&rsquo;accueil suivante :</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/petclinic-home-page.png alt=image.png></p>
+<p>Cliquez sur FIND OWNERS et VETERINARIANS pour générer des données de performance à envoyer au serveur APM.</p>
+<p>Cliquez sur ERROR pour générer des erreurs qui seront envoyées au serveur APM. Assurez-vous que vous obtenez le statut 404 et le message d&rsquo;erreur No message available comme suit :</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/petclinic-error.png alt=image.png></p>
+<p>Si vous n&rsquo;obtenez pas cette erreur, cliquez sur HOME et cliquez à nouveau sur ERROR jusqu&rsquo;à ce que vous obteniez cette erreur.</p>
+<p>Lancez l&rsquo;application APM pour commencer à explorer les données collectées.</p>
+<p>Après avoir lancé l&rsquo;application APM, vous accédez à l&rsquo;aperçu des services.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/apm.png alt=image.png></p>
+<p>Cliquez sur Détails du service pour explorer la santé globale du front-end en vérifiant les métriques sur les transactions, les erreurs et l&rsquo;infrastructure.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/petclinic-overview.png alt=image.png></p>
+<p>Ensuite, cliquez sur l&rsquo;aperçu des transactions et sélectionnez le type de transaction http-request pour explorer les requêtes du frontend.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/petclinic-react-transactions.png alt=image.png></p>
+<p>Ensuite, cliquez sur GET /api/vets pour explorer le traçage distribué et voir comment les applications et les services interagissent entre eux.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/transaction-sample-id.png alt=image.png></p>
+<p>Ensuite, cliquez sur l&rsquo;aperçu des erreurs pour explorer les erreurs de l&rsquo;application.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/petclinic-react-errors.png alt=image.png></p>
+<p>Ensuite, cliquez sur l&rsquo;erreur &ldquo;Aucun message disponible&rdquo; pour voir la trace de la pile qui indique l&rsquo;origine de l&rsquo;erreur.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/stacktrace.png alt=image.png></p>
+<p>Enfin, cliquez sur la transaction GET /api/error pour voir les erreurs associées et comment elles se sont propagées parmi les services.</p>
+<p><img src=/elastic-tutorial/images/attachments/debutant/transaction-sample-id.png alt=image.png></p>
+<p>Résumé : Dans ce laboratoire, vous avez appris comment il est facile de configurer des agents APM pour collecter des informations de trace et des erreurs afin de les indexer dans Elasticsearch. Vous avez également exploré l&rsquo;application APM Kibana et vu avec quelle facilité vous pouvez surveiller les performances des applications.</p>
+<footer class=footline>
+</footer>
+</div>
+</div>
+<div id=navigation>
+<a class="nav nav-prev" href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics"> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+</div>
+</section>
+<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
+</div>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645472208></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645472208></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645472208></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645472208></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645472208></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645472208></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645472208></script>
+<script src=/elastic-tutorial/js/learn.js?1645472208></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645472208></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645472208></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+</body>
+</html>
