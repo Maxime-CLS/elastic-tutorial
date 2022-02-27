@@ -6,7 +6,7 @@
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Elastic :: Elastic Tutoriel</title>
+<title>Reindex Documents :: Elastic Tutoriel</title>
 <link href=/elastic-tutorial/css/nucleus.css?1645956657 rel=stylesheet>
 <link href=/elastic-tutorial/css/fontawesome-all.min.css?1645956657 rel=stylesheet>
 <link href=/elastic-tutorial/css/hybrid.css?1645956657 rel=stylesheet>
@@ -21,7 +21,7 @@
 <script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645956657></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
-<body data-url=/elastic-tutorial/elastic/>
+<body data-url=/elastic-tutorial/elastic/intermediare/reindex/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
 <div id=header>
@@ -40,8 +40,7 @@
 <div class=highlightable>
 <ul class=topics>
 <li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
-parent
-active">
+parent">
 <a href=/elastic-tutorial/elastic/>
 Elastic
 <i class="fas fa-check read-icon"></i>
@@ -125,7 +124,8 @@ Lab - Diagnostic
 </li>
 </ul>
 </li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
+parent">
 <a href=/elastic-tutorial/elastic/intermediare/>
 Intermediare
 <i class="fas fa-check read-icon"></i>
@@ -161,7 +161,7 @@ Définir le mapping
 <i class="fas fa-check read-icon"></i>
 </a>
 </li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Reindex Documents" class=dd-item>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Reindex Documents" class="dd-item active">
 <a href=/elastic-tutorial/elastic/intermediare/reindex/>
 Reindex Documents
 <i class="fas fa-check read-icon"></i>
@@ -208,12 +208,20 @@ Avancé
 </span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
 <span class=links>
-<a href=/elastic-tutorial/>Elastic Tutoriel</a> > Elastic
+<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/intermediare/>Intermediare</a> > Reindex Documents
 </span>
 </div>
 <div class=progress>
 <div class=wrapper>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#description>Description</a>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</nav>
 </div>
 </div>
 </div>
@@ -222,15 +230,139 @@ Avancé
 </div>
 <div id=body-inner>
 <h1>
-Elastic
+Reindex Documents
 </h1>
+<h2 id=description>Description</h2>
+<p>Que vous ayez besoin de modifier le mappage d&rsquo;un index existant ou de prendre un sous-ensemble de données d&rsquo;un index et de le copier dans un autre, l&rsquo;API _reindex d&rsquo;Elasticsearch vous couvre. Avec l&rsquo;API _reindex, vous pouvez prendre toutes les données ou seulement un sous-ensemble de données d&rsquo;un index et les copier dans un autre. Dans ce laboratoire pratique, vous aurez l&rsquo;occasion de faire les exercices suivants :</p>
+<ul>
+<li>Réindexer un sous-ensemble de données d&rsquo;un index vers un nouvel index.</li>
+<li>Créer un pipeline de nœuds d&rsquo;ingestion</li>
+<li>Transformer les données pendant le processus de réindexation</li>
+</ul>
+<p>Vous travaillez en tant que bibliothécaire de recherche et vous étudiez actuellement les œuvres de Shakespeare, en particulier Roméo et Juliette. Vous avez un cluster Elasticsearch à 6 nœuds et les œuvres complètes de Shakespeare, que vous utilisez pour votre analyse littéraire. Actuellement, les œuvres complètes de Shakespeare sont indexées dans un seul index appelé shakespeare, mais, comme vous vous concentrez actuellement sur la pièce Roméo et Juliette, vous préférez copier cette pièce dans son propre index.</p>
+<p>Pour ce faire, vous devrez d&rsquo;abord créer un nouvel index appelé romeo_and_juliet avec les mêmes mappages de champs que l&rsquo;index shakespeare. Comme votre cluster Elasticsearch à 3 nœuds ne compte que 4 nœuds de données, vous souhaitez créer l&rsquo;index romeo_and_juliet avec 4 shards primaires et 3 shards répliques pour une réplication maximale. Une fois l&rsquo;index romeo_and_juliet créé, vous devrez utiliser l&rsquo;API _reindex pour copier tous les documents dont le nom de pièce est &ldquo;Romeo and Juliet&rdquo; vers l&rsquo;index romeo_and_juliet.</p>
+<p>En plus de copier les données de la pièce Roméo et Juliette dans son propre index, vous souhaitez également modifier les données en cours de route pendant le processus de réindexation. Plus précisément, vous voulez prendre le contenu du champ text_entry et stocker chaque mot délimité par des espaces dans un tableau appelé word_array. En outre, vous voulez ajouter un champ word_count qui est égal au nombre de mots dans le champ word_array. Enfin, comme l&rsquo;index ne contiendra que les données relatives à la pièce Roméo et Juliette, nous pouvons supprimer le champ play_name. Tout ceci peut être accompli avec un pipeline de nœuds d&rsquo;acquisition utilisant les processeurs split, script et remove.</p>
+<h4 id=préparation-des-données>Préparation des données</h4>
+<pre tabindex=0><code>PUT /shakespeare
+{
+ &quot;mappings&quot;: {
+   &quot;properties&quot;: {
+    &quot;speaker&quot;: {&quot;type&quot;: &quot;keyword&quot;},
+    &quot;play_name&quot;: {&quot;type&quot;: &quot;keyword&quot;},
+    &quot;line_id&quot;: {&quot;type&quot;: &quot;integer&quot;},
+    &quot;speech_number&quot;: {&quot;type&quot;: &quot;integer&quot;}
+   }
+ }
+}
+</code></pre><pre tabindex=0><code>curl --location --request POST 'https://localhost:9200/bank/account/_bulk?pretty' \
+--header 'Content-Type: application/x-ndjson' \
+--header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
+ --data-binary @accounts.json
+
+curl --location --request POST 'https://localhost:9200/shakespeare/doc/_bulk?pretty' \
+--header 'Content-Type: application/x-ndjson' \
+--header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
+ --data-binary @shakespeare.json
+</code></pre><h4 id=créer-lindex-romeo_and_juiliet>Créer l&rsquo;index romeo_and_juiliet</h4>
+<pre tabindex=0><code>PUT romeo_and_juliet
+{
+  &quot;mappings&quot;: {
+    &quot;properties&quot;: {
+      &quot;line_id&quot;: {
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      &quot;line_number&quot;: {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;fields&quot;: {
+          &quot;keyword&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 256
+          }
+        }
+      },
+      &quot;play_name&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;
+      },
+      &quot;speaker&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;
+      },
+      &quot;speech_number&quot;: {
+        &quot;type&quot;: &quot;integer&quot;
+      },
+      &quot;text_entry&quot;: {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;fields&quot;: {
+          &quot;keyword&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 256
+          }
+        }
+      },
+      &quot;type&quot;: {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;fields&quot;: {
+          &quot;keyword&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 256
+          }
+        }
+      }
+    }
+  },
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 4,
+    &quot;number_of_replicas&quot;: 3
+  }
+}
+</code></pre><h4 id=créer-le-shakespeare-tokenizer-ingest-node-pipeline>Créer le shakespeare-tokenizer ingest node pipeline</h4>
+<pre tabindex=0><code>PUT _ingest/pipeline/shakespeare-tokenizer
+{
+  &quot;description&quot;: &quot;Tokenizes the text_entry field into an array. Adds a word_count field. Removes the play_name field.&quot;,
+  &quot;processors&quot;: [
+    {
+      &quot;split&quot;: {
+        &quot;field&quot;: &quot;text_entry&quot;,
+        &quot;separator&quot;: &quot;\\s+&quot;,
+        &quot;target_field&quot;: &quot;word_array&quot;
+      }
+    },
+    {
+      &quot;script&quot;: {
+        &quot;lang&quot;: &quot;painless&quot;,
+        &quot;source&quot;: &quot;ctx.word_count = ctx.word_array.length&quot;
+      }
+    },
+    {
+      &quot;remove&quot;: {
+        &quot;field&quot;: &quot;play_name&quot;
+      }
+    }
+  ]
+}
+</code></pre><h4 id=reindex-le-champ-play-romeo-and-juliet>Reindex le champ play &ldquo;Romeo and Juliet&rdquo;</h4>
+<pre tabindex=0><code>POST _reindex
+{
+  &quot;source&quot;: {
+    &quot;index&quot;: &quot;shakespeare&quot;,
+    &quot;query&quot;: {
+      &quot;match&quot;: {
+        &quot;play_name&quot;: &quot;Romeo and Juliet&quot;
+      }
+    }
+  },
+  &quot;dest&quot;: {
+    &quot;index&quot;: &quot;romeo_and_juliet&quot;,
+    &quot;pipeline&quot;: &quot;shakespeare-tokenizer&quot;
+  }
+}
+</code></pre>
 <footer class=footline>
 </footer>
 </div>
 </div>
 <div id=navigation>
-<a class="nav nav-prev" href=/elastic-tutorial/ title="Elastic Tutoriel"> <i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/prerequis/ title=Prérequis style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+<a class="nav nav-prev" href=/elastic-tutorial/elastic/intermediare/mapping/ title="Définir le mapping"> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/intermediare/crud_documents/ title="CRUD opération sur les documents" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
 </div>
 </section>
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>

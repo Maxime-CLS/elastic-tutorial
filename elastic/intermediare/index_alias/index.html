@@ -6,7 +6,7 @@
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Elastic :: Elastic Tutoriel</title>
+<title>Définir les index et alias :: Elastic Tutoriel</title>
 <link href=/elastic-tutorial/css/nucleus.css?1645956657 rel=stylesheet>
 <link href=/elastic-tutorial/css/fontawesome-all.min.css?1645956657 rel=stylesheet>
 <link href=/elastic-tutorial/css/hybrid.css?1645956657 rel=stylesheet>
@@ -21,7 +21,7 @@
 <script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645956657></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
-<body data-url=/elastic-tutorial/elastic/>
+<body data-url=/elastic-tutorial/elastic/intermediare/index_alias/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
 <div id=header>
@@ -40,8 +40,7 @@
 <div class=highlightable>
 <ul class=topics>
 <li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
-parent
-active">
+parent">
 <a href=/elastic-tutorial/elastic/>
 Elastic
 <i class="fas fa-check read-icon"></i>
@@ -125,7 +124,8 @@ Lab - Diagnostic
 </li>
 </ul>
 </li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
+parent">
 <a href=/elastic-tutorial/elastic/intermediare/>
 Intermediare
 <i class="fas fa-check read-icon"></i>
@@ -143,7 +143,7 @@ Lab - Alertes
 <i class="fas fa-check read-icon"></i>
 </a>
 </li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Définir les index et alias" class=dd-item>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Définir les index et alias" class="dd-item active">
 <a href=/elastic-tutorial/elastic/intermediare/index_alias/>
 Définir les index et alias
 <i class="fas fa-check read-icon"></i>
@@ -208,12 +208,20 @@ Avancé
 </span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
 <span class=links>
-<a href=/elastic-tutorial/>Elastic Tutoriel</a> > Elastic
+<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/intermediare/>Intermediare</a> > Définir les index et alias
 </span>
 </div>
 <div class=progress>
 <div class=wrapper>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#description>Description</a>
+<ul>
+<li><a href=#création-des-index>Création des index</a></li>
+</ul>
+</li>
+</ul>
+</nav>
 </div>
 </div>
 </div>
@@ -222,15 +230,171 @@ Avancé
 </div>
 <div id=body-inner>
 <h1>
-Elastic
+Définir les index et alias
 </h1>
+<h2 id=description>Description</h2>
+<p>Dans Elasticsearch, les données que nous indexons sont stockées dans un index. Le mot &ldquo;index&rdquo; est utilisé à la fois comme un verbe et un nom. Essentiellement, nous effectuons une opération d&rsquo;indexation afin de stocker des données dans un index. Cependant, avant de pouvoir le faire, nous devons d&rsquo;abord comprendre la structure d&rsquo;un index et comment en définir un pour répondre à des besoins spécifiques. Dans ce laboratoire pratique, vous allez définir des index Elasticsearch en effectuant les tâches suivantes :</p>
+<ul>
+<li>Configurer le nombre de shards primaires d&rsquo;un index.</li>
+<li>Configurer le nombre de tiroirs de réplique d&rsquo;un index.</li>
+<li>Attribuer les tiroirs d&rsquo;un index aux nœuds chauds.</li>
+<li>Allouer les tessons d&rsquo;un index aux nœuds chauds.</li>
+<li>Associer des index avec des alias.</li>
+</ul>
+<p>Vous travaillez en tant qu&rsquo;administrateur système pour une entreprise qui souhaite utiliser Elasticsearch avec Kibana pour stocker et analyser certaines données de journal. On vous demande de préparer le cluster Elasticsearch pour les données de journal en créant quelques index. Les journaux sont considérés comme des données chronologiques, et nous nous intéressons généralement aux journaux les plus récents. Nous devons nous assurer que les données dont nous nous soucions le plus sont allouées à nos nœuds les plus rapides, ou &ldquo;chauds&rdquo;. Les données dont nous nous soucions moins peuvent être attribuées à des nœuds &ldquo;chauds&rdquo; plus lents, qui ne seront pas indexés ou recherchés aussi souvent. Nous devons également être en mesure de rechercher les données en utilisant des alias tels que &ldquo;this_week&rdquo;, &ldquo;yesterday&rdquo; ou &ldquo;today&rdquo;. Les alias facilitent la recherche des données qui vous intéressent car vous n&rsquo;avez pas besoin de connaître les noms d&rsquo;index spécifiques.</p>
+<p>Vous disposez d&rsquo;un cluster Elasticsearch préconfiguré à 6 nœuds avec Kibana déjà configuré et en cours d&rsquo;exécution sur le nœud coordinator-1. Vous devrez utiliser l&rsquo;outil de console de Kibana pour interagir avec les API d&rsquo;Elasticsearch afin de créer les index suivants :</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Aliases</th>
+<th>Primaries</th>
+<th>Replicas</th>
+<th>Allocation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tuto-logs-2020-01-05</td>
+<td>logs / this_week</td>
+<td>2</td>
+<td>1</td>
+<td>warm</td>
+</tr>
+<tr>
+<td>tuto-logs-2020-01-06</td>
+<td>logs / this_week</td>
+<td>2</td>
+<td>1</td>
+<td>warm</td>
+</tr>
+<tr>
+<td>tuto-logs-2020-01-07</td>
+<td>logs / this_week</td>
+<td>2</td>
+<td>1</td>
+<td>warm</td>
+</tr>
+<tr>
+<td>tuto-logs-2020-01-05</td>
+<td>logs / this_week</td>
+<td>2</td>
+<td>1</td>
+<td>warm</td>
+</tr>
+<tr>
+<td>tuto-logs-2020-01-05</td>
+<td>logs / this_week</td>
+<td>2</td>
+<td>1</td>
+<td>warm</td>
+</tr>
+<tr>
+<td>tuto-logs-2020-01-05</td>
+<td>logs / this_week / yesterday</td>
+<td>2</td>
+<td>1</td>
+<td>hot</td>
+</tr>
+<tr>
+<td>tuto-logs-2020-01-05</td>
+<td>logs / this_week / today</td>
+<td>2</td>
+<td>1</td>
+<td>hot</td>
+</tr>
+</tbody>
+</table>
+<h3 id=création-des-index>Création des index</h3>
+<p>Utilisez l&rsquo;outil de console Kibana pour exécuter ce qui suit :</p>
+<h4 id=créer-lindex-tuto-logs-2020-01-05>Créer l&rsquo;index tuto-logs-2020-01-05</h4>
+<pre tabindex=0><code>PUT tuto-logs-2020-01-05
+{
+  &quot;aliases&quot;: {
+    &quot;logs&quot;: {},
+    &quot;this_week&quot;: {}
+  },
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 2,
+    &quot;number_of_replicas&quot;: 1,
+    &quot;index.routing.allocation.require.temp&quot;: &quot;warm&quot;
+  }
+}
+</code></pre><h4 id=créer-lindex-tuto-logs-2020-01-06>Créer l&rsquo;index tuto-logs-2020-01-06</h4>
+<pre tabindex=0><code>PUT tuto-logs-2020-01-06
+{
+  &quot;aliases&quot;: {
+    &quot;logs&quot;: {},
+    &quot;this_week&quot;: {}
+  },
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 2,
+    &quot;number_of_replicas&quot;: 1,
+    &quot;index.routing.allocation.require.temp&quot;: &quot;warm&quot;
+  }
+}
+</code></pre><h4 id=créer-lindex-tuto-logs-2020-01-07>Créer l&rsquo;index tuto-logs-2020-01-07</h4>
+<pre tabindex=0><code>PUT tuto-logs-2020-01-07
+{
+  &quot;aliases&quot;: {
+    &quot;logs&quot;: {},
+    &quot;this_week&quot;: {}
+  },
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 2,
+    &quot;number_of_replicas&quot;: 1,
+    &quot;index.routing.allocation.require.temp&quot;: &quot;warm&quot;
+  }
+}
+</code></pre><h4 id=créer-lindex-tuto-logs-2020-01-08>Créer l&rsquo;index tuto-logs-2020-01-08</h4>
+<pre tabindex=0><code>PUT tuto-logs-2020-01-08
+{
+  &quot;aliases&quot;: {
+    &quot;logs&quot;: {},
+    &quot;this_week&quot;: {}
+  },
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 2,
+    &quot;number_of_replicas&quot;: 1,
+    &quot;index.routing.allocation.require.temp&quot;: &quot;warm&quot;
+  }
+}
+</code></pre><h4 id=créer-lindex-tuto-logs-2020-01-09>Créer l&rsquo;index tuto-logs-2020-01-09</h4>
+<pre tabindex=0><code>PUT tuto-logs-2020-01-09
+{
+  &quot;aliases&quot;: {
+    &quot;logs&quot;: {},
+    &quot;this_week&quot;: {}
+  },
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 2,
+    &quot;number_of_replicas&quot;: 1,
+    &quot;index.routing.allocation.require.temp&quot;: &quot;warm&quot;
+  }
+}
+</code></pre><h4 id=créer-lindex-tuto-logs-2020-01-10>Créer l&rsquo;index tuto-logs-2020-01-10</h4>
+<pre tabindex=0><code>PUT tuto-logs-2020-01-10
+{
+  &quot;aliases&quot;: {
+    &quot;logs&quot;: {},
+    &quot;this_week&quot;: {},
+    &quot;yesterday&quot;: {}
+  },
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 2,
+    &quot;number_of_replicas&quot;: 1,
+    &quot;index.routing.allocation.require.temp&quot;: &quot;hot&quot;
+  }
+}
+</code></pre><h4 id=créer-lindex-tuto-logs-2020-01-11>Créer l&rsquo;index tuto-logs-2020-01-11</h4>
+<p>A vous de me fournir la configuration de l&rsquo;index correspondant aux informations dans le tableau.</p>
 <footer class=footline>
 </footer>
 </div>
 </div>
 <div id=navigation>
-<a class="nav nav-prev" href=/elastic-tutorial/ title="Elastic Tutoriel"> <i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/prerequis/ title=Prérequis style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+<a class="nav nav-prev" href=/elastic-tutorial/elastic/intermediare/alerting/ title="Lab - Alertes"> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Index Template et Mapping" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
 </div>
 </section>
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>

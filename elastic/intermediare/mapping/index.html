@@ -1,0 +1,851 @@
+<!doctype html><html lang=en class="js csstransforms3d">
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.92.2">
+<meta name=description content="Tutoriel sur Elastic">
+<meta name=author content="Maxime Calves">
+<link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
+<title>Définir le mapping :: Elastic Tutoriel</title>
+<link href=/elastic-tutorial/css/nucleus.css?1645956657 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645956657 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645956657 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645956657 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645956657 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645956657 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645956657 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645956657 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645956657 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645956657 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645956657 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645956657></script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
+</head>
+<body data-url=/elastic-tutorial/elastic/intermediare/mapping/>
+<nav id=sidebar class=showVisitedLinks>
+<div id=header-wrapper>
+<div id=header>
+<img src=../../../../elastic-tutorial/media/logo.png>
+</div>
+<div class=searchbox>
+<label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span>
+</div>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645956657></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645956657></script>
+<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645956657></script>
+</div>
+<div class=highlightable>
+<ul class=topics>
+<li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
+parent">
+<a href=/elastic-tutorial/elastic/>
+Elastic
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item>
+<a href=/elastic-tutorial/elastic/prerequis/>
+Prérequis
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/prerequis/installation/ title=Installation class=dd-item>
+<a href=/elastic-tutorial/elastic/prerequis/installation/>
+Installation
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/>
+Débutant
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/ title="Lab - Logs" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/>
+Lab - Logs
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
+Lab - Metrics
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
+Lab - APM
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
+Lab - Uptime
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
+Elementaire
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title="Lab - Habilitation" class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/>
+Lab - Habilitation
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
+Lab - Index Lifecycle Policy
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>
+Lab - Backup & Restore
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
+<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>
+Lab - Diagnostic
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
+parent">
+<a href=/elastic-tutorial/elastic/intermediare/>
+Intermediare
+<i class="fas fa-check read-icon"></i>
+</a>
+<ul>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/fleet/ title="Fleet & Elastic Agent" class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/fleet/>
+Fleet & Elastic Agent
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/alerting/ title="Lab - Alertes" class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/alerting/>
+Lab - Alertes
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Définir les index et alias" class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/index_alias/>
+Définir les index et alias
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Index Template et Mapping" class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/template_mapping/>
+Index Template et Mapping
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Définir le mapping" class="dd-item active">
+<a href=/elastic-tutorial/elastic/intermediare/mapping/>
+Définir le mapping
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Reindex Documents" class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/reindex/>
+Reindex Documents
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="CRUD opération sur les documents" class=dd-item>
+<a href=/elastic-tutorial/elastic/intermediare/crud_documents/>
+CRUD opération sur les documents
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+<li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/>
+Avancé
+<i class="fas fa-check read-icon"></i>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<section id=prefooter>
+<hr>
+<ul>
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+</ul>
+</section>
+<section id=footer>
+<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p>
+</section>
+</div>
+</nav>
+<section id=body>
+<div id=overlay></div>
+<div class="padding highlightable">
+<div>
+<div id=top-bar>
+<div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
+<span id=sidebar-toggle-span>
+<a href=# id=sidebar-toggle data-sidebar-toggle>
+<i class="fas fa-bars"></i>
+</a>
+</span>
+<span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links>
+<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/intermediare/>Intermediare</a> > Définir le mapping
+</span>
+</div>
+<div class=progress>
+<div class=wrapper>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#description>Description</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id=head-tags>
+</div>
+<div id=body-inner>
+<h1>
+Définir le mapping
+</h1>
+<h2 id=description>Description</h2>
+<p>Les modèles dynamiques dans Elasticsearch permettent d&rsquo;indexer très facilement les données sans avoir à créer des mappages explicites pour chaque champ. Cependant, il peut arriver que vous préfériez créer des mappages explicites, ou même désactiver complètement le mappage dynamique, afin d&rsquo;avoir un contrôle plus étroit de la structure de votre index et des exigences en matière de type de données. Dans cette activité d&rsquo;apprentissage, vous avez l&rsquo;occasion de créer des mappages de champ explicites pour un index contenant des données de journal. Plus précisément, vous allez vous exercer à</p>
+<ul>
+<li>Créer des champs de chaîne de caractères analysés avec un analyseur spécifique.</li>
+<li>Créer des champs de chaîne de caractères non analysés avec des limites de caractères</li>
+<li>Créer des mappages de champs geo_point</li>
+<li>Créer des mappages de champs numériques</li>
+<li>Créer des mappages de champs de date</li>
+<li>Créer des mappages de champs IP</li>
+<li>Créer des mappages de champs d&rsquo;imbrication (objets)</li>
+<li>Réindexer des données d&rsquo;un index dans un autre avec des mappings différents.</li>
+</ul>
+<p>Vous travaillez en tant qu&rsquo;administrateur Elasticsearch pour un cluster à 6 nœuds et vous êtes chargé de corriger certains mappages de champs pour un index contenant des données de journal. Les données de journal actuelles ont été ingérées sans aucune préparation et la plupart des champs créés ne sont pas du type souhaité. L&rsquo;index logs existant devra être réindexé dans un nouvel index appelé tuto-logs_new. Vous êtes chargé de créer l&rsquo;index tuto-logs_new avec les exigences de mappage suivantes :</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Datatype</th>
+<th>Character Limit</th>
+<th>Analyzer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@message</td>
+<td>text</td>
+<td></td>
+<td>standard</td>
+</tr>
+<tr>
+<td>@tags</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>@timestamp</td>
+<td>date</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>@version</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>agent</td>
+<td>text</td>
+<td></td>
+<td>standard</td>
+</tr>
+<tr>
+<td>agent.keyword</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>bytes</td>
+<td>long</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>clientip</td>
+<td>ip</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>extension</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>geo.coordinates</td>
+<td>geo_point</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>geo.dest</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>geo.src</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>geo.srcdest</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>headings</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>host</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>ip</td>
+<td>ip</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>links</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>machine.os</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>machine.ram</td>
+<td>long</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>memory</td>
+<td>long</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>phpmemory</td>
+<td>long</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>referer</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.article:modified_time</td>
+<td>date</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.article:published_time</td>
+<td>date</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.article:section</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.article:tag</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.og:description</td>
+<td>text</td>
+<td></td>
+<td>standard</td>
+</tr>
+<tr>
+<td>relatedContent.og:image</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.og:image:height</td>
+<td>long</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.og:image:height</td>
+<td>long</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.og:site_name</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.og:title</td>
+<td>text</td>
+<td></td>
+<td>standard</td>
+</tr>
+<tr>
+<td>relatedContent.og:title.keyword</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.og:type</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.og:url</td>
+<td>text</td>
+<td></td>
+<td>simple</td>
+</tr>
+<tr>
+<td>relatedContent.og:url.keyword</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.twitter:card</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.twitter:description</td>
+<td>text</td>
+<td></td>
+<td>standard</td>
+</tr>
+<tr>
+<td>relatedContent.twitter:image</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.twitter:site</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.twitter:title</td>
+<td>text</td>
+<td></td>
+<td>standard</td>
+</tr>
+<tr>
+<td>relatedContent.twitter:title.keyword</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.twitter:title.keyword</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>relatedContent.url.keyword</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>request</td>
+<td>text</td>
+<td></td>
+<td>simple</td>
+</tr>
+<tr>
+<td>request.keyword</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>response</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>response</td>
+<td>keyword</td>
+<td>128</td>
+<td></td>
+</tr>
+<tr>
+<td>spaces</td>
+<td>text</td>
+<td></td>
+<td>whitespace</td>
+</tr>
+<tr>
+<td>url</td>
+<td>text</td>
+<td></td>
+<td>simple</td>
+</tr>
+<tr>
+<td>url.keyword</td>
+<td>keyword</td>
+<td>256</td>
+<td></td>
+</tr>
+<tr>
+<td>utc_time</td>
+<td>date</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xss</td>
+<td>text</td>
+<td></td>
+<td>standard</td>
+</tr>
+<tr>
+<td>xss.keyword</td>
+<td>keyword</td>
+<td>512</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>L&rsquo;index tuto-logs_new doit conserver les mêmes paramètres d&rsquo;index que l&rsquo;index logs pour le nombre de shards primaires et de replica. Une fois que l&rsquo;index tuto-logs_new a été créé, vous pouvez réindexer les documents dans le nouvel index.</p>
+<pre tabindex=0><code>curl --location --request POST 'https://localhost:9200/tuto-logs/doc/_bulk?pretty' \
+--header 'Content-Type: application/x-ndjson' \
+--header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
+ --data-binary @logs.json
+</code></pre><pre tabindex=0><code>PUT tuto-logs_new
+{
+  &quot;mappings&quot;: {
+    &quot;properties&quot;: {
+      &quot;@message&quot;: {
+        &quot;type&quot;: &quot;text&quot;
+      },
+      &quot;@tags&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;,
+        &quot;ignore_above&quot;: 128
+      },
+      &quot;@timestamp&quot;: {
+        &quot;type&quot;: &quot;date&quot;
+      },
+      &quot;@version&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;,
+        &quot;ignore_above&quot;: 256
+      },
+      &quot;agent&quot;: {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;fields&quot;: {
+          &quot;keyword&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 256
+          }
+        }
+      },
+      &quot;bytes&quot;: {
+        &quot;type&quot;: &quot;long&quot;
+      },
+      &quot;clientip&quot;: {
+        &quot;type&quot;: &quot;ip&quot;
+      },
+      &quot;extension&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;,
+        &quot;ignore_above&quot;: 256
+      },
+      &quot;geo&quot;: {
+        &quot;properties&quot;: {
+          &quot;coordinates&quot;: {
+            &quot;type&quot;: &quot;geo_point&quot;
+          },
+          &quot;dest&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 128
+          },
+          &quot;src&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 128
+          },
+          &quot;srcdest&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 128
+          }
+        }
+      },
+      &quot;headings&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;,
+        &quot;ignore_above&quot;: 256
+      },
+      &quot;host&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;,
+        &quot;ignore_above&quot;: 256
+      },
+      &quot;ip&quot;: {
+        &quot;type&quot;: &quot;ip&quot;
+      },
+      &quot;links&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;,
+        &quot;ignore_above&quot;: 256
+      },
+      &quot;machine&quot;: {
+        &quot;properties&quot;: {
+          &quot;os&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 256
+          },
+          &quot;ram&quot;: {
+            &quot;type&quot;: &quot;long&quot;
+          }
+        }
+      },
+      &quot;memory&quot;: {
+        &quot;type&quot;: &quot;long&quot;
+      },
+      &quot;phpmemory&quot;: {
+        &quot;type&quot;: &quot;long&quot;
+      },
+      &quot;referer&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;,
+        &quot;ignore_above&quot;: 256
+      },
+      &quot;relatedContent&quot;: {
+        &quot;properties&quot;: {
+          &quot;article:modified_time&quot;: {
+            &quot;type&quot;: &quot;date&quot;
+          },
+          &quot;article:published_time&quot;: {
+            &quot;type&quot;: &quot;date&quot;
+          },
+          &quot;article:section&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 128
+          },
+          &quot;article:tag&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 128
+          },
+          &quot;og:description&quot;: {
+            &quot;type&quot;: &quot;text&quot;
+          },
+          &quot;og:image&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 256
+          },
+          &quot;og:image:height&quot;: {
+            &quot;type&quot;: &quot;long&quot;
+          },
+          &quot;og:image:width&quot;: {
+            &quot;type&quot;: &quot;long&quot;
+          },
+          &quot;og:site_name&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 256
+          },
+          &quot;og:title&quot;: {
+            &quot;type&quot;: &quot;text&quot;,
+            &quot;fields&quot;: {
+              &quot;keyword&quot;: {
+                &quot;type&quot;: &quot;keyword&quot;,
+                &quot;ignore_above&quot;: 256
+              }
+            }
+          },
+          &quot;og:type&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 128
+          },
+          &quot;og:url&quot;: {
+            &quot;type&quot;: &quot;text&quot;,
+            &quot;analyzer&quot;: &quot;simple&quot;,
+            &quot;fields&quot;: {
+              &quot;keyword&quot;: {
+                &quot;type&quot;: &quot;keyword&quot;,
+                &quot;ignore_above&quot;: 256
+              }
+            }
+          },
+          &quot;twitter:card&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 128
+          },
+          &quot;twitter:description&quot;: {
+            &quot;type&quot;: &quot;text&quot;
+          },
+          &quot;twitter:image&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 256
+          },
+          &quot;twitter:site&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 128
+          },
+          &quot;twitter:title&quot;: {
+            &quot;type&quot;: &quot;text&quot;,
+            &quot;fields&quot;: {
+              &quot;keyword&quot;: {
+                &quot;type&quot;: &quot;keyword&quot;,
+                &quot;ignore_above&quot;: 128
+              }
+            }
+          },
+          &quot;url&quot;: {
+            &quot;type&quot;: &quot;text&quot;,
+            &quot;analyzer&quot;: &quot;simple&quot;,
+            &quot;fields&quot;: {
+              &quot;keyword&quot;: {
+                &quot;type&quot;: &quot;keyword&quot;,
+                &quot;ignore_above&quot;: 256
+              }
+            }
+          }
+        }
+      },
+      &quot;request&quot;: {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;analyzer&quot;: &quot;simple&quot;,
+        &quot;fields&quot;: {
+          &quot;keyword&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 256
+          }
+        }
+      },
+      &quot;response&quot;: {
+        &quot;type&quot;: &quot;keyword&quot;,
+        &quot;ignore_above&quot;: 128
+      },
+      &quot;spaces&quot;: {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;analyzer&quot;: &quot;whitespace&quot;
+      },
+      &quot;url&quot;: {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;analyzer&quot;: &quot;simple&quot;,
+        &quot;fields&quot;: {
+          &quot;keyword&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 256
+          }
+        }
+      },
+      &quot;utc_time&quot;: {
+        &quot;type&quot;: &quot;date&quot;
+      },
+      &quot;xss&quot;: {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;fields&quot;: {
+          &quot;keyword&quot;: {
+            &quot;type&quot;: &quot;keyword&quot;,
+            &quot;ignore_above&quot;: 512
+          }
+        }
+      }
+    }
+  },
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 4,
+    &quot;number_of_replicas&quot;: 3
+  }
+}
+</code></pre><pre tabindex=0><code>POST _reindex
+{
+  &quot;source&quot;: {
+    &quot;index&quot;: &quot;tuto-logs&quot;
+  },
+  &quot;dest&quot;: {
+    &quot;index&quot;: &quot;tuto-logs_new&quot;
+  }
+}
+</code></pre>
+<footer class=footline>
+</footer>
+</div>
+</div>
+<div id=navigation>
+<a class="nav nav-prev" href=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Index Template et Mapping"> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/intermediare/reindex/ title="Reindex Documents" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+</div>
+</section>
+<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
+</div>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645956657></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645956657></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645956657></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645956657></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645956657></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645956657></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645956657></script>
+<script src=/elastic-tutorial/js/learn.js?1645956657></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645956657></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645956657></script>
+<script>mermaid.initialize({startOnLoad:!0})</script>
+</body>
+</html>
