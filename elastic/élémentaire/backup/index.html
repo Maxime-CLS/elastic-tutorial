@@ -7,18 +7,18 @@
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
 <title>Lab - Backup & Restore :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645957183 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645957183></script>
+<link href=/elastic-tutorial/css/nucleus.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645973180 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645973180></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>
@@ -32,10 +32,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645957183></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645957183></script>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645973180></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645973180></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645957183></script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645973180></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -222,7 +222,7 @@ Bonus - Fleet & Elastic Agent
 <ul>
 <li>
 <ul>
-<li><a href=#créer-et-configurer-le-répertoire-dinstantanés>Créer et configurer le répertoire d&rsquo;instantanés</a></li>
+<li></li>
 <li><a href=#slm-policy>SLM Policy</a></li>
 </ul>
 </li>
@@ -244,28 +244,7 @@ Lab - Backup & Restore
 <li>Sauvegarder des index spécifiques</li>
 <li>Restaurer des données à partir d&rsquo;un instantané</li>
 </ul>
-<h3 id=créer-et-configurer-le-répertoire-dinstantanés>Créer et configurer le répertoire d&rsquo;instantanés</h3>
-<p>Modifier la configuration des noeuds Elasticsearch présent dans le fichier <strong>elastic-docker-tls.yml</strong></p>
-<pre tabindex=0><code>es01:
-...
-environment:
-      - path.repo=/usr/share/elasticsearch/snapshots/
-...
-
-es02:
-...
-environment:
-      - path.repo=/usr/share/elasticsearch/snapshots/
-...
-
-es03:
-...
-environment:
-      - path.repo=/usr/share/elasticsearch/snapshots/
-...
-</code></pre><p>Redémarrer vos intances Elasticsearch</p>
-<pre tabindex=0><code>docker-compose -f elastic-docker-tls.yml
-</code></pre><h4 id=créez-le-référentiel-observability_repo>Créez le référentiel &ldquo;observability_repo&rdquo;.</h4>
+<h4 id=créez-le-référentiel-observability_repo>Créez le référentiel &ldquo;observability_repo&rdquo;.</h4>
 <p>Utilisez l&rsquo;outil DevTool Kibana pour exécuter ce qui suit :</p>
 <pre tabindex=0><code>PUT _snapshot/observability_repo?verify=false
 {
@@ -373,17 +352,17 @@ green  open .kibana_task_manager_7.17.0_001                          x63yGuhDSau
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645957183></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645957183></script>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645973180></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645973180></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645957183></script>
-<script src=/elastic-tutorial/js/learn.js?1645957183></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645957183></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645957183></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645973180></script>
+<script src=/elastic-tutorial/js/learn.js?1645973180></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645973180></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645973180></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

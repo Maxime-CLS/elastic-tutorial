@@ -7,18 +7,18 @@
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
 <title>Installation :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645957183 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645957183></script>
+<link href=/elastic-tutorial/css/nucleus.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645973180 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645973180></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/elastic-tutorial/elastic/prerequis/installation/>
@@ -32,10 +32,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645957183></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645957183></script>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645973180></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645973180></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645957183></script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645973180></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -323,19 +323,19 @@ networks:
     driver: bridge
 </code></pre><p><strong>elastic-docker-tls.yml</strong>:</p>
 <pre tabindex=0><code>version: '2.2'
-
 services:
   es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION}
     container_name: es01
     environment:
+      - path.repo=/usr/share/elasticsearch/snapshots/
       - node.name=es01
       - cluster.name=es-docker-cluster
       - discovery.seed_hosts=es02,es03
       - cluster.initial_master_nodes=es01,es02,es03
       - bootstrap.memory_lock=true
-      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
-      - xpack.license.self_generated.type=trial
+      - &quot;ES_JAVA_OPTS=-Xms256m -Xmx256m&quot;
+      - xpack.license.self_generated.type=basic
       - xpack.security.enabled=true
       - xpack.security.http.ssl.enabled=true
       - xpack.security.http.ssl.key=$CERTS_DIR/es01/es01.key
@@ -370,12 +370,13 @@ services:
     container_name: es02
     environment:
       - node.name=es02
+      - path.repo=/usr/share/elasticsearch/snapshots/
       - cluster.name=es-docker-cluster
       - discovery.seed_hosts=es01,es03
       - cluster.initial_master_nodes=es01,es02,es03
       - bootstrap.memory_lock=true
-      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
-      - xpack.license.self_generated.type=trial
+      - &quot;ES_JAVA_OPTS=-Xms256m -Xmx256m&quot;
+      - xpack.license.self_generated.type=basic
       - xpack.security.enabled=true
       - xpack.security.http.ssl.enabled=true
       - xpack.security.http.ssl.key=$CERTS_DIR/es02/es02.key
@@ -402,12 +403,13 @@ services:
     container_name: es03
     environment:
       - node.name=es03
+      - path.repo=/usr/share/elasticsearch/snapshots/
       - cluster.name=es-docker-cluster
       - discovery.seed_hosts=es01,es02
       - cluster.initial_master_nodes=es01,es02,es03
       - bootstrap.memory_lock=true
-      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
-      - xpack.license.self_generated.type=trial
+      - &quot;ES_JAVA_OPTS=-Xms256m -Xmx256m&quot;
+      - xpack.license.self_generated.type=basic
       - xpack.security.enabled=true
       - xpack.security.http.ssl.enabled=true
       - xpack.security.http.ssl.key=$CERTS_DIR/es03/es03.key
@@ -432,15 +434,14 @@ services:
     container_name: kib01
     depends_on:
       es01: { condition: service_healthy}
-      package-registry: { condition: service_healthy }
     ports:
       - 5601:5601
     environment:
       SERVERNAME: localhost
       ELASTICSEARCH_URL: https://es01:9200
       ELASTICSEARCH_HOSTS: https://es01:9200
-      ELASTICSEARCH_USERNAME: kibana_system
-      ELASTICSEARCH_PASSWORD: UZuuB5ABGjTBZPez4aDl
+      ELASTICSEARCH_USERNAME: $USER_KIBANA_SYSTEM
+      ELASTICSEARCH_PASSWORD: $PASSWORD_KIBANA_SYSTEM
       ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES: $CERTS_DIR/ca/ca.crt
       SERVER_SSL_ENABLED: &quot;true&quot;
       SERVER_SSL_KEY: $CERTS_DIR/kib01/kib01.key
@@ -448,9 +449,6 @@ services:
       SERVER_SSL_CERTIFICATEAUTHORITIES: $CERTS_DIR/ca/ca.crt
       XPACK_SECURITY_ENCRYPTIONKEY: &quot;fhjskloppd678ehkdfdlliverpoolfcr&quot;
       XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY: &quot;fhjskloppd678ehkdfdlliverpoolfcr&quot;
-      XPACK_FLEET_AGENTS_ELASTICSEARCH_HOST: &quot;https://es01:9200&quot;
-      XPACK_FLEET_REGISTRYURL: &quot;https://package-registry&quot;
-      NODE_EXTRA_CA_CERTS: $CERTS_DIR/ca/ca.crt
     healthcheck:
        test: curl --cacert $CERTS_DIR/ca/ca.crt -s https://localhost/api/status | grep -q 'Looking good' &gt;/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
        retries: 100
@@ -459,6 +457,40 @@ services:
       - certs:$CERTS_DIR
     networks:
       - elastic
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:${VERSION}
+    container_name: apm-server
+    depends_on:
+      es01: { condition: service_healthy }
+      kib01: { condition: service_healthy }
+    cap_add: [&quot;CHOWN&quot;, &quot;DAC_OVERRIDE&quot;, &quot;SETGID&quot;, &quot;SETUID&quot;]
+    cap_drop: [&quot;ALL&quot;]
+    ports:
+    - 8200:8200
+    volumes:
+       - certs:$CERTS_DIR
+    networks:
+    - elastic
+    command: &gt;
+       apm-server -e
+         -E apm-server.rum.enabled=true
+         -E setup.kibana.host=kib01:5601
+         -E setup.template.settings.index.number_of_replicas=1
+         -E apm-server.kibana.enabled=true
+         -E apm-server.kibana.host=kib01:5601
+         -E apm-server.kibana.protocol=https
+         -E apm-server.kibana.username=$USER_ELASTIC
+         -E apm-server.kibana.password=$PASSWORD_ELASTIC
+         -E apm-server.kibana.ssl.enabled=true
+         -E apm-server.kibana.ssl.certificate_authorities=[&quot;$CERTS_DIR/ca/ca.crt&quot;]
+         -E output.elasticsearch.hosts=[&quot;https://es01:9200&quot;]
+         -E output.elasticsearch.username=$USER_ELASTIC
+         -E output.elasticsearch.password=$PASSWORD_ELASTIC
+         -E output.elasticsearch.ssl.certificate_authorities=[&quot;$CERTS_DIR/ca/ca.crt&quot;]
+    healthcheck:
+      interval: 10s
+      retries: 12
+      test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:8200/
 
 volumes:
   data01:
@@ -473,7 +505,6 @@ volumes:
 networks:
   elastic:
     driver: bridge
-
 </code></pre><p>1- Générez et appliquez une licence d&rsquo;essai qui prend en charge Transport Layer Security.</p>
 <p>2- Activez Transport Layer Security pour crypter les communications des clients.</p>
 <p>3- Activez Transport Layer Security pour crypter les communications internodales.</p>
@@ -659,8 +690,17 @@ networks:
         location / {
           proxy_pass http://petclinic:8080/;
         }
-        location /server-status {
-         	stub_status;
+        location = /owners/find {
+          return 301 /#$uri;
+        }
+        location = /vets.html {
+          return 301 /#$uri;
+        }
+        location = /oups {
+          return 301 /#$uri;
+        }
+        location /nginx_status {
+         	stub_status on;
         	allow all; # A bit too wide
          	# deny all;
         }
@@ -669,6 +709,7 @@ networks:
             root   /usr/share/nginx/html;
         }
     }
+
 </code></pre><pre tabindex=0><code>docker-compose -f app/petclinic.yml up -d
 </code></pre><p>Accédez à la application blanche en cliquant <a href=http://localhost>ici</a></p>
 <p><img src=/elastic-tutorial/images/attachments/prerequis/petclinic.png alt=image.png></p>
@@ -684,17 +725,17 @@ networks:
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645957183></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645957183></script>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645973180></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645973180></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645957183></script>
-<script src=/elastic-tutorial/js/learn.js?1645957183></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645957183></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645957183></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645973180></script>
+<script src=/elastic-tutorial/js/learn.js?1645973180></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645973180></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645973180></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>

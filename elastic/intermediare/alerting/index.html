@@ -7,18 +7,18 @@
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
 <title>Lab - Alertes :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645957183 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645957183 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645957183></script>
+<link href=/elastic-tutorial/css/nucleus.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1645973180 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1645973180 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645973180></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
 <body data-url=/elastic-tutorial/elastic/intermediare/alerting/>
@@ -32,10 +32,10 @@
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
 </div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645957183></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645957183></script>
+<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645973180></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645973180></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645957183></script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1645973180></script>
 </div>
 <div class=highlightable>
 <ul class=topics>
@@ -217,7 +217,6 @@ Bonus - Fleet & Elastic Agent
 <div class=wrapper>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#configurer-kibana-pour-produits-des-alertes>Configurer Kibana pour produits des alertes</a></li>
 <li><a href=#créer-des-alertes-avec-le-module-rules--connector>Créer des alertes avec le module Rules & Connector</a>
 <ul>
 <li><a href=#créer-une-api-key>Créer une API Key</a></li>
@@ -245,38 +244,7 @@ Lab - Alertes
 <li>utiliser l&rsquo;API actions/connectors pour créer un connecteur de donnée</li>
 <li>Utiliser l&rsquo;API alerting/rule pour mettre rapidement en place des alertes.</li>
 </ul>
-<h2 id=configurer-kibana-pour-produits-des-alertes>Configurer Kibana pour produits des alertes</h2>
-<pre tabindex=0><code>vim elastic-docker-tls.yml
-</code></pre><p>Ajoutez les variables <strong>XPACK_SECURITY_ENCRYPTIONKEY</strong> et <strong>XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY</strong>.</p>
-<pre tabindex=0><code>kib01:
-    image: docker.elastic.co/kibana/kibana:${VERSION}
-    container_name: kib01
-    depends_on:
-      es01: { condition: service_healthy}
-    ports:
-      - 5601:5601
-    environment:
-      SERVERNAME: localhost
-      ELASTICSEARCH_URL: https://es01:9200
-      ELASTICSEARCH_HOSTS: https://es01:9200
-      ELASTICSEARCH_USERNAME: $USER_KIBANA_SYSTEM
-      ELASTICSEARCH_PASSWORD: $PASSWORD_KIBANA_SYSTEM
-      ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES: $CERTS_DIR/ca/ca.crt
-      SERVER_SSL_ENABLED: &quot;true&quot;
-      SERVER_SSL_KEY: $CERTS_DIR/kib01/kib01.key
-      SERVER_SSL_CERTIFICATE: $CERTS_DIR/kib01/kib01.crt
-      SERVER_SSL_CERTIFICATEAUTHORITIES: $CERTS_DIR/ca/ca.crt
-      XPACK_SECURITY_ENCRYPTIONKEY: &quot;fhjskloppd678ehkdfdlliverpoolfcr&quot;
-      XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY: &quot;fhjskloppd678ehkdfdlliverpoolfcr&quot;
-    healthcheck:
-       test: curl --cacert $CERTS_DIR/ca/ca.crt -s https://localhost/api/status | grep -q 'Looking good' &gt;/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-       retries: 100
-       interval: 5s
-    volumes:
-      - certs:$CERTS_DIR
-    networks:
-      - elastic
-</code></pre><h2 id=créer-des-alertes-avec-le-module-rules--connector>Créer des alertes avec le module Rules & Connector</h2>
+<h2 id=créer-des-alertes-avec-le-module-rules--connector>Créer des alertes avec le module Rules & Connector</h2>
 <h3 id=créer-une-api-key>Créer une API Key</h3>
 <p>Utilisez l&rsquo;outil de console Kibana pour exécuter ce qui suit :</p>
 <pre tabindex=0><code>POST /_security/api_key
@@ -549,17 +517,17 @@ curl --location --request POST 'https://localhost:5601/api/alerting/rule' \
 <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
 </div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645957183></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645957183></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645957183></script>
+<script src=/elastic-tutorial/js/clipboard.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1645973180></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1645973180></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1645973180></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645957183></script>
-<script src=/elastic-tutorial/js/learn.js?1645957183></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645957183></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645957183></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645973180></script>
+<script src=/elastic-tutorial/js/learn.js?1645973180></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1645973180></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1645973180></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body>
 </html>
