@@ -2,42 +2,36 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Labs - Index Template et Mapping :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645973180 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645973180></script>
-<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
-</head>
-<body data-url=/elastic-tutorial/elastic/intermediare/template_mapping/>
+<title>Labs - Index Template et Mapping :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1646153867 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646153867></script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/intermediare/template_mapping/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
 <div id=header>
 <img src=../../../../elastic-tutorial/media/logo.png>
-</div>
-<div class=searchbox>
+</div><div class=searchbox>
 <label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
-</div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645973180></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645973180></script>
+</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646153867></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646153867></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645973180></script>
-</div>
-<div class=highlightable>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1646153867></script>
+</div><div class=highlightable>
 <ul class=topics>
 <li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
 parent">
@@ -57,10 +51,7 @@ Prérequis
 Installation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/>
 Débutant
 <i class="fas fa-check read-icon"></i>
@@ -71,28 +62,22 @@ Débutant
 Lab - Logs
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
 Lab - Metrics
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
 Lab - APM
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
 Lab - Uptime
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
 Elementaire
 <i class="fas fa-check read-icon"></i>
@@ -103,28 +88,22 @@ Elementaire
 Lab - Habilitation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
 Lab - Index Lifecycle Policy
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>
 Lab - Backup & Restore
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>
 Lab - Diagnostic
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
 parent">
 <a href=/elastic-tutorial/elastic/intermediare/>
 Intermediare
@@ -136,40 +115,32 @@ Intermediare
 Lab - Alertes
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/index_alias/>
 Labs - Index et ALias
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/mapping/>
 Labs - Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class="dd-item active">
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class="dd-item active">
 <a href=/elastic-tutorial/elastic/intermediare/template_mapping/>
 Labs - Index Template et Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/reindex/>
 Labs - Reindex
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/crud_documents/>
 Labs - CRUD
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/>
 Avancé
 <i class="fas fa-check read-icon"></i>
@@ -180,26 +151,32 @@ Avancé
 Bonus - Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<section id=prefooter>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/term/>
+Labs - Query niveau I
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query Sort" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/sort/>
+Labs - Query Sort
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau II" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/query/>
+Labs - Query niveau II
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/tp_query/>
+TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+<i class="fas fa-check read-icon"></i>
+</a>
+</li></ul></li></ul></li></ul><section id=prefooter>
 <hr>
 <ul>
-<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li>
-</ul>
-</section>
-<section id=footer>
-<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p>
-</section>
-</div>
-</nav>
-<section id=body>
-<div id=overlay></div>
-<div class="padding highlightable">
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer>
+<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body>
+<div id=overlay></div><div class="padding highlightable">
 <div>
 <div id=top-bar>
 <div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
@@ -212,161 +189,97 @@ Bonus - Fleet & Elastic Agent
 <span class=links>
 <a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/intermediare/>Intermediare</a> > Labs - Index Template et Mapping
 </span>
-</div>
-<div class=progress>
+</div><div class=progress>
 <div class=wrapper>
 <nav id=TableOfContents>
 <ul>
 <li><a href=#description>Description</a>
 <ul>
-<li><a href=#créer-customers-index-template>Créer customers Index Template</a></li>
-<li><a href=#créer-partners-index-template>Créer partners Index Template</a></li>
-</ul>
-</li>
-<li><a href=#a-vous-de-jouez->A vous de jouez !</a>
+<li><a href=#créer-customers-index-template>Créer customers Index Template</a></li><li><a href=#créer-partners-index-template>Créer partners Index Template</a></li></ul></li><li><a href=#a-vous-de-jouez->A vous de jouez !</a>
 <ul>
-<li><a href=#créer-leads-index-template>Créer leads Index Template</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-</div>
-<div id=head-tags>
-</div>
-<div id=body-inner>
+<li><a href=#créer-leads-index-template>Créer leads Index Template</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
+</div><div id=body-inner>
 <h1>
 Labs - Index Template et Mapping
-</h1>
-<h2 id=description>Description</h2>
-<p>L&rsquo;une des fonctionnalités les plus conviviales d&rsquo;Elasticsearch est le mappage dynamique. Le mappage dynamique est le mécanisme utilisé par Elasticsearch pour détecter les champs et les mettre en correspondance avec un type de données approprié. À l&rsquo;aide de modèles d&rsquo;index, nous pouvons définir la structure d&rsquo;une série d&rsquo;index pour répondre à des exigences spécifiques ou remplacer et contrôler le comportement du mappage dynamique. Avec le mappage dynamique, nous pouvons sauter le processus de définition explicite de chaque champ possible et de son type de données et indiquer à Elasticsearch comment détecter les types de données souhaités au fur et à mesure qu&rsquo;ils sont découverts pendant l&rsquo;indexation. En conséquence, le mappage dynamique nous permet d&rsquo;être opérationnel très rapidement avec nos données. Dans ce laboratoire pratique, vous allez effectuer les tâches suivantes :</p>
-<ul>
-<li>Créer un modèle d&rsquo;index</li>
-<li>Définir des mappages de champs explicites</li>
-<li>Définir des mappages de champs dynamiques</li>
-</ul>
-<p>Vous travaillez en tant qu&rsquo;administrateur Elasticsearch pour une société d&rsquo;analyse de données qui souhaite utiliser votre cluster Elasticsearch existant à 6 nœuds pour analyser quelques ensembles de données. Pour faciliter l&rsquo;indexation de chaque ensemble de données, vous devez configurer les modèles d&rsquo;index nécessaires afin que les données soient stockées dans Elasticsearch avec les mappages corrects. Chaque modèle doit avoir 4 shards primaires et 3 shards répliques pour une réplication maximale sur les 4 nœuds de données. Les mappages des modèles requis sont décrits ci-dessous :</p>
-<table>
+</h1><h2 id=description>Description</h2><p>L&rsquo;une des fonctionnalités les plus conviviales d&rsquo;Elasticsearch est le mappage dynamique. Le mappage dynamique est le mécanisme utilisé par Elasticsearch pour détecter les champs et les mettre en correspondance avec un type de données approprié. À l&rsquo;aide de modèles d&rsquo;index, nous pouvons définir la structure d&rsquo;une série d&rsquo;index pour répondre à des exigences spécifiques ou remplacer et contrôler le comportement du mappage dynamique. Avec le mappage dynamique, nous pouvons sauter le processus de définition explicite de chaque champ possible et de son type de données et indiquer à Elasticsearch comment détecter les types de données souhaités au fur et à mesure qu&rsquo;ils sont découverts pendant l&rsquo;indexation. En conséquence, le mappage dynamique nous permet d&rsquo;être opérationnel très rapidement avec nos données. Dans ce laboratoire pratique, vous allez effectuer les tâches suivantes :</p><ul>
+<li>Créer un modèle d&rsquo;index</li><li>Définir des mappages de champs explicites</li><li>Définir des mappages de champs dynamiques</li></ul><p>Vous travaillez en tant qu&rsquo;administrateur Elasticsearch pour une société d&rsquo;analyse de données qui souhaite utiliser votre cluster Elasticsearch existant à 6 nœuds pour analyser quelques ensembles de données. Pour faciliter l&rsquo;indexation de chaque ensemble de données, vous devez configurer les modèles d&rsquo;index nécessaires afin que les données soient stockées dans Elasticsearch avec les mappages corrects. Chaque modèle doit avoir 4 shards primaires et 3 shards répliques pour une réplication maximale sur les 4 nœuds de données. Les mappages des modèles requis sont décrits ci-dessous :</p><table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Index Pattern</th>
-<th>Aliases</th>
-<th>Explicit Mapping</th>
-<th>Dynamic Mapping</th>
-</tr>
-</thead>
-<tbody>
+<th>Name</th><th>Index Pattern</th><th>Aliases</th><th>Explicit Mapping</th><th>Dynamic Mapping</th></tr></thead><tbody>
 <tr>
-<td>customers</td>
-<td>customers-*</td>
-<td>customers</td>
-<td>field: year_to_date / type: double</td>
-<td>name: long_to_integer / match mapping: long / mapping: integers</td>
-</tr>
-<tr>
-<td>partners</td>
-<td>partners-*</td>
-<td>partners</td>
-<td>field: address / type: text</td>
-<td>name: string_to_keyword / match mapping: string / mapping: keyword</td>
-</tr>
-<tr>
-<td>leads</td>
-<td>leads-*</td>
-<td>leads</td>
-<td>field: address / type: text ; field: estimate / type: double</td>
-<td>name: string_to_keyword / match mapping: string / match: lead_* / unmatch: *_text / mapping: keyword</td>
-</tr>
-</tbody>
-</table>
-<h3 id=créer-customers-index-template>Créer customers Index Template</h3>
-<p>Utilisez l&rsquo;outil de console Kibana pour exécuter ce qui suit :</p>
-<pre tabindex=0><code>PUT _template/customers
+<td>customers</td><td>customers-*</td><td>customers</td><td>field: year_to_date / type: double</td><td>name: long_to_integer / match mapping: long / mapping: integers</td></tr><tr>
+<td>partners</td><td>partners-*</td><td>partners</td><td>field: address / type: text</td><td>name: string_to_keyword / match mapping: string / mapping: keyword</td></tr><tr>
+<td>leads</td><td>leads-*</td><td>leads</td><td>field: address / type: text ; field: estimate / type: double</td><td>name: string_to_keyword / match mapping: string / match: lead_* / unmatch: *_text / mapping: keyword</td></tr></tbody></table><h3 id=créer-customers-index-template>Créer customers Index Template</h3><p>Utilisez l&rsquo;outil de console Kibana pour exécuter ce qui suit :</p><pre tabindex=0><code>PUT _template/customers
 {
-  &quot;aliases&quot;: {
-    &quot;customers&quot;: {}
+  &#34;aliases&#34;: {
+    &#34;customers&#34;: {}
   },
-  &quot;index_patterns&quot;: [&quot;customers-*&quot;],
-  &quot;mappings&quot;: {
-    &quot;dynamic_templates&quot;: [
+  &#34;index_patterns&#34;: [&#34;customers-*&#34;],
+  &#34;mappings&#34;: {
+    &#34;dynamic_templates&#34;: [
       {
-        &quot;long_to_integer&quot;: {
-          &quot;match_mapping_type&quot;: &quot;long&quot;,
-          &quot;mapping&quot;: {
-            &quot;type&quot;: &quot;integer&quot;
+        &#34;long_to_integer&#34;: {
+          &#34;match_mapping_type&#34;: &#34;long&#34;,
+          &#34;mapping&#34;: {
+            &#34;type&#34;: &#34;integer&#34;
           }
         }
       }
     ],
-    &quot;properties&quot;: {
-      &quot;year_to_date&quot;: {
-        &quot;type&quot;: &quot;double&quot;
+    &#34;properties&#34;: {
+      &#34;year_to_date&#34;: {
+        &#34;type&#34;: &#34;double&#34;
       }
     }
   },
-  &quot;settings&quot;: {
-    &quot;number_of_shards&quot;: 4,
-    &quot;number_of_replicas&quot;: 3
+  &#34;settings&#34;: {
+    &#34;number_of_shards&#34;: 4,
+    &#34;number_of_replicas&#34;: 3
   }
 }
-</code></pre><h3 id=créer-partners-index-template>Créer partners Index Template</h3>
-<pre tabindex=0><code>PUT _template/partners
+</code></pre><h3 id=créer-partners-index-template>Créer partners Index Template</h3><pre tabindex=0><code>PUT _template/partners
 {
-  &quot;aliases&quot;: {
-    &quot;partners&quot;: {}
+  &#34;aliases&#34;: {
+    &#34;partners&#34;: {}
   },
-  &quot;index_patterns&quot;: [&quot;partners-*&quot;],
-  &quot;mappings&quot;: {
-    &quot;dynamic_templates&quot;: [
+  &#34;index_patterns&#34;: [&#34;partners-*&#34;],
+  &#34;mappings&#34;: {
+    &#34;dynamic_templates&#34;: [
       {
-        &quot;string_to_keyword&quot;: {
-          &quot;match_mapping_type&quot;: &quot;string&quot;,
-          &quot;mapping&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;
+        &#34;string_to_keyword&#34;: {
+          &#34;match_mapping_type&#34;: &#34;string&#34;,
+          &#34;mapping&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;
           }
         }
       }
     ],
-    &quot;properties&quot;: {
-      &quot;address&quot;: {
-        &quot;type&quot;: &quot;text&quot;
+    &#34;properties&#34;: {
+      &#34;address&#34;: {
+        &#34;type&#34;: &#34;text&#34;
       }
     }
   },
-  &quot;settings&quot;: {
-    &quot;number_of_shards&quot;: 4,
-    &quot;number_of_replicas&quot;: 3
+  &#34;settings&#34;: {
+    &#34;number_of_shards&#34;: 4,
+    &#34;number_of_replicas&#34;: 3
   }
 }
-</code></pre><h2 id=a-vous-de-jouez->A vous de jouez !</h2>
-<h3 id=créer-leads-index-template>Créer leads Index Template</h3>
-<p>A vous de me fournir le template correspondant aux informations dans le tableau.</p>
-<footer class=footline>
-</footer>
-</div>
-</div>
-<div id=navigation>
+</code></pre><h2 id=a-vous-de-jouez->A vous de jouez !</h2><h3 id=créer-leads-index-template>Créer leads Index Template</h3><p>A vous de me fournir le template correspondant aux informations dans le tableau.</p><footer class=footline>
+</footer></div></div><div id=navigation>
 <a class="nav nav-prev" href=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping"> <i class="fa fa-chevron-left"></i></a>
 <a class="nav nav-next" href=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
-</div>
-</section>
-<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
-</div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645973180></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645973180></script>
+</div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1646153867></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1646153867></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645973180></script>
-<script src=/elastic-tutorial/js/learn.js?1645973180></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645973180></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645973180></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646153867></script>
+<script src=/elastic-tutorial/js/learn.js?1646153867></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1646153867></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1646153867></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
-</body>
-</html>
+</body></html>

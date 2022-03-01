@@ -2,42 +2,36 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Bonus - Fleet & Elastic Agent :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645973180 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645973180></script>
-<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
-</head>
-<body data-url=/elastic-tutorial/elastic/avance/fleet/>
+<title>Bonus - Fleet & Elastic Agent :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1646153867 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646153867></script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/avance/fleet/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
 <div id=header>
 <img src=../../../../elastic-tutorial/media/logo.png>
-</div>
-<div class=searchbox>
+</div><div class=searchbox>
 <label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
-</div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645973180></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645973180></script>
+</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646153867></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646153867></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645973180></script>
-</div>
-<div class=highlightable>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1646153867></script>
+</div><div class=highlightable>
 <ul class=topics>
 <li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
 parent">
@@ -57,10 +51,7 @@ Prérequis
 Installation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/>
 Débutant
 <i class="fas fa-check read-icon"></i>
@@ -71,28 +62,22 @@ Débutant
 Lab - Logs
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
 Lab - Metrics
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
 Lab - APM
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
 Lab - Uptime
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
 Elementaire
 <i class="fas fa-check read-icon"></i>
@@ -103,28 +88,22 @@ Elementaire
 Lab - Habilitation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
 Lab - Index Lifecycle Policy
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>
 Lab - Backup & Restore
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>
 Lab - Diagnostic
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/>
 Intermediare
 <i class="fas fa-check read-icon"></i>
@@ -135,40 +114,32 @@ Intermediare
 Lab - Alertes
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/index_alias/>
 Labs - Index et ALias
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/mapping/>
 Labs - Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/template_mapping/>
 Labs - Index Template et Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/reindex/>
 Labs - Reindex
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/crud_documents/>
 Labs - CRUD
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class="dd-item
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class="dd-item
 parent">
 <a href=/elastic-tutorial/elastic/avance/>
 Avancé
@@ -180,26 +151,32 @@ Avancé
 Bonus - Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<section id=prefooter>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/term/>
+Labs - Query niveau I
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query Sort" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/sort/>
+Labs - Query Sort
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau II" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/query/>
+Labs - Query niveau II
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/tp_query/>
+TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+<i class="fas fa-check read-icon"></i>
+</a>
+</li></ul></li></ul></li></ul><section id=prefooter>
 <hr>
 <ul>
-<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li>
-</ul>
-</section>
-<section id=footer>
-<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p>
-</section>
-</div>
-</nav>
-<section id=body>
-<div id=overlay></div>
-<div class="padding highlightable">
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer>
+<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body>
+<div id=overlay></div><div class="padding highlightable">
 <div>
 <div id=top-bar>
 <div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
@@ -214,44 +191,18 @@ Bonus - Fleet & Elastic Agent
           
        
 </span>
-</div>
-<div class=progress>
+</div><div class=progress>
 <div class=wrapper>
 <nav id=TableOfContents>
 <ul>
 <li>
 <ul>
-<li><a href=#serveur-fleet>Serveur Fleet</a></li>
-<li><a href=#serveur-apm>Serveur APM</a></li>
-<li><a href=#intégration-du-module-apm>Intégration du module APM</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-</div>
-<div id=head-tags>
-</div>
-<div id=body-inner>
+<li><a href=#serveur-fleet>Serveur Fleet</a></li><li><a href=#serveur-apm>Serveur APM</a></li><li><a href=#intégration-du-module-apm>Intégration du module APM</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
+</div><div id=body-inner>
 <h1>
 Bonus - Fleet & Elastic Agent
-</h1>
-<h3 id=serveur-fleet>Serveur Fleet</h3>
-<p>Fleet Server est un composant de la pile Elastic utilisé pour gérer de manière centralisée les agents Elastic. Il est lancé en tant que partie d&rsquo;un agent Elastic sur un hôte destiné à servir de serveur. Un processus Fleet Server peut prendre en charge de nombreuses connexions d&rsquo;agents Elastic et sert de plan de contrôle pour la mise à jour des stratégies d&rsquo;agents, la collecte d&rsquo;informations d&rsquo;état et la coordination des actions entre les agents Elastic.</p>
-<p>Fleet Server est le mécanisme utilisé par les agents Elastic pour communiquer avec Elasticsearch :</p>
-<ul>
-<li>Lorsqu&rsquo;une nouvelle politique d&rsquo;agent est créée, elle est enregistrée dans Elasticsearch.</li>
-<li>Pour s&rsquo;inscrire à la politique, les agents Elastic envoient une demande à Fleet Server, en utilisant la clé d&rsquo;inscription générée pour l&rsquo;authentification.</li>
-<li>Le serveur Fleet reçoit la demande et extrait la politique d&rsquo;agent d&rsquo;Elasticsearch, puis l&rsquo;envoie à tous les agents Elastic inscrits à cette politique.</li>
-<li>L&rsquo;agent Elastic utilise les informations de configuration de la politique pour collecter et envoyer des données à Elasticsearch.</li>
-<li>Elastic Agent vérifie les mises à jour auprès de Fleet Server, en maintenant une connexion ouverte.</li>
-<li>Lorsqu&rsquo;une politique est mise à jour, Fleet Server récupère la politique mise à jour dans Elasticsearch et l&rsquo;envoie aux agents Elastic connectés.</li>
-</ul>
-<p><img src=https://www.elastic.co/guide/en/fleet/current/images/fleet-server-communication.png alt=fleet></p>
-<p>Ajoutez les deux services ci-dessous dans le fichier <strong>elastic-docker-tls.yml</strong> :</p>
-<pre tabindex=0><code>  package-registry:
+</h1><h3 id=serveur-fleet>Serveur Fleet</h3><p>Fleet Server est un composant de la pile Elastic utilisé pour gérer de manière centralisée les agents Elastic. Il est lancé en tant que partie d&rsquo;un agent Elastic sur un hôte destiné à servir de serveur. Un processus Fleet Server peut prendre en charge de nombreuses connexions d&rsquo;agents Elastic et sert de plan de contrôle pour la mise à jour des stratégies d&rsquo;agents, la collecte d&rsquo;informations d&rsquo;état et la coordination des actions entre les agents Elastic.</p><p>Fleet Server est le mécanisme utilisé par les agents Elastic pour communiquer avec Elasticsearch :</p><ul>
+<li>Lorsqu&rsquo;une nouvelle politique d&rsquo;agent est créée, elle est enregistrée dans Elasticsearch.</li><li>Pour s&rsquo;inscrire à la politique, les agents Elastic envoient une demande à Fleet Server, en utilisant la clé d&rsquo;inscription générée pour l&rsquo;authentification.</li><li>Le serveur Fleet reçoit la demande et extrait la politique d&rsquo;agent d&rsquo;Elasticsearch, puis l&rsquo;envoie à tous les agents Elastic inscrits à cette politique.</li><li>L&rsquo;agent Elastic utilise les informations de configuration de la politique pour collecter et envoyer des données à Elasticsearch.</li><li>Elastic Agent vérifie les mises à jour auprès de Fleet Server, en maintenant une connexion ouverte.</li><li>Lorsqu&rsquo;une politique est mise à jour, Fleet Server récupère la politique mise à jour dans Elasticsearch et l&rsquo;envoie aux agents Elastic connectés.</li></ul><p><img src=https://www.elastic.co/guide/en/fleet/current/images/fleet-server-communication.png alt=fleet></p><p>Ajoutez les deux services ci-dessous dans le fichier <strong>elastic-docker-tls.yml</strong> :</p><pre tabindex=0><code>  package-registry:
     image: docker.elastic.co/package-registry/distribution:${VERSION}
     container_name: package-registry
     ports:
@@ -274,20 +225,20 @@ Bonus - Fleet & Elastic Agent
     ports:
       - 8220:8220
     healthcheck:
-      test: [&quot;CMD-SHELL&quot;, &quot;curl -s -k https://localhost:8220/api/status | grep -q 'HEALTHY'&quot;]
+      test: [&#34;CMD-SHELL&#34;, &#34;curl -s -k https://localhost:8220/api/status | grep -q &#39;HEALTHY&#39;&#34;]
       retries: 300
       interval: 1s
     environment:
-      FLEET_SERVER_ENABLE: &quot;1&quot;
-      ELASTICSEARCH_HOST: &quot;https://es01:9200&quot;
+      FLEET_SERVER_ENABLE: &#34;1&#34;
+      ELASTICSEARCH_HOST: &#34;https://es01:9200&#34;
       ELASTICSEARCH_CA: $CERTS_DIR/ca/ca.crt
       ELASTICSEARCH_USERNAME: elastic
       ELASTICSEARCH_PASSWORD: CHANGEME
-      FLEET_URL: &quot;https://fleet-server:8220&quot;
+      FLEET_URL: &#34;https://fleet-server:8220&#34;
       FLEET_SERVER_CERT: $CERTS_DIR/fleet-server/fleet-server.crt
       FLEET_SERVER_CERT_KEY: $CERTS_DIR/fleet-server/fleet-server.key
-      KIBANA_FLEET_SETUP: &quot;true&quot;
-      KIBANA_HOST: &quot;https://kib01:5601&quot;
+      KIBANA_FLEET_SETUP: &#34;true&#34;
+      KIBANA_HOST: &#34;https://kib01:5601&#34;
       KIBANA_USERNAME: elastic
       KIBANA_PASSWORD: CHANGEME
       KIBANA_CA: $CERTS_DIR/ca/ca.crt
@@ -298,46 +249,39 @@ Bonus - Fleet & Elastic Agent
       - certs:$CERTS_DIR
     networks:
         - elastic
-
-</code></pre><p>Définissez <strong>ELASTICSEARCH_PASSWORD</strong> et <strong>KIBANA_PASSWORD</strong> dans le fichier <strong>elastic-docker-tls.yml</strong> avec le mot de passe généré pour l&rsquo;utilisateur elastic.</p>
-<pre tabindex=0><code>fleet-server:
+</code></pre><p>Définissez <strong>ELASTICSEARCH_PASSWORD</strong> et <strong>KIBANA_PASSWORD</strong> dans le fichier <strong>elastic-docker-tls.yml</strong> avec le mot de passe généré pour l&rsquo;utilisateur elastic.</p><pre tabindex=0><code>fleet-server:
     image: docker.elastic.co/beats/elastic-agent:${VERSION}
     container_name: fleet-server
     ports:
       - 8220:8220
     healthcheck:
-      test: [&quot;CMD-SHELL&quot;, &quot;curl -s -k https://localhost:8220/api/status | grep -q 'HEALTHY'&quot;]
+      test: [&#34;CMD-SHELL&#34;, &#34;curl -s -k https://localhost:8220/api/status | grep -q &#39;HEALTHY&#39;&#34;]
       retries: 300
       interval: 1s
     environment:
-      FLEET_SERVER_ENABLE: &quot;1&quot;
-      ELASTICSEARCH_HOST: &quot;https://es01:9200&quot;
+      FLEET_SERVER_ENABLE: &#34;1&#34;
+      ELASTICSEARCH_HOST: &#34;https://es01:9200&#34;
       ELASTICSEARCH_CA: $CERTS_DIR/ca/ca.crt
       ELASTICSEARCH_USERNAME: elastic
       ELASTICSEARCH_PASSWORD: CHANGEME
-      FLEET_URL: &quot;https://fleet-server:8220&quot;
+      FLEET_URL: &#34;https://fleet-server:8220&#34;
       FLEET_SERVER_CERT: $CERTS_DIR/fleet-server/fleet-server.crt
       FLEET_SERVER_CERT_KEY: $CERTS_DIR/fleet-server/fleet-server.key
-      KIBANA_FLEET_SETUP: &quot;true&quot;
-      KIBANA_HOST: &quot;https://kib01:5601&quot;
+      KIBANA_FLEET_SETUP: &#34;true&#34;
+      KIBANA_HOST: &#34;https://kib01:5601&#34;
       KIBANA_USERNAME: elastic
       KIBANA_PASSWORD: CHANGEME
       KIBANA_CA: $CERTS_DIR/ca/ca.crt
 </code></pre><pre tabindex=0><code>docker-compose -f elastic-docker-tls.yml up -d
-</code></pre><p>Vérifiez la connexion entre le serveur Fleet et Kibana :</p>
-<p><strong>Management</strong> -> <strong>Fleet</strong></p>
-<p><img src=/elastic-tutorial/images/attachments/prerequis/fleet.png alt=image.png></p>
-<h3 id=serveur-apm>Serveur APM</h3>
-<p>Ajoutez le service ELastic Agent dans le fichier <strong>elastic-docker-tls.yml</strong> : :</p>
-<pre tabindex=0><code>  elastic-agent:
+</code></pre><p>Vérifiez la connexion entre le serveur Fleet et Kibana :</p><p><strong>Management</strong> -> <strong>Fleet</strong></p><p><img src=/elastic-tutorial/images/attachments/prerequis/fleet.png alt=image.png></p><h3 id=serveur-apm>Serveur APM</h3><p>Ajoutez le service ELastic Agent dans le fichier <strong>elastic-docker-tls.yml</strong> : :</p><pre tabindex=0><code>  elastic-agent:
     image: docker.elastic.co/beats/elastic-agent-complete:${VERSION}
     container_name: elastic-agent
     restart: always
     user: root # note, synthetic browser monitors require this set to `elastic-agent`
     environment:
       FLEET_ENROLL: 1
-      FLEET_URL: &quot;https://fleet-server:8220&quot;
-      FLEET_TOKEN_POLICY_NAME: &quot;Default policy&quot;
+      FLEET_URL: &#34;https://fleet-server:8220&#34;
+      FLEET_TOKEN_POLICY_NAME: &#34;Default policy&#34;
       FLEET_CA: $CERTS_DIR/ca/ca.crt
       KIBANA_FLEET_HOST: https://kib01:5601
       KIBANA_FLEET_USERNAME: elastic
@@ -356,25 +300,17 @@ Bonus - Fleet & Elastic Agent
        - /:/hostfs:ro
     networks:
        - elastic
-</code></pre><p>Modifier la configuration par défaut des agents elastic via le serveur fleet sur l&rsquo;interface Kibana :</p>
-<p><strong>Management</strong> -> <strong>Fleet</strong></p>
-<p>Cliquez sur <strong>Fleet settings</strong></p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/fleet_settings.png alt=image.png></p>
-<p><strong>Fleet Server Hosts</strong></p>
-<pre tabindex=0><code>https://fleet-server:8220
-</code></pre><p><strong>Elasticsearch Output Configuration (YAML)</strong></p>
-<pre tabindex=0><code>ssl.certificate_authorities: [&quot;/usr/share/elasticsearch/config/certificates/ca/ca.crt&quot;]
-</code></pre><p><img src=/elastic-tutorial/images/attachments/debutant/fleet_settings_configuration.png alt=image.png></p>
-<p>Définissez KIBANA_FLEET_PASSWORD dans le fichier elastic-docker-tls.yml avec le mot de passe généré pour l&rsquo;utilisateur elastic.</p>
-<pre tabindex=0><code>  elastic-agent:
+</code></pre><p>Modifier la configuration par défaut des agents elastic via le serveur fleet sur l&rsquo;interface Kibana :</p><p><strong>Management</strong> -> <strong>Fleet</strong></p><p>Cliquez sur <strong>Fleet settings</strong></p><p><img src=/elastic-tutorial/images/attachments/debutant/fleet_settings.png alt=image.png></p><p><strong>Fleet Server Hosts</strong></p><pre tabindex=0><code>https://fleet-server:8220
+</code></pre><p><strong>Elasticsearch Output Configuration (YAML)</strong></p><pre tabindex=0><code>ssl.certificate_authorities: [&#34;/usr/share/elasticsearch/config/certificates/ca/ca.crt&#34;]
+</code></pre><p><img src=/elastic-tutorial/images/attachments/debutant/fleet_settings_configuration.png alt=image.png></p><p>Définissez KIBANA_FLEET_PASSWORD dans le fichier elastic-docker-tls.yml avec le mot de passe généré pour l&rsquo;utilisateur elastic.</p><pre tabindex=0><code>  elastic-agent:
     image: docker.elastic.co/beats/elastic-agent-complete:${VERSION}
     container_name: elastic-agent
     restart: always
     user: root # note, synthetic browser monitors require this set to `elastic-agent`
     environment:
       FLEET_ENROLL: 1
-      FLEET_URL: &quot;https://fleet-server:8220&quot;
-      FLEET_TOKEN_POLICY_NAME: &quot;Default policy&quot;
+      FLEET_URL: &#34;https://fleet-server:8220&#34;
+      FLEET_TOKEN_POLICY_NAME: &#34;Default policy&#34;
       FLEET_CA: $CERTS_DIR/ca/ca.crt
       KIBANA_FLEET_HOST: https://kib01:5601
       KIBANA_FLEET_USERNAME: elastic
@@ -393,32 +329,21 @@ Bonus - Fleet & Elastic Agent
        - /:/hostfs:ro
     networks:
        - elastic
-</code></pre><p>Après quelques minutes vous devez voir apparaitre l&rsquo;agent elastic sur l&rsquo;interface Kibana.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/fleet_agent_elastic.png alt=image.png></p>
-<h3 id=intégration-du-module-apm>Intégration du module APM</h3>
-<footer class=footline>
-</footer>
-</div>
-</div>
-<div id=navigation>
+</code></pre><p>Après quelques minutes vous devez voir apparaitre l&rsquo;agent elastic sur l&rsquo;interface Kibana.</p><p><img src=/elastic-tutorial/images/attachments/debutant/fleet_agent_elastic.png alt=image.png></p><h3 id=intégration-du-module-apm>Intégration du module APM</h3><footer class=footline>
+</footer></div></div><div id=navigation>
 <a class="nav nav-prev" href=/elastic-tutorial/elastic/avance/ title=Avancé> <i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/prerequis/ title=Prérequis style=margin-right:0><i class="fa fa-chevron-right"></i></a>
-</div>
-</section>
-<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
-</div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645973180></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645973180></script>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+</div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1646153867></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1646153867></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645973180></script>
-<script src=/elastic-tutorial/js/learn.js?1645973180></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645973180></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645973180></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646153867></script>
+<script src=/elastic-tutorial/js/learn.js?1646153867></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1646153867></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1646153867></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
-</body>
-</html>
+</body></html>

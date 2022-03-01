@@ -6,7 +6,7 @@
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Labs - CRUD :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646153867 rel=stylesheet>
+<title>TP : Définir et exécuter des requêtes de recherche dans Elasticsearch :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646153867 rel=stylesheet>
 <link href=/elastic-tutorial/css/fontawesome-all.min.css?1646153867 rel=stylesheet>
 <link href=/elastic-tutorial/css/hybrid.css?1646153867 rel=stylesheet>
 <link href=/elastic-tutorial/css/featherlight.min.css?1646153867 rel=stylesheet>
@@ -18,7 +18,7 @@
 <link href=/elastic-tutorial/css/hugo-theme.css?1646153867 rel=stylesheet>
 <link href=/elastic-tutorial/css/theme-blue.css?1646153867 rel=stylesheet>
 <script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646153867></script>
-<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/intermediare/crud_documents/>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/avance/tp_query/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
 <div id=header>
@@ -103,8 +103,7 @@ Lab - Backup & Restore
 Lab - Diagnostic
 <i class="fas fa-check read-icon"></i>
 </a>
-</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
-parent">
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/>
 Intermediare
 <i class="fas fa-check read-icon"></i>
@@ -135,12 +134,13 @@ Labs - Index Template et Mapping
 Labs - Reindex
 <i class="fas fa-check read-icon"></i>
 </a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class="dd-item active">
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/crud_documents/>
 Labs - CRUD
 <i class="fas fa-check read-icon"></i>
 </a>
-</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class="dd-item
+parent">
 <a href=/elastic-tutorial/elastic/avance/>
 Avancé
 <i class="fas fa-check read-icon"></i>
@@ -166,7 +166,7 @@ Labs - Query Sort
 Labs - Query niveau II
 <i class="fas fa-check read-icon"></i>
 </a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class="dd-item active">
 <a href=/elastic-tutorial/elastic/avance/tp_query/>
 TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
 <i class="fas fa-check read-icon"></i>
@@ -187,7 +187,7 @@ TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
 </span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
 <span class=links>
-<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/intermediare/>Intermediare</a> > Labs - CRUD
+<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/avance/>Avancé</a> > TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
 </span>
 </div><div class=progress>
 <div class=wrapper>
@@ -195,41 +195,36 @@ TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
 <ul>
 <li><a href=#description>Description</a>
 <ul>
-<li></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
+<li><a href=#préparation>Préparation</a></li><li><a href=#créer-une-requête-de-recherche-qui-répond-aux-exigences-de-la-requête>Créer une requête de recherche qui répond aux exigences de la requête</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
 </div><div id=body-inner>
 <h1>
-Labs - CRUD
-</h1><h2 id=description>Description</h2><p>Quelle que soit la façon dont vous comptez utiliser Elasticsearch, il est essentiel de comprendre comment créer, mettre à jour et supprimer rapidement des documents dans Elasticsearch. Dans cette activité d&rsquo;apprentissage, vous allez effectuer les tâches suivantes :</p><ul>
-<li>Créer des documents dans Elasticsearch</li><li>Mettre à jour des documents existants dans Elasticsearch</li><li>Supprimer des documents d&rsquo;un index Elasticsearch</li></ul><p>Vous travaillez en tant qu&rsquo;administrateur Elasticsearch pour une société bancaire. Un récent échec de déploiement et un retour en arrière de votre logiciel bancaire ont désynchronisé certaines actions qui ont été prises sur quelques comptes. Pour corriger rapidement la désynchronisation, on vous demande d&rsquo;effectuer des opérations CRUD manuelles sur l&rsquo;index bancaire dans Elasticsearch.</p><p>Un compte doit être ajouté avec les données client suivantes :</p><ul>
-<li>Numéro de compte : 1000</li><li>Solde : 65 536</li><li>Prénom : Jean</li><li>Nom de famille : Doe</li><li>Age : 23 ans</li><li>Sexe : masculin Homme</li><li>Adresse : 125 Bear Creek Pkwy</li><li>Employeur : Linux Academy</li><li>Courriel : <a href=mailto:john@linuxacademy.com>john@linuxacademy.com</a></li><li>Ville : Keller</li><li>Etat : TX</li></ul><p>Le compte 100 a changé d&rsquo;adresse et les champs suivants doivent être mis à jour :</p><ul>
-<li>Adresse : 1600 Pennsylvania Ave NW</li><li>Ville : Washington</li><li>Etat : DC</li></ul><h4 id=créer-account-1000>Créer Account 1000</h4><pre tabindex=0><code>PUT bank/_doc/1000
+TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+</h1><h2 id=description>Description</h2><p>Savoir comment collecter, analyser, enrichir et indexer des données dans Elasticsearch est important, mais savoir comment poser des questions précises sur les données est encore plus crucial. Après tout, vous ne pouvez pas épeler &ldquo;Elasticsearch&rdquo; sans &ldquo;recherche&rdquo; ! Que vous utilisiez Elasticsearch pour la recherche de sites, la recherche de produits, l&rsquo;analyse opérationnelle ou la veille stratégique, savoir formuler des requêtes de recherche complexes est essentiel pour tirer de la valeur de toutes ces données que vous avez réussi à collecter, analyser, enrichir et indexer. Dans ce laboratoire pratique, vous allez effectuer les tâches suivantes :</p><ul>
+<li>Rechercher un terme spécifique dans un champ</li><li>Appliquer un filtre de recherche pour réduire l&rsquo;ensemble de données recherchables</li><li>Trier les données résultantes</li><li>Mettre en évidence le terme recherché dans les résultats</li><li>Paginer les résultats de la recherche</li></ul><p>Vous travaillez en tant que consultant Elasticsearch et avez été engagé par une université locale qui cherche à mettre en œuvre Elasticsearch pour la recherche littéraire. L&rsquo;équipe avec laquelle vous travaillez crée une interface utilisateur qui permettra aux étudiants d&rsquo;effectuer des analyses de recherche sur diverses œuvres littéraires. La configuration de test avec laquelle vous travaillez est un cluster Elasticsearch à 6 nœuds chargé des œuvres complètes de Shakespeare. Pour que l&rsquo;interface utilisateur affiche les résultats de recherche souhaités, vous devez aider l&rsquo;équipe à proposer deux requêtes de recherche qui répondent aux exigences.</p><h3 id=préparation>Préparation</h3><pre tabindex=0><code>PUT /shakespeare
 {
-  &#34;account_number&#34;: 1000,
-  &#34;balance&#34;: 65536,
-  &#34;firstname&#34;: &#34;John&#34;,
-  &#34;lastname&#34;: &#34;Doe&#34;,
-  &#34;age&#34;: 23,
-  &#34;gender&#34;: &#34;M&#34;,
-  &#34;address&#34;: &#34;125 Bear Creek Pkwy&#34;,
-  &#34;employer&#34;: &#34;Linux Academy&#34;,
-  &#34;email&#34;: &#34;john@linuxacademy.com&#34;,
-  &#34;city&#34;: &#34;Keller&#34;,
-  &#34;state&#34;: &#34;TX&#34;
+ &#34;mappings&#34;: {
+   &#34;properties&#34;: {
+    &#34;speaker&#34;: {&#34;type&#34;: &#34;keyword&#34;},
+    &#34;play_name&#34;: {&#34;type&#34;: &#34;keyword&#34;},
+    &#34;line_id&#34;: {&#34;type&#34;: &#34;integer&#34;},
+    &#34;speech_number&#34;: {&#34;type&#34;: &#34;integer&#34;}
+   }
+ }
 }
-</code></pre><h4 id=mise-à-jour-account-100>Mise à jour Account 100</h4><pre tabindex=0><code>POST bank/_update/100/
-{
-  &#34;doc&#34;: {
-    &#34;address&#34;: &#34;1600 Pennsylvania Ave NW&#34;,
-    &#34;city&#34;: &#34;Washington&#34;,
-    &#34;state&#34;: &#34;DC&#34;
-  }
-}
-</code></pre><h4 id=supprimer-accounts-1-et-10>Supprimer accounts 1 et 10</h4><pre tabindex=0><code>DELETE bank/_doc/1
-DELETE bank/_doc/10
-</code></pre><footer class=footline>
+
+
+curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json
+curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/shakespeare/doc/_bulk?pretty&#39; --data-binary @shakespeare_6.0.json
+
+
+GET _cat/nodes?v
+
+GET _cat/indices?v
+</code></pre><h3 id=créer-une-requête-de-recherche-qui-répond-aux-exigences-de-la-requête>Créer une requête de recherche qui répond aux exigences de la requête</h3><p>Requête :</p><ul>
+<li>Le type du document doit être une &ldquo;scène&rdquo;.</li><li>Le champ text_entry doit contenir une forme du mot &ldquo;london&rdquo;.</li><li>La pièce doit être parmi &ldquo;Henry VI Part 1&rdquo;, &ldquo;Henry VI Part 2&rdquo;, ou &ldquo;Henry VI Part 3&rdquo;.</li><li>La taille du tableau des résultats doit être égale au nombre de résultats.</li><li>Les résultats sont d&rsquo;abord triés par nom de la pièce dans l&rsquo;ordre croissant, puis par numéro de ligne dans l&rsquo;ordre croissant.</li></ul><footer class=footline>
 </footer></div></div><div id=navigation>
-<a class="nav nav-prev" href=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex"> <i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/avance/ title=Avancé style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+<a class="nav nav-prev" href=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau II"> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
 </div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646153867></script>
 <script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646153867></script>

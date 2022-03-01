@@ -2,42 +2,36 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Labs - Reindex :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645973180 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645973180></script>
-<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
-</head>
-<body data-url=/elastic-tutorial/elastic/intermediare/reindex/>
+<title>Labs - Reindex :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1646153867 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646153867></script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/intermediare/reindex/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
 <div id=header>
 <img src=../../../../elastic-tutorial/media/logo.png>
-</div>
-<div class=searchbox>
+</div><div class=searchbox>
 <label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
-</div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645973180></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645973180></script>
+</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646153867></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646153867></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645973180></script>
-</div>
-<div class=highlightable>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1646153867></script>
+</div><div class=highlightable>
 <ul class=topics>
 <li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
 parent">
@@ -57,10 +51,7 @@ Prérequis
 Installation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/>
 Débutant
 <i class="fas fa-check read-icon"></i>
@@ -71,28 +62,22 @@ Débutant
 Lab - Logs
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
 Lab - Metrics
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
 Lab - APM
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
 Lab - Uptime
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
 Elementaire
 <i class="fas fa-check read-icon"></i>
@@ -103,28 +88,22 @@ Elementaire
 Lab - Habilitation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
 Lab - Index Lifecycle Policy
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>
 Lab - Backup & Restore
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>
 Lab - Diagnostic
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
 parent">
 <a href=/elastic-tutorial/elastic/intermediare/>
 Intermediare
@@ -136,40 +115,32 @@ Intermediare
 Lab - Alertes
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/index_alias/>
 Labs - Index et ALias
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/mapping/>
 Labs - Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/template_mapping/>
 Labs - Index Template et Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class="dd-item active">
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class="dd-item active">
 <a href=/elastic-tutorial/elastic/intermediare/reindex/>
 Labs - Reindex
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/crud_documents/>
 Labs - CRUD
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/>
 Avancé
 <i class="fas fa-check read-icon"></i>
@@ -180,26 +151,32 @@ Avancé
 Bonus - Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<section id=prefooter>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/term/>
+Labs - Query niveau I
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query Sort" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/sort/>
+Labs - Query Sort
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau II" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/query/>
+Labs - Query niveau II
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/tp_query/>
+TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+<i class="fas fa-check read-icon"></i>
+</a>
+</li></ul></li></ul></li></ul><section id=prefooter>
 <hr>
 <ul>
-<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li>
-</ul>
-</section>
-<section id=footer>
-<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p>
-</section>
-</div>
-</nav>
-<section id=body>
-<div id=overlay></div>
-<div class="padding highlightable">
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer>
+<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body>
+<div id=overlay></div><div class="padding highlightable">
 <div>
 <div id=top-bar>
 <div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
@@ -212,175 +189,141 @@ Bonus - Fleet & Elastic Agent
 <span class=links>
 <a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/intermediare/>Intermediare</a> > Labs - Reindex
 </span>
-</div>
-<div class=progress>
+</div><div class=progress>
 <div class=wrapper>
 <nav id=TableOfContents>
 <ul>
 <li><a href=#description>Description</a>
 <ul>
-<li></li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-</div>
-<div id=head-tags>
-</div>
-<div id=body-inner>
+<li></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
+</div><div id=body-inner>
 <h1>
 Labs - Reindex
-</h1>
-<h2 id=description>Description</h2>
-<p>Que vous ayez besoin de modifier le mappage d&rsquo;un index existant ou de prendre un sous-ensemble de données d&rsquo;un index et de le copier dans un autre, l&rsquo;API _reindex d&rsquo;Elasticsearch vous couvre. Avec l&rsquo;API _reindex, vous pouvez prendre toutes les données ou seulement un sous-ensemble de données d&rsquo;un index et les copier dans un autre. Dans ce laboratoire pratique, vous aurez l&rsquo;occasion de faire les exercices suivants :</p>
-<ul>
-<li>Réindexer un sous-ensemble de données d&rsquo;un index vers un nouvel index.</li>
-<li>Créer un pipeline de nœuds d&rsquo;ingestion</li>
-<li>Transformer les données pendant le processus de réindexation</li>
-</ul>
-<p>Vous travaillez en tant que bibliothécaire de recherche et vous étudiez actuellement les œuvres de Shakespeare, en particulier Roméo et Juliette. Vous avez un cluster Elasticsearch à 6 nœuds et les œuvres complètes de Shakespeare, que vous utilisez pour votre analyse littéraire. Actuellement, les œuvres complètes de Shakespeare sont indexées dans un seul index appelé shakespeare, mais, comme vous vous concentrez actuellement sur la pièce Roméo et Juliette, vous préférez copier cette pièce dans son propre index.</p>
-<p>Pour ce faire, vous devrez d&rsquo;abord créer un nouvel index appelé romeo_and_juliet avec les mêmes mappages de champs que l&rsquo;index shakespeare. Comme votre cluster Elasticsearch à 3 nœuds ne compte que 4 nœuds de données, vous souhaitez créer l&rsquo;index romeo_and_juliet avec 4 shards primaires et 3 shards répliques pour une réplication maximale. Une fois l&rsquo;index romeo_and_juliet créé, vous devrez utiliser l&rsquo;API _reindex pour copier tous les documents dont le nom de pièce est &ldquo;Romeo and Juliet&rdquo; vers l&rsquo;index romeo_and_juliet.</p>
-<p>En plus de copier les données de la pièce Roméo et Juliette dans son propre index, vous souhaitez également modifier les données en cours de route pendant le processus de réindexation. Plus précisément, vous voulez prendre le contenu du champ text_entry et stocker chaque mot délimité par des espaces dans un tableau appelé word_array. En outre, vous voulez ajouter un champ word_count qui est égal au nombre de mots dans le champ word_array. Enfin, comme l&rsquo;index ne contiendra que les données relatives à la pièce Roméo et Juliette, nous pouvons supprimer le champ play_name. Tout ceci peut être accompli avec un pipeline de nœuds d&rsquo;acquisition utilisant les processeurs split, script et remove.</p>
-<h4 id=préparation-des-données>Préparation des données</h4>
-<pre tabindex=0><code>PUT /shakespeare
+</h1><h2 id=description>Description</h2><p>Que vous ayez besoin de modifier le mappage d&rsquo;un index existant ou de prendre un sous-ensemble de données d&rsquo;un index et de le copier dans un autre, l&rsquo;API _reindex d&rsquo;Elasticsearch vous couvre. Avec l&rsquo;API _reindex, vous pouvez prendre toutes les données ou seulement un sous-ensemble de données d&rsquo;un index et les copier dans un autre. Dans ce laboratoire pratique, vous aurez l&rsquo;occasion de faire les exercices suivants :</p><ul>
+<li>Réindexer un sous-ensemble de données d&rsquo;un index vers un nouvel index.</li><li>Créer un pipeline de nœuds d&rsquo;ingestion</li><li>Transformer les données pendant le processus de réindexation</li></ul><p>Vous travaillez en tant que bibliothécaire de recherche et vous étudiez actuellement les œuvres de Shakespeare, en particulier Roméo et Juliette. Vous avez un cluster Elasticsearch à 6 nœuds et les œuvres complètes de Shakespeare, que vous utilisez pour votre analyse littéraire. Actuellement, les œuvres complètes de Shakespeare sont indexées dans un seul index appelé shakespeare, mais, comme vous vous concentrez actuellement sur la pièce Roméo et Juliette, vous préférez copier cette pièce dans son propre index.</p><p>Pour ce faire, vous devrez d&rsquo;abord créer un nouvel index appelé romeo_and_juliet avec les mêmes mappages de champs que l&rsquo;index shakespeare. Comme votre cluster Elasticsearch à 3 nœuds ne compte que 4 nœuds de données, vous souhaitez créer l&rsquo;index romeo_and_juliet avec 4 shards primaires et 3 shards répliques pour une réplication maximale. Une fois l&rsquo;index romeo_and_juliet créé, vous devrez utiliser l&rsquo;API _reindex pour copier tous les documents dont le nom de pièce est &ldquo;Romeo and Juliet&rdquo; vers l&rsquo;index romeo_and_juliet.</p><p>En plus de copier les données de la pièce Roméo et Juliette dans son propre index, vous souhaitez également modifier les données en cours de route pendant le processus de réindexation. Plus précisément, vous voulez prendre le contenu du champ text_entry et stocker chaque mot délimité par des espaces dans un tableau appelé word_array. En outre, vous voulez ajouter un champ word_count qui est égal au nombre de mots dans le champ word_array. Enfin, comme l&rsquo;index ne contiendra que les données relatives à la pièce Roméo et Juliette, nous pouvons supprimer le champ play_name. Tout ceci peut être accompli avec un pipeline de nœuds d&rsquo;acquisition utilisant les processeurs split, script et remove.</p><h4 id=préparation-des-données>Préparation des données</h4><pre tabindex=0><code>PUT /shakespeare
 {
- &quot;mappings&quot;: {
-   &quot;properties&quot;: {
-    &quot;speaker&quot;: {&quot;type&quot;: &quot;keyword&quot;},
-    &quot;play_name&quot;: {&quot;type&quot;: &quot;keyword&quot;},
-    &quot;line_id&quot;: {&quot;type&quot;: &quot;integer&quot;},
-    &quot;speech_number&quot;: {&quot;type&quot;: &quot;integer&quot;}
+ &#34;mappings&#34;: {
+   &#34;properties&#34;: {
+    &#34;speaker&#34;: {&#34;type&#34;: &#34;keyword&#34;},
+    &#34;play_name&#34;: {&#34;type&#34;: &#34;keyword&#34;},
+    &#34;line_id&#34;: {&#34;type&#34;: &#34;integer&#34;},
+    &#34;speech_number&#34;: {&#34;type&#34;: &#34;integer&#34;}
    }
  }
 }
-</code></pre><pre tabindex=0><code>curl --location --request POST 'https://localhost:9200/bank/account/_bulk?pretty' \
---header 'Content-Type: application/x-ndjson' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
+</code></pre><pre tabindex=0><code>curl --location --request POST &#39;https://localhost:9200/bank/account/_bulk?pretty&#39; \
+--header &#39;Content-Type: application/x-ndjson&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
  --data-binary @accounts.json
 
-curl --location --request POST 'https://localhost:9200/shakespeare/doc/_bulk?pretty' \
---header 'Content-Type: application/x-ndjson' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
+curl --location --request POST &#39;https://localhost:9200/shakespeare/doc/_bulk?pretty&#39; \
+--header &#39;Content-Type: application/x-ndjson&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
  --data-binary @shakespeare.json
-</code></pre><h4 id=créer-lindex-romeo_and_juiliet>Créer l&rsquo;index romeo_and_juiliet</h4>
-<pre tabindex=0><code>PUT romeo_and_juliet
+</code></pre><h4 id=créer-lindex-romeo_and_juiliet>Créer l&rsquo;index romeo_and_juiliet</h4><pre tabindex=0><code>PUT romeo_and_juliet
 {
-  &quot;mappings&quot;: {
-    &quot;properties&quot;: {
-      &quot;line_id&quot;: {
-        &quot;type&quot;: &quot;integer&quot;
+  &#34;mappings&#34;: {
+    &#34;properties&#34;: {
+      &#34;line_id&#34;: {
+        &#34;type&#34;: &#34;integer&#34;
       },
-      &quot;line_number&quot;: {
-        &quot;type&quot;: &quot;text&quot;,
-        &quot;fields&quot;: {
-          &quot;keyword&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 256
+      &#34;line_number&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
           }
         }
       },
-      &quot;play_name&quot;: {
-        &quot;type&quot;: &quot;keyword&quot;
+      &#34;play_name&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;
       },
-      &quot;speaker&quot;: {
-        &quot;type&quot;: &quot;keyword&quot;
+      &#34;speaker&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;
       },
-      &quot;speech_number&quot;: {
-        &quot;type&quot;: &quot;integer&quot;
+      &#34;speech_number&#34;: {
+        &#34;type&#34;: &#34;integer&#34;
       },
-      &quot;text_entry&quot;: {
-        &quot;type&quot;: &quot;text&quot;,
-        &quot;fields&quot;: {
-          &quot;keyword&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 256
+      &#34;text_entry&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
           }
         }
       },
-      &quot;type&quot;: {
-        &quot;type&quot;: &quot;text&quot;,
-        &quot;fields&quot;: {
-          &quot;keyword&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 256
+      &#34;type&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
           }
         }
       }
     }
   },
-  &quot;settings&quot;: {
-    &quot;number_of_shards&quot;: 4,
-    &quot;number_of_replicas&quot;: 3
+  &#34;settings&#34;: {
+    &#34;number_of_shards&#34;: 4,
+    &#34;number_of_replicas&#34;: 3
   }
 }
-</code></pre><h4 id=créer-le-shakespeare-tokenizer-ingest-node-pipeline>Créer le shakespeare-tokenizer ingest node pipeline</h4>
-<pre tabindex=0><code>PUT _ingest/pipeline/shakespeare-tokenizer
+</code></pre><h4 id=créer-le-shakespeare-tokenizer-ingest-node-pipeline>Créer le shakespeare-tokenizer ingest node pipeline</h4><pre tabindex=0><code>PUT _ingest/pipeline/shakespeare-tokenizer
 {
-  &quot;description&quot;: &quot;Tokenizes the text_entry field into an array. Adds a word_count field. Removes the play_name field.&quot;,
-  &quot;processors&quot;: [
+  &#34;description&#34;: &#34;Tokenizes the text_entry field into an array. Adds a word_count field. Removes the play_name field.&#34;,
+  &#34;processors&#34;: [
     {
-      &quot;split&quot;: {
-        &quot;field&quot;: &quot;text_entry&quot;,
-        &quot;separator&quot;: &quot;\\s+&quot;,
-        &quot;target_field&quot;: &quot;word_array&quot;
+      &#34;split&#34;: {
+        &#34;field&#34;: &#34;text_entry&#34;,
+        &#34;separator&#34;: &#34;\\s+&#34;,
+        &#34;target_field&#34;: &#34;word_array&#34;
       }
     },
     {
-      &quot;script&quot;: {
-        &quot;lang&quot;: &quot;painless&quot;,
-        &quot;source&quot;: &quot;ctx.word_count = ctx.word_array.length&quot;
+      &#34;script&#34;: {
+        &#34;lang&#34;: &#34;painless&#34;,
+        &#34;source&#34;: &#34;ctx.word_count = ctx.word_array.length&#34;
       }
     },
     {
-      &quot;remove&quot;: {
-        &quot;field&quot;: &quot;play_name&quot;
+      &#34;remove&#34;: {
+        &#34;field&#34;: &#34;play_name&#34;
       }
     }
   ]
 }
-</code></pre><h4 id=reindex-le-champ-play-romeo-and-juliet>Reindex le champ play &ldquo;Romeo and Juliet&rdquo;</h4>
-<pre tabindex=0><code>POST _reindex
+</code></pre><h4 id=reindex-le-champ-play-romeo-and-juliet>Reindex le champ play &ldquo;Romeo and Juliet&rdquo;</h4><pre tabindex=0><code>POST _reindex
 {
-  &quot;source&quot;: {
-    &quot;index&quot;: &quot;shakespeare&quot;,
-    &quot;query&quot;: {
-      &quot;match&quot;: {
-        &quot;play_name&quot;: &quot;Romeo and Juliet&quot;
+  &#34;source&#34;: {
+    &#34;index&#34;: &#34;shakespeare&#34;,
+    &#34;query&#34;: {
+      &#34;match&#34;: {
+        &#34;play_name&#34;: &#34;Romeo and Juliet&#34;
       }
     }
   },
-  &quot;dest&quot;: {
-    &quot;index&quot;: &quot;romeo_and_juliet&quot;,
-    &quot;pipeline&quot;: &quot;shakespeare-tokenizer&quot;
+  &#34;dest&#34;: {
+    &#34;index&#34;: &#34;romeo_and_juliet&#34;,
+    &#34;pipeline&#34;: &#34;shakespeare-tokenizer&#34;
   }
 }
-</code></pre>
-<footer class=footline>
-</footer>
-</div>
-</div>
-<div id=navigation>
+</code></pre><footer class=footline>
+</footer></div></div><div id=navigation>
 <a class="nav nav-prev" href=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping"> <i class="fa fa-chevron-left"></i></a>
 <a class="nav nav-next" href=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
-</div>
-</section>
-<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
-</div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645973180></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645973180></script>
+</div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1646153867></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1646153867></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645973180></script>
-<script src=/elastic-tutorial/js/learn.js?1645973180></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645973180></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645973180></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646153867></script>
+<script src=/elastic-tutorial/js/learn.js?1646153867></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1646153867></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1646153867></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
-</body>
-</html>
+</body></html>

@@ -2,42 +2,36 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Lab - Metrics :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645973180 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645973180></script>
-<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
-</head>
-<body data-url=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
+<title>Lab - Metrics :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1646153867 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646153867></script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
 <div id=header>
 <img src=../../../../elastic-tutorial/media/logo.png>
-</div>
-<div class=searchbox>
+</div><div class=searchbox>
 <label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
-</div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645973180></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645973180></script>
+</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646153867></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646153867></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645973180></script>
-</div>
-<div class=highlightable>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1646153867></script>
+</div><div class=highlightable>
 <ul class=topics>
 <li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
 parent">
@@ -57,10 +51,7 @@ Prérequis
 Installation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class="dd-item
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class="dd-item
 parent">
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/>
 Débutant
@@ -72,28 +63,22 @@ Débutant
 Lab - Logs
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class="dd-item active">
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class="dd-item active">
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
 Lab - Metrics
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
 Lab - APM
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
 Lab - Uptime
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
 Elementaire
 <i class="fas fa-check read-icon"></i>
@@ -104,28 +89,22 @@ Elementaire
 Lab - Habilitation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
 Lab - Index Lifecycle Policy
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>
 Lab - Backup & Restore
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>
 Lab - Diagnostic
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/>
 Intermediare
 <i class="fas fa-check read-icon"></i>
@@ -136,40 +115,32 @@ Intermediare
 Lab - Alertes
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/index_alias/>
 Labs - Index et ALias
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/mapping/>
 Labs - Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/template_mapping/>
 Labs - Index Template et Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/reindex/>
 Labs - Reindex
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/crud_documents/>
 Labs - CRUD
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/>
 Avancé
 <i class="fas fa-check read-icon"></i>
@@ -180,26 +151,32 @@ Avancé
 Bonus - Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<section id=prefooter>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/term/>
+Labs - Query niveau I
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query Sort" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/sort/>
+Labs - Query Sort
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau II" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/query/>
+Labs - Query niveau II
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/tp_query/>
+TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+<i class="fas fa-check read-icon"></i>
+</a>
+</li></ul></li></ul></li></ul><section id=prefooter>
 <hr>
 <ul>
-<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li>
-</ul>
-</section>
-<section id=footer>
-<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p>
-</section>
-</div>
-</nav>
-<section id=body>
-<div id=overlay></div>
-<div class="padding highlightable">
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer>
+<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body>
+<div id=overlay></div><div class="padding highlightable">
 <div>
 <div id=top-bar>
 <div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
@@ -212,46 +189,30 @@ Bonus - Fleet & Elastic Agent
 <span class=links>
 <a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/d%C3%A9butant/>Débutant</a> > Lab - Metrics
 </span>
-</div>
-<div class=progress>
+</div><div class=progress>
 <div class=wrapper>
 <nav id=TableOfContents>
 <ul>
 <li>
 <ul>
-<li><a href=#déployer-un-agent-beats>Déployer un agent beats</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-</div>
-<div id=head-tags>
-</div>
-<div id=body-inner>
+<li><a href=#déployer-un-agent-beats>Déployer un agent beats</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
+</div><div id=body-inner>
 <h1>
 Lab - Metrics
-</h1>
-<p>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques système et NGINX avec Metricbeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.</p>
-<h3 id=déployer-un-agent-beats>Déployer un agent beats</h3>
-<p>Ajoutez le service <strong>Metricbeat</strong> à la suite du service <strong>Beats</strong></p>
-<pre tabindex=0><code>vim beats/beats-docker.yml
-</code></pre><p><strong>beats-docker.yml</strong></p>
-<pre tabindex=0><code>version: '2.2'
+</h1><p>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques système et NGINX avec Metricbeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.</p><h3 id=déployer-un-agent-beats>Déployer un agent beats</h3><p>Ajoutez le service <strong>Metricbeat</strong> à la suite du service <strong>Beats</strong></p><pre tabindex=0><code>vim beats/beats-docker.yml
+</code></pre><p><strong>beats-docker.yml</strong></p><pre tabindex=0><code>version: &#39;2.2&#39;
 services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:${VERSION}
     container_name: filebeat
     restart: unless-stopped
-    entrypoint: &quot;filebeat -e -strict.perms=false&quot;
+    entrypoint: &#34;filebeat -e -strict.perms=false&#34;
     user: root
     volumes:
-    - &quot;./conf/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro&quot;
-    - &quot;/var/lib/docker/containers:/var/lib/docker/containers:ro&quot;
-    - &quot;/var/run/docker.sock:/var/run/docker.sock:ro&quot;
-    - &quot;/var/log:/tmp:ro&quot;
+    - &#34;./conf/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro&#34;
+    - &#34;/var/lib/docker/containers:/var/lib/docker/containers:ro&#34;
+    - &#34;/var/run/docker.sock:/var/run/docker.sock:ro&#34;
+    - &#34;/var/log:/tmp:ro&#34;
     - certs:$CERTS_DIR
     networks:
     - elastic
@@ -259,14 +220,14 @@ services:
     image: docker.elastic.co/beats/metricbeat:${VERSION}
     container_name: metricbeat
     restart: unless-stopped
-    entrypoint: &quot;metricbeat -e -strict.perms=false&quot;
+    entrypoint: &#34;metricbeat -e -strict.perms=false&#34;
     user: root
     volumes:
-    - &quot;./conf/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro&quot;
-    - &quot;/proc:/hostfs/proc:ro&quot;
-    - &quot;/sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro&quot;
-    - &quot;/:/hostfs:ro&quot;
-    - &quot;/var/run/docker.sock:/var/run/docker.sock:ro&quot;
+    - &#34;./conf/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro&#34;
+    - &#34;/proc:/hostfs/proc:ro&#34;
+    - &#34;/sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro&#34;
+    - &#34;/:/hostfs:ro&#34;
+    - &#34;/var/run/docker.sock:/var/run/docker.sock:ro&#34;
     - certs:$CERTS_DIR
     networks:
     - elastic
@@ -291,14 +252,14 @@ metricbeat.autodiscover:
 metricbeat.modules:
 #------------------------------- System Module -------------------------------
 - module: system
-  metricsets: [&quot;cpu&quot;, &quot;load&quot;, &quot;memory&quot;, &quot;network&quot;, &quot;process&quot;, &quot;process_summary&quot;, &quot;core&quot;, &quot;diskio&quot;, &quot;socket&quot;]
-  processes: ['.*']
+  metricsets: [&#34;cpu&#34;, &#34;load&#34;, &#34;memory&#34;, &#34;network&#34;, &#34;process&#34;, &#34;process_summary&#34;, &#34;core&#34;, &#34;diskio&#34;, &#34;socket&#34;]
+  processes: [&#39;.*&#39;]
   process.include_top_n:
     by_cpu: 5
     by_memory: 5
   period: 10s
-  cpu.metrics:  [&quot;percentages&quot;]
-  core.metrics: [&quot;percentages&quot;]
+  cpu.metrics:  [&#34;percentages&#34;]
+  core.metrics: [&#34;percentages&#34;]
 
 - module: system
   period: 1m
@@ -307,7 +268,7 @@ metricbeat.modules:
     - fsstat
   processors:
   - drop_event.when.regexp:
-      system.filesystem.mount_point: '^/(sys|cgroup|proc|dev|etc|host|lib)($|/)'
+      system.filesystem.mount_point: &#39;^/(sys|cgroup|proc|dev|etc|host|lib)($|/)&#39;
 
 - module: system
   period: 15m
@@ -316,8 +277,8 @@ metricbeat.modules:
 
 #------------------------------- Docker Module -------------------------------
 - module: docker
-  metricsets: [&quot;container&quot;, &quot;cpu&quot;, &quot;diskio&quot;, &quot;healthcheck&quot;, &quot;info&quot;, &quot;memory&quot;, &quot;network&quot;]
-  hosts: [&quot;unix:///var/run/docker.sock&quot;]
+  metricsets: [&#34;container&#34;, &#34;cpu&#34;, &#34;diskio&#34;, &#34;healthcheck&#34;, &#34;info&#34;, &#34;memory&#34;, &#34;network&#34;]
+  hosts: [&#34;unix:///var/run/docker.sock&#34;]
   period: 10s
 
 #================================ Processors ===================================
@@ -330,11 +291,11 @@ processors:
 
 #========================== Elasticsearch output ===============================
 output.elasticsearch:
-  hosts: [&quot;https://es01:9200&quot;]
-  username: &quot;beats_system&quot;
-  password: &quot;CHANGEME&quot;
+  hosts: [&#34;https://es01:9200&#34;]
+  username: &#34;beats_system&#34;
+  password: &#34;CHANGEME&#34;
   ssl.enabled: true
-  ssl.certificate_authorities: [&quot;/usr/share/elasticsearch/config/certificates/ca/ca.crt&quot;]
+  ssl.certificate_authorities: [&#34;/usr/share/elasticsearch/config/certificates/ca/ca.crt&#34;]
 
 #============================== Dashboards =====================================
 setup.dashboards:
@@ -342,13 +303,12 @@ setup.dashboards:
 
 #============================== Kibana =========================================
 setup.kibana:
-  host: &quot;https://kib01:5601&quot;
-  username: &quot;elastic&quot;
-  password: &quot;CHANGEME&quot;
+  host: &#34;https://kib01:5601&#34;
+  username: &#34;elastic&#34;
+  password: &#34;CHANGEME&#34;
   ssl.enabled: true
-  ssl.certificate_authorities: [&quot;/usr/share/elasticsearch/config/certificates/ca/ca.crt&quot;]
-</code></pre><p>Changer la valeur du champs <strong>password</strong> avec la valeur du mot de passe générer automatiquement.</p>
-<pre tabindex=0><code>docker-compose -f beats/beats-docker.yml up -d
+  ssl.certificate_authorities: [&#34;/usr/share/elasticsearch/config/certificates/ca/ca.crt&#34;]
+</code></pre><p>Changer la valeur du champs <strong>password</strong> avec la valeur du mot de passe générer automatiquement.</p><pre tabindex=0><code>docker-compose -f beats/beats-docker.yml up -d
 </code></pre><pre tabindex=0><code>vim app/artificial_load.sh
 </code></pre><pre tabindex=0><code>#!/bin/bash
 
@@ -356,7 +316,7 @@ COUNTER=0
 
 while [  $COUNTER -lt 10000 ] ;
 do
- curl -s --header &quot;X-Forwarded-For: 5.198.223.255&quot; localhost &gt; /dev/null
+ curl -s --header &#34;X-Forwarded-For: 5.198.223.255&#34; localhost &gt; /dev/null
  curl -s localhost/owners/find &gt; /dev/null
  curl -s localhost/owners?lastName= &gt; /dev/null
  curl -s localhost/owners/1 &gt; /dev/null
@@ -368,58 +328,22 @@ do
  let COUNTER=COUNTER+1
 done
 </code></pre><pre tabindex=0><code>chmod +x app/artificial_load.sh
-</code></pre><p>Maintenant, ouvrez une nouvelle fenêtre de terminal et exécutez le script suivant pour simuler la charge sur votre serveur NGINX.</p>
-<pre tabindex=0><code>./app/artificial_load.sh
-</code></pre><p>Lancez Kibana pour commencer à explorer les tableaux de bord qui ont été inclus dans le processus de configuration.</p>
-<p>Ensuite, accédez à Dashboard via le menu principal.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/dashboard-menu.png alt=image.png></p>
-<p>Recherchez le système et ouvrez la vue d&rsquo;ensemble de Metricbeat System ECS.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/metricbeat-dashboards.png alt=image.png></p>
-<p>Vous verrez quelque chose de similaire à la page ci-dessous.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/metricbeat-system-dashboard.png alt=image.png></p>
-<p>Cliquez sur Vue d&rsquo;ensemble de l&rsquo;hôte en haut du tableau de bord actuel pour voir un tableau de bord avec plus d&rsquo;informations que Metricbeat a collectées à partir de l&rsquo;hôte de votre environnement de laboratoire.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/metricbeat-host-overview-dashboard.png alt=image.png></p>
-<p>Retournez sur la page des tableaux de bord Kibana, recherchez nginx et ouvrez le tableau de bord ECS [Metricbeat Nginx] Overview.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/nginx-dashboards.png alt=image.png></p>
-<p>Vous verrez quelque chose de similaire à la page ci-dessous.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/metricbeat-nginx-dashboard.png alt=image.png></p>
-<p>Retournez dans les tableaux de bord Kibana et cliquez sur Créer un nouveau tableau de bord pour comparer les données NGINX collectées à partir de Filebeat et Metricbeat.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-1.png alt=image.png></p>
-<p>Cliquez sur Ajouter depuis la bibliothèque pour commencer à ajouter des visualisations à votre tableau de bord.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-2.png alt=image.png></p>
-<p>Utilisez la barre de requête pour filtrer par visualisations filebeat nginx et ajoutez les visualisations Filebeat suivantes : Journaux d&rsquo;accès dans le temps et Codes de réponse dans le temps.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-3.png alt=image.png></p>
-<p>Maintenant, filtrez par visualisations metricbeat nginx pour ajouter les visualisations Metricbeat suivantes : Taux de requêtes et Taux de lecture/écriture/attente.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-4.png alt=image.png></p>
-<p>Fermez la boîte de dialogue Ajouter à partir de la bibliothèque et enregistrez votre tableau de bord sous le nom de Filebeat x Metricbeat.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-5.png alt=image.png></p>
-<p>Vérifiez les différentes informations que vous pouvez obtenir à partir des journaux et des métriques de NGINX dans le tableau de bord que vous venez de créer.</p>
-<p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-6.png alt=image.png></p>
-<p>Notez que vous pouvez utiliser les données de Filebeat et de Metricbeat pour vérifier le nombre de requêtes par seconde, comme le montrent les visualisations Access logs over time et Request Rate. La version open source de NGINX ne fournit pas de métriques sur les codes de réponse, mais vous pouvez utiliser Filebeat pour obtenir ces informations à partir des journaux NGINX, comme vous pouvez le voir dans la visualisation des codes de réponse dans le temps. Avec les journaux NGINX, vous pouvez également vérifier l&rsquo;emplacement, le système d&rsquo;exploitation, le navigateur, la durée et de nombreuses autres informations sur les demandes. Cependant, les journaux NGINX ne vous disent pas combien de connexions ont été acceptées, traitées et abandonnées. Dans ce cas, vous pouvez utiliser Metricbeat pour collecter ces informations ainsi que le nombre de connexions actives et le nombre de connexions en lecture, écriture et attente, comme vous pouvez le voir dans la visualisation du taux de lecture / écriture / attente.</p>
-<p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez obtenir des mesures du système et de NGINX avec Metricbeat et les indexer dans Elasticsearch. Vous avez également exploré les tableaux de bord Kibana et vu avec quelle facilité vous pouvez surveiller ces mesures.</p>
-<footer class=footline>
-</footer>
-</div>
-</div>
-<div id=navigation>
+</code></pre><p>Maintenant, ouvrez une nouvelle fenêtre de terminal et exécutez le script suivant pour simuler la charge sur votre serveur NGINX.</p><pre tabindex=0><code>./app/artificial_load.sh
+</code></pre><p>Lancez Kibana pour commencer à explorer les tableaux de bord qui ont été inclus dans le processus de configuration.</p><p>Ensuite, accédez à Dashboard via le menu principal.</p><p><img src=/elastic-tutorial/images/attachments/debutant/dashboard-menu.png alt=image.png></p><p>Recherchez le système et ouvrez la vue d&rsquo;ensemble de Metricbeat System ECS.</p><p><img src=/elastic-tutorial/images/attachments/debutant/metricbeat-dashboards.png alt=image.png></p><p>Vous verrez quelque chose de similaire à la page ci-dessous.</p><p><img src=/elastic-tutorial/images/attachments/debutant/metricbeat-system-dashboard.png alt=image.png></p><p>Cliquez sur Vue d&rsquo;ensemble de l&rsquo;hôte en haut du tableau de bord actuel pour voir un tableau de bord avec plus d&rsquo;informations que Metricbeat a collectées à partir de l&rsquo;hôte de votre environnement de laboratoire.</p><p><img src=/elastic-tutorial/images/attachments/debutant/metricbeat-host-overview-dashboard.png alt=image.png></p><p>Retournez sur la page des tableaux de bord Kibana, recherchez nginx et ouvrez le tableau de bord ECS [Metricbeat Nginx] Overview.</p><p><img src=/elastic-tutorial/images/attachments/debutant/nginx-dashboards.png alt=image.png></p><p>Vous verrez quelque chose de similaire à la page ci-dessous.</p><p><img src=/elastic-tutorial/images/attachments/debutant/metricbeat-nginx-dashboard.png alt=image.png></p><p>Retournez dans les tableaux de bord Kibana et cliquez sur Créer un nouveau tableau de bord pour comparer les données NGINX collectées à partir de Filebeat et Metricbeat.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-1.png alt=image.png></p><p>Cliquez sur Ajouter depuis la bibliothèque pour commencer à ajouter des visualisations à votre tableau de bord.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-2.png alt=image.png></p><p>Utilisez la barre de requête pour filtrer par visualisations filebeat nginx et ajoutez les visualisations Filebeat suivantes : Journaux d&rsquo;accès dans le temps et Codes de réponse dans le temps.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-3.png alt=image.png></p><p>Maintenant, filtrez par visualisations metricbeat nginx pour ajouter les visualisations Metricbeat suivantes : Taux de requêtes et Taux de lecture/écriture/attente.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-4.png alt=image.png></p><p>Fermez la boîte de dialogue Ajouter à partir de la bibliothèque et enregistrez votre tableau de bord sous le nom de Filebeat x Metricbeat.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-5.png alt=image.png></p><p>Vérifiez les différentes informations que vous pouvez obtenir à partir des journaux et des métriques de NGINX dans le tableau de bord que vous venez de créer.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-metricbeat-6.png alt=image.png></p><p>Notez que vous pouvez utiliser les données de Filebeat et de Metricbeat pour vérifier le nombre de requêtes par seconde, comme le montrent les visualisations Access logs over time et Request Rate. La version open source de NGINX ne fournit pas de métriques sur les codes de réponse, mais vous pouvez utiliser Filebeat pour obtenir ces informations à partir des journaux NGINX, comme vous pouvez le voir dans la visualisation des codes de réponse dans le temps. Avec les journaux NGINX, vous pouvez également vérifier l&rsquo;emplacement, le système d&rsquo;exploitation, le navigateur, la durée et de nombreuses autres informations sur les demandes. Cependant, les journaux NGINX ne vous disent pas combien de connexions ont été acceptées, traitées et abandonnées. Dans ce cas, vous pouvez utiliser Metricbeat pour collecter ces informations ainsi que le nombre de connexions actives et le nombre de connexions en lecture, écriture et attente, comme vous pouvez le voir dans la visualisation du taux de lecture / écriture / attente.</p><p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez obtenir des mesures du système et de NGINX avec Metricbeat et les indexer dans Elasticsearch. Vous avez également exploré les tableaux de bord Kibana et vu avec quelle facilité vous pouvez surveiller ces mesures.</p><footer class=footline>
+</footer></div></div><div id=navigation>
 <a class="nav nav-prev" href=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/ title="Lab - Logs"> <i class="fa fa-chevron-left"></i></a>
 <a class="nav nav-next" href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
-</div>
-</section>
-<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
-</div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645973180></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645973180></script>
+</div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1646153867></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1646153867></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645973180></script>
-<script src=/elastic-tutorial/js/learn.js?1645973180></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645973180></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645973180></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646153867></script>
+<script src=/elastic-tutorial/js/learn.js?1646153867></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1646153867></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1646153867></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
-</body>
-</html>
+</body></html>

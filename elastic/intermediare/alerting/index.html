@@ -2,42 +2,36 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Lab - Alertes :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645973180 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645973180></script>
-<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
-</head>
-<body data-url=/elastic-tutorial/elastic/intermediare/alerting/>
+<title>Lab - Alertes :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1646153867 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646153867></script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/intermediare/alerting/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
 <div id=header>
 <img src=../../../../elastic-tutorial/media/logo.png>
-</div>
-<div class=searchbox>
+</div><div class=searchbox>
 <label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
-</div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645973180></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645973180></script>
+</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646153867></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646153867></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645973180></script>
-</div>
-<div class=highlightable>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1646153867></script>
+</div><div class=highlightable>
 <ul class=topics>
 <li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
 parent">
@@ -57,10 +51,7 @@ Prérequis
 Installation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/>
 Débutant
 <i class="fas fa-check read-icon"></i>
@@ -71,28 +62,22 @@ Débutant
 Lab - Logs
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
 Lab - Metrics
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
 Lab - APM
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
 Lab - Uptime
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
 Elementaire
 <i class="fas fa-check read-icon"></i>
@@ -103,28 +88,22 @@ Elementaire
 Lab - Habilitation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
 Lab - Index Lifecycle Policy
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>
 Lab - Backup & Restore
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>
 Lab - Diagnostic
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
 parent">
 <a href=/elastic-tutorial/elastic/intermediare/>
 Intermediare
@@ -136,40 +115,32 @@ Intermediare
 Lab - Alertes
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/index_alias/>
 Labs - Index et ALias
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/mapping/>
 Labs - Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/template_mapping/>
 Labs - Index Template et Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/reindex/>
 Labs - Reindex
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/crud_documents/>
 Labs - CRUD
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/>
 Avancé
 <i class="fas fa-check read-icon"></i>
@@ -180,26 +151,32 @@ Avancé
 Bonus - Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<section id=prefooter>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/term/>
+Labs - Query niveau I
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query Sort" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/sort/>
+Labs - Query Sort
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau II" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/query/>
+Labs - Query niveau II
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/tp_query/>
+TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+<i class="fas fa-check read-icon"></i>
+</a>
+</li></ul></li></ul></li></ul><section id=prefooter>
 <hr>
 <ul>
-<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li>
-</ul>
-</section>
-<section id=footer>
-<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p>
-</section>
-</div>
-</nav>
-<section id=body>
-<div id=overlay></div>
-<div class="padding highlightable">
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer>
+<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body>
+<div id=overlay></div><div class="padding highlightable">
 <div>
 <div id=top-bar>
 <div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
@@ -212,322 +189,273 @@ Bonus - Fleet & Elastic Agent
 <span class=links>
 <a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/intermediare/>Intermediare</a> > Lab - Alertes
 </span>
-</div>
-<div class=progress>
+</div><div class=progress>
 <div class=wrapper>
 <nav id=TableOfContents>
 <ul>
 <li><a href=#créer-des-alertes-avec-le-module-rules--connector>Créer des alertes avec le module Rules & Connector</a>
 <ul>
-<li><a href=#créer-une-api-key>Créer une API Key</a></li>
-<li><a href=#créer-un-connecteur-server-log>Créer un connecteur Server Log</a></li>
-<li><a href=#récupérer-lid-du-connecteur>Récupérer l&rsquo;ID du connecteur</a></li>
-<li><a href=#créer-une-alerte-sur-la-consommation-des-ressources>Créer une alerte sur la consommation des ressources</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-</div>
-<div id=head-tags>
-</div>
-<div id=body-inner>
+<li><a href=#créer-une-api-key>Créer une API Key</a></li><li><a href=#créer-un-connecteur-server-log>Créer un connecteur Server Log</a></li><li><a href=#récupérer-lid-du-connecteur>Récupérer l&rsquo;ID du connecteur</a></li><li><a href=#créer-une-alerte-sur-la-consommation-des-ressources>Créer une alerte sur la consommation des ressources</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
+</div><div id=body-inner>
 <h1>
 Lab - Alertes
-</h1>
-<p>Vous êtes le nouvel administrateur d&rsquo;un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que aucune alerte n&rsquo;est remonter sur l&rsquo;état de la plateforme Elastic. Vos supérieurs vous demandent de donner la priorité à construire une solution d&rsquo;alerting permettant de fournir des indicateurs de fiabilisés la plateforme.</p>
-<p>Dans ce laboratoire pratique, vous aurez l&rsquo;occasion de :</p>
-<ul>
-<li>Utiliser les API _security pour créer une API Key.</li>
-<li>utiliser l&rsquo;API actions/connectors pour créer un connecteur de donnée</li>
-<li>Utiliser l&rsquo;API alerting/rule pour mettre rapidement en place des alertes.</li>
-</ul>
-<h2 id=créer-des-alertes-avec-le-module-rules--connector>Créer des alertes avec le module Rules & Connector</h2>
-<h3 id=créer-une-api-key>Créer une API Key</h3>
-<p>Utilisez l&rsquo;outil de console Kibana pour exécuter ce qui suit :</p>
-<pre tabindex=0><code>POST /_security/api_key
+</h1><p>Vous êtes le nouvel administrateur d&rsquo;un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que aucune alerte n&rsquo;est remonter sur l&rsquo;état de la plateforme Elastic. Vos supérieurs vous demandent de donner la priorité à construire une solution d&rsquo;alerting permettant de fournir des indicateurs de fiabilisés la plateforme.</p><p>Dans ce laboratoire pratique, vous aurez l&rsquo;occasion de :</p><ul>
+<li>Utiliser les API _security pour créer une API Key.</li><li>utiliser l&rsquo;API actions/connectors pour créer un connecteur de donnée</li><li>Utiliser l&rsquo;API alerting/rule pour mettre rapidement en place des alertes.</li></ul><h2 id=créer-des-alertes-avec-le-module-rules--connector>Créer des alertes avec le module Rules & Connector</h2><h3 id=créer-une-api-key>Créer une API Key</h3><p>Utilisez l&rsquo;outil de console Kibana pour exécuter ce qui suit :</p><pre tabindex=0><code>POST /_security/api_key
 {
-  &quot;name&quot;: &quot;my-api-key&quot;,
-  &quot;expiration&quot;: &quot;30d&quot;,
-  &quot;metadata&quot;: {
-    &quot;application&quot;: &quot;my-application&quot;,
-    &quot;environment&quot;: {
-       &quot;level&quot;: 1,
-       &quot;trusted&quot;: true,
-       &quot;tags&quot;: [&quot;prod&quot;, &quot;pprod&quot;]
+  &#34;name&#34;: &#34;my-api-key&#34;,
+  &#34;expiration&#34;: &#34;30d&#34;,
+  &#34;metadata&#34;: {
+    &#34;application&#34;: &#34;my-application&#34;,
+    &#34;environment&#34;: {
+       &#34;level&#34;: 1,
+       &#34;trusted&#34;: true,
+       &#34;tags&#34;: [&#34;prod&#34;, &#34;pprod&#34;]
     }
   }
 }
 </code></pre><pre tabindex=0><code>{
-  &quot;id&quot; : &quot;uiVdOn8BIwAgRd-L1SZa&quot;,
-  &quot;name&quot; : &quot;my-api-key&quot;,
-  &quot;expiration&quot; : 1648543702335,
-  &quot;api_key&quot; : &quot;AuXI4K3aSZ2jDYUbycs-8g&quot;,
-  &quot;encoded&quot; : &quot;dWlWZE9uOEJJd0FnUmQtTDFTWmE6QXVYSTRLM2FTWjJqRFlVYnljcy04Zw==&quot;
+  &#34;id&#34; : &#34;uiVdOn8BIwAgRd-L1SZa&#34;,
+  &#34;name&#34; : &#34;my-api-key&#34;,
+  &#34;expiration&#34; : 1648543702335,
+  &#34;api_key&#34; : &#34;AuXI4K3aSZ2jDYUbycs-8g&#34;,
+  &#34;encoded&#34; : &#34;dWlWZE9uOEJJd0FnUmQtTDFTWmE6QXVYSTRLM2FTWjJqRFlVYnljcy04Zw==&#34;
 }
-</code></pre><h3 id=créer-un-connecteur-server-log>Créer un connecteur Server Log</h3>
-<p>Utilisez l&rsquo;outil POSTMAN pour exécuter ce qui suit :</p>
-<pre tabindex=0><code>curl --location --request POST 'https://localhost:5601/api/actions/connector' \
---header 'kbn-xsrf: true' \
---header 'Authorization: APIKey YnlSTU9uOEJJd0FnUmQtTE9PQXc6em52akIyQlNRdHlPc3R4ODhTNFg3QQ==' \
---header 'Content-Type: text/plain' \
---data-raw '{
-  &quot;name&quot;: &quot;Monitoring: Write to Kibana log TEST&quot;,
-  &quot;config&quot;: {},
-  &quot;connector_type_id&quot;: &quot;.server-log&quot;
-}'
-</code></pre><h3 id=récupérer-lid-du-connecteur>Récupérer l&rsquo;ID du connecteur</h3>
-<pre tabindex=0><code>curl --location --request GET 'https://localhost:5601/api/actions/connectors' \
---header 'kbn-xsrf: true' \
---header 'Authorization: APIKey YnlSTU9uOEJJd0FnUmQtTE9PQXc6em52akIyQlNRdHlPc3R4ODhTNFg3QQ==' \
---data-raw ''
+</code></pre><h3 id=créer-un-connecteur-server-log>Créer un connecteur Server Log</h3><p>Utilisez l&rsquo;outil POSTMAN pour exécuter ce qui suit :</p><pre tabindex=0><code>curl --location --request POST &#39;https://localhost:5601/api/actions/connector&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: APIKey YnlSTU9uOEJJd0FnUmQtTE9PQXc6em52akIyQlNRdHlPc3R4ODhTNFg3QQ==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;name&#34;: &#34;Monitoring: Write to Kibana log TEST&#34;,
+  &#34;config&#34;: {},
+  &#34;connector_type_id&#34;: &#34;.server-log&#34;
+}&#39;
+</code></pre><h3 id=récupérer-lid-du-connecteur>Récupérer l&rsquo;ID du connecteur</h3><pre tabindex=0><code>curl --location --request GET &#39;https://localhost:5601/api/actions/connectors&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: APIKey YnlSTU9uOEJJd0FnUmQtTE9PQXc6em52akIyQlNRdHlPc3R4ODhTNFg3QQ==&#39; \
+--data-raw &#39;&#39;
 </code></pre><pre tabindex=0><code>{
-        &quot;id&quot;: &quot;6c65f7f0-97a6-11ec-b236-41c39a1728b8&quot;,
-        &quot;name&quot;: &quot;Monitoring: Write to Kibana log&quot;,
-        &quot;config&quot;: {},
-        &quot;connector_type_id&quot;: &quot;.server-log&quot;,
-        &quot;is_preconfigured&quot;: false,
-        &quot;referenced_by_count&quot;: 1,
-        &quot;is_missing_secrets&quot;: false
+        &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+        &#34;name&#34;: &#34;Monitoring: Write to Kibana log&#34;,
+        &#34;config&#34;: {},
+        &#34;connector_type_id&#34;: &#34;.server-log&#34;,
+        &#34;is_preconfigured&#34;: false,
+        &#34;referenced_by_count&#34;: 1,
+        &#34;is_missing_secrets&#34;: false
 }
-</code></pre><p>Vous pouvez maintenant voir dans l&rsquo;interface Kibana le connecteur :</p>
-<p><img src=/elastic-tutorial/images/attachments/intermediare/connectors.png alt=image.png></p>
-<h3 id=créer-une-alerte-sur-la-consommation-des-ressources>Créer une alerte sur la consommation des ressources</h3>
-<h4 id=cpu-usage>CPU Usage</h4>
-<p>Dans l&rsquo;outil POSTMAN changer la méthode d&rsquo;authentification en Basic Auth et renseigner le login et password de l&rsquo;utilisateur elastic.</p>
-<pre tabindex=0><code>curl --location --request POST 'https://localhost:5601/api/alerting/rule' \
---header 'kbn-xsrf: true' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
---header 'Content-Type: text/plain' \
---data-raw '{
-            &quot;enabled&quot;: true,
-            &quot;tags&quot;: [&quot;monitoring&quot;, &quot;cpu&quot;],
-            &quot;consumer&quot;: &quot;monitoring&quot;,
-            &quot;name&quot;: &quot;CPU Usage&quot;,
-            &quot;throttle&quot;: &quot;1d&quot;,
-            &quot;schedule&quot;: {
-                &quot;interval&quot;: &quot;1m&quot;
+</code></pre><p>Vous pouvez maintenant voir dans l&rsquo;interface Kibana le connecteur :</p><p><img src=/elastic-tutorial/images/attachments/intermediare/connectors.png alt=image.png></p><h3 id=créer-une-alerte-sur-la-consommation-des-ressources>Créer une alerte sur la consommation des ressources</h3><h4 id=cpu-usage>CPU Usage</h4><p>Dans l&rsquo;outil POSTMAN changer la méthode d&rsquo;authentification en Basic Auth et renseigner le login et password de l&rsquo;utilisateur elastic.</p><pre tabindex=0><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+            &#34;enabled&#34;: true,
+            &#34;tags&#34;: [&#34;monitoring&#34;, &#34;cpu&#34;],
+            &#34;consumer&#34;: &#34;monitoring&#34;,
+            &#34;name&#34;: &#34;CPU Usage&#34;,
+            &#34;throttle&#34;: &#34;1d&#34;,
+            &#34;schedule&#34;: {
+                &#34;interval&#34;: &#34;1m&#34;
             },
-            &quot;params&quot;: {
-                &quot;threshold&quot;: 85,
-                &quot;duration&quot;: &quot;5m&quot;
+            &#34;params&#34;: {
+                &#34;threshold&#34;: 85,
+                &#34;duration&#34;: &#34;5m&#34;
             },
-            &quot;rule_type_id&quot;: &quot;monitoring_alert_cpu_usage&quot;,
-            &quot;notify_when&quot;: &quot;onThrottleInterval&quot;,
-            &quot;actions&quot;: [
+            &#34;rule_type_id&#34;: &#34;monitoring_alert_cpu_usage&#34;,
+            &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+            &#34;actions&#34;: [
                 {
-                    &quot;group&quot;: &quot;default&quot;,
-                    &quot;id&quot;: &quot;6c65f7f0-97a6-11ec-b236-41c39a1728b8&quot;,
-                    &quot;params&quot;: {
-                        &quot;message&quot;: &quot;{{context.internalShortMessage}}&quot;
+                    &#34;group&#34;: &#34;default&#34;,
+                    &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+                    &#34;params&#34;: {
+                        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
                     }
                 }
             ]
         }
-'
-</code></pre><h4 id=disk-usage>Disk Usage</h4>
-<pre tabindex=0><code>curl --location --request POST 'https://localhost:5601/api/alerting/rule' \
---header 'kbn-xsrf: true' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
---header 'Content-Type: text/plain' \
---data-raw '{
-  &quot;enabled&quot;: true,
-  &quot;tags&quot;: [],
-  &quot;consumer&quot;: &quot;monitoring&quot;,
-  &quot;name&quot;: &quot;Disk Usage&quot;,
-  &quot;throttle&quot;: &quot;1d&quot;,
-  &quot;schedule&quot;: {
-    &quot;interval&quot;: &quot;1m&quot;
+&#39;
+</code></pre><h4 id=disk-usage>Disk Usage</h4><pre tabindex=0><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;Disk Usage&#34;,
+  &#34;throttle&#34;: &#34;1d&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
   },
-  &quot;params&quot;: {
-    &quot;threshold&quot;: 80,
-    &quot;duration&quot;: &quot;5m&quot;
+  &#34;params&#34;: {
+    &#34;threshold&#34;: 80,
+    &#34;duration&#34;: &#34;5m&#34;
   },
-  &quot;rule_type_id&quot;: &quot;monitoring_alert_disk_usage&quot;,
-  &quot;notify_when&quot;: &quot;onThrottleInterval&quot;,
-  &quot;actions&quot;: [
+  &#34;rule_type_id&#34;: &#34;monitoring_alert_disk_usage&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
     {
-      &quot;group&quot;: &quot;default&quot;,
-      &quot;id&quot;: &quot;6c65f7f0-97a6-11ec-b236-41c39a1728b8&quot;,
-      &quot;params&quot;: {
-        &quot;message&quot;: &quot;{{context.internalShortMessage}}&quot;
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
       }
     }
   ]
-}'
-</code></pre><h4 id=experiation-de-la-licence>Experiation de la licence</h4>
-<pre tabindex=0><code>curl --location --request POST 'https://localhost:5601/api/alerting/rule' \
---header 'kbn-xsrf: true' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
---header 'Content-Type: text/plain' \
---data-raw '{
-  &quot;enabled&quot;: true,
-  &quot;tags&quot;: [],
-  &quot;consumer&quot;: &quot;monitoring&quot;,
-  &quot;name&quot;: &quot;License expiration&quot;,
-  &quot;throttle&quot;: &quot;1d&quot;,
-  &quot;schedule&quot;: {
-    &quot;interval&quot;: &quot;1m&quot;
+}&#39;
+</code></pre><h4 id=experiation-de-la-licence>Experiation de la licence</h4><pre tabindex=0><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;License expiration&#34;,
+  &#34;throttle&#34;: &#34;1d&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
   },
-  &quot;params&quot;: {},
-  &quot;rule_type_id&quot;: &quot;monitoring_alert_license_expiration&quot;,
-  &quot;notify_when&quot;: &quot;onThrottleInterval&quot;,
-  &quot;actions&quot;: [
+  &#34;params&#34;: {},
+  &#34;rule_type_id&#34;: &#34;monitoring_alert_license_expiration&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
     {
-      &quot;group&quot;: &quot;default&quot;,
-      &quot;id&quot;: &quot;6c65f7f0-97a6-11ec-b236-41c39a1728b8&quot;,
-      &quot;params&quot;: {
-        &quot;message&quot;: &quot;{{context.internalShortMessage}}&quot;
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
       }
     }
   ]
-}'
-</code></pre><h4 id=etat-de-santé-du-cluster>Etat de santé du cluster</h4>
-<pre tabindex=0><code>
-curl --location --request POST 'https://localhost:5601/api/alerting/rule' \
---header 'kbn-xsrf: true' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
---header 'Content-Type: text/plain' \
---data-raw '{
-  &quot;enabled&quot;: true,
-  &quot;tags&quot;: [],
-  &quot;consumer&quot;: &quot;monitoring&quot;,
-  &quot;name&quot;: &quot;Cluster health&quot;,
-  &quot;throttle&quot;: &quot;1d&quot;,
-  &quot;schedule&quot;: {
-    &quot;interval&quot;: &quot;1m&quot;
+}&#39;
+</code></pre><h4 id=etat-de-santé-du-cluster>Etat de santé du cluster</h4><pre tabindex=0><code>
+curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;Cluster health&#34;,
+  &#34;throttle&#34;: &#34;1d&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
   },
-  &quot;params&quot;: {},
-  &quot;rule_type_id&quot;: &quot;monitoring_alert_cluster_health&quot;,
-  &quot;notify_when&quot;: &quot;onThrottleInterval&quot;,
-  &quot;actions&quot;: [
+  &#34;params&#34;: {},
+  &#34;rule_type_id&#34;: &#34;monitoring_alert_cluster_health&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
     {
-      &quot;group&quot;: &quot;default&quot;,
-      &quot;id&quot;: &quot;6c65f7f0-97a6-11ec-b236-41c39a1728b8&quot;,
-      &quot;params&quot;: {
-        &quot;message&quot;: &quot;{{context.internalShortMessage}}&quot;
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
       }
     }
   ]
-}'
-</code></pre><h4 id=thread-pool-write-rejections>Thread pool write rejections</h4>
-<pre tabindex=0><code>curl --location --request POST 'https://localhost:5601/api/alerting/rule' \
---header 'kbn-xsrf: true' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
---header 'Content-Type: text/plain' \
---data-raw '{
-  &quot;enabled&quot;: true,
-  &quot;tags&quot;: [],
-  &quot;consumer&quot;: &quot;monitoring&quot;,
-  &quot;name&quot;: &quot;Thread pool write rejections&quot;,
-  &quot;throttle&quot;: &quot;1d&quot;,
-  &quot;schedule&quot;: {
-    &quot;interval&quot;: &quot;1m&quot;
+}&#39;
+</code></pre><h4 id=thread-pool-write-rejections>Thread pool write rejections</h4><pre tabindex=0><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;Thread pool write rejections&#34;,
+  &#34;throttle&#34;: &#34;1d&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
   },
-  &quot;params&quot;: {
-    &quot;threshold&quot;: 300,
-    &quot;duration&quot;: &quot;5m&quot;
+  &#34;params&#34;: {
+    &#34;threshold&#34;: 300,
+    &#34;duration&#34;: &#34;5m&#34;
   },
-  &quot;rule_type_id&quot;: &quot;monitoring_alert_thread_pool_write_rejections&quot;,
-  &quot;notify_when&quot;: &quot;onThrottleInterval&quot;,
-  &quot;actions&quot;: [
+  &#34;rule_type_id&#34;: &#34;monitoring_alert_thread_pool_write_rejections&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
     {
-      &quot;group&quot;: &quot;default&quot;,
-      &quot;id&quot;: &quot;6c65f7f0-97a6-11ec-b236-41c39a1728b8&quot;,
-      &quot;params&quot;: {
-        &quot;message&quot;: &quot;{{context.internalShortMessage}}&quot;
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
       }
     }
   ]
-}'
-</code></pre><h4 id=thread-pool-search-rejections>Thread pool search rejections</h4>
-<pre tabindex=0><code>curl --location --request POST 'https://localhost:5601/api/alerting/rule' \
---header 'kbn-xsrf: true' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
---header 'Content-Type: text/plain' \
---data-raw '{
-  &quot;enabled&quot;: true,
-  &quot;tags&quot;: [],
-  &quot;consumer&quot;: &quot;monitoring&quot;,
-  &quot;name&quot;: &quot;Thread pool search rejections&quot;,
-  &quot;throttle&quot;: &quot;1d&quot;,
-  &quot;schedule&quot;: {
-    &quot;interval&quot;: &quot;1m&quot;
+}&#39;
+</code></pre><h4 id=thread-pool-search-rejections>Thread pool search rejections</h4><pre tabindex=0><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;Thread pool search rejections&#34;,
+  &#34;throttle&#34;: &#34;1d&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
   },
-  &quot;params&quot;: {
-    &quot;threshold&quot;: 300,
-    &quot;duration&quot;: &quot;5m&quot;
+  &#34;params&#34;: {
+    &#34;threshold&#34;: 300,
+    &#34;duration&#34;: &#34;5m&#34;
   },
-  &quot;rule_type_id&quot;: &quot;monitoring_alert_thread_pool_search_rejections&quot;,
-  &quot;notify_when&quot;: &quot;onThrottleInterval&quot;,
-  &quot;actions&quot;: [
+  &#34;rule_type_id&#34;: &#34;monitoring_alert_thread_pool_search_rejections&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
     {
-      &quot;group&quot;: &quot;default&quot;,
-      &quot;id&quot;: &quot;6c65f7f0-97a6-11ec-b236-41c39a1728b8&quot;,
-      &quot;params&quot;: {
-        &quot;message&quot;: &quot;{{context.internalShortMessage}}&quot;
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
       }
     }
   ]
-}'
-</code></pre><h4 id=shard-size>Shard size</h4>
-<pre tabindex=0><code>curl --location --request POST 'https://localhost:5601/api/alerting/rule' \
---header 'kbn-xsrf: true' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
---header 'Content-Type: text/plain' \
---data-raw '{
-  &quot;enabled&quot;: true,
-  &quot;tags&quot;: [],
-  &quot;consumer&quot;: &quot;monitoring&quot;,
-  &quot;name&quot;: &quot;Shard size&quot;,
-  &quot;throttle&quot;: &quot;12h&quot;,
-  &quot;schedule&quot;: {
-    &quot;interval&quot;: &quot;1m&quot;
+}&#39;
+</code></pre><h4 id=shard-size>Shard size</h4><pre tabindex=0><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;Shard size&#34;,
+  &#34;throttle&#34;: &#34;12h&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
   },
-  &quot;params&quot;: {
-    &quot;indexPattern&quot;: &quot;*&quot;,
-    &quot;threshold&quot;: 55
+  &#34;params&#34;: {
+    &#34;indexPattern&#34;: &#34;*&#34;,
+    &#34;threshold&#34;: 55
   },
-  &quot;rule_type_id&quot;: &quot;monitoring_shard_size&quot;,
-  &quot;notify_when&quot;: &quot;onThrottleInterval&quot;,
-  &quot;actions&quot;: [
+  &#34;rule_type_id&#34;: &#34;monitoring_shard_size&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
     {
-      &quot;group&quot;: &quot;default&quot;,
-      &quot;id&quot;: &quot;6c65f7f0-97a6-11ec-b236-41c39a1728b8&quot;,
-      &quot;params&quot;: {
-        &quot;message&quot;: &quot;{{context.internalShortMessage}}&quot;
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
       }
     }
   ]
-}'
-</code></pre><p>Vous pouvez maintenant voir dans l&rsquo;interface Kibana les alertes :</p>
-<p><img src=/elastic-tutorial/images/attachments/intermediare/rules.png alt=image.png></p>
-<p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez créer des connecteurs et des alertes et les indexer dans Elasticsearch.</p>
-<footer class=footline>
-</footer>
-</div>
-</div>
-<div id=navigation>
+}&#39;
+</code></pre><p>Vous pouvez maintenant voir dans l&rsquo;interface Kibana les alertes :</p><p><img src=/elastic-tutorial/images/attachments/intermediare/rules.png alt=image.png></p><p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez créer des connecteurs et des alertes et les indexer dans Elasticsearch.</p><footer class=footline>
+</footer></div></div><div id=navigation>
 <a class="nav nav-prev" href=/elastic-tutorial/elastic/intermediare/ title=Intermediare> <i class="fa fa-chevron-left"></i></a>
 <a class="nav nav-next" href=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
-</div>
-</section>
-<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
-</div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645973180></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645973180></script>
+</div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1646153867></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1646153867></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645973180></script>
-<script src=/elastic-tutorial/js/learn.js?1645973180></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645973180></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645973180></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646153867></script>
+<script src=/elastic-tutorial/js/learn.js?1646153867></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1646153867></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1646153867></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
-</body>
-</html>
+</body></html>

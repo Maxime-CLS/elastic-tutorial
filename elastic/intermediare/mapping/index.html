@@ -2,42 +2,36 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Labs - Mapping :: Elastic Tutoriel</title>
-<link href=/elastic-tutorial/css/nucleus.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1645973180 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1645973180 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1645973180></script>
-<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
-</head>
-<body data-url=/elastic-tutorial/elastic/intermediare/mapping/>
+<title>Labs - Mapping :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1646153867 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1646153867 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646153867></script>
+<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/intermediare/mapping/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
 <div id=header>
 <img src=../../../../elastic-tutorial/media/logo.png>
-</div>
-<div class=searchbox>
+</div><div class=searchbox>
 <label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
-</div>
-<script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1645973180></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1645973180></script>
+</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646153867></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646153867></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1645973180></script>
-</div>
-<div class=highlightable>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1646153867></script>
+</div><div class=highlightable>
 <ul class=topics>
 <li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
 parent">
@@ -57,10 +51,7 @@ Prérequis
 Installation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/>
 Débutant
 <i class="fas fa-check read-icon"></i>
@@ -71,28 +62,22 @@ Débutant
 Lab - Logs
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
 Lab - Metrics
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
 Lab - APM
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
 <a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
 Lab - Uptime
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
 Elementaire
 <i class="fas fa-check read-icon"></i>
@@ -103,28 +88,22 @@ Elementaire
 Lab - Habilitation
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
 Lab - Index Lifecycle Policy
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>
 Lab - Backup & Restore
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
 <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>
 Lab - Diagnostic
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
 parent">
 <a href=/elastic-tutorial/elastic/intermediare/>
 Intermediare
@@ -136,40 +115,32 @@ Intermediare
 Lab - Alertes
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/index_alias/>
 Labs - Index et ALias
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class="dd-item active">
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class="dd-item active">
 <a href=/elastic-tutorial/elastic/intermediare/mapping/>
 Labs - Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/template_mapping/>
 Labs - Index Template et Mapping
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/reindex/>
 Labs - Reindex
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
 <a href=/elastic-tutorial/elastic/intermediare/crud_documents/>
 Labs - CRUD
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-<li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
+</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/>
 Avancé
 <i class="fas fa-check read-icon"></i>
@@ -180,26 +151,32 @@ Avancé
 Bonus - Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i>
 </a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<section id=prefooter>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/term/>
+Labs - Query niveau I
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query Sort" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/sort/>
+Labs - Query Sort
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau II" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/query/>
+Labs - Query niveau II
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/tp_query/>
+TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+<i class="fas fa-check read-icon"></i>
+</a>
+</li></ul></li></ul></li></ul><section id=prefooter>
 <hr>
 <ul>
-<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li>
-</ul>
-</section>
-<section id=footer>
-<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p>
-</section>
-</div>
-</nav>
-<section id=body>
-<div id=overlay></div>
-<div class="padding highlightable">
+<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer>
+<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body>
+<div id=overlay></div><div class="padding highlightable">
 <div>
 <div id=top-bar>
 <div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
@@ -212,642 +189,332 @@ Bonus - Fleet & Elastic Agent
 <span class=links>
 <a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/intermediare/>Intermediare</a> > Labs - Mapping
 </span>
-</div>
-<div class=progress>
+</div><div class=progress>
 <div class=wrapper>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#description>Description</a></li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-</div>
-<div id=head-tags>
-</div>
-<div id=body-inner>
+<li><a href=#description>Description</a></li></ul></nav></div></div></div></div><div id=head-tags>
+</div><div id=body-inner>
 <h1>
 Labs - Mapping
-</h1>
-<h2 id=description>Description</h2>
-<p>Les modèles dynamiques dans Elasticsearch permettent d&rsquo;indexer très facilement les données sans avoir à créer des mappages explicites pour chaque champ. Cependant, il peut arriver que vous préfériez créer des mappages explicites, ou même désactiver complètement le mappage dynamique, afin d&rsquo;avoir un contrôle plus étroit de la structure de votre index et des exigences en matière de type de données. Dans cette activité d&rsquo;apprentissage, vous avez l&rsquo;occasion de créer des mappages de champ explicites pour un index contenant des données de journal. Plus précisément, vous allez vous exercer à</p>
-<ul>
-<li>Créer des champs de chaîne de caractères analysés avec un analyseur spécifique.</li>
-<li>Créer des champs de chaîne de caractères non analysés avec des limites de caractères</li>
-<li>Créer des mappages de champs geo_point</li>
-<li>Créer des mappages de champs numériques</li>
-<li>Créer des mappages de champs de date</li>
-<li>Créer des mappages de champs IP</li>
-<li>Créer des mappages de champs d&rsquo;imbrication (objets)</li>
-<li>Réindexer des données d&rsquo;un index dans un autre avec des mappings différents.</li>
-</ul>
-<p>Vous travaillez en tant qu&rsquo;administrateur Elasticsearch pour un cluster à 6 nœuds et vous êtes chargé de corriger certains mappages de champs pour un index contenant des données de journal. Les données de journal actuelles ont été ingérées sans aucune préparation et la plupart des champs créés ne sont pas du type souhaité. L&rsquo;index logs existant devra être réindexé dans un nouvel index appelé tuto-logs_new. Vous êtes chargé de créer l&rsquo;index tuto-logs_new avec les exigences de mappage suivantes :</p>
-<table>
+</h1><h2 id=description>Description</h2><p>Les modèles dynamiques dans Elasticsearch permettent d&rsquo;indexer très facilement les données sans avoir à créer des mappages explicites pour chaque champ. Cependant, il peut arriver que vous préfériez créer des mappages explicites, ou même désactiver complètement le mappage dynamique, afin d&rsquo;avoir un contrôle plus étroit de la structure de votre index et des exigences en matière de type de données. Dans cette activité d&rsquo;apprentissage, vous avez l&rsquo;occasion de créer des mappages de champ explicites pour un index contenant des données de journal. Plus précisément, vous allez vous exercer à</p><ul>
+<li>Créer des champs de chaîne de caractères analysés avec un analyseur spécifique.</li><li>Créer des champs de chaîne de caractères non analysés avec des limites de caractères</li><li>Créer des mappages de champs geo_point</li><li>Créer des mappages de champs numériques</li><li>Créer des mappages de champs de date</li><li>Créer des mappages de champs IP</li><li>Créer des mappages de champs d&rsquo;imbrication (objets)</li><li>Réindexer des données d&rsquo;un index dans un autre avec des mappings différents.</li></ul><p>Vous travaillez en tant qu&rsquo;administrateur Elasticsearch pour un cluster à 6 nœuds et vous êtes chargé de corriger certains mappages de champs pour un index contenant des données de journal. Les données de journal actuelles ont été ingérées sans aucune préparation et la plupart des champs créés ne sont pas du type souhaité. L&rsquo;index logs existant devra être réindexé dans un nouvel index appelé tuto-logs_new. Vous êtes chargé de créer l&rsquo;index tuto-logs_new avec les exigences de mappage suivantes :</p><table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Datatype</th>
-<th>Character Limit</th>
-<th>Analyzer</th>
-</tr>
-</thead>
-<tbody>
+<th>Field</th><th>Datatype</th><th>Character Limit</th><th>Analyzer</th></tr></thead><tbody>
 <tr>
-<td>@message</td>
-<td>text</td>
-<td></td>
-<td>standard</td>
-</tr>
-<tr>
-<td>@tags</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>@timestamp</td>
-<td>date</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>@version</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>agent</td>
-<td>text</td>
-<td></td>
-<td>standard</td>
-</tr>
-<tr>
-<td>agent.keyword</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>bytes</td>
-<td>long</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>clientip</td>
-<td>ip</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>extension</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>geo.coordinates</td>
-<td>geo_point</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>geo.dest</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>geo.src</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>geo.srcdest</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>headings</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>host</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>ip</td>
-<td>ip</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>links</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>machine.os</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>machine.ram</td>
-<td>long</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>memory</td>
-<td>long</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>phpmemory</td>
-<td>long</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>referer</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.article:modified_time</td>
-<td>date</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.article:published_time</td>
-<td>date</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.article:section</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.article:tag</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.og:description</td>
-<td>text</td>
-<td></td>
-<td>standard</td>
-</tr>
-<tr>
-<td>relatedContent.og:image</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.og:image:height</td>
-<td>long</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.og:image:height</td>
-<td>long</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.og:site_name</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.og:title</td>
-<td>text</td>
-<td></td>
-<td>standard</td>
-</tr>
-<tr>
-<td>relatedContent.og:title.keyword</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.og:type</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.og:url</td>
-<td>text</td>
-<td></td>
-<td>simple</td>
-</tr>
-<tr>
-<td>relatedContent.og:url.keyword</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.twitter:card</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.twitter:description</td>
-<td>text</td>
-<td></td>
-<td>standard</td>
-</tr>
-<tr>
-<td>relatedContent.twitter:image</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.twitter:site</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.twitter:title</td>
-<td>text</td>
-<td></td>
-<td>standard</td>
-</tr>
-<tr>
-<td>relatedContent.twitter:title.keyword</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.twitter:title.keyword</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>relatedContent.url.keyword</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>request</td>
-<td>text</td>
-<td></td>
-<td>simple</td>
-</tr>
-<tr>
-<td>request.keyword</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>response</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>response</td>
-<td>keyword</td>
-<td>128</td>
-<td></td>
-</tr>
-<tr>
-<td>spaces</td>
-<td>text</td>
-<td></td>
-<td>whitespace</td>
-</tr>
-<tr>
-<td>url</td>
-<td>text</td>
-<td></td>
-<td>simple</td>
-</tr>
-<tr>
-<td>url.keyword</td>
-<td>keyword</td>
-<td>256</td>
-<td></td>
-</tr>
-<tr>
-<td>utc_time</td>
-<td>date</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>xss</td>
-<td>text</td>
-<td></td>
-<td>standard</td>
-</tr>
-<tr>
-<td>xss.keyword</td>
-<td>keyword</td>
-<td>512</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>L&rsquo;index tuto-logs_new doit conserver les mêmes paramètres d&rsquo;index que l&rsquo;index logs pour le nombre de shards primaires et de replica. Une fois que l&rsquo;index tuto-logs_new a été créé, vous pouvez réindexer les documents dans le nouvel index.</p>
-<pre tabindex=0><code>curl --location --request POST 'https://localhost:9200/tuto-logs/doc/_bulk?pretty' \
---header 'Content-Type: application/x-ndjson' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
+<td>@message</td><td>text</td><td></td><td>standard</td></tr><tr>
+<td>@tags</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>@timestamp</td><td>date</td><td></td><td></td></tr><tr>
+<td>@version</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>agent</td><td>text</td><td></td><td>standard</td></tr><tr>
+<td>agent.keyword</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>bytes</td><td>long</td><td></td><td></td></tr><tr>
+<td>clientip</td><td>ip</td><td></td><td></td></tr><tr>
+<td>extension</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>geo.coordinates</td><td>geo_point</td><td></td><td></td></tr><tr>
+<td>geo.dest</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>geo.src</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>geo.srcdest</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>headings</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>host</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>ip</td><td>ip</td><td></td><td></td></tr><tr>
+<td>links</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>machine.os</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>machine.ram</td><td>long</td><td></td><td></td></tr><tr>
+<td>memory</td><td>long</td><td></td><td></td></tr><tr>
+<td>phpmemory</td><td>long</td><td></td><td></td></tr><tr>
+<td>referer</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>relatedContent.article:modified_time</td><td>date</td><td></td><td></td></tr><tr>
+<td>relatedContent.article:published_time</td><td>date</td><td></td><td></td></tr><tr>
+<td>relatedContent.article:section</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>relatedContent.article:tag</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>relatedContent.og:description</td><td>text</td><td></td><td>standard</td></tr><tr>
+<td>relatedContent.og:image</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>relatedContent.og:image:height</td><td>long</td><td></td><td></td></tr><tr>
+<td>relatedContent.og:image:height</td><td>long</td><td></td><td></td></tr><tr>
+<td>relatedContent.og:site_name</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>relatedContent.og:title</td><td>text</td><td></td><td>standard</td></tr><tr>
+<td>relatedContent.og:title.keyword</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>relatedContent.og:type</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>relatedContent.og:url</td><td>text</td><td></td><td>simple</td></tr><tr>
+<td>relatedContent.og:url.keyword</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>relatedContent.twitter:card</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>relatedContent.twitter:description</td><td>text</td><td></td><td>standard</td></tr><tr>
+<td>relatedContent.twitter:image</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>relatedContent.twitter:site</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>relatedContent.twitter:title</td><td>text</td><td></td><td>standard</td></tr><tr>
+<td>relatedContent.twitter:title.keyword</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>relatedContent.twitter:title.keyword</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>relatedContent.url.keyword</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>request</td><td>text</td><td></td><td>simple</td></tr><tr>
+<td>request.keyword</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>response</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>response</td><td>keyword</td><td>128</td><td></td></tr><tr>
+<td>spaces</td><td>text</td><td></td><td>whitespace</td></tr><tr>
+<td>url</td><td>text</td><td></td><td>simple</td></tr><tr>
+<td>url.keyword</td><td>keyword</td><td>256</td><td></td></tr><tr>
+<td>utc_time</td><td>date</td><td></td><td></td></tr><tr>
+<td>xss</td><td>text</td><td></td><td>standard</td></tr><tr>
+<td>xss.keyword</td><td>keyword</td><td>512</td><td></td></tr></tbody></table><p>L&rsquo;index tuto-logs_new doit conserver les mêmes paramètres d&rsquo;index que l&rsquo;index logs pour le nombre de shards primaires et de replica. Une fois que l&rsquo;index tuto-logs_new a été créé, vous pouvez réindexer les documents dans le nouvel index.</p><pre tabindex=0><code>curl --location --request POST &#39;https://localhost:9200/tuto-logs/doc/_bulk?pretty&#39; \
+--header &#39;Content-Type: application/x-ndjson&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
  --data-binary @logs.json
 </code></pre><pre tabindex=0><code>PUT tuto-logs_new
 {
-  &quot;mappings&quot;: {
-    &quot;properties&quot;: {
-      &quot;@message&quot;: {
-        &quot;type&quot;: &quot;text&quot;
+  &#34;mappings&#34;: {
+    &#34;properties&#34;: {
+      &#34;@message&#34;: {
+        &#34;type&#34;: &#34;text&#34;
       },
-      &quot;@tags&quot;: {
-        &quot;type&quot;: &quot;keyword&quot;,
-        &quot;ignore_above&quot;: 128
+      &#34;@tags&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 128
       },
-      &quot;@timestamp&quot;: {
-        &quot;type&quot;: &quot;date&quot;
+      &#34;@timestamp&#34;: {
+        &#34;type&#34;: &#34;date&#34;
       },
-      &quot;@version&quot;: {
-        &quot;type&quot;: &quot;keyword&quot;,
-        &quot;ignore_above&quot;: 256
+      &#34;@version&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
       },
-      &quot;agent&quot;: {
-        &quot;type&quot;: &quot;text&quot;,
-        &quot;fields&quot;: {
-          &quot;keyword&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 256
+      &#34;agent&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
           }
         }
       },
-      &quot;bytes&quot;: {
-        &quot;type&quot;: &quot;long&quot;
+      &#34;bytes&#34;: {
+        &#34;type&#34;: &#34;long&#34;
       },
-      &quot;clientip&quot;: {
-        &quot;type&quot;: &quot;ip&quot;
+      &#34;clientip&#34;: {
+        &#34;type&#34;: &#34;ip&#34;
       },
-      &quot;extension&quot;: {
-        &quot;type&quot;: &quot;keyword&quot;,
-        &quot;ignore_above&quot;: 256
+      &#34;extension&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
       },
-      &quot;geo&quot;: {
-        &quot;properties&quot;: {
-          &quot;coordinates&quot;: {
-            &quot;type&quot;: &quot;geo_point&quot;
+      &#34;geo&#34;: {
+        &#34;properties&#34;: {
+          &#34;coordinates&#34;: {
+            &#34;type&#34;: &#34;geo_point&#34;
           },
-          &quot;dest&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 128
+          &#34;dest&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
           },
-          &quot;src&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 128
+          &#34;src&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
           },
-          &quot;srcdest&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 128
+          &#34;srcdest&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
           }
         }
       },
-      &quot;headings&quot;: {
-        &quot;type&quot;: &quot;keyword&quot;,
-        &quot;ignore_above&quot;: 256
+      &#34;headings&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
       },
-      &quot;host&quot;: {
-        &quot;type&quot;: &quot;keyword&quot;,
-        &quot;ignore_above&quot;: 256
+      &#34;host&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
       },
-      &quot;ip&quot;: {
-        &quot;type&quot;: &quot;ip&quot;
+      &#34;ip&#34;: {
+        &#34;type&#34;: &#34;ip&#34;
       },
-      &quot;links&quot;: {
-        &quot;type&quot;: &quot;keyword&quot;,
-        &quot;ignore_above&quot;: 256
+      &#34;links&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
       },
-      &quot;machine&quot;: {
-        &quot;properties&quot;: {
-          &quot;os&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 256
+      &#34;machine&#34;: {
+        &#34;properties&#34;: {
+          &#34;os&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
           },
-          &quot;ram&quot;: {
-            &quot;type&quot;: &quot;long&quot;
+          &#34;ram&#34;: {
+            &#34;type&#34;: &#34;long&#34;
           }
         }
       },
-      &quot;memory&quot;: {
-        &quot;type&quot;: &quot;long&quot;
+      &#34;memory&#34;: {
+        &#34;type&#34;: &#34;long&#34;
       },
-      &quot;phpmemory&quot;: {
-        &quot;type&quot;: &quot;long&quot;
+      &#34;phpmemory&#34;: {
+        &#34;type&#34;: &#34;long&#34;
       },
-      &quot;referer&quot;: {
-        &quot;type&quot;: &quot;keyword&quot;,
-        &quot;ignore_above&quot;: 256
+      &#34;referer&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
       },
-      &quot;relatedContent&quot;: {
-        &quot;properties&quot;: {
-          &quot;article:modified_time&quot;: {
-            &quot;type&quot;: &quot;date&quot;
+      &#34;relatedContent&#34;: {
+        &#34;properties&#34;: {
+          &#34;article:modified_time&#34;: {
+            &#34;type&#34;: &#34;date&#34;
           },
-          &quot;article:published_time&quot;: {
-            &quot;type&quot;: &quot;date&quot;
+          &#34;article:published_time&#34;: {
+            &#34;type&#34;: &#34;date&#34;
           },
-          &quot;article:section&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 128
+          &#34;article:section&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
           },
-          &quot;article:tag&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 128
+          &#34;article:tag&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
           },
-          &quot;og:description&quot;: {
-            &quot;type&quot;: &quot;text&quot;
+          &#34;og:description&#34;: {
+            &#34;type&#34;: &#34;text&#34;
           },
-          &quot;og:image&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 256
+          &#34;og:image&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
           },
-          &quot;og:image:height&quot;: {
-            &quot;type&quot;: &quot;long&quot;
+          &#34;og:image:height&#34;: {
+            &#34;type&#34;: &#34;long&#34;
           },
-          &quot;og:image:width&quot;: {
-            &quot;type&quot;: &quot;long&quot;
+          &#34;og:image:width&#34;: {
+            &#34;type&#34;: &#34;long&#34;
           },
-          &quot;og:site_name&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 256
+          &#34;og:site_name&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
           },
-          &quot;og:title&quot;: {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;fields&quot;: {
-              &quot;keyword&quot;: {
-                &quot;type&quot;: &quot;keyword&quot;,
-                &quot;ignore_above&quot;: 256
+          &#34;og:title&#34;: {
+            &#34;type&#34;: &#34;text&#34;,
+            &#34;fields&#34;: {
+              &#34;keyword&#34;: {
+                &#34;type&#34;: &#34;keyword&#34;,
+                &#34;ignore_above&#34;: 256
               }
             }
           },
-          &quot;og:type&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 128
+          &#34;og:type&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
           },
-          &quot;og:url&quot;: {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;analyzer&quot;: &quot;simple&quot;,
-            &quot;fields&quot;: {
-              &quot;keyword&quot;: {
-                &quot;type&quot;: &quot;keyword&quot;,
-                &quot;ignore_above&quot;: 256
+          &#34;og:url&#34;: {
+            &#34;type&#34;: &#34;text&#34;,
+            &#34;analyzer&#34;: &#34;simple&#34;,
+            &#34;fields&#34;: {
+              &#34;keyword&#34;: {
+                &#34;type&#34;: &#34;keyword&#34;,
+                &#34;ignore_above&#34;: 256
               }
             }
           },
-          &quot;twitter:card&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 128
+          &#34;twitter:card&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
           },
-          &quot;twitter:description&quot;: {
-            &quot;type&quot;: &quot;text&quot;
+          &#34;twitter:description&#34;: {
+            &#34;type&#34;: &#34;text&#34;
           },
-          &quot;twitter:image&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 256
+          &#34;twitter:image&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
           },
-          &quot;twitter:site&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 128
+          &#34;twitter:site&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
           },
-          &quot;twitter:title&quot;: {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;fields&quot;: {
-              &quot;keyword&quot;: {
-                &quot;type&quot;: &quot;keyword&quot;,
-                &quot;ignore_above&quot;: 128
+          &#34;twitter:title&#34;: {
+            &#34;type&#34;: &#34;text&#34;,
+            &#34;fields&#34;: {
+              &#34;keyword&#34;: {
+                &#34;type&#34;: &#34;keyword&#34;,
+                &#34;ignore_above&#34;: 128
               }
             }
           },
-          &quot;url&quot;: {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;analyzer&quot;: &quot;simple&quot;,
-            &quot;fields&quot;: {
-              &quot;keyword&quot;: {
-                &quot;type&quot;: &quot;keyword&quot;,
-                &quot;ignore_above&quot;: 256
+          &#34;url&#34;: {
+            &#34;type&#34;: &#34;text&#34;,
+            &#34;analyzer&#34;: &#34;simple&#34;,
+            &#34;fields&#34;: {
+              &#34;keyword&#34;: {
+                &#34;type&#34;: &#34;keyword&#34;,
+                &#34;ignore_above&#34;: 256
               }
             }
           }
         }
       },
-      &quot;request&quot;: {
-        &quot;type&quot;: &quot;text&quot;,
-        &quot;analyzer&quot;: &quot;simple&quot;,
-        &quot;fields&quot;: {
-          &quot;keyword&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 256
+      &#34;request&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;analyzer&#34;: &#34;simple&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
           }
         }
       },
-      &quot;response&quot;: {
-        &quot;type&quot;: &quot;keyword&quot;,
-        &quot;ignore_above&quot;: 128
+      &#34;response&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 128
       },
-      &quot;spaces&quot;: {
-        &quot;type&quot;: &quot;text&quot;,
-        &quot;analyzer&quot;: &quot;whitespace&quot;
+      &#34;spaces&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;analyzer&#34;: &#34;whitespace&#34;
       },
-      &quot;url&quot;: {
-        &quot;type&quot;: &quot;text&quot;,
-        &quot;analyzer&quot;: &quot;simple&quot;,
-        &quot;fields&quot;: {
-          &quot;keyword&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 256
+      &#34;url&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;analyzer&#34;: &#34;simple&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
           }
         }
       },
-      &quot;utc_time&quot;: {
-        &quot;type&quot;: &quot;date&quot;
+      &#34;utc_time&#34;: {
+        &#34;type&#34;: &#34;date&#34;
       },
-      &quot;xss&quot;: {
-        &quot;type&quot;: &quot;text&quot;,
-        &quot;fields&quot;: {
-          &quot;keyword&quot;: {
-            &quot;type&quot;: &quot;keyword&quot;,
-            &quot;ignore_above&quot;: 512
+      &#34;xss&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 512
           }
         }
       }
     }
   },
-  &quot;settings&quot;: {
-    &quot;number_of_shards&quot;: 4,
-    &quot;number_of_replicas&quot;: 3
+  &#34;settings&#34;: {
+    &#34;number_of_shards&#34;: 4,
+    &#34;number_of_replicas&#34;: 3
   }
 }
 </code></pre><pre tabindex=0><code>POST _reindex
 {
-  &quot;source&quot;: {
-    &quot;index&quot;: &quot;tuto-logs&quot;
+  &#34;source&#34;: {
+    &#34;index&#34;: &#34;tuto-logs&#34;
   },
-  &quot;dest&quot;: {
-    &quot;index&quot;: &quot;tuto-logs_new&quot;
+  &#34;dest&#34;: {
+    &#34;index&#34;: &#34;tuto-logs_new&#34;
   }
 }
-</code></pre>
-<footer class=footline>
-</footer>
-</div>
-</div>
-<div id=navigation>
+</code></pre><footer class=footline>
+</footer></div></div><div id=navigation>
 <a class="nav nav-prev" href=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias"> <i class="fa fa-chevron-left"></i></a>
 <a class="nav nav-next" href=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
-</div>
-</section>
-<div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
-</div>
-<script src=/elastic-tutorial/js/clipboard.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1645973180></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1645973180></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1645973180></script>
+</div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1646153867></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1646153867></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1646153867></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1645973180></script>
-<script src=/elastic-tutorial/js/learn.js?1645973180></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1645973180></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1645973180></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646153867></script>
+<script src=/elastic-tutorial/js/learn.js?1646153867></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1646153867></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1646153867></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
-</body>
-</html>
+</body></html>
