@@ -6,18 +6,18 @@
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Labs - Query niveau I :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1646153867 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646153867></script>
+<title>Labs - Query niveau I :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1646233176 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646233176></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/avance/term/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
@@ -27,10 +27,10 @@
 <label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
-</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646153867></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646153867></script>
+</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646233176></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646233176></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1646153867></script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1646233176></script>
 </div><div class=highlightable>
 <ul class=topics>
 <li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
@@ -146,29 +146,29 @@ Avancé
 <i class="fas fa-check read-icon"></i>
 </a>
 <ul>
-<li data-nav-id=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/fleet/>
-Bonus - Fleet & Elastic Agent
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class="dd-item active">
+<li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class="dd-item active">
 <a href=/elastic-tutorial/elastic/avance/term/>
 Labs - Query niveau I
 <i class="fas fa-check read-icon"></i>
 </a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query Sort" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query niveau II" class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/sort/>
-Labs - Query Sort
+Labs - Query niveau II
 <i class="fas fa-check read-icon"></i>
 </a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau II" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau III" class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/query/>
-Labs - Query niveau II
+Labs - Query niveau III
 <i class="fas fa-check read-icon"></i>
 </a>
 </li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/tp_query/>
 TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/fleet/>
+Bonus - Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i>
 </a>
 </li></ul></li></ul></li></ul><section id=prefooter>
@@ -222,97 +222,106 @@ GET _cat/indices?v
 
 
 ## API Search
-</code></pre><h3 id=recherche-plusieurs-terms-match>Recherche plusieurs terms (match)</h3><p>GET _search
+</code></pre><h3 id=recherche-plusieurs-terms-match>Recherche plusieurs terms (match)</h3><p>Renvoie les documents qui correspondent à un texte, un nombre, une date ou une valeur booléenne fournis. Le texte fourni est analysé avant de correspondre.</p><pre tabindex=0><code>GET _search
 {
-&ldquo;query&rdquo;: {
-&ldquo;match&rdquo;: {
-&ldquo;text_entry&rdquo;: &ldquo;to be or not to be&rdquo;
+    &#34;query&#34;: {
+        &#34;match&#34;: {
+            &#34;text_entry&#34;: &#34;to be or not to be&#34;
+        }
+    }
 }
-}
-}</p><h3 id=recherche-une-phrase-en-entière-match-phrase>Recherche une phrase en entière (match phrase)</h3><p>GET _search
+</code></pre><h3 id=recherche-une-phrase-en-entière-match-phrase>Recherche une phrase en entière (match phrase)</h3><p>La requête match_phrase analyse le texte et crée une requête de phrase à partir du texte analysé.</p><pre tabindex=0><code>GET _search
 {
-&ldquo;query&rdquo;: {
-&ldquo;match_phrase&rdquo;: {
-&ldquo;text_entry&rdquo;: &ldquo;to be or not to be&rdquo;
+    &#34;query&#34;: {
+        &#34;match_phrase&#34;: {
+            &#34;text_entry&#34;: &#34;to be or not to be&#34;
+        }
+    }
 }
-}
-}</p><h3 id=recherche-un-term-dans-un-champs-spécifique-multi-match>Recherche un term dans un champs spécifique (multi match)</h3><p>GET _search
+</code></pre><h3 id=recherche-un-term-dans-un-champs-spécifique-multi-match>Recherche un term dans un champs spécifique (multi match)</h3><p>La requête multi_match s&rsquo;appuie sur la requête match pour permettre les requêtes multi-champs.</p><pre tabindex=0><code>GET _search
 {
-&ldquo;query&rdquo;: {
-&ldquo;multi_match&rdquo;: {
-&ldquo;query&rdquo;: &ldquo;Crime&rdquo;,
-&ldquo;fields&rdquo;: [&ldquo;text_entry&rdquo;, &ldquo;relatedContent.og:description&rdquo;]
+    &#34;query&#34;: {
+        &#34;multi_match&#34;: {
+            &#34;query&#34;: &#34;Crime&#34;,
+            &#34;fields&#34;: [&#34;text_entry&#34;, &#34;relatedContent.og:description&#34;]
+        }
+    }
 }
-}
-}</p><h3 id=recherche-plusieurs-terms-dans-un-champs-spécifique-query-string>Recherche plusieurs terms dans un champs spécifique (query string)</h3><p>GET _search
+</code></pre><h3 id=recherche-plusieurs-terms-dans-un-champs-spécifique-query-string>Recherche plusieurs terms dans un champs spécifique (query string)</h3><p>Renvoie les documents basés sur une chaîne de requête fournie, en utilisant un analyseur syntaxique strict.</p><pre tabindex=0><code>GET _search
 {
-&ldquo;query&rdquo;: {
-&ldquo;query_string&rdquo;: {
-&ldquo;default_field&rdquo;: &ldquo;text_entry&rdquo;,
-&ldquo;query&rdquo;: &ldquo;(romeo AND juliet) OR (mother AND father)&rdquo;
+    &#34;query&#34;: {
+        &#34;query_string&#34;: {
+            &#34;default_field&#34;: &#34;text_entry&#34;,
+            &#34;query&#34;: &#34;(romeo AND juliet) OR (mother AND father)&#34;
+        }
+    }
 }
-}
-}</p><h3 id=recherche-un-term-dans-un-champs-spécifique-sans-utiliser-un-analyseur-de-texte-term>Recherche un term dans un champs spécifique sans utiliser un analyseur de texte (term)</h3><p>GET _search
+</code></pre><h3 id=recherche-un-term-dans-un-champs-spécifique-sans-utiliser-un-analyseur-de-texte-term>Recherche un term dans un champs spécifique sans utiliser un analyseur de texte (term)</h3><p>Retourne les documents qui contiennent un terme exact dans un champ fourni.</p><pre tabindex=0><code>GET _search
 {
-&ldquo;query&rdquo;: {
-&ldquo;term&rdquo;: {
-&ldquo;speaker&rdquo;: {
-&ldquo;value&rdquo;: &ldquo;ROMEO&rdquo;
+    &#34;query&#34;: {
+        &#34;term&#34;: {
+            &#34;speaker&#34;: {
+                &#34;value&#34;: &#34;ROMEO&#34;
+            }
+        }
+    }
 }
-}
-}
-}</p><h3 id=recherche-plusieurs-terms-dans-un-champs-spécifique-sans-utiliser-un-analyseur-de-texte-terms>Recherche plusieurs terms dans un champs spécifique sans utiliser un analyseur de texte (terms)</h3><p>GET _search
+</code></pre><h3 id=recherche-plusieurs-terms-dans-un-champs-spécifique-sans-utiliser-un-analyseur-de-texte-terms>Recherche plusieurs terms dans un champs spécifique sans utiliser un analyseur de texte (terms)</h3><p>Retourne les documents qui contiennent un terme exact dans un champ fourni.</p><pre tabindex=0><code>GET _search
 {
-&ldquo;query&rdquo;: {
-&ldquo;terms&rdquo;: {
-&ldquo;speaker&rdquo;: [
-&ldquo;ROMEO&rdquo;,
-&ldquo;JUILIET&rdquo;,
-&ldquo;HAMLET&rdquo;
-]
+    &#34;query&#34;: {
+        &#34;terms&#34;: {
+            &#34;speaker&#34;: [
+                &#34;ROMEO&#34;,
+                &#34;JUILIET&#34;,
+                &#34;HAMLET&#34;
+            ]
+        }
+    }
 }
-}
-}</p><h3 id=recherche-une-valeur-entre-40-et-50-dans-un-champs-spécifique-range>Recherche une valeur entre 40 et 50 dans un champs spécifique (range)</h3><p>GET _search
+</code></pre><h3 id=recherche-une-valeur-entre-40-et-50-dans-un-champs-spécifique-range>Recherche une valeur entre 40 et 50 dans un champs spécifique (range)</h3><p>Renvoie les documents qui contiennent des termes compris dans une plage donnée.</p><pre tabindex=0><code>GET _search
 {
-&ldquo;query&rdquo;: {
-&ldquo;range&rdquo;: {
-&ldquo;age&rdquo;: {
-&ldquo;gte&rdquo;: 40,
-&ldquo;lt&rdquo;: 50
+    &#34;query&#34;: {
+        &#34;range&#34;: {
+            &#34;age&#34;: {
+                &#34;gte&#34;: 40,
+                &#34;lt&#34;: 50
+            }
+        }
+    }
 }
-}
-}
-}</p><h3 id=recherche-une-valeur-wildcard-dans-un-champs-spécifique-wildcard>Recherche une valeur wildcard dans un champs spécifique (wildcard)</h3><p>GET _search
+</code></pre><h3 id=recherche-une-valeur-wildcard-dans-un-champs-spécifique-wildcard>Recherche une valeur wildcard dans un champs spécifique (wildcard)</h3><p>Renvoie les documents qui contiennent des termes correspondant à un motif de caractère générique.</p><p>Un opérateur wildcard est un caractère de remplacement qui correspond à un ou plusieurs caractères. Par exemple, l&rsquo;opérateur wildcard * correspond à zéro ou plusieurs caractères. Vous pouvez combiner des opérateurs wildcard avec d&rsquo;autres caractères pour créer un motif wildcard.</p><pre tabindex=0><code>GET _search
 {
-&ldquo;query&rdquo;: {
-&ldquo;wildcard&rdquo;: {
-&ldquo;city.keyword&rdquo;: {
-&ldquo;value&rdquo;: &ldquo;*ville&rdquo;
+    &#34;query&#34;: {
+        &#34;wildcard&#34;: {
+            &#34;city.keyword&#34;: {
+                &#34;value&#34;: &#34;*ville&#34;
+            }
+        }
+    }
 }
-}
-}
-}</p><h3 id=recherche-une-valeur-avec-une-regex-dans-un-champs-spécifique-regex>Recherche une valeur avec une regex dans un champs spécifique (regex)</h3><p>GET _search
+</code></pre><h3 id=recherche-une-valeur-avec-une-regex-dans-un-champs-spécifique-regex>Recherche une valeur avec une regex dans un champs spécifique (regex)</h3><p>Renvoie les documents qui contiennent des termes correspondant à une expression régulière.</p><pre tabindex=0><code>GET _search
 {
-&ldquo;query&rdquo;: {
-&ldquo;regex&rdquo;: {
-&ldquo;email.keyword&rdquo;: &ldquo;.*@xurban\.com&rdquo;
+    &#34;query&#34;: {
+        &#34;regex&#34;: {
+            &#34;email.keyword&#34;: &#34;.*@xurban\\.com&#34;
+        }
+    }
 }
-}
-}</p><pre tabindex=0><code></code></pre><footer class=footline>
+</code></pre><footer class=footline>
 </footer></div></div><div id=navigation>
-<a class="nav nav-prev" href=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent"> <i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query Sort" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
+<a class="nav nav-prev" href=/elastic-tutorial/elastic/avance/ title=Avancé> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query niveau II" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
 </div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646153867></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646153867></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646153867></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1646153867></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1646153867></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1646153867></script>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646233176></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646233176></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646233176></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1646233176></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1646233176></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1646233176></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646153867></script>
-<script src=/elastic-tutorial/js/learn.js?1646153867></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1646153867></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1646153867></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646233176></script>
+<script src=/elastic-tutorial/js/learn.js?1646233176></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1646233176></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1646233176></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body></html>

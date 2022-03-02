@@ -6,18 +6,18 @@
 <meta name=description content="Tutoriel sur Elastic">
 <meta name=author content="Maxime Calves">
 <link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Labs - Query niveau II :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1646153867 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1646153867 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646153867></script>
+<title>Labs - Query niveau III :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/hybrid.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/featherlight.min.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/auto-complete.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/tabs.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/hugo-theme.css?1646233176 rel=stylesheet>
+<link href=/elastic-tutorial/css/theme-blue.css?1646233176 rel=stylesheet>
+<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646233176></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/avance/query/>
 <nav id=sidebar class=showVisitedLinks>
 <div id=header-wrapper>
@@ -27,10 +27,10 @@
 <label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
 <span data-search-clear><i class="fas fa-times"></i></span>
-</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646153867></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646153867></script>
+</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646233176></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646233176></script>
 <script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1646153867></script>
+<script type=text/javascript src=/elastic-tutorial/js/search.js?1646233176></script>
 </div><div class=highlightable>
 <ul class=topics>
 <li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
@@ -146,29 +146,29 @@ Avancé
 <i class="fas fa-check read-icon"></i>
 </a>
 <ul>
-<li data-nav-id=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/fleet/>
-Bonus - Fleet & Elastic Agent
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item>
+<li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/term/>
 Labs - Query niveau I
 <i class="fas fa-check read-icon"></i>
 </a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query Sort" class=dd-item>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query niveau II" class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/sort/>
-Labs - Query Sort
+Labs - Query niveau II
 <i class="fas fa-check read-icon"></i>
 </a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau II" class="dd-item active">
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau III" class="dd-item active">
 <a href=/elastic-tutorial/elastic/avance/query/>
-Labs - Query niveau II
+Labs - Query niveau III
 <i class="fas fa-check read-icon"></i>
 </a>
 </li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
 <a href=/elastic-tutorial/elastic/avance/tp_query/>
 TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+<i class="fas fa-check read-icon"></i>
+</a>
+</li><li data-nav-id=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" class=dd-item>
+<a href=/elastic-tutorial/elastic/avance/fleet/>
+Bonus - Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i>
 </a>
 </li></ul></li></ul></li></ul><section id=prefooter>
@@ -187,18 +187,18 @@ TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
 </span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
 <span class=links>
-<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/avance/>Avancé</a> > Labs - Query niveau II
+<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/avance/>Avancé</a> > Labs - Query niveau III
 </span>
 </div><div class=progress>
 <div class=wrapper>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#préparation>Préparation</a>
+<li><a href=#préparation>Préparation</a></li><li><a href=#api-search>API Search</a>
 <ul>
-<li><a href=#recherche-un-terms-via-un-boolean>Recherche un terms via un boolean</a></li><li><a href=#recherche-un-terms-via-un-boolean-et-ne-pas-recherche-un-term-dans-les-résultats>Recherche un terms via un boolean et ne pas recherche un term dans les résultats</a></li><li><a href=#recherche-un-terms-via-un-boolean-ne-pas-rechercher-un-term-dans-les-résultats-et-de-rechercher-des-résultats-avec-au-moins-un-des-terms>Recherche un terms via un boolean, ne pas rechercher un term dans les résultats et de rechercher des résultats avec au moins un des terms</a></li><li><a href=#recherche-un-terms-via-un-boolean-ne-pas-rechercher-un-term-dans-les-résultats-de-rechercher-des-résultats-avec-au-moins-un-des-terms-et-un-filtre-sur-la-ville>Recherche un terms via un boolean, ne pas rechercher un term dans les résultats, de rechercher des résultats avec au moins un des terms et un filtre sur la ville</a></li><li><a href=#meme-requete-quau-dessus-avec-le-meme-score>Meme requete qu&rsquo;au dessus avec le meme score</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
+<li><a href=#recherche-un-terms-via-un-boolean-et-ne-pas-recherche-un-term-dans-les-résultats>Recherche un terms via un boolean et ne pas recherche un term dans les résultats</a></li><li><a href=#recherche-un-terms-via-un-boolean-ne-pas-rechercher-un-term-dans-les-résultats-et-de-rechercher-des-résultats-avec-au-moins-un-des-terms>Recherche un terms via un boolean, ne pas rechercher un term dans les résultats et de rechercher des résultats avec au moins un des terms</a></li><li><a href=#recherche-un-terms-via-un-boolean-ne-pas-rechercher-un-term-dans-les-résultats-de-rechercher-des-résultats-avec-au-moins-un-des-terms-et-un-filtre-sur-la-ville>Recherche un terms via un boolean, ne pas rechercher un term dans les résultats, de rechercher des résultats avec au moins un des terms et un filtre sur la ville</a></li><li><a href=#meme-requete-quau-dessus-avec-le-meme-score>Meme requete qu&rsquo;au dessus avec le meme score</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
 </div><div id=body-inner>
 <h1>
-Labs - Query niveau II
+Labs - Query niveau III
 </h1><h2 id=préparation>Préparation</h2><pre tabindex=0><code>PUT /shakespeare
 {
  &#34;mappings&#34;: {
@@ -210,300 +210,194 @@ Labs - Query niveau II
    }
  }
 }
-
-
-curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json
+</code></pre><pre tabindex=0><code>curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json
 curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/shakespeare/doc/_bulk?pretty&#39; --data-binary @shakespeare_6.0.json
-
-
-GET _cat/nodes?v
+</code></pre><pre tabindex=0><code>GET _cat/nodes?v
 
 GET _cat/indices?v
-
-
-## API Search
-</code></pre><h3 id=recherche-un-terms-via-un-boolean>Recherche un terms via un boolean</h3><p>GET _search
-{
-&ldquo;query&rdquo;: {
-&ldquo;bool&rdquo;: {
-&ldquo;must&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;gender.keyword&rdquo;: {
-&ldquo;value&rdquo;: &ldquo;F&rdquo;
-}
-}
-}
-]
-}
-}
-}</p><h3 id=recherche-un-terms-via-un-boolean-et-ne-pas-recherche-un-term-dans-les-résultats>Recherche un terms via un boolean et ne pas recherche un term dans les résultats</h3><p>GET _search
-{
-&ldquo;query&rdquo;: {
-&ldquo;bool&rdquo;: {
-&ldquo;must&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;gender.keyword&rdquo;: {
-&ldquo;value&rdquo;: &ldquo;F&rdquo;
-}
-}
-}
-],
-&ldquo;must_not&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;state.keyword&rdquo;: {
-&ldquo;value&rdquo;: &ldquo;RI&rdquo;
-}
-}
-}
-]
-}
-}
-}</p><h3 id=recherche-un-terms-via-un-boolean-ne-pas-rechercher-un-term-dans-les-résultats-et-de-rechercher-des-résultats-avec-au-moins-un-des-terms>Recherche un terms via un boolean, ne pas rechercher un term dans les résultats et de rechercher des résultats avec au moins un des terms</h3><p>GET _search
-{
-&ldquo;query&rdquo;: {
-&ldquo;bool&rdquo;: {
-&ldquo;must&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;gender.keyword&rdquo;: {
-&ldquo;value&rdquo;: &ldquo;F&rdquo;
-}
-}
-}
-],
-&ldquo;must_not&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;state.keyword&rdquo;: {
-&ldquo;value&rdquo;: &ldquo;RI&rdquo;
-}
-}
-}
-],
-&ldquo;should&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;lastname.keyword&rdquo;: {
-&ldquo;value&rdquo;: &ldquo;Meyers&rdquo;
-}
-}
-},
-{
-&ldquo;term&rdquo;: {
-&ldquo;lastname.keyword&rdquo;: {
-&ldquo;value&rdquo;: &ldquo;Owens&rdquo;
-}
-}
-}
-],
-&ldquo;minimum_should_match&rdquo;: 1
-}
-}
-}</p><h3 id=recherche-un-terms-via-un-boolean-ne-pas-rechercher-un-term-dans-les-résultats-de-rechercher-des-résultats-avec-au-moins-un-des-terms-et-un-filtre-sur-la-ville>Recherche un terms via un boolean, ne pas rechercher un term dans les résultats, de rechercher des résultats avec au moins un des terms et un filtre sur la ville</h3><p>GET _search
-{
-&ldquo;query&rdquo;: {
-&ldquo;bool&rdquo;: {
-&ldquo;must&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;gender.keyword&rdquo;: {
-&ldquo;_name&rdquo;: &ldquo;gender&rdquo;,
-&ldquo;value&rdquo;: &ldquo;F&rdquo;
-}
-}
-}
-],
-&ldquo;must_not&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;state.keyword&rdquo;: {
-&ldquo;_name&rdquo;: &ldquo;state&rdquo;,
-&ldquo;value&rdquo;: &ldquo;RI&rdquo;
-}
-}
-}
-],
-&ldquo;should&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;lastname.keyword&rdquo;: {
-&ldquo;_name&rdquo;: &ldquo;lastname_1&rdquo;,
-&ldquo;value&rdquo;: &ldquo;Meyers&rdquo;
-}
-}
-},
-{
-&ldquo;term&rdquo;: {
-&ldquo;lastname.keyword&rdquo;: {
-&ldquo;_name&rdquo;: &ldquo;lastname_2&rdquo;,
-&ldquo;value&rdquo;: &ldquo;Owens&rdquo;
-}
-}
-}
-],
-&ldquo;minimum_should_match&rdquo;: 1,
-&ldquo;filter&rdquo;: {
-&ldquo;term&rdquo;: {
-&ldquo;city.keyword&rdquo;: &ldquo;Jacksonburg&rdquo;
-}
-}
-}
-}
-}</p><h3 id=meme-requete-quau-dessus-avec-le-meme-score>Meme requete qu&rsquo;au dessus avec le meme score</h3><p>GET _search
-{
-&ldquo;query&rdquo;: {
-&ldquo;bool&rdquo;: {
-&ldquo;must&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;gender.keyword&rdquo;: {
-&ldquo;_name&rdquo;: &ldquo;gender&rdquo;,
-&ldquo;value&rdquo;: &ldquo;F&rdquo;
-}
-}
-}
-],
-&ldquo;should&rdquo;: [
-{
-&ldquo;term&rdquo;: {
-&ldquo;lastname.keyword&rdquo;: {
-&ldquo;_name&rdquo;: &ldquo;lastname_1&rdquo;,
-&ldquo;value&rdquo;: &ldquo;Meyers&rdquo;
-}
-}
-}
-],
-&ldquo;minimum_should_match&rdquo;: 1,
-&ldquo;filter&rdquo;: {
-&ldquo;term&rdquo;: {
-&ldquo;city.keyword&rdquo;: &ldquo;Jacksonburg&rdquo;
-}
-}
-}
-}
-}</p><pre tabindex=0><code>
-### Recherche plusieurs terms (match)
+</code></pre><h2 id=api-search>API Search</h2><pre tabindex=0><code>### Recherche un terms via un boolean
 GET _search
 {
     &#34;query&#34;: {
-        &#34;match&#34;: {
-            &#34;text_entry&#34;: &#34;to be or not to be&#34;
-        }
-    }
-}
-
-### Recherche une phrase en entière (match phrase)
-GET _search
-{
-    &#34;query&#34;: {
-        &#34;match_phrase&#34;: {
-            &#34;text_entry&#34;: &#34;to be or not to be&#34;
-        }
-    }
-}
-
-### Recherche un term dans un champs spécifique (multi match)
-GET _search
-{
-    &#34;query&#34;: {
-        &#34;multi_match&#34;: {
-            &#34;query&#34;: &#34;Crime&#34;,
-            &#34;fields&#34;: [&#34;text_entry&#34;, &#34;relatedContent.og:description&#34;]
-        }
-    }
-}
-
-### Recherche plusieurs terms dans un champs spécifique (query string)
-GET _search
-{
-    &#34;query&#34;: {
-        &#34;query_string&#34;: {
-            &#34;default_field&#34;: &#34;text_entry&#34;,
-            &#34;query&#34;: &#34;(romeo AND juliet) OR (mother AND father)&#34;
-        }
-    }
-}
-
-
-### Recherche un term dans un champs spécifique sans utiliser un analyseur de texte (term)
-GET _search
-{
-    &#34;query&#34;: {
-        &#34;term&#34;: {
-            &#34;speaker&#34;: {
-                &#34;value&#34;: &#34;ROMEO&#34;
-            }
-        }
-    }
-}
-
-
-### Recherche plusieurs terms dans un champs spécifique sans utiliser un analyseur de texte (terms)
-GET _search
-{
-    &#34;query&#34;: {
-        &#34;terms&#34;: {
-            &#34;speaker&#34;: [
-                &#34;ROMEO&#34;,
-                &#34;JUILIET&#34;,
-                &#34;HAMLET&#34;
+        &#34;bool&#34;: {
+            &#34;must&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;gender.keyword&#34;: {
+                            &#34;value&#34;: &#34;F&#34;
+                         }
+                    }
+                }
             ]
         }
     }
 }
-
-### Recherche une valeur entre 40 et 50 dans un champs spécifique (range)
-GET _search
+</code></pre><h3 id=recherche-un-terms-via-un-boolean-et-ne-pas-recherche-un-term-dans-les-résultats>Recherche un terms via un boolean et ne pas recherche un term dans les résultats</h3><pre tabindex=0><code>GET _search
 {
     &#34;query&#34;: {
-        &#34;range&#34;: {
-            &#34;age&#34;: {
-                &#34;gte&#34;: 40,
-                &#34;lt&#34;: 50
+        &#34;bool&#34;: {
+            &#34;must&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;gender.keyword&#34;: {
+                            &#34;value&#34;: &#34;F&#34;
+                         }
+                    }
+                }
+            ],
+            &#34;must_not&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;state.keyword&#34;: {
+                            &#34;value&#34;: &#34;RI&#34;
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+</code></pre><h3 id=recherche-un-terms-via-un-boolean-ne-pas-rechercher-un-term-dans-les-résultats-et-de-rechercher-des-résultats-avec-au-moins-un-des-terms>Recherche un terms via un boolean, ne pas rechercher un term dans les résultats et de rechercher des résultats avec au moins un des terms</h3><pre tabindex=0><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;bool&#34;: {
+            &#34;must&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;gender.keyword&#34;: {
+                            &#34;value&#34;: &#34;F&#34;
+                         }
+                    }
+                }
+            ],
+            &#34;must_not&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;state.keyword&#34;: {
+                            &#34;value&#34;: &#34;RI&#34;
+                        }
+                    }
+                }
+            ],
+            &#34;should&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;lastname.keyword&#34;: {
+                            &#34;value&#34;: &#34;Meyers&#34;
+                        }
+                    }
+                },
+                {
+                    &#34;term&#34;: {
+                        &#34;lastname.keyword&#34;: {
+                            &#34;value&#34;: &#34;Owens&#34;
+                        }
+                    }
+                }
+            ],
+            &#34;minimum_should_match&#34;: 1
+        }
+    }
+}
+</code></pre><h3 id=recherche-un-terms-via-un-boolean-ne-pas-rechercher-un-term-dans-les-résultats-de-rechercher-des-résultats-avec-au-moins-un-des-terms-et-un-filtre-sur-la-ville>Recherche un terms via un boolean, ne pas rechercher un term dans les résultats, de rechercher des résultats avec au moins un des terms et un filtre sur la ville</h3><pre tabindex=0><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;bool&#34;: {
+            &#34;must&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;gender.keyword&#34;: {
+                            &#34;_name&#34;: &#34;gender&#34;,
+                            &#34;value&#34;: &#34;F&#34;
+                         }
+                    }
+                }
+            ],
+            &#34;must_not&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;state.keyword&#34;: {
+                            &#34;_name&#34;: &#34;state&#34;,
+                            &#34;value&#34;: &#34;RI&#34;
+                        }
+                    }
+                }
+            ],
+            &#34;should&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;lastname.keyword&#34;: {
+                            &#34;_name&#34;: &#34;lastname_1&#34;,
+                            &#34;value&#34;: &#34;Meyers&#34;
+                        }
+                    }
+                },
+                {
+                    &#34;term&#34;: {
+                        &#34;lastname.keyword&#34;: {
+                            &#34;_name&#34;: &#34;lastname_2&#34;,
+                            &#34;value&#34;: &#34;Owens&#34;
+                        }
+                    }
+                }
+            ],
+            &#34;minimum_should_match&#34;: 1,
+            &#34;filter&#34;: {
+                &#34;term&#34;: {
+                    &#34;city.keyword&#34;: &#34;Jacksonburg&#34;
+                }
             }
         }
     }
 }
-
-### Recherche une valeur wildcard dans un champs spécifique (wildcard)
-GET _search
+</code></pre><h3 id=meme-requete-quau-dessus-avec-le-meme-score>Meme requete qu&rsquo;au dessus avec le meme score</h3><pre tabindex=0><code>GET _search
 {
     &#34;query&#34;: {
-        &#34;wildcard&#34;: {
-            &#34;city.keyword&#34;: {
-                &#34;value&#34;: &#34;*ville&#34;
+        &#34;bool&#34;: {
+            &#34;must&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;gender.keyword&#34;: {
+                            &#34;_name&#34;: &#34;gender&#34;,
+                            &#34;value&#34;: &#34;F&#34;
+                         }
+                    }
+                }
+            ],
+            &#34;should&#34;: [
+                {
+                    &#34;term&#34;: {
+                        &#34;lastname.keyword&#34;: {
+                            &#34;_name&#34;: &#34;lastname_1&#34;,
+                            &#34;value&#34;: &#34;Meyers&#34;
+                        }
+                    }
+                }
+            ],
+            &#34;minimum_should_match&#34;: 1,
+            &#34;filter&#34;: {
+                &#34;term&#34;: {
+                    &#34;city.keyword&#34;: &#34;Jacksonburg&#34;
+                }
             }
-        }
-    }
-}
-
-### Recherche une valeur avec une regex dans un champs spécifique (regex)
-GET _search
-{
-    &#34;query&#34;: {
-        &#34;regex&#34;: {
-            &#34;email.keyword&#34;: &#34;.*@xurban\\.com&#34;
         }
     }
 }
 </code></pre><footer class=footline>
 </footer></div></div><div id=navigation>
-<a class="nav nav-prev" href=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query Sort"> <i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-prev" href=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query niveau II"> <i class="fa fa-chevron-left"></i></a>
 <a class="nav nav-next" href=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
 </div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646153867></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646153867></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646153867></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1646153867></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1646153867></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1646153867></script>
+<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646233176></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646233176></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646233176></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1646233176></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1646233176></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1646233176></script>
 <script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646153867></script>
-<script src=/elastic-tutorial/js/learn.js?1646153867></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1646153867></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1646153867></script>
+<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646233176></script>
+<script src=/elastic-tutorial/js/learn.js?1646233176></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1646233176></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1646233176></script>
 <script>mermaid.initialize({startOnLoad:!0})</script>
 </body></html>
