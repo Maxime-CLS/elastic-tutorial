@@ -1,208 +1,38 @@
-<!doctype html><html lang=en class="js csstransforms3d">
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.93.0">
-<meta name=description content="Tutoriel sur Elastic">
-<meta name=author content="Maxime Calves">
-<link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Labs - CRUD :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1646233176 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646233176></script>
-<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/intermediare/crud_documents/>
-<nav id=sidebar class=showVisitedLinks>
-<div id=header-wrapper>
-<div id=header>
-<img src=../../../../elastic-tutorial/media/logo.png>
-</div><div class=searchbox>
-<label for=search-by><i class="fas fa-search"></i></label>
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.94.2"><meta name=description content="Tutoriel sur Elastic"><meta name=author content="Maxime Calves"><link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png><title>Labs - CRUD :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/fontawesome-all.min.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/hybrid.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/featherlight.min.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/auto-complete.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/theme.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/tabs.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/hugo-theme.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/theme-blue.css?1647253416 rel=stylesheet><script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1647253416></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/intermediare/crud_documents/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><img src=../../../../elastic-tutorial/media/logo.png></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
-<span data-search-clear><i class="fas fa-times"></i></span>
-</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646233176></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646233176></script>
-<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1646233176></script>
-</div><div class=highlightable>
-<ul class=topics>
-<li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
-parent">
-<a href=/elastic-tutorial/elastic/>
-Elastic
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item>
-<a href=/elastic-tutorial/elastic/prerequis/>
-Prérequis
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/prerequis/installation/ title=Installation class=dd-item>
-<a href=/elastic-tutorial/elastic/prerequis/installation/>
-Installation
-<i class="fas fa-check read-icon"></i>
-</a>
-</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/>
-Débutant
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/ title="Lab - Logs" class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/>
-Lab - Logs
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
-Lab - Metrics
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
-Lab - APM
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
-Lab - Uptime
-<i class="fas fa-check read-icon"></i>
-</a>
-</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item>
-<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
-Elementaire
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title="Lab - Habilitation" class=dd-item>
-<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/>
-Lab - Habilitation
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item>
-<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
-Lab - Index Lifecycle Policy
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
-<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>
-Lab - Backup & Restore
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
-<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>
-Lab - Diagnostic
-<i class="fas fa-check read-icon"></i>
-</a>
-</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
-parent">
-<a href=/elastic-tutorial/elastic/intermediare/>
-Intermediare
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/alerting/ title="Lab - Alertes" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/alerting/>
-Lab - Alertes
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/index_alias/>
-Labs - Index et ALias
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/mapping/>
-Labs - Mapping
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/template_mapping/>
-Labs - Index Template et Mapping
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/reindex/>
-Labs - Reindex
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class="dd-item active">
-<a href=/elastic-tutorial/elastic/intermediare/crud_documents/>
-Labs - CRUD
-<i class="fas fa-check read-icon"></i>
-</a>
-</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/>
-Avancé
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/term/>
-Labs - Query niveau I
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query niveau II" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/sort/>
-Labs - Query niveau II
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau III" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/query/>
-Labs - Query niveau III
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/tp_query/>
-TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/fleet/>
-Bonus - Fleet & Elastic Agent
-<i class="fas fa-check read-icon"></i>
-</a>
-</li></ul></li></ul></li></ul><section id=prefooter>
-<hr>
-<ul>
-<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer>
-<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body>
-<div id=overlay></div><div class="padding highlightable">
-<div>
-<div id=top-bar>
-<div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
-<span id=sidebar-toggle-span>
-<a href=# id=sidebar-toggle data-sidebar-toggle>
-<i class="fas fa-bars"></i>
-</a>
-</span>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1647253416></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1647253416></script>
+<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script><script type=text/javascript src=/elastic-tutorial/js/search.js?1647253416></script></div><div class=highlightable><ul class=topics><li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
+parent"><a href=/elastic-tutorial/elastic/>Elastic
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item><a href=/elastic-tutorial/elastic/prerequis/>Prérequis
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/prerequis/installation/ title=Installation class=dd-item><a href=/elastic-tutorial/elastic/prerequis/installation/>Installation
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item><a href=/elastic-tutorial/elastic/d%C3%A9butant/>Débutant
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/ title="Lab - Logs" class=dd-item><a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/>Lab - Logs
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item><a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>Lab - Metrics
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item><a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>Lab - APM
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item><a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>Lab - Uptime
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class=dd-item><a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>Elementaire
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title="Lab - Habilitation" class=dd-item><a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/>Lab - Habilitation
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class=dd-item><a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>Lab - Index Lifecycle Policy
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item><a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>Lab - Backup & Restore
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item><a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>Lab - Diagnostic
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class="dd-item
+parent"><a href=/elastic-tutorial/elastic/intermediare/>Intermediare
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/intermediare/alerting/ title="Lab - Alertes" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/alerting/>Lab - Alertes
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/index_alias/>Labs - Index et ALias
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/mapping/>Labs - Mapping
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/template_mapping/>Labs - Index Template et Mapping
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/reindex/>Labs - Reindex
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class="dd-item active"><a href=/elastic-tutorial/elastic/intermediare/crud_documents/>Labs - CRUD
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item><a href=/elastic-tutorial/elastic/avance/>Avancé
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item><a href=/elastic-tutorial/elastic/avance/term/>Labs - Query niveau I
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query niveau II" class=dd-item><a href=/elastic-tutorial/elastic/avance/sort/>Labs - Query niveau II
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau III" class=dd-item><a href=/elastic-tutorial/elastic/avance/query/>Labs - Query niveau III
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item><a href=/elastic-tutorial/elastic/avance/tp_query/>TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" class=dd-item><a href=/elastic-tutorial/elastic/avance/fleet/>Bonus - Fleet & Elastic Agent
+<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li></ul><section id=prefooter><hr><ul><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i></a></span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
-<span class=links>
-<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/intermediare/>Intermediare</a> > Labs - CRUD
-</span>
-</div><div class=progress>
-<div class=wrapper>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#description>Description</a>
-<ul>
-<li></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
-</div><div id=body-inner>
-<h1>
-Labs - CRUD
-</h1><h2 id=description>Description</h2><p>Quelle que soit la façon dont vous comptez utiliser Elasticsearch, il est essentiel de comprendre comment créer, mettre à jour et supprimer rapidement des documents dans Elasticsearch. Dans cette activité d&rsquo;apprentissage, vous allez effectuer les tâches suivantes :</p><ul>
-<li>Créer des documents dans Elasticsearch</li><li>Mettre à jour des documents existants dans Elasticsearch</li><li>Supprimer des documents d&rsquo;un index Elasticsearch</li></ul><p>Vous travaillez en tant qu&rsquo;administrateur Elasticsearch pour une société bancaire. Un récent échec de déploiement et un retour en arrière de votre logiciel bancaire ont désynchronisé certaines actions qui ont été prises sur quelques comptes. Pour corriger rapidement la désynchronisation, on vous demande d&rsquo;effectuer des opérations CRUD manuelles sur l&rsquo;index bancaire dans Elasticsearch.</p><p>Un compte doit être ajouté avec les données client suivantes :</p><ul>
-<li>Numéro de compte : 1000</li><li>Solde : 65 536</li><li>Prénom : Jean</li><li>Nom de famille : Doe</li><li>Age : 23 ans</li><li>Sexe : masculin Homme</li><li>Adresse : 125 Bear Creek Pkwy</li><li>Employeur : Linux Academy</li><li>Courriel : <a href=mailto:john@linuxacademy.com>john@linuxacademy.com</a></li><li>Ville : Keller</li><li>Etat : TX</li></ul><p>Le compte 100 a changé d&rsquo;adresse et les champs suivants doivent être mis à jour :</p><ul>
-<li>Adresse : 1600 Pennsylvania Ave NW</li><li>Ville : Washington</li><li>Etat : DC</li></ul><h4 id=créer-account-1000>Créer Account 1000</h4><pre tabindex=0><code>PUT bank/_doc/1000
+<span class=links><a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/intermediare/>Intermediare</a> > Labs - CRUD</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><a href=#description>Description</a><ul><li></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Labs - CRUD</h1><h2 id=description>Description</h2><p>Quelle que soit la façon dont vous comptez utiliser Elasticsearch, il est essentiel de comprendre comment créer, mettre à jour et supprimer rapidement des documents dans Elasticsearch. Dans cette activité d&rsquo;apprentissage, vous allez effectuer les tâches suivantes :</p><ul><li>Créer des documents dans Elasticsearch</li><li>Mettre à jour des documents existants dans Elasticsearch</li><li>Supprimer des documents d&rsquo;un index Elasticsearch</li></ul><p>Vous travaillez en tant qu&rsquo;administrateur Elasticsearch pour une société bancaire. Un récent échec de déploiement et un retour en arrière de votre logiciel bancaire ont désynchronisé certaines actions qui ont été prises sur quelques comptes. Pour corriger rapidement la désynchronisation, on vous demande d&rsquo;effectuer des opérations CRUD manuelles sur l&rsquo;index bancaire dans Elasticsearch.</p><p>Un compte doit être ajouté avec les données client suivantes :</p><ul><li>Numéro de compte : 1000</li><li>Solde : 65 536</li><li>Prénom : Jean</li><li>Nom de famille : Doe</li><li>Age : 23 ans</li><li>Sexe : masculin Homme</li><li>Adresse : 125 Bear Creek Pkwy</li><li>Employeur : Linux Academy</li><li>Courriel : <a href=mailto:john@linuxacademy.com>john@linuxacademy.com</a></li><li>Ville : Keller</li><li>Etat : TX</li></ul><p>Le compte 100 a changé d&rsquo;adresse et les champs suivants doivent être mis à jour :</p><ul><li>Adresse : 1600 Pennsylvania Ave NW</li><li>Ville : Washington</li><li>Etat : DC</li></ul><h4 id=créer-account-1000>Créer Account 1000</h4><pre tabindex=0><code>PUT bank/_doc/1000
 {
   &#34;account_number&#34;: 1000,
   &#34;balance&#34;: 65536,
@@ -226,21 +56,15 @@ Labs - CRUD
 }
 </code></pre><h4 id=supprimer-accounts-1-et-10>Supprimer accounts 1 et 10</h4><pre tabindex=0><code>DELETE bank/_doc/1
 DELETE bank/_doc/10
-</code></pre><footer class=footline>
-</footer></div></div><div id=navigation>
-<a class="nav nav-prev" href=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex"> <i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/avance/ title=Avancé style=margin-right:0><i class="fa fa-chevron-right"></i></a>
-</div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646233176></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646233176></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646233176></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1646233176></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1646233176></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1646233176></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646233176></script>
-<script src=/elastic-tutorial/js/learn.js?1646233176></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1646233176></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1646233176></script>
-<script>mermaid.initialize({startOnLoad:!0})</script>
-</body></html>
+</code></pre><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex"><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/avance/ title=Avancé style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1647253416></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1647253416></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1647253416></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1647253416></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1647253416></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1647253416></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1647253416></script>
+<script src=/elastic-tutorial/js/learn.js?1647253416></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1647253416></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1647253416></script>
+<script>mermaid.initialize({startOnLoad:!0})</script></body></html>

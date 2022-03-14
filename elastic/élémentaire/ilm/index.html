@@ -1,207 +1,38 @@
-<!doctype html><html lang=en class="js csstransforms3d">
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.93.0">
-<meta name=description content="Tutoriel sur Elastic">
-<meta name=author content="Maxime Calves">
-<link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png>
-<title>Lab - Index Lifecycle Policy :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/fontawesome-all.min.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/hybrid.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/featherlight.min.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/auto-complete.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/tabs.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/hugo-theme.css?1646233176 rel=stylesheet>
-<link href=/elastic-tutorial/css/theme-blue.css?1646233176 rel=stylesheet>
-<script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1646233176></script>
-<style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
-<nav id=sidebar class=showVisitedLinks>
-<div id=header-wrapper>
-<div id=header>
-<img src=../../../../elastic-tutorial/media/logo.png>
-</div><div class=searchbox>
-<label for=search-by><i class="fas fa-search"></i></label>
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.94.2"><meta name=description content="Tutoriel sur Elastic"><meta name=author content="Maxime Calves"><link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png><title>Lab - Index Lifecycle Policy :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/fontawesome-all.min.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/hybrid.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/featherlight.min.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/auto-complete.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/theme.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/tabs.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/hugo-theme.css?1647253416 rel=stylesheet><link href=/elastic-tutorial/css/theme-blue.css?1647253416 rel=stylesheet><script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1647253416></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><img src=../../../../elastic-tutorial/media/logo.png></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
-<span data-search-clear><i class="fas fa-times"></i></span>
-</div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1646233176></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1646233176></script>
-<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script>
-<script type=text/javascript src=/elastic-tutorial/js/search.js?1646233176></script>
-</div><div class=highlightable>
-<ul class=topics>
-<li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
-parent">
-<a href=/elastic-tutorial/elastic/>
-Elastic
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item>
-<a href=/elastic-tutorial/elastic/prerequis/>
-Prérequis
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/prerequis/installation/ title=Installation class=dd-item>
-<a href=/elastic-tutorial/elastic/prerequis/installation/>
-Installation
-<i class="fas fa-check read-icon"></i>
-</a>
-</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/>
-Débutant
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/ title="Lab - Logs" class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/>
-Lab - Logs
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>
-Lab - Metrics
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>
-Lab - APM
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item>
-<a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>
-Lab - Uptime
-<i class="fas fa-check read-icon"></i>
-</a>
-</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class="dd-item
-parent">
-<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>
-Elementaire
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title="Lab - Habilitation" class=dd-item>
-<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/>
-Lab - Habilitation
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class="dd-item active">
-<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>
-Lab - Index Lifecycle Policy
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item>
-<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>
-Lab - Backup & Restore
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item>
-<a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>
-Lab - Diagnostic
-<i class="fas fa-check read-icon"></i>
-</a>
-</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/>
-Intermediare
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/intermediare/alerting/ title="Lab - Alertes" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/alerting/>
-Lab - Alertes
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/index_alias/>
-Labs - Index et ALias
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/mapping/>
-Labs - Mapping
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/template_mapping/>
-Labs - Index Template et Mapping
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/reindex/>
-Labs - Reindex
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item>
-<a href=/elastic-tutorial/elastic/intermediare/crud_documents/>
-Labs - CRUD
-<i class="fas fa-check read-icon"></i>
-</a>
-</li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/>
-Avancé
-<i class="fas fa-check read-icon"></i>
-</a>
-<ul>
-<li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/term/>
-Labs - Query niveau I
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query niveau II" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/sort/>
-Labs - Query niveau II
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau III" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/query/>
-Labs - Query niveau III
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/tp_query/>
-TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
-<i class="fas fa-check read-icon"></i>
-</a>
-</li><li data-nav-id=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" class=dd-item>
-<a href=/elastic-tutorial/elastic/avance/fleet/>
-Bonus - Fleet & Elastic Agent
-<i class="fas fa-check read-icon"></i>
-</a>
-</li></ul></li></ul></li></ul><section id=prefooter>
-<hr>
-<ul>
-<li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer>
-<p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body>
-<div id=overlay></div><div class="padding highlightable">
-<div>
-<div id=top-bar>
-<div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb>
-<span id=sidebar-toggle-span>
-<a href=# id=sidebar-toggle data-sidebar-toggle>
-<i class="fas fa-bars"></i>
-</a>
-</span>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1647253416></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1647253416></script>
+<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script><script type=text/javascript src=/elastic-tutorial/js/search.js?1647253416></script></div><div class=highlightable><ul class=topics><li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
+parent"><a href=/elastic-tutorial/elastic/>Elastic
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item><a href=/elastic-tutorial/elastic/prerequis/>Prérequis
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/prerequis/installation/ title=Installation class=dd-item><a href=/elastic-tutorial/elastic/prerequis/installation/>Installation
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant class=dd-item><a href=/elastic-tutorial/elastic/d%C3%A9butant/>Débutant
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/ title="Lab - Logs" class=dd-item><a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/>Lab - Logs
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" class=dd-item><a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/>Lab - Metrics
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/ title="Lab - APM" class=dd-item><a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/>Lab - APM
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/ title="Lab - Uptime" class=dd-item><a href=/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/>Lab - Uptime
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ title=Elementaire class="dd-item
+parent"><a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>Elementaire
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title="Lab - Habilitation" class=dd-item><a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/>Lab - Habilitation
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/ title="Lab - Index Lifecycle Policy" class="dd-item active"><a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/ilm/>Lab - Index Lifecycle Policy
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" class=dd-item><a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/>Lab - Backup & Restore
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/ title="Lab - Diagnostic" class=dd-item><a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/diagnostic/>Lab - Diagnostic
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/ title=Intermediare class=dd-item><a href=/elastic-tutorial/elastic/intermediare/>Intermediare
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/intermediare/alerting/ title="Lab - Alertes" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/alerting/>Lab - Alertes
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/index_alias/ title="Labs - Index et ALias" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/index_alias/>Labs - Index et ALias
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/mapping/ title="Labs - Mapping" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/mapping/>Labs - Mapping
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/template_mapping/ title="Labs - Index Template et Mapping" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/template_mapping/>Labs - Index Template et Mapping
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/reindex/ title="Labs - Reindex" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/reindex/>Labs - Reindex
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/intermediare/crud_documents/ title="Labs - CRUD" class=dd-item><a href=/elastic-tutorial/elastic/intermediare/crud_documents/>Labs - CRUD
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/elastic-tutorial/elastic/avance/ title=Avancé class=dd-item><a href=/elastic-tutorial/elastic/avance/>Avancé
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/avance/term/ title="Labs - Query niveau I" class=dd-item><a href=/elastic-tutorial/elastic/avance/term/>Labs - Query niveau I
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/avance/sort/ title="Labs - Query niveau II" class=dd-item><a href=/elastic-tutorial/elastic/avance/sort/>Labs - Query niveau II
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/avance/query/ title="Labs - Query niveau III" class=dd-item><a href=/elastic-tutorial/elastic/avance/query/>Labs - Query niveau III
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/avance/tp_query/ title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch" class=dd-item><a href=/elastic-tutorial/elastic/avance/tp_query/>TP : Définir et exécuter des requêtes de recherche dans Elasticsearch
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" class=dd-item><a href=/elastic-tutorial/elastic/avance/fleet/>Bonus - Fleet & Elastic Agent
+<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li></ul><section id=prefooter><hr><ul><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i></a></span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
-<span class=links>
-<a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>Elementaire</a> > Lab - Index Lifecycle Policy
-</span>
-</div><div class=progress>
-<div class=wrapper>
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#ilm-settings>ILM Settings</a></li><li><a href=#ilm-policy>ILM Policy</a></li><li><a href=#components-template>Components Template</a></li><li><a href=#index-template>Index Template</a></li><li><a href=#créer-votre-data-stream>Créer votre Data Stream</a></li><li><a href=#ajouter-des-données-dans-le-data-stream>Ajouter des données dans le Data Stream</a></li><li><a href=#mettre-à-jours-les-données-data-stream>Mettre à jours les données Data Stream</a></li><li><a href=#ilm-check>ILM Check</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags>
-</div><div id=body-inner>
-<h1>
-Lab - Index Lifecycle Policy
-</h1><p>Vous pouvez configurer des politiques de gestion du cycle de vie des index (ILM) pour gérer automatiquement les index en fonction de vos exigences en matière de performances, de résilience et de rétention. Par exemple, vous pouvez utiliser ILM pour :</p><ul>
-<li>Faire tourner un nouvel index lorsqu&rsquo;un index atteint une certaine taille ou un certain nombre de documents.</li><li>créer un nouvel index chaque jour, semaine ou mois et archiver les précédents</li><li>supprimer les index périmés pour appliquer les normes de conservation des données.</li></ul><p>Vous pouvez créer et gérer les politiques de cycle de vie des index via Kibana Management ou les API ILM. Lorsque vous activez la gestion du cycle de vie des index pour Beats ou le plugin de sortie Logstash Elasticsearch, des politiques par défaut sont configurées automatiquement.</p><p>La mise en place de règle de gestion permet :</p><ul>
-<li>Augmenter les <strong>performances</strong> de recherche et/ou de visualisation</li><li>Obtenir une meilleure <strong>résilience</strong> de ses données</li><li>De définir des standards de <strong>rétention</strong>.</li></ul><p>L&rsquo;avantage de la fonctionnalité ILM est d&rsquo;automatiser cette gestion avec des règles simple d&rsquo;usage.</p><p><img src=https://www.elastic.co/guide/en/elasticsearch/reference/current/images/ilm/index-lifecycle-policies.png alt=ILM></p><h3 id=ilm-settings>ILM Settings</h3><p>Par défaut sur votre cluster la fonctionnalité ILM est configuré à un interval de vérification de 10 minutes.</p><p>Ce paramètre peut être modifié dans des contexts <strong>hors prod</strong>.</p><pre tabindex=0><code>GET _cluster/settings
+<span class=links><a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/>Elementaire</a> > Lab - Index Lifecycle Policy</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><ul><li><a href=#ilm-settings>ILM Settings</a></li><li><a href=#ilm-policy>ILM Policy</a></li><li><a href=#components-template>Components Template</a></li><li><a href=#index-template>Index Template</a></li><li><a href=#créer-votre-data-stream>Créer votre Data Stream</a></li><li><a href=#ajouter-des-données-dans-le-data-stream>Ajouter des données dans le Data Stream</a></li><li><a href=#mettre-à-jours-les-données-data-stream>Mettre à jours les données Data Stream</a></li><li><a href=#ilm-check>ILM Check</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Lab - Index Lifecycle Policy</h1><p>Vous pouvez configurer des politiques de gestion du cycle de vie des index (ILM) pour gérer automatiquement les index en fonction de vos exigences en matière de performances, de résilience et de rétention. Par exemple, vous pouvez utiliser ILM pour :</p><ul><li>Faire tourner un nouvel index lorsqu&rsquo;un index atteint une certaine taille ou un certain nombre de documents.</li><li>créer un nouvel index chaque jour, semaine ou mois et archiver les précédents</li><li>supprimer les index périmés pour appliquer les normes de conservation des données.</li></ul><p>Vous pouvez créer et gérer les politiques de cycle de vie des index via Kibana Management ou les API ILM. Lorsque vous activez la gestion du cycle de vie des index pour Beats ou le plugin de sortie Logstash Elasticsearch, des politiques par défaut sont configurées automatiquement.</p><p>La mise en place de règle de gestion permet :</p><ul><li>Augmenter les <strong>performances</strong> de recherche et/ou de visualisation</li><li>Obtenir une meilleure <strong>résilience</strong> de ses données</li><li>De définir des standards de <strong>rétention</strong>.</li></ul><p>L&rsquo;avantage de la fonctionnalité ILM est d&rsquo;automatiser cette gestion avec des règles simple d&rsquo;usage.</p><p><img src=https://www.elastic.co/guide/en/elasticsearch/reference/current/images/ilm/index-lifecycle-policies.png alt=ILM></p><h3 id=ilm-settings>ILM Settings</h3><p>Par défaut sur votre cluster la fonctionnalité ILM est configuré à un interval de vérification de 10 minutes.</p><p>Ce paramètre peut être modifié dans des contexts <strong>hors prod</strong>.</p><pre tabindex=0><code>GET _cluster/settings
 
 PUT _cluster/settings
 {
@@ -220,13 +51,7 @@ PUT _cluster/settings
   },
   &#34;transient&#34; : { }
 }
-</code></pre><h3 id=ilm-policy>ILM Policy</h3><p>La définition d&rsquo;une règle intègre plusieurs paramètres :</p><ul>
-<li>Phase : Il existe plusieurs type de phase hot, warm et cold.</li><li>Rollover : Le roulement d&rsquo;un index s&rsquo;applique avec au moins un de ces paramètres : max_age, max_size, max_docs.</li><li>Delete : La rétention d&rsquo;un index avec la fonction de suppression.</li></ul><p>Il est recommander d&rsquo;effectuer dans la phase <strong>hot</strong> une rotation d&rsquo;index sur les paramètres suivant :</p><ul>
-<li>Logs :
-<ul>
-<li>max_age : 15d</li><li>max_size : 45gb</li></ul></li><li>Metric :
-<ul>
-<li>max_age : 15d</li><li>max_size : 40gb</li></ul></li></ul><p>Et une deuxième recommandation est d&rsquo;effectuer une retention d&rsquo;index égale à 90 jours.</p><p>Cela permet d&rsquo;augmenter les performances de l&rsquo;index et d&rsquo;optimiser les recherches.</p><p>Pour notre besoin d&rsquo;aujourd&rsquo;hui, nous allons préparer une ILM avec une phase très courte. Ouvrez dans le menu Kibana le DevTool.</p><pre tabindex=0><code>PUT _ilm/policy/observability-policy
+</code></pre><h3 id=ilm-policy>ILM Policy</h3><p>La définition d&rsquo;une règle intègre plusieurs paramètres :</p><ul><li>Phase : Il existe plusieurs type de phase hot, warm et cold.</li><li>Rollover : Le roulement d&rsquo;un index s&rsquo;applique avec au moins un de ces paramètres : max_age, max_size, max_docs.</li><li>Delete : La rétention d&rsquo;un index avec la fonction de suppression.</li></ul><p>Il est recommander d&rsquo;effectuer dans la phase <strong>hot</strong> une rotation d&rsquo;index sur les paramètres suivant :</p><ul><li>Logs :<ul><li>max_age : 15d</li><li>max_size : 45gb</li></ul></li><li>Metric :<ul><li>max_age : 15d</li><li>max_size : 40gb</li></ul></li></ul><p>Et une deuxième recommandation est d&rsquo;effectuer une retention d&rsquo;index égale à 90 jours.</p><p>Cela permet d&rsquo;augmenter les performances de l&rsquo;index et d&rsquo;optimiser les recherches.</p><p>Pour notre besoin d&rsquo;aujourd&rsquo;hui, nous allons préparer une ILM avec une phase très courte. Ouvrez dans le menu Kibana le DevTool.</p><pre tabindex=0><code>PUT _ilm/policy/observability-policy
 {
   &#34;policy&#34;: {
     &#34;phases&#34;: {
@@ -252,8 +77,7 @@ PUT _cluster/settings
 </code></pre><pre tabindex=0><code>{
   &#34;acknowledged&#34; : true
 }
-</code></pre><h3 id=components-template>Components Template</h3><h4 id=settings>Settings</h4><p>Nous allons configurer des paramètres par défaut pour tous les index ELasticsearch qui seront créé.</p><p>Il est recommandé d&rsquo;avoir les paramètres de réplications suivant :</p><ul>
-<li>shard : 1</li><li>replicas : 1</li></ul><pre tabindex=0><code>PUT _component_template/observability-settings
+</code></pre><h3 id=components-template>Components Template</h3><h4 id=settings>Settings</h4><p>Nous allons configurer des paramètres par défaut pour tous les index ELasticsearch qui seront créé.</p><p>Il est recommandé d&rsquo;avoir les paramètres de réplications suivant :</p><ul><li>shard : 1</li><li>replicas : 1</li></ul><pre tabindex=0><code>PUT _component_template/observability-settings
 {
   &#34;template&#34;: {
     &#34;settings&#34;: {
@@ -748,21 +572,15 @@ Cela permet d&rsquo;automatiser la gestion des index en appliquant des configura
     }
   }
 }
-</code></pre><p>On peut observer les différentes informations de nos index concernant ILM appliquée deçu.</p><p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez mettre en place une politique de gestion du cylce de vie de vos index. Vous avez également exploré les différentes composants d&rsquo;une politique de gestion d&rsquo;index au travers des settings, mappings, template et data stream.</p><footer class=footline>
-</footer></div></div><div id=navigation>
-<a class="nav nav-prev" href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title="Lab - Habilitation"> <i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" style=margin-right:0><i class="fa fa-chevron-right"></i></a>
-</div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
-<div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1646233176></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1646233176></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1646233176></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1646233176></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1646233176></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1646233176></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1646233176></script>
-<script src=/elastic-tutorial/js/learn.js?1646233176></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1646233176></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1646233176></script>
-<script>mermaid.initialize({startOnLoad:!0})</script>
-</body></html>
+</code></pre><p>On peut observer les différentes informations de nos index concernant ILM appliquée deçu.</p><p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez mettre en place une politique de gestion du cylce de vie de vos index. Vous avez également exploré les différentes composants d&rsquo;une politique de gestion d&rsquo;index au travers des settings, mappings, template et data stream.</p><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/security/ title="Lab - Habilitation"><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/%C3%A9l%C3%A9mentaire/backup/ title="Lab - Backup & Restore" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1647253416></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1647253416></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1647253416></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1647253416></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1647253416></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1647253416></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1647253416></script>
+<script src=/elastic-tutorial/js/learn.js?1647253416></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1647253416></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1647253416></script>
+<script>mermaid.initialize({startOnLoad:!0})</script></body></html>
