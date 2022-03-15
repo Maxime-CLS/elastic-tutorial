@@ -86,11 +86,7 @@ Maintenant que les trois microservices sont en cours d'exécution, accédez à l
 
 Cliquez sur FIND OWNERS et VETERINARIANS pour générer des données de performance à envoyer au serveur APM.
 
-Cliquez sur ERROR pour générer des erreurs qui seront envoyées au serveur APM. Assurez-vous que vous obtenez le statut 404 et le message d'erreur No message available comme suit :
-
-![image.png](/elastic-tutorial/images/attachments/debutant/petclinic-error.png)
-
-Si vous n'obtenez pas cette erreur, cliquez sur HOME et cliquez à nouveau sur ERROR jusqu'à ce que vous obteniez cette erreur.
+Cliquez sur ERROR pour générer des erreurs qui seront envoyées au serveur APM. 
 
 Lancez l'application APM pour commencer à explorer les données collectées.
 

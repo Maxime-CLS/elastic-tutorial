@@ -69,8 +69,9 @@ volumes:
     driver: local
 
 networks:
-    elastic:
-        driver: bridge
+  elastic:
+    name: elastic
+    driver: bridge
 ```
 
 ```
@@ -84,7 +85,7 @@ heartbeat.monitors:
   name: Nginx Status
   schedule: '@every 10s'
   urls:
-    - http://nginx
+    - http://nginx:8081
   timeout: 30s
   check.response:
     status: 200
@@ -188,7 +189,7 @@ Modifiez la configuration de l'agent Heratbeat
 vim beats/conf/heartbeat.yml
 ```
 
-Ajouter les tests de navigation
+Ajouter les tests de navigation et modifier les URLs indiquer en localhost par l'adresse IP de votre machine. `http://localhost:8081/` en `http://IP_MACHINE:8081/`
 
 ```
 - type: browser
@@ -199,7 +200,7 @@ Ajouter les tests de navigation
     inline:
       script: |-
         step("load homepage", async () => {
-            await page.goto('http://10.240.145.124/');
+            await page.goto('http://localhost:8081/');
             await page.waitForRequest(/intake/);
         });
         step("click on find owners", async () => {
@@ -227,7 +228,7 @@ Ajouter les tests de navigation
     inline:
       script: |-
         step("load homepage", async () => {
-            await page.goto('http://10.240.145.124/');
+            await page.goto('http://localhost:8081/');
             await page.waitForRequest(/intake/);
         });
         step("click on vets", async () => {
@@ -243,7 +244,7 @@ Ajouter les tests de navigation
     inline:
       script: |-
         step("load homepage", async () => {
-            await page.goto('http://10.240.145.124/');
+            await page.goto('http://localhost:8081/');
             await page.waitForRequest(/intake/);
         });
         step("click on find owners", async () => {
@@ -263,7 +264,7 @@ Ajouter les tests de navigation
     inline:
       script: |-
         step("load homepage", async () => {
-            await page.goto('http://10.240.145.124/');
+            await page.goto('http://localhost:8081/');
             await page.waitForRequest(/intake/);
         });
         step("click on error", async () => {

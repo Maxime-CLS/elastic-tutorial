@@ -297,6 +297,7 @@ volumes:
 
 networks:
   elastic:
+    name: elastic
     driver: bridge
 ```
 
@@ -423,7 +424,7 @@ PASSWORD_ELASTIC=ASf3lYu7xoKMeesYuMPc
 Utilisez docker-compose pour redémarrer le cluster et Kibana :
 
 ```
-docker-compose stop
+docker-compose -f elastic-docker-tls.yml stop
 docker-compose -f elastic-docker-tls.yml up -d
 ```
 
@@ -452,7 +453,7 @@ Cliquez sur l'option "Or, set up with self monitoring"
 ### Déloyer une application blanche
 
 ```
-mkdir -P app/conf
+mkdir -p app/conf
 vim app/petclinic.yml
 ```
 
@@ -470,10 +471,10 @@ services:
       "co.elastic.logs/fileset.stdout": "access"
       "co.elastic.logs/fileset.stderr": "error"
       "co.elastic.metrics/module": "nginx"
-      "co.elastic.metrics/hosts": "nginx:80"
+      "co.elastic.metrics/hosts": "nginx:8081"
       "co.elastic.metrics/metricsets": "stubstatus"
     ports:
-      - 80:80
+      - 8081:8081
     volumes:
       - ./conf/default.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
@@ -507,7 +508,7 @@ services:
         -Dspring.datasource.url=jdbc:mysql://mysql:3306/petclinic?autoReconnect=true&useSSL=false
         -XX:+StartAttachListener
     ports:
-      - 8080:8080
+      - 8080
     networks:
       - elastic
 
@@ -528,6 +529,7 @@ services:
 
 networks:
   elastic:
+    name: elastic
     driver: bridge
 ```
 
@@ -539,7 +541,8 @@ vim app/conf/default.conf
 
 ```
 server {
-        listen       80;
+        listen       8081;
+        listen [::]:8081;
         server_name  localhost;
         location /intake {
           if ($request_method = 'OPTIONS') {
@@ -583,6 +586,6 @@ server {
 docker-compose -f app/petclinic.yml up -d
 ```
 
-Accédez à la application blanche en cliquant [ici](http://localhost)
+Accédez à la application blanche en cliquant [ici](http://localhost:8081)
 
 ![image.png](/elastic-tutorial/images/attachments/prerequis/petclinic.png)
