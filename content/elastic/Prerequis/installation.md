@@ -28,6 +28,33 @@ Créez les fichiers de composition et de configuration suivants. Ces fichiers so
 **create-certs.yml** est un fichier Docker Compose qui lance un conteneur pour générer les certificats pour Elasticsearch et Kibana.
 **elastic-docker-tls.yml** est un fichier Docker Compose qui met en place un cluster Elasticsearch à trois nœuds et une instance Kibana avec TLS activé afin que vous puissiez voir comment les choses fonctionnent. Cette configuration tout-en-un est un moyen pratique de mettre en place votre premier cluster de développement avant de construire un déploiement distribué avec plusieurs hôtes.
 
+
+Voici l'arborscence attendu :
+
+```
+./
+├── app
+│   ├── artificial_load.sh
+│   ├── conf
+│   │   └── default.conf
+│   └── petclinic.yml
+└── elastic-stack
+    ├── beats
+    │   ├── beats-docker.yml
+    │   └── conf
+    │       ├── filebeat.yml
+    │       ├── heartbeat.yml
+    │       └── metricbeat.yml
+    ├── create-certs.yml
+    ├── data
+    │   ├── accounts.json
+    │   ├── logs.json
+    │   └── shakespeare.json
+    ├── elastic-docker-tls.yml
+    ├── elastic-fleet-docker-tls.yml
+    └── instances.yml
+```
+
 **instances.yml** :
 
 ```
