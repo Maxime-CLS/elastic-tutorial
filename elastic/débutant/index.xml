@@ -21,7 +21,22 @@ restart: unless-stopped
 entrypoint: &amp;#34;filebeat -e -strict.</description></item><item><title>Lab - APM</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/</guid><description>Serveur APM Objectif : Dans ce laboratoire, vous apprendrez comment il est facile d&amp;rsquo;utiliser APM pour instrumenter les applications afin de collecter des informations détaillées sur les performances ainsi que les erreurs et les envoyer à votre déploiement Elasticsearch. Vous explorerez également l&amp;rsquo;application APM Kibana et verrez avec quelle facilité vous pouvez surveiller les performances des applications.
 Ajoutez le service APM ci-dessous dans le fichier elastic-docker-tls.yml :
 apm-server:
-image: docker.</description></item><item><title>Lab - Uptime</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/</guid><description>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques des disponibilités des services avec Heratbeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
+image: docker.elastic.co/apm/apm-server:${VERSION}
+container_name: apm-server
+depends_on:
+es01: { condition: service_healthy }
+kib01: { condition: service_healthy }
+cap_add: [&amp;#34;CHOWN&amp;#34;, &amp;#34;DAC_OVERRIDE&amp;#34;, &amp;#34;SETGID&amp;#34;, &amp;#34;SETUID&amp;#34;]
+cap_drop: [&amp;#34;ALL&amp;#34;]
+ports:
+- 8200:8200
+volumes:
+- certs:$CERTS_DIR
+networks:
+- elastic
+command: &amp;gt;
+apm-server -e
+-E apm-server.</description></item><item><title>Lab - Uptime</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/</guid><description>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques des disponibilités des services avec Heratbeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
 Déployer un agent beats Ajoutez le service Heartbeat à la suite du service Beats
 vim beats/beats-docker.yml beats-docker.yml
 version: &amp;#39;2.2&amp;#39;
