@@ -24,10 +24,10 @@ Vous disposez d'un cluster Elasticsearch préconfiguré à 6 nœuds avec Kibana 
 | tuto-logs-2020-01-05 | logs / this_week             | 2         | 1        | warm       |
 | tuto-logs-2020-01-06 | logs / this_week             | 2         | 1        | warm       |
 | tuto-logs-2020-01-07 | logs / this_week             | 2         | 1        | warm       |
-| tuto-logs-2020-01-05 | logs / this_week             | 2         | 1        | warm       |
-| tuto-logs-2020-01-05 | logs / this_week             | 2         | 1        | warm       |
-| tuto-logs-2020-01-05 | logs / this_week / yesterday | 2         | 1        | hot        |
-| tuto-logs-2020-01-05 | logs / this_week / today     | 2         | 1        | hot        |
+| tuto-logs-2020-01-08 | logs / this_week             | 2         | 1        | warm       |
+| tuto-logs-2020-01-09 | logs / this_week             | 2         | 1        | warm       |
+| tuto-logs-2020-01-10 | logs / this_week / yesterday | 2         | 1        | hot        |
+| tuto-logs-2020-01-11 | logs / this_week / today     | 2         | 1        | hot        |
 
 
 

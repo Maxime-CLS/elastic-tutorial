@@ -139,7 +139,7 @@ setup.kibana:
 Changer la valeur du champs **password** avec la valeur du mot de passe générer automatiquement.
 
 ```
-docker-compose -f beats/beats-docker.yml up -d
+docker compose -f beats/beats-docker.yml up -d
 ```
 
 ```
