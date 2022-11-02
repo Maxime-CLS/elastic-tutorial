@@ -173,7 +173,7 @@ GET _search
 }
 ```
 
-### Recherche une valeur avec une regex dans un champs spécifique (regex)
+### Recherche une valeur avec une regexp dans un champs spécifique (regexp)
 
 Renvoie les documents qui contiennent des termes correspondant à une expression régulière.
 
@@ -181,7 +181,7 @@ Renvoie les documents qui contiennent des termes correspondant à une expression
 GET _search
 {
     "query": {
-        "regex": {
+        "regexp": {
             "email.keyword": ".*@xurban\\.com"
         }
     }

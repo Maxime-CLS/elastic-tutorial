@@ -324,7 +324,7 @@ Ensuite vous allez définir un utilisateur qui aura l'habilitation de lire les d
 ```
 POST /_security/user/admin_observability
 {
-  "username": "admin_observability",
+  "password" : "admin_password",
   "roles": [
     "admin_observability"
   ],

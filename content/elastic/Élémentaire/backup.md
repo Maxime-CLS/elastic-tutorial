@@ -89,7 +89,7 @@ green  open .kibana_task_manager_7.17.0_001                          x63yGuhDSau
 La gestion du cycle de vie des instantanés (SLM) est le moyen le plus simple de sauvegarder régulièrement un cluster. Une politique SLM prend automatiquement des instantanés selon une planification prédéfinie. La politique peut également supprimer les instantanés en fonction des règles de rétention que vous définissez.
 
 ```
-PUT _slm/policy/daily-observability-snpashots
+PUT _slm/policy/daily-observability-snapshots
 {
   "name": "<observability-{now/d}>",
   "schedule": "0 30 1 * * ?",

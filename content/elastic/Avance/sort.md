@@ -51,7 +51,7 @@ GET bank/_search
 }
 ```
 
-### Tri ascendant descendant
+### Tri descendant
 
 ```
 GET bank/_search

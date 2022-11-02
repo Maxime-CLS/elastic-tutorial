@@ -51,7 +51,7 @@ Ajoutez le service APM ci-dessous dans le fichier **elastic-docker-tls.yml**  :
 ```
 
 ```
-docker-compose -f elastic-docker-tls.yml up -d
+docker compose -f elastic-docker-tls.yml up -d
 ```
 
 L'application Petclinic contient des variables d'environnement pour contacter le serveur APM :

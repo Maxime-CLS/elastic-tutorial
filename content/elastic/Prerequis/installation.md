@@ -340,7 +340,7 @@ networks:
 Générez des certificats pour Elasticsearch en faisant apparaître le conteneur create-certs :
 
 ```
-docker-compose -f create-certs.yml run --rm create_certs
+docker compose -f create-certs.yml run --rm create_certs
 ```
 
 Vérifiez a présence des volumes
@@ -389,7 +389,7 @@ package-registry.crt  package-registry.key
 Mettez en place le cluster Elasticsearch à trois nœuds :
 
 ```
-docker-compose -f elastic-docker-tls.yml up -d
+docker compose -f elastic-docker-tls.yml up -d
 ```
 
 À ce stade, Kibana ne peut pas se connecter au cluster Elasticsearch. Vous devez générer un mot de passe pour l'utilisateur intégré kibana_system, mettre à jour le mot de passe ELASTICSEARCH_PASSWORD dans le fichier compose, et redémarrer pour permettre à Kibana de communiquer avec le cluster sécurisé.
@@ -451,8 +451,8 @@ PASSWORD_ELASTIC=ASf3lYu7xoKMeesYuMPc
 Utilisez docker-compose pour redémarrer le cluster et Kibana :
 
 ```
-docker-compose -f elastic-docker-tls.yml stop
-docker-compose -f elastic-docker-tls.yml up -d
+docker compose -f elastic-docker-tls.yml stop
+docker compose -f elastic-docker-tls.yml up -d
 ```
 
 Ouvrez Kibana pour charger les données de l'échantillon et interagir avec le cluster : [Kibana](https://localhost:5601)
@@ -610,9 +610,15 @@ server {
 ```
 
 ```
-docker-compose -f app/petclinic.yml up -d
+docker compose -f app/petclinic.yml up -d
 ```
 
 Accédez à la application blanche en cliquant [ici](http://localhost:8081)
 
 ![image.png](/elastic-tutorial/images/attachments/prerequis/petclinic.png)
+
+Télécharger des données d'exemples :
+
+```
+git clone https://github.com/Maxime-CLS/elastic-data-tutorial.git
+```

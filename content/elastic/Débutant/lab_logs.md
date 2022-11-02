@@ -12,7 +12,7 @@ Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous 
 ### Déployer un agent beats
 
 ```
-mkdir -P beats/conf
+mkdir -p beats/conf
 ```
 
 ```
@@ -243,7 +243,7 @@ Changer la valeur du champs **password** avec la valeur du mot de passe génére
 
 
 ```
-docker-compose -f beats/beats-docker.yml up -d
+docker compose -f beats/beats-docker.yml up -d
 ```
 
 ```

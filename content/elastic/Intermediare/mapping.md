@@ -79,13 +79,53 @@ Vous travaillez en tant qu'administrateur Elasticsearch pour un cluster à 6 nœ
 
 L'index tuto-logs_new doit conserver les mêmes paramètres d'index que l'index logs pour le nombre de shards primaires et de replica. Une fois que l'index tuto-logs_new a été créé, vous pouvez réindexer les documents dans le nouvel index.
 
+Ecrivez un script de chargement des données nommée load_data_logs.sh
+
 ```
-curl --location --request POST 'https://localhost:9200/tuto-logs/doc/_bulk?pretty' \
---header 'Content-Type: application/x-ndjson' \
---header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
- --data-binary @logs.json
+#!/bin/bash
+
+input="logs.json"
+output="bulk.log"
+counter=0
+max_rows=500
+create='{"create": {}}'
+bulk_data=$'\n'
+
+echo "Reading logs events from $input..."
+
+while read -r log_event
+do
+  let "counter=counter+1"
+  bulk_data+="$create"$'\n'"$log_event"$'\n'
+  if [ $counter -eq $max_rows ]
+  then
+       echo "Indexing $counter documents..."
+       bulk_data+=$'\n'
+       echo "$bulk_data" | tee temp.json > /dev/null
+       curl -XPOST 'https://elastic:nonprodpwd@localhost:9200/tuto-logs/_bulk' -H 'Content-Type: application/json' --insecure --data-binary @temp.json > "$output"
+       rm -rf temp.json
+       counter=0
+       bulk_data=$'\n'
+  fi
+done < "$input"
+
+if [ $counter -lt $max_rows ] && [ $counter -gt 0 ]
+then
+       echo "Indexing $counter documents..."
+       bulk_data+=$'\n'
+       echo "$bulk_data" | tee temp.json > /dev/null
+       curl -XPOST 'https://elastic:nonprodpwd@localhost:9200/tuto-logs/_bulk' -H 'Content-Type: application/json' --insecure --data-binary @temp.json > "$output"
+       rm -rf temp.json
+fi
 ```
 
+Modifier le password d'Elasticsearch.
+
+Exécuter le script.
+
+```
+./load_data_logs.sh
+```
 
 ```
 PUT tuto-logs_new
