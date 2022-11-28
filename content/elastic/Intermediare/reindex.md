@@ -56,6 +56,52 @@ bulk_data=$'\n'
 
 echo "Reading logs events from $input..."
 
+while read -r log_event
+do
+  let "counter=counter+1"
+  bulk_data+="$create"$'\n'"$log_event"$'\n'
+  if [ $counter -eq $max_rows ]
+  then
+       echo "Indexing $counter documents..."
+       bulk_data+=$'\n'
+       echo "$bulk_data" | tee temp.json > /dev/null
+       curl -XPOST 'https://elastic:nonprodpwd@localhost:9200/account/_bulk' -H 'Content-Type: application/json' --insecure --data-binary @temp.json > "$output"
+       rm -rf temp.json
+       counter=0
+       bulk_data=$'\n'
+  fi
+done < "$input"
+
+if [ $counter -lt $max_rows ] && [ $counter -gt 0 ]
+then
+       echo "Indexing $counter documents..."
+       bulk_data+=$'\n'
+       echo "$bulk_data" | tee temp.json > /dev/null
+       curl -XPOST 'https://elastic:nonprodpwd@localhost:9200/account/_bulk' -H 'Content-Type: application/json' --insecure --data-binary @temp.json > "$output"
+       rm -rf temp.json
+fi
+```
+
+Modifier le password d'Elasticsearch.
+
+Exécuter le script.
+
+```
+./load_data_account.sh
+>>>>>>> 5544809a1e80114a48e4d1479587e1b391b48b41
+```
+#!/bin/bash
+
+<<<<<<< HEAD
+input="account.json"
+output="bulk.log"
+counter=0
+max_rows=500
+create='{"create": {}}'
+bulk_data=$'\n'
+
+echo "Reading logs events from $input..."
+
 ```
 while read -r log_event
 do
@@ -91,6 +137,8 @@ Exécuter le script.
 ./load_data_account.sh
 ```
 
+=======
+>>>>>>> 5544809a1e80114a48e4d1479587e1b391b48b41
 Ecrivez un script de chargement des données nommée load_data_shakespeare.sh
 
 ```
