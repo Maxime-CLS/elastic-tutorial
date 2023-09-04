@@ -11,49 +11,6 @@ Objectif : Dans ce laboratoire, vous apprendrez comment il est facile d'utiliser
 
 ![image.png](/elastic-tutorial/images/attachments/debutant/apm-lab-architecture.png)
 
-Ajoutez le service APM ci-dessous dans le fichier **elastic-docker-tls.yml**  :
-
-```
-  apm-server:
-    image: docker.elastic.co/apm/apm-server:${VERSION}
-    container_name: apm-server
-    depends_on:
-      es01: { condition: service_healthy }
-      kib01: { condition: service_healthy }
-    cap_add: ["CHOWN", "DAC_OVERRIDE", "SETGID", "SETUID"]
-    cap_drop: ["ALL"]
-    ports:
-    - 8200:8200
-    volumes:
-       - certs:$CERTS_DIR
-    networks:
-    - elastic
-    command: >
-       apm-server -e
-         -E apm-server.rum.enabled=true
-         -E setup.kibana.host=kib01:5601
-         -E setup.template.settings.index.number_of_replicas=1
-         -E apm-server.kibana.enabled=true
-         -E apm-server.kibana.host=kib01:5601
-         -E apm-server.kibana.protocol=https
-         -E apm-server.kibana.username=$USER_ELASTIC
-         -E apm-server.kibana.password=$PASSWORD_ELASTIC
-         -E apm-server.kibana.ssl.enabled=true
-         -E apm-server.kibana.ssl.certificate_authorities=["$CERTS_DIR/ca/ca.crt"]
-         -E output.elasticsearch.hosts=["https://es01:9200"]
-         -E output.elasticsearch.username=$USER_ELASTIC
-         -E output.elasticsearch.password=$PASSWORD_ELASTIC
-         -E output.elasticsearch.ssl.certificate_authorities=["$CERTS_DIR/ca/ca.crt"]
-    healthcheck:
-      interval: 10s
-      retries: 12
-      test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:8200/
-```
-
-```
-docker compose -f elastic-docker-tls.yml up -d
-```
-
 L'application Petclinic contient des variables d'environnement pour contacter le serveur APM :
 
 
@@ -87,6 +44,8 @@ Maintenant que les trois microservices sont en cours d'exécution, accédez à l
 Cliquez sur FIND OWNERS et VETERINARIANS pour générer des données de performance à envoyer au serveur APM.
 
 Cliquez sur ERROR pour générer des erreurs qui seront envoyées au serveur APM. 
+
+Vous avez constaté des dysfonctionnements ? Ne vous inquiétez pas, nous verrons cela par la suite.
 
 Lancez l'application APM pour commencer à explorer les données collectées.
 

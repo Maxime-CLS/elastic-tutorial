@@ -8,50 +8,17 @@ weight: 5
 Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez lire les fichiers journaux NGINX avec Filebeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller les journaux NGINX.
 
 
+Voici le fichier de configuration de l'agent de collecte pour les données de type logs.
 
-### Déployer un agent beats
+Cette configuration va nous permettre :
+- Collecter les logs de la machine Linux
+- Collecter les logs de containers Docker
+- Contextualiser les données collecter au travers de metadata
+- Envoyer les données à un cluster Elasticsearch
+- Provisionner des tableaux de bords
+- Provisionner des paramètres de configuration des données de type logs
 
-```
-mkdir -p beats/conf
-```
-
-```
-vim beats/beats-docker.yml
-```
-
-**beats-docker.yml**
-
-```
-version: '2.2'
-services:
-    filebeat:
-        image: docker.elastic.co/beats/filebeat:${VERSION}
-        container_name: filebeat
-        restart: unless-stopped
-        entrypoint: "filebeat -e -strict.perms=false"
-        user: root
-        volumes:
-        - "./conf/filebeat.yml:/usr/share/filebeat/filebeat.yml:rw"
-        - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
-        - "/var/run/docker.sock:/var/run/docker.sock:ro"
-        - "/var/log:/tmp:ro"
-        - certs:$CERTS_DIR
-        networks:
-        - elastic
-
-volumes:
-  certs:
-    driver: local
-
-networks:
-  elastic:
-    name: elastic
-    driver: bridge
-```
-
-```
-vim beats/conf/filebeat.yml
-```
+**filebeat.yml**
 
 ```
 ######################## Filebeat Configuration ############################
@@ -239,45 +206,11 @@ logging.files:
   name: filebeat
 ```
 
-Changer la valeur du champs **password** avec la valeur du mot de passe générer automatiquement.
-
-
-```
-docker compose -f beats/beats-docker.yml up -d
-```
-
-```
-vim app/artificial_load.sh
-```
-
-```
-#!/bin/bash
-
-COUNTER=0
-
-while [  $COUNTER -lt 10000 ] ;
-do
- curl -s --header "X-Forwarded-For: 5.198.223.255" localhost > /dev/null
- curl -s localhost:8081/owners/find > /dev/null
- curl -s localhost:8081/owners?lastName= > /dev/null
- curl -s localhost:8081/owners/1 > /dev/null
- curl -s localhost:8081/owners/4 > /dev/null
- curl -s localhost:8081/owners/6 > /dev/null
- curl -s localhost:8081/owners/8 > /dev/null
- curl -s localhost:8081/vets.html > /dev/null
- curl -s localhost:8081/oups > /dev/null
- let COUNTER=COUNTER+1
-done
-```
-
-```
-chmod +x app/artificial_load.sh
-```
-
 Maintenant, ouvrez une nouvelle fenêtre de terminal et exécutez le script suivant pour simuler la charge sur votre serveur NGINX.
 
 ```
-./app/artificial_load.sh
+cd elastic-platform/app/
+./artificial_load.sh
 ```
 
 Lancer Kibana pour commencer à explorer les tableaux de bord qui ont été inclus dans le processus de configuration.
@@ -289,16 +222,40 @@ Accédez à Dashboard via le menu principal
 
 Recherchez nginx et ouvrez le tableau de bord ECS Filebeat Nginx Overview.
 
-![image.png](/elastic-tutorial/images/attachments/debutant/filebeat-dashboards.png) 
+![image.png](/elastic-tutorial/images/attachments/debutant/filebeat-dashboards.png)
 
 Vous verrez quelque chose de similaire à la page ci-dessous.
 
 ![image.png](/elastic-tutorial/images/attachments/debutant/filebeat-nginx-dashboard.png)
 
+Si vous rencontrez ce message dans une ou plusieurs visualisation.
+
+![image.png](/elastic-tutorial/images/attachments/debutant/visualisation_error.png)
+
+```
+Saved field "user_agent.name" of data view "filebeat-*" is invalid for use with the "Terms" aggregation. Please select a new field.
+```
+
+Vous devez éditer la visualisation en cliquant sur le bouton "Editer" puis sélectionner la petite roue sur la visualisation.
+
+Ensuite vous pouvez modifier la visualisation en écrivant le nom du champs et de sélectionner le champs avec .keyword.
+
+sans keyword :
+
+![image.png](/elastic-tutorial/images/attachments/debutant/edition_visualisation.png)
+
+avec keyword :
+
+![image.png](/elastic-tutorial/images/attachments/debutant/visualisation_keyword.png)
+
+Vous pouvez enregistrer votre modification et vous aurez une visualisation qui fonctionne :
+
+![image.png](/elastic-tutorial/images/attachments/debutant/visualisation_ok.png)
 
 Faites défiler vers le bas et vérifiez quel est le navigateur le plus utilisé. Vous remarquerez que ce devrait être curl car il est utilisé par le script de simulation de charge.
 
 ![image.png](/elastic-tutorial/images/attachments/debutant/filebeat-nginx-most-used-browser.png)
+
 
 Maintenant, cliquez sur Nginx access and error logs en haut du tableau de bord actuel pour voir le tableau de bord avec les journaux d'accès et d'erreurs que Filebeat a collecté de NGINX.
 

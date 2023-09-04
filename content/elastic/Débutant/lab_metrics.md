@@ -7,64 +7,17 @@ weight: 10
 
 Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques système et NGINX avec Metricbeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
 
+Voici le fichier de configuration de l'agent de collecte pour les données de type métriques.
 
-### Déployer un agent beats
-
-Ajoutez le service **Metricbeat** à la suite du service **Beats**
-
-```
-vim beats/beats-docker.yml
-```
-
-**beats-docker.yml**
-
-```
-version: '2.2'
-services:
-  filebeat:
-    image: docker.elastic.co/beats/filebeat:${VERSION}
-    container_name: filebeat
-    restart: unless-stopped
-    entrypoint: "filebeat -e -strict.perms=false"
-    user: root
-    volumes:
-    - "./conf/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro"
-    - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
-    - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    - "/var/log:/tmp:ro"
-    - certs:$CERTS_DIR
-    networks:
-    - elastic
-  metricbeat:
-    image: docker.elastic.co/beats/metricbeat:${VERSION}
-    container_name: metricbeat
-    restart: unless-stopped
-    entrypoint: "metricbeat -e -strict.perms=false"
-    user: root
-    volumes:
-    - "./conf/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro"
-    - "/proc:/hostfs/proc:ro"
-    - "/sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro"
-    - "/:/hostfs:ro"
-    - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    - certs:$CERTS_DIR
-    networks:
-    - elastic
+Cette configuration va nous permettre :
+- Collecter les métriques de la machine Linux
+- Collecter les métriques de containers Docker
+- Contextualiser les données collecter au travers de metadata
+- Envoyer les données à un cluster Elasticsearch
+- Provisionner des tableaux de bords
 
 
-volumes:
-  certs:
-    driver: local
-
-networks:
-  elastic:
-    name: elastic
-    driver: bridge
-```
-
-```
-vim beats/conf/metricbeat.yml
-```
+**metricbeat.yml**
 
 ```
 #-------------------------------- Autodiscovery -------------------------------
@@ -136,44 +89,12 @@ setup.kibana:
   ssl.certificate_authorities: ["/usr/share/elasticsearch/config/certificates/ca/ca.crt"]
 ```
 
-Changer la valeur du champs **password** avec la valeur du mot de passe générer automatiquement.
-
-```
-docker compose -f beats/beats-docker.yml up -d
-```
-
-```
-vim app/artificial_load.sh
-```
-
-```
-#!/bin/bash
-
-COUNTER=0
-
-while [  $COUNTER -lt 10000 ] ;
-do
- curl -s --header "X-Forwarded-For: 5.198.223.255" localhost > /dev/null
- curl -s localhost:8081/owners/find > /dev/null
- curl -s localhost:8081/owners?lastName= > /dev/null
- curl -s localhost:8081/owners/1 > /dev/null
- curl -s localhost:8081/owners/4 > /dev/null
- curl -s localhost:8081/owners/6 > /dev/null
- curl -s localhost:8081/owners/8 > /dev/null
- curl -s localhost:8081/vets.html > /dev/null
- curl -s localhost:8081/oups > /dev/null
- let COUNTER=COUNTER+1
-done
-```
-
-```
-chmod +x app/artificial_load.sh
-```
 
 Maintenant, ouvrez une nouvelle fenêtre de terminal et exécutez le script suivant pour simuler la charge sur votre serveur NGINX.
 
 ```
-./app/artificial_load.sh
+cd elastic-platform/app/
+./artificial_load.sh
 ```
 
 Lancez Kibana pour commencer à explorer les tableaux de bord qui ont été inclus dans le processus de configuration.
