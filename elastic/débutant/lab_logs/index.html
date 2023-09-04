@@ -1,8 +1,8 @@
-<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.107.0"><meta name=description content="Tutoriel sur Elastic"><meta name=author content="Maxime Calves"><link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png><title>Lab - Logs :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/fontawesome-all.min.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/hybrid.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/featherlight.min.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/auto-complete.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/theme.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/tabs.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/hugo-theme.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/theme-blue.css?1669647242 rel=stylesheet><script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1669647242></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><img src=../../../../elastic-tutorial/media/logo.png></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.118.2"><meta name=description content="Tutoriel sur Elastic"><meta name=author content="Maxime Calves"><link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png><title>Lab - Logs :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/fontawesome-all.min.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/hybrid.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/featherlight.min.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/auto-complete.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/theme.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/tabs.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/hugo-theme.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/theme-blue.css?1693837831 rel=stylesheet><script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1693837831></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><img src=../../../../elastic-tutorial/media/logo.png></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
-<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1669647242></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1669647242></script>
-<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script><script type=text/javascript src=/elastic-tutorial/js/search.js?1669647242></script></div><div class=highlightable><ul class=topics><li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1693837831></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1693837831></script>
+<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script><script type=text/javascript src=/elastic-tutorial/js/search.js?1693837831></script></div><div class=highlightable><ul class=topics><li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
 parent"><a href=/elastic-tutorial/elastic/>Elastic
 <i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item><a href=/elastic-tutorial/elastic/prerequis/>Prérequis
 <i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/prerequis/installation/ title=Installation class=dd-item><a href=/elastic-tutorial/elastic/prerequis/installation/>Installation
@@ -32,35 +32,7 @@ parent"><a href=/elastic-tutorial/elastic/d%C3%A9butant/>Débutant
 <i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" class=dd-item><a href=/elastic-tutorial/elastic/avance/fleet/>Bonus - Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li></ul><section id=prefooter><hr><ul><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i></a></span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
-<span class=links><a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/d%C3%A9butant/>Débutant</a> > Lab - Logs</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><ul><li><a href=#déployer-un-agent-beats>Déployer un agent beats</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Lab - Logs</h1><p>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez lire les fichiers journaux NGINX avec Filebeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller les journaux NGINX.</p><h3 id=déployer-un-agent-beats>Déployer un agent beats</h3><pre tabindex=0><code>mkdir -p beats/conf
-</code></pre><pre tabindex=0><code>vim beats/beats-docker.yml
-</code></pre><p><strong>beats-docker.yml</strong></p><pre tabindex=0><code>version: &#39;2.2&#39;
-services:
-    filebeat:
-        image: docker.elastic.co/beats/filebeat:${VERSION}
-        container_name: filebeat
-        restart: unless-stopped
-        entrypoint: &#34;filebeat -e -strict.perms=false&#34;
-        user: root
-        volumes:
-        - &#34;./conf/filebeat.yml:/usr/share/filebeat/filebeat.yml:rw&#34;
-        - &#34;/var/lib/docker/containers:/var/lib/docker/containers:ro&#34;
-        - &#34;/var/run/docker.sock:/var/run/docker.sock:ro&#34;
-        - &#34;/var/log:/tmp:ro&#34;
-        - certs:$CERTS_DIR
-        networks:
-        - elastic
-
-volumes:
-  certs:
-    driver: local
-
-networks:
-  elastic:
-    name: elastic
-    driver: bridge
-</code></pre><pre tabindex=0><code>vim beats/conf/filebeat.yml
-</code></pre><pre tabindex=0><code>######################## Filebeat Configuration ############################
+<span class=links><a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/d%C3%A9butant/>Débutant</a> > Lab - Logs</span></div><div class=progress><div class=wrapper><nav id=TableOfContents></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Lab - Logs</h1><p>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez lire les fichiers journaux NGINX avec Filebeat et les indexer dans Elasticsearch. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller les journaux NGINX.</p><p>Voici le fichier de configuration de l&rsquo;agent de collecte pour les données de type logs.</p><p>Cette configuration va nous permettre :</p><ul><li>Collecter les logs de la machine Linux</li><li>Collecter les logs de containers Docker</li><li>Contextualiser les données collecter au travers de metadata</li><li>Envoyer les données à un cluster Elasticsearch</li><li>Provisionner des tableaux de bords</li><li>Provisionner des paramètres de configuration des données de type logs</li></ul><p><strong>filebeat.yml</strong></p><pre tabindex=0><code>######################## Filebeat Configuration ############################
 
 #==========================  Modules configuration ============================
 filebeat.modules:
@@ -243,36 +215,18 @@ logging.files:
 
   # The name of the files where the logs are written to.
   name: filebeat
-</code></pre><p>Changer la valeur du champs <strong>password</strong> avec la valeur du mot de passe générer automatiquement.</p><pre tabindex=0><code>docker compose -f beats/beats-docker.yml up -d
-</code></pre><pre tabindex=0><code>vim app/artificial_load.sh
-</code></pre><pre tabindex=0><code>#!/bin/bash
-
-COUNTER=0
-
-while [  $COUNTER -lt 10000 ] ;
-do
- curl -s --header &#34;X-Forwarded-For: 5.198.223.255&#34; localhost &gt; /dev/null
- curl -s localhost:8081/owners/find &gt; /dev/null
- curl -s localhost:8081/owners?lastName= &gt; /dev/null
- curl -s localhost:8081/owners/1 &gt; /dev/null
- curl -s localhost:8081/owners/4 &gt; /dev/null
- curl -s localhost:8081/owners/6 &gt; /dev/null
- curl -s localhost:8081/owners/8 &gt; /dev/null
- curl -s localhost:8081/vets.html &gt; /dev/null
- curl -s localhost:8081/oups &gt; /dev/null
- let COUNTER=COUNTER+1
-done
-</code></pre><pre tabindex=0><code>chmod +x app/artificial_load.sh
-</code></pre><p>Maintenant, ouvrez une nouvelle fenêtre de terminal et exécutez le script suivant pour simuler la charge sur votre serveur NGINX.</p><pre tabindex=0><code>./app/artificial_load.sh
-</code></pre><p>Lancer Kibana pour commencer à explorer les tableaux de bord qui ont été inclus dans le processus de configuration.</p><p>Accédez à Dashboard via le menu principal</p><p><img src=/elastic-tutorial/images/attachments/debutant/dashboard-menu.png alt=image.png></p><p>Recherchez nginx et ouvrez le tableau de bord ECS Filebeat Nginx Overview.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-dashboards.png alt=image.png></p><p>Vous verrez quelque chose de similaire à la page ci-dessous.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-nginx-dashboard.png alt=image.png></p><p>Faites défiler vers le bas et vérifiez quel est le navigateur le plus utilisé. Vous remarquerez que ce devrait être curl car il est utilisé par le script de simulation de charge.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-nginx-most-used-browser.png alt=image.png></p><p>Maintenant, cliquez sur Nginx access and error logs en haut du tableau de bord actuel pour voir le tableau de bord avec les journaux d&rsquo;accès et d&rsquo;erreurs que Filebeat a collecté de NGINX.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-nginx-dashboard2.png alt=image.png></p><p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez lire les fichiers journaux NGINX avec Filebeat et les indexer dans Elasticsearch. Vous avez également exploré les tableaux de bord Kibana et vu comment vous pouvez facilement surveiller les journaux NGINX.</p><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant><i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1669647242></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1669647242></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1669647242></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1669647242></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1669647242></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1669647242></script>
-<script>hljs.initHighlightingOnLoad()</script><script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1669647242></script>
-<script src=/elastic-tutorial/js/learn.js?1669647242></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1669647242></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1669647242></script>
+</code></pre><p>Maintenant, ouvrez une nouvelle fenêtre de terminal et exécutez le script suivant pour simuler la charge sur votre serveur NGINX.</p><pre tabindex=0><code>cd elastic-platform/app/
+./artificial_load.sh
+</code></pre><p>Lancer Kibana pour commencer à explorer les tableaux de bord qui ont été inclus dans le processus de configuration.</p><p>Accédez à Dashboard via le menu principal</p><p><img src=/elastic-tutorial/images/attachments/debutant/dashboard-menu.png alt=image.png></p><p>Recherchez nginx et ouvrez le tableau de bord ECS Filebeat Nginx Overview.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-dashboards.png alt=image.png></p><p>Vous verrez quelque chose de similaire à la page ci-dessous.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-nginx-dashboard.png alt=image.png></p><p>Si vous rencontrez ce message dans une ou plusieurs visualisation.</p><p><img src=/elastic-tutorial/images/attachments/debutant/visualisation_error.png alt=image.png></p><pre tabindex=0><code>Saved field &#34;user_agent.name&#34; of data view &#34;filebeat-*&#34; is invalid for use with the &#34;Terms&#34; aggregation. Please select a new field.
+</code></pre><p>Vous devez éditer la visualisation en cliquant sur le bouton &ldquo;Editer&rdquo; puis sélectionner la petite roue sur la visualisation.</p><p>Ensuite vous pouvez modifier la visualisation en écrivant le nom du champs et de sélectionner le champs avec .keyword.</p><p>sans keyword :</p><p><img src=/elastic-tutorial/images/attachments/debutant/edition_visualisation.png alt=image.png></p><p>avec keyword :</p><p><img src=/elastic-tutorial/images/attachments/debutant/visualisation_keyword.png alt=image.png></p><p>Vous pouvez enregistrer votre modification et vous aurez une visualisation qui fonctionne :</p><p><img src=/elastic-tutorial/images/attachments/debutant/visualisation_ok.png alt=image.png></p><p>Faites défiler vers le bas et vérifiez quel est le navigateur le plus utilisé. Vous remarquerez que ce devrait être curl car il est utilisé par le script de simulation de charge.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-nginx-most-used-browser.png alt=image.png></p><p>Maintenant, cliquez sur Nginx access and error logs en haut du tableau de bord actuel pour voir le tableau de bord avec les journaux d&rsquo;accès et d&rsquo;erreurs que Filebeat a collecté de NGINX.</p><p><img src=/elastic-tutorial/images/attachments/debutant/filebeat-nginx-dashboard2.png alt=image.png></p><p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez lire les fichiers journaux NGINX avec Filebeat et les indexer dans Elasticsearch. Vous avez également exploré les tableaux de bord Kibana et vu comment vous pouvez facilement surveiller les journaux NGINX.</p><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/ title="Lab - Metrics" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1693837831></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1693837831></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1693837831></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1693837831></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1693837831></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1693837831></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1693837831></script>
+<script src=/elastic-tutorial/js/learn.js?1693837831></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1693837831></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1693837831></script>
 <script>mermaid.initialize({startOnLoad:!0})</script></body></html>

@@ -1,8 +1,8 @@
-<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.107.0"><meta name=description content="Tutoriel sur Elastic"><meta name=author content="Maxime Calves"><link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png><title>Installation :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/fontawesome-all.min.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/hybrid.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/featherlight.min.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/auto-complete.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/theme.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/tabs.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/hugo-theme.css?1669647242 rel=stylesheet><link href=/elastic-tutorial/css/theme-blue.css?1669647242 rel=stylesheet><script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1669647242></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/prerequis/installation/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><img src=../../../../elastic-tutorial/media/logo.png></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.118.2"><meta name=description content="Tutoriel sur Elastic"><meta name=author content="Maxime Calves"><link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png><title>Installation :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/fontawesome-all.min.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/hybrid.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/featherlight.min.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/auto-complete.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/theme.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/tabs.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/hugo-theme.css?1693837831 rel=stylesheet><link href=/elastic-tutorial/css/theme-blue.css?1693837831 rel=stylesheet><script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1693837831></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/prerequis/installation/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><img src=../../../../elastic-tutorial/media/logo.png></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
-<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1669647242></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1669647242></script>
-<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script><script type=text/javascript src=/elastic-tutorial/js/search.js?1669647242></script></div><div class=highlightable><ul class=topics><li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1693837831></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1693837831></script>
+<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script><script type=text/javascript src=/elastic-tutorial/js/search.js?1693837831></script></div><div class=highlightable><ul class=topics><li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
 parent"><a href=/elastic-tutorial/elastic/>Elastic
 <i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class="dd-item
 parent"><a href=/elastic-tutorial/elastic/prerequis/>Prérequis
@@ -32,12 +32,43 @@ parent"><a href=/elastic-tutorial/elastic/prerequis/>Prérequis
 <i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/elastic-tutorial/elastic/avance/fleet/ title="Bonus - Fleet & Elastic Agent" class=dd-item><a href=/elastic-tutorial/elastic/avance/fleet/>Bonus - Fleet & Elastic Agent
 <i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li></ul><section id=prefooter><hr><ul><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><p>Built with <a href=https://github.com/matcornic/hugo-theme-learn><i class="fas fa-heart"></i></a> from <a href=https://getgrav.org>Grav</a> and <a href=https://gohugo.io/>Hugo</a></p></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i></a></span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
-<span class=links><a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/prerequis/>Prérequis</a> > Installation</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><a href=#prérequis>Prérequis</a><ul><li><a href=#déployer-la-stack-elasticsearch-kibana-dans-docker-avec-tls-activé>Déployer la stack Elasticsearch Kibana dans Docker avec TLS activé</a></li><li><a href=#déloyer-une-application-blanche>Déloyer une application blanche</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Installation</h1><h2 id=prérequis>Prérequis</h2><ul><li>Ubuntu ou Debian</li><li>Docker</li><li>Exécuter la commande ci-dessous</li></ul><pre tabindex=0><code>sudo sysctl -w vm.max_map_count=262144
-</code></pre><h3 id=déployer-la-stack-elasticsearch-kibana-dans-docker-avec-tls-activé>Déployer la stack Elasticsearch Kibana dans Docker avec TLS activé</h3><p>Si les fonctions de sécurité sont activées, vous devez configurer le chiffrement TLS (Transport Layer Security) pour la couche de transport d&rsquo;Elasticsearch. Bien qu&rsquo;il soit possible d&rsquo;utiliser une licence d&rsquo;essai sans configurer TLS, nous vous conseillons de sécuriser votre pile dès le départ.</p><p>Pour obtenir un cluster Elasticsearch et Kibana opérationnel dans Docker avec la sécurité activée, vous pouvez utiliser Docker Compose :</p><p>Créez les fichiers de composition et de configuration suivants. Ces fichiers sont également disponibles dans le dépôt elastic/stack-docs sur GitHub.</p><p><strong>instances.yml</strong> identifie les instances pour lesquelles vous devez créer des certificats.
-<strong>.env</strong> définit des variables d&rsquo;environnement pour spécifier la version d&rsquo;Elasticsearch et l&rsquo;emplacement où les certificats Elasticsearch seront créés.
-<strong>create-certs.yml</strong> est un fichier Docker Compose qui lance un conteneur pour générer les certificats pour Elasticsearch et Kibana.
-<strong>elastic-docker-tls.yml</strong> est un fichier Docker Compose qui met en place un cluster Elasticsearch à trois nœuds et une instance Kibana avec TLS activé afin que vous puissiez voir comment les choses fonctionnent. Cette configuration tout-en-un est un moyen pratique de mettre en place votre premier cluster de développement avant de construire un déploiement distribué avec plusieurs hôtes.</p><p>Voici l&rsquo;arborscence attendu :</p><pre tabindex=0><code>./
-├── app
+<span class=links><a href=/elastic-tutorial/>Elastic Tutoriel</a> > <a href=/elastic-tutorial/elastic/>Elastic</a> > <a href=/elastic-tutorial/elastic/prerequis/>Prérequis</a> > Installation</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><a href=#prérequis>Prérequis</a><ul><li><a href=#vérification-de-votre-environnement-de-travail>Vérification de votre environnement de travail</a></li><li><a href=#déployer-la-stack-elasticsearch-kibana-dans-docker-avec-tls-activé>Déployer la stack Elasticsearch Kibana dans Docker avec TLS activé</a></li><li><a href=#déployer-une-application-blanche>Déployer une application blanche</a></li><li><a href=#déployer-les-agents-de-collectes>Déployer les agents de collectes</a></li><li><a href=#labs-avancés>Labs Avancés</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Installation</h1><h2 id=prérequis>Prérequis</h2><ul><li>Ubuntu ou Debian</li><li>Docker & Docker-Compose</li><li>Exécuter la commande ci-dessous</li></ul><pre tabindex=0><code>sudo sysctl -w vm.max_map_count=262144
+</code></pre><h3 id=vérification-de-votre-environnement-de-travail>Vérification de votre environnement de travail</h3><h4 id=docker>Docker</h4><pre tabindex=0><code>docker version
+</code></pre><p>Vous devez obtenir une réponse similaire :</p><pre tabindex=0><code>Client: Docker Engine - Community
+ Version:           24.0.2
+ API version:       1.43
+ Go version:        go1.20.4
+ Git commit:        cb74dfc
+ Built:             Thu May 25 21:52:13 2023
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          24.0.2
+  API version:      1.43 (minimum version 1.12)
+  Go version:       go1.20.4
+  Git commit:       659604f
+  Built:            Thu May 25 21:52:13 2023
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.21
+  GitCommit:        3dce8eb055cbb6872793272b4f20ed16117344f8
+ runc:
+  Version:          1.1.7
+  GitCommit:        v1.1.7-0-g860f061
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+</code></pre><p>Si vous avez un retour vous indiquant que la commande docker n&rsquo;est pas reconnu, veuillez l&rsquo;installer.</p><pre tabindex=0><code>curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh ./get-docker.sh
+</code></pre><p>Si vous rencontrez des difficultés à utiliser la commande docker sans le sudo, veuillez ajouter cette configruation :</p><pre tabindex=0><code>sudo groupadd docker
+sudo usermod -aG docker $USER
+docker run hello-world
+</code></pre><h3 id=déployer-la-stack-elasticsearch-kibana-dans-docker-avec-tls-activé>Déployer la stack Elasticsearch Kibana dans Docker avec TLS activé</h3><p>Si les fonctions de sécurité sont activées, vous devez configurer le chiffrement TLS (Transport Layer Security) pour la couche de transport d&rsquo;Elasticsearch. Bien qu&rsquo;il soit possible d&rsquo;utiliser une licence d&rsquo;essai sans configurer TLS, nous vous conseillons de sécuriser votre pile dès le départ.</p><p>Pour obtenir un cluster Elasticsearch et Kibana opérationnel dans Docker avec la sécurité activée, vous pouvez utiliser Docker Compose :</p><p><strong>instances.yml</strong> identifie les instances pour lesquelles vous devez créer des certificats.
+<strong>elastic-docker-tls.yml</strong> est un fichier Docker Compose qui met en place un cluster Elasticsearch à trois nœuds et une instance Kibana avec TLS activé afin que vous puissiez voir comment les choses fonctionnent. Cette configuration tout-en-un est un moyen pratique de mettre en place votre premier cluster de développement avant de construire un déploiement distribué avec plusieurs hôtes.
+<strong>beats-docker.yml</strong> est un fichier Docker Compose qui met en place les agents de collecte avec TLS activé afin que vous puissiez voir comment les choses fonctionnent.</p><p>Voici l&rsquo;arborscence :</p><pre tabindex=0><code>├── app
 │   ├── artificial_load.sh
 │   ├── conf
 │   │   └── default.conf
@@ -49,276 +80,28 @@ parent"><a href=/elastic-tutorial/elastic/prerequis/>Prérequis
     │       ├── filebeat.yml
     │       ├── heartbeat.yml
     │       └── metricbeat.yml
-    ├── create-certs.yml
     ├── data
     │   ├── accounts.json
     │   ├── logs.json
     │   └── shakespeare.json
     ├── elastic-docker-tls.yml
-    ├── elastic-fleet-docker-tls.yml
     └── instances.yml
-</code></pre><p><strong>instances.yml</strong> :</p><pre tabindex=0><code>instances:
-  - name: es01
-    dns:
-      - es01
-      - localhost
-    ip:
-      - 127.0.0.1
-
-  - name: es02
-    dns:
-      - es02
-      - localhost
-    ip:
-      - 127.0.0.1
-
-  - name: es03
-    dns:
-      - es03
-      - localhost
-    ip:
-      - 127.0.0.1
-
-  - name: &#39;kib01&#39;
-    dns:
-      - kib01
-      - localhost
-
-  - name: &#39;package-registry&#39;
-    dns:
-      - package-registry
-      - localhost
-
-  - name: &#39;fleet-server&#39;
-    dns:
-      - fleet-server
-      - localhost
-</code></pre><p><strong>.env</strong>:</p><pre tabindex=0><code>COMPOSE_PROJECT_NAME=es
-CERTS_DIR=/usr/share/elasticsearch/config/certificates
-VERSION=7.17.0
-</code></pre><p><strong>create-certs.yml</strong>:</p><pre tabindex=0><code>version: &#39;2.2&#39;
-
-services:
-  create_certs:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION}
-    container_name: create_certs
-    command: &gt;
-      bash -c &#39;
-        yum install -y -q -e 0 unzip;
-        if [[ ! -f /certs/bundle.zip ]]; then
-          bin/elasticsearch-certutil cert --silent --pem --in config/certificates/instances.yml -out /certs/bundle.zip;
-          unzip /certs/bundle.zip -d /certs;
-        fi;
-        chown -R 1000:0 /certs
-      &#39;
-    working_dir: /usr/share/elasticsearch
-    volumes:
-      - certs:/certs
-      - .:/usr/share/elasticsearch/config/certificates
-    networks:
-      - elastic
-
-volumes:
-  certs:
-    driver: local
-
-networks:
-  elastic:
-    driver: bridge
-</code></pre><p><strong>elastic-docker-tls.yml</strong>:</p><pre tabindex=0><code>version: &#39;2.2&#39;
-services:
-  es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION}
-    container_name: es01
-    environment:
-      - path.repo=/usr/share/elasticsearch/snapshots/
-      - node.name=es01
-      - cluster.name=es-docker-cluster
-      - discovery.seed_hosts=es02,es03
-      - cluster.initial_master_nodes=es01,es02,es03
-      - bootstrap.memory_lock=true
-      - &#34;ES_JAVA_OPTS=-Xms256m -Xmx256m&#34;
-      - xpack.license.self_generated.type=basic
-      - xpack.security.enabled=true
-      - xpack.security.http.ssl.enabled=true
-      - xpack.security.http.ssl.key=$CERTS_DIR/es01/es01.key
-      - xpack.security.http.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
-      - xpack.security.http.ssl.certificate=$CERTS_DIR/es01/es01.crt
-      - xpack.security.transport.ssl.enabled=true
-      - xpack.security.transport.ssl.verification_mode=certificate
-      - xpack.security.transport.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
-      - xpack.security.transport.ssl.certificate=$CERTS_DIR/es01/es01.crt
-      - xpack.security.transport.ssl.key=$CERTS_DIR/es01/es01.key
-      - xpack.security.authc.api_key.enabled=true
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data01:/usr/share/elasticsearch/data
-      - certs:$CERTS_DIR
-    ports:
-      - 9200:9200
-    networks:
-      - elastic
-
-    healthcheck:
-      test: curl --cacert $CERTS_DIR/ca/ca.crt -s https://localhost:9200 &gt;/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      interval: 30s
-      timeout: 10s
-      retries: 5
-
-  es02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION}
-    container_name: es02
-    environment:
-      - node.name=es02
-      - path.repo=/usr/share/elasticsearch/snapshots/
-      - cluster.name=es-docker-cluster
-      - discovery.seed_hosts=es01,es03
-      - cluster.initial_master_nodes=es01,es02,es03
-      - bootstrap.memory_lock=true
-      - &#34;ES_JAVA_OPTS=-Xms256m -Xmx256m&#34;
-      - xpack.license.self_generated.type=basic
-      - xpack.security.enabled=true
-      - xpack.security.http.ssl.enabled=true
-      - xpack.security.http.ssl.key=$CERTS_DIR/es02/es02.key
-      - xpack.security.http.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
-      - xpack.security.http.ssl.certificate=$CERTS_DIR/es02/es02.crt
-      - xpack.security.transport.ssl.enabled=true
-      - xpack.security.transport.ssl.verification_mode=certificate
-      - xpack.security.transport.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
-      - xpack.security.transport.ssl.certificate=$CERTS_DIR/es02/es02.crt
-      - xpack.security.transport.ssl.key=$CERTS_DIR/es02/es02.key
-      - xpack.security.authc.api_key.enabled=true
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data02:/usr/share/elasticsearch/data
-      - certs:$CERTS_DIR
-    networks:
-      - elastic
-
-  es03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION}
-    container_name: es03
-    environment:
-      - node.name=es03
-      - path.repo=/usr/share/elasticsearch/snapshots/
-      - cluster.name=es-docker-cluster
-      - discovery.seed_hosts=es01,es02
-      - cluster.initial_master_nodes=es01,es02,es03
-      - bootstrap.memory_lock=true
-      - &#34;ES_JAVA_OPTS=-Xms256m -Xmx256m&#34;
-      - xpack.license.self_generated.type=basic
-      - xpack.security.enabled=true
-      - xpack.security.http.ssl.enabled=true
-      - xpack.security.http.ssl.key=$CERTS_DIR/es03/es03.key
-      - xpack.security.http.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
-      - xpack.security.http.ssl.certificate=$CERTS_DIR/es03/es03.crt
-      - xpack.security.transport.ssl.enabled=true
-      - xpack.security.transport.ssl.verification_mode=certificate
-      - xpack.security.transport.ssl.certificate_authorities=$CERTS_DIR/ca/ca.crt
-      - xpack.security.transport.ssl.certificate=$CERTS_DIR/es03/es03.crt
-      - xpack.security.transport.ssl.key=$CERTS_DIR/es03/es03.key
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data03:/usr/share/elasticsearch/data
-      - certs:$CERTS_DIR
-    networks:
-      - elastic
-  kib01:
-    image: docker.elastic.co/kibana/kibana:${VERSION}
-    container_name: kib01
-    depends_on:
-      es01: { condition: service_healthy}
-    ports:
-      - 5601:5601
-    environment:
-      SERVERNAME: localhost
-      ELASTICSEARCH_URL: https://es01:9200
-      ELASTICSEARCH_HOSTS: https://es01:9200
-      ELASTICSEARCH_USERNAME: $USER_KIBANA_SYSTEM
-      ELASTICSEARCH_PASSWORD: $PASSWORD_KIBANA_SYSTEM
-      ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES: $CERTS_DIR/ca/ca.crt
-      SERVER_SSL_ENABLED: &#34;true&#34;
-      SERVER_SSL_KEY: $CERTS_DIR/kib01/kib01.key
-      SERVER_SSL_CERTIFICATE: $CERTS_DIR/kib01/kib01.crt
-      SERVER_SSL_CERTIFICATEAUTHORITIES: $CERTS_DIR/ca/ca.crt
-      XPACK_SECURITY_ENCRYPTIONKEY: &#34;fhjskloppd678ehkdfdlliverpoolfcr&#34;
-      XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY: &#34;fhjskloppd678ehkdfdlliverpoolfcr&#34;
-    healthcheck:
-       test: curl --cacert $CERTS_DIR/ca/ca.crt -s https://localhost/api/status | grep -q &#39;Looking good&#39; &gt;/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-       retries: 100
-       interval: 5s
-    volumes:
-      - certs:$CERTS_DIR
-    networks:
-      - elastic
-  apm-server:
-    image: docker.elastic.co/apm/apm-server:${VERSION}
-    container_name: apm-server
-    depends_on:
-      es01: { condition: service_healthy }
-      kib01: { condition: service_healthy }
-    cap_add: [&#34;CHOWN&#34;, &#34;DAC_OVERRIDE&#34;, &#34;SETGID&#34;, &#34;SETUID&#34;]
-    cap_drop: [&#34;ALL&#34;]
-    ports:
-    - 8200:8200
-    volumes:
-       - certs:$CERTS_DIR
-    networks:
-    - elastic
-    command: &gt;
-       apm-server -e
-         -E apm-server.rum.enabled=true
-         -E setup.kibana.host=kib01:5601
-         -E setup.template.settings.index.number_of_replicas=1
-         -E apm-server.kibana.enabled=true
-         -E apm-server.kibana.host=kib01:5601
-         -E apm-server.kibana.protocol=https
-         -E apm-server.kibana.username=$USER_ELASTIC
-         -E apm-server.kibana.password=$PASSWORD_ELASTIC
-         -E apm-server.kibana.ssl.enabled=true
-         -E apm-server.kibana.ssl.certificate_authorities=[&#34;$CERTS_DIR/ca/ca.crt&#34;]
-         -E output.elasticsearch.hosts=[&#34;https://es01:9200&#34;]
-         -E output.elasticsearch.username=$USER_ELASTIC
-         -E output.elasticsearch.password=$PASSWORD_ELASTIC
-         -E output.elasticsearch.ssl.certificate_authorities=[&#34;$CERTS_DIR/ca/ca.crt&#34;]
-    healthcheck:
-      interval: 10s
-      retries: 12
-      test: curl --write-out &#39;HTTP %{http_code}&#39; --fail --silent --output /dev/null http://localhost:8200/
-
-volumes:
-  data01:
-    driver: local
-  data02:
-    driver: local
-  data03:
-    driver: local
-  certs:
-    driver: local
-
-networks:
-  elastic:
-    name: elastic
-    driver: bridge
-</code></pre><p>1- Générez et appliquez une licence d&rsquo;essai qui prend en charge Transport Layer Security.</p><p>2- Activez Transport Layer Security pour crypter les communications des clients.</p><p>3- Activez Transport Layer Security pour crypter les communications internodales.</p><p>4- Autorisez l&rsquo;utilisation de certificats auto-signés en ne demandant pas de vérification du nom d&rsquo;hôte.</p><p>Générez des certificats pour Elasticsearch en faisant apparaître le conteneur create-certs :</p><pre tabindex=0><code>docker compose -f create-certs.yml run --rm create_certs
+</code></pre><p>Télécharger la projet contenant la plateforme Elastic :</p><pre tabindex=0><code>git clone https://github.com/Maxime-CLS/elastic-platform.git
+</code></pre><p>Démarrer la stack Elastic</p><pre tabindex=0><code>cd elastic-platform/elastic-stack
+docker compose -f elastic-docker-tls.yml up -d
 </code></pre><p>Vérifiez a présence des volumes</p><pre tabindex=0><code>docker volume ls
 </code></pre><pre tabindex=0><code>DRIVER    VOLUME NAME
 local     es_certs
+local     es_esdata01
+local     es_esdata02
+local     es_esdata03
+local     es_kibanadata
 </code></pre><p>Vérifiez la présence des certificats</p><pre tabindex=0><code>sudo ls -R /var/lib/docker/volumes/es_certs/_data/
 </code></pre><pre tabindex=0><code>/var/lib/docker/volumes/es_certs/_data/:
-bundle.zip  ca	es01  es02  es03  fleet-server	kib01  package-registry
+ca  ca.zip  certs.zip  es01  es02  es03  fleet-server  instances.yml  kibana  package-registry
 
 /var/lib/docker/volumes/es_certs/_data/ca:
-ca.crt
+ca.crt	ca.key
 
 /var/lib/docker/volumes/es_certs/_data/es01:
 es01.crt  es01.key
@@ -332,174 +115,25 @@ es03.crt  es03.key
 /var/lib/docker/volumes/es_certs/_data/fleet-server:
 fleet-server.crt  fleet-server.key
 
-/var/lib/docker/volumes/es_certs/_data/kib01:
-kib01.crt  kib01.key
+/var/lib/docker/volumes/es_certs/_data/kibana:
+kibana.crt  kibana.key
 
 /var/lib/docker/volumes/es_certs/_data/package-registry:
 package-registry.crt  package-registry.key
-</code></pre><p>Mettez en place le cluster Elasticsearch à trois nœuds :</p><pre tabindex=0><code>docker compose -f elastic-docker-tls.yml up -d
-</code></pre><p>À ce stade, Kibana ne peut pas se connecter au cluster Elasticsearch. Vous devez générer un mot de passe pour l&rsquo;utilisateur intégré kibana_system, mettre à jour le mot de passe ELASTICSEARCH_PASSWORD dans le fichier compose, et redémarrer pour permettre à Kibana de communiquer avec le cluster sécurisé.</p><p>Exécutez l&rsquo;outil elasticsearch-setup-passwords pour générer des mots de passe pour tous les utilisateurs intégrés, y compris l&rsquo;utilisateur kibana_system. Si vous n&rsquo;utilisez pas PowerShell sous Windows, supprimez les caractères <code>\</code>de fin de ligne et joignez les lignes avant d&rsquo;exécuter cette commande.</p><pre tabindex=0><code>docker exec es01 /bin/bash -c &#34;bin/elasticsearch-setup-passwords \
-auto --batch --url https://es01:9200&#34;
-</code></pre><p>Si la commande tombe en erreur, veuillez relancer la commande quand le noeud Elasticsearch est pret.</p><pre tabindex=0><code>Changed password for user apm_system
-PASSWORD apm_system = cFupG97Ha1vh8Ntdmi8V
-
-Changed password for user kibana_system
-PASSWORD kibana_system = im0I9MGIDXHSy5gpUgmm
-
-Changed password for user kibana
-PASSWORD kibana = im0I9MGIDXHSy5gpUgmm
-
-Changed password for user logstash_system
-PASSWORD logstash_system = 3ZunAd3WpUcp1tKnb3Rq
-
-Changed password for user beats_system
-PASSWORD beats_system = yn88diKHJhU5wF7h9Rh9
-
-Changed password for user remote_monitoring_user
-PASSWORD remote_monitoring_user = wfliiMix1pep0Gnm6Ah8
-
-Changed password for user elastic
-PASSWORD elastic = fLzlyoIb8RsCT639v7HH
-</code></pre><p>Prenez note des mots de passe générés. Vous devez configurer le mot de passe de l&rsquo;utilisateur kibana_system dans le fichier compose pour permettre à Kibana de se connecter à Elasticsearch, et vous aurez besoin du mot de passe du superutilisateur elastic pour vous connecter à Kibana et soumettre des requêtes à Elasticsearch.</p><p>Définissez les variables d&rsquo;authentification dans le fichier <strong>.env</strong>.</p><pre tabindex=0><code>COMPOSE_PROJECT_NAME=es
-CERTS_DIR=/usr/share/elasticsearch/config/certificates
-VERSION=7.17.0
-### Credentials
-USER_APM_SYSTEM=apm_system
-PASSWORD_APM_SYSTEM=tE7F2LePRNPgUC4SN0nT
-USER_KIBANA_SYSTEM=kibana_system
-PASSWORD_KIBANA_SYSTEM=zJE8y8KlV79dv6OCmfpF
-USER_KIBANA=kibana
-PASSWORD_KIBANA=zJE8y8KlV79dv6OCmfpF
-USER_BEATS_SYSTEM=beats_system
-PASSWORD_BEATS_SYSTEM=ITklPCO1oTCWQIMdpWFT
-USER_ELASTIC=elastic
-PASSWORD_ELASTIC=ASf3lYu7xoKMeesYuMPc
-</code></pre><p>Utilisez docker-compose pour redémarrer le cluster et Kibana :</p><pre tabindex=0><code>docker compose -f elastic-docker-tls.yml stop
-docker compose -f elastic-docker-tls.yml up -d
-</code></pre><p>Ouvrez Kibana pour charger les données de l&rsquo;échantillon et interagir avec le cluster : <a href=https://localhost:5601>Kibana</a></p><p><img src=/elastic-tutorial/images/attachments/prerequis/kibana_connexion.png alt=image.png></p><p>Comme SSL est également activé pour les communications entre Kibana et les navigateurs clients, vous devez accéder à Kibana via le protocole HTTPS.</p><p>Ouvrez le menu de droit et cliquez sur &ldquo;Stack Monitorng&rdquo;</p><p><img src=/elastic-tutorial/images/attachments/prerequis/stack_monitoring.png alt=image.png></p><p>Cliquez sur l&rsquo;option &ldquo;Or, set up with self monitoring&rdquo;</p><p><img src=/elastic-tutorial/images/attachments/prerequis/enable_monitoring.png alt=image.png></p><p><img src=/elastic-tutorial/images/attachments/prerequis/turn_on_monitoring.png alt=image.png></p><p><img src=/elastic-tutorial/images/attachments/prerequis/monitoring.png alt=image.png></p><h3 id=déloyer-une-application-blanche>Déloyer une application blanche</h3><pre tabindex=0><code>mkdir -p app/conf
-vim app/petclinic.yml
-</code></pre><p><strong>petclinic.yml</strong></p><pre tabindex=0><code>version: &#39;2.2&#39;
-
-services:
-  nginx:
-    image: nginx:1.17.3
-    container_name: nginx
-    labels:
-      &#34;co.elastic.logs/module&#34;: &#34;nginx&#34;
-      &#34;co.elastic.logs/fileset.stdout&#34;: &#34;access&#34;
-      &#34;co.elastic.logs/fileset.stderr&#34;: &#34;error&#34;
-      &#34;co.elastic.metrics/module&#34;: &#34;nginx&#34;
-      &#34;co.elastic.metrics/hosts&#34;: &#34;nginx:8081&#34;
-      &#34;co.elastic.metrics/metricsets&#34;: &#34;stubstatus&#34;
-    ports:
-      - 8081:8081
-    volumes:
-      - ./conf/default.conf:/etc/nginx/conf.d/default.conf:ro
-    networks:
-      - elastic
-  petclinic:
-    image: docker.io/michaelhyatt/elastic-k8s-o11y-workshop-petclinic:1.25.0
-    container_name: petclinic
-    labels:
-      &#34;co.elastic.metrics/module&#34;: &#34;prometheus&#34;
-      &#34;co.elastic.metrics/hosts&#34;: &#34;$${data.host}:$${data.port}&#34;
-      &#34;co.elastic.metrics/metrics_path&#34;: &#34;/metrics/prometheus&#34;
-      &#34;co.elastic.metrics/period&#34;: &#34;1m&#34;
-    environment:
-      ELASTIC_APM_SERVER_URLS: &#34;http://apm-server:8200&#34;
-      ELASTIC_APM_SERVER_URLS_FOR_RUM: &#34;http://localhost:8200&#34;
-      ELASTIC_APM_SECRET_TOKEN: &#34;&#34;
-      ELASTIC_APM_SERVICE_NAME: &#34;spring-petclinic-monolith&#34;
-      ELASTIC_APM_APPLICATION_PACKAGES: &#34;org.springframework.samples&#34;
-      ELASTIC_APM_ENABLE_LOG_CORRELATION: &#34;true&#34;
-      ELASTIC_APM_CAPTURE_JMX_METRICS: &gt;
-        object_name[java.lang:type=GarbageCollector,name=*] attribute[CollectionCount:metric_name=collection_count] attribute[CollectionTime:metric_name=collection_time],
-        object_name[java.lang:type=Memory] attribute[HeapMemoryUsage:metric_name=heap]
-      JAVA_OPTS: &gt;
-        -Xms100m
-        -Xmx256m
-        -Dspring.profiles.active=mysql
-        -Ddatabase=mysql
-        -Dspring.datasource.username=root
-        -Dspring.datasource.password=petclinic
-        -Dspring.datasource.initialization-mode=always
-        -Dspring.datasource.url=jdbc:mysql://mysql:3306/petclinic?autoReconnect=true&amp;useSSL=false
-        -XX:+StartAttachListener
-    ports:
-      - 8080
-    networks:
-      - elastic
-
-  mysql:
-    image: mysql:5.7.27
-    container_name: mysql
-    labels:
-      &#34;co.elastic.logs/module&#34;: &#34;mysql&#34;
-      &#34;co.elastic.metrics/module&#34;: &#34;mysql&#34;
-      &#34;co.elastic.metrics/hosts&#34;: &#34;root:petclinic@tcp($${data.host}:3306)/&#34;
-    environment:
-      MYSQL_ROOT_PASSWORD: petclinic
-      MYSQL_DATABASE: petclinic
-    ports:
-      - 3306
-    networks:
-      - elastic
-
-networks:
-  elastic:
-    name: elastic
-    driver: bridge
-</code></pre><pre tabindex=0><code>vim app/conf/default.conf
-</code></pre><p><strong>default.conf</strong></p><pre tabindex=0><code>server {
-        listen       8081;
-        listen [::]:8081;
-        server_name  localhost;
-        location /intake {
-          if ($request_method = &#39;OPTIONS&#39;) {
-            # This is a bit too wide, would be enough to replace it with only APM server url for CORS support.
-            add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;
-            add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET,POST,OPTIONS&#39;;
-            add_header &#39;Access-Control-Allow-Headers&#39; &#39;Accept:,Accept-Encoding,Accept-Language:,Cache-Control,Connection,DNT,Pragma,Host,Referer,Upgrade-Insecure-Requests,User-Agent,elastic-apm-traceparent&#39;;
-            add_header &#39;Access-Control-Max-Age&#39; 1728000;
-            add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;
-            add_header &#39;Content-Type&#39; &#39;text/plain; charset=utf-8&#39;;
-            add_header &#39;Content-Length&#39; 0;
-            return 200;
-          }
-        }
-        location / {
-          proxy_pass http://petclinic:8080/;
-        }
-        location = /owners/find {
-          return 301 /#$uri;
-        }
-        location = /vets.html {
-          return 301 /#$uri;
-        }
-        location = /oups {
-          return 301 /#$uri;
-        }
-        location /nginx_status {
-         	stub_status on;
-        	allow all; # A bit too wide
-         	# deny all;
-        }
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   /usr/share/nginx/html;
-        }
-    }
-</code></pre><pre tabindex=0><code>docker compose -f app/petclinic.yml up -d
-</code></pre><p>Accédez à la application blanche en cliquant <a href=http://localhost:8081>ici</a></p><p><img src=/elastic-tutorial/images/attachments/prerequis/petclinic.png alt=image.png></p><p>Télécharger des données d&rsquo;exemples :</p><pre tabindex=0><code>git clone https://github.com/Maxime-CLS/elastic-data-tutorial.git
+</code></pre><p>Ouvrez Kibana pour charger les données de l&rsquo;échantillon et interagir avec le cluster : <a href=https://localhost:5601>Kibana</a></p><p><img src=/elastic-tutorial/images/attachments/prerequis/kibana_connexion.png alt=image.png></p><p>Comme SSL est également activé pour les communications entre Kibana et les navigateurs clients, vous devez accéder à Kibana via le protocole HTTPS.</p><p>Ouvrez le menu de droit et cliquez sur &ldquo;Stack Monitorng&rdquo;</p><p><img src=/elastic-tutorial/images/attachments/prerequis/stack_monitoring.png alt=image.png></p><p>Cliquez sur l&rsquo;option &ldquo;Or, set up with self monitoring&rdquo;</p><p><img src=/elastic-tutorial/images/attachments/prerequis/enable_monitoring.png alt=image.png></p><p><img src=/elastic-tutorial/images/attachments/prerequis/turn_on_monitoring.png alt=image.png></p><p><img src=/elastic-tutorial/images/attachments/prerequis/monitoring.png alt=image.png></p><h3 id=déployer-une-application-blanche>Déployer une application blanche</h3><pre tabindex=0><code>cd ../app
+docker compose -f petclinic.yml up -d
+</code></pre><p>Accédez à la application blanche en cliquant <a href=http://localhost:8081>ici</a></p><p><img src=/elastic-tutorial/images/attachments/prerequis/petclinic.png alt=image.png></p><h3 id=déployer-les-agents-de-collectes>Déployer les agents de collectes</h3><pre tabindex=0><code>cd ../elastic-stack
+docker compose -f beats/beats-docker.yml up -d
+</code></pre><h3 id=labs-avancés>Labs Avancés</h3><h4 id=télécharger-des-données-dexemples>Télécharger des données d&rsquo;exemples</h4><pre tabindex=0><code>git clone https://github.com/Maxime-CLS/elastic-data-tutorial.git
 </code></pre><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/elastic-tutorial/elastic/prerequis/ title=Prérequis><i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1669647242></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1669647242></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1669647242></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1669647242></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1669647242></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1669647242></script>
-<script>hljs.initHighlightingOnLoad()</script><script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1669647242></script>
-<script src=/elastic-tutorial/js/learn.js?1669647242></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1669647242></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1669647242></script>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/d%C3%A9butant/ title=Débutant style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1693837831></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1693837831></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1693837831></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1693837831></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1693837831></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1693837831></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1693837831></script>
+<script src=/elastic-tutorial/js/learn.js?1693837831></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1693837831></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1693837831></script>
 <script>mermaid.initialize({startOnLoad:!0})</script></body></html>

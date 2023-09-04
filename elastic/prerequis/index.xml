@@ -1,2 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Prérequis on Elastic Tutoriel</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/prerequis/</link><description>Recent content in Prérequis on Elastic Tutoriel</description><generator>Hugo -- gohugo.io</generator><language>fr-FR</language><lastBuildDate>Mon, 04 May 2020 08:52:59 +0200</lastBuildDate><atom:link href="https://maxime-cls.github.io/elastic-tutorial/elastic/prerequis/index.xml" rel="self" type="application/rss+xml"/><item><title>Installation</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/prerequis/installation/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/prerequis/installation/</guid><description>Prérequis Ubuntu ou Debian Docker Exécuter la commande ci-dessous sudo sysctl -w vm.max_map_count=262144 Déployer la stack Elasticsearch Kibana dans Docker avec TLS activé Si les fonctions de sécurité sont activées, vous devez configurer le chiffrement TLS (Transport Layer Security) pour la couche de transport d&amp;rsquo;Elasticsearch. Bien qu&amp;rsquo;il soit possible d&amp;rsquo;utiliser une licence d&amp;rsquo;essai sans configurer TLS, nous vous conseillons de sécuriser votre pile dès le départ.
-Pour obtenir un cluster Elasticsearch et Kibana opérationnel dans Docker avec la sécurité activée, vous pouvez utiliser Docker Compose :</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Prérequis on Elastic Tutoriel</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/prerequis/</link><description>Recent content in Prérequis on Elastic Tutoriel</description><generator>Hugo -- gohugo.io</generator><language>fr-FR</language><lastBuildDate>Mon, 04 May 2020 08:52:59 +0200</lastBuildDate><atom:link href="https://maxime-cls.github.io/elastic-tutorial/elastic/prerequis/index.xml" rel="self" type="application/rss+xml"/><item><title>Installation</title><link>https://maxime-cls.github.io/elastic-tutorial/elastic/prerequis/installation/</link><pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate><guid>https://maxime-cls.github.io/elastic-tutorial/elastic/prerequis/installation/</guid><description>Prérequis Ubuntu ou Debian Docker &amp;amp; Docker-Compose Exécuter la commande ci-dessous sudo sysctl -w vm.max_map_count=262144 Vérification de votre environnement de travail Docker docker version Vous devez obtenir une réponse similaire :
+Client: Docker Engine - Community
+Version: 24.0.2
+API version: 1.43
+Go version: go1.20.4
+Git commit: cb74dfc
+Built: Thu May 25 21:52:13 2023
+OS/Arch: linux/amd64
+Context: default
+Server: Docker Engine - Community
+Engine:
+Version: 24.0.2
+API version: 1.43 (minimum version 1.</description></item></channel></rss>
