@@ -44,7 +44,7 @@ PUT _snapshot/observability_repo/observability?wait_for_completion=true
 Utilisez l'outil de console Kibana pour exécuter ce qui suit :
 
 ```
-POST _snapshot/observability-time-series_repo/observability-time-series/_restore
+POST _snapshot/observability_repo/observability/_restore
 {
   "indices": "observability-time-series",
   "rename_pattern": "(.+)",
@@ -108,7 +108,7 @@ PUT _slm/policy/daily-observability-snapshots
 ```
 
 ```
-GET _slm/policy/daily-observability-snpashots
+GET _slm/policy/daily-observability-snapshots
 ```
 
 ```

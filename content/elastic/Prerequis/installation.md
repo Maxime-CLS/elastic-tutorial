@@ -170,6 +170,9 @@ Ouvrez Kibana pour charger les données de l'échantillon et interagir avec le c
 
 ![image.png](/elastic-tutorial/images/attachments/prerequis/kibana_connexion.png)
 
+**username :** elastic  
+**password :** elastic
+
 Comme SSL est également activé pour les communications entre Kibana et les navigateurs clients, vous devez accéder à Kibana via le protocole HTTPS.
 
 

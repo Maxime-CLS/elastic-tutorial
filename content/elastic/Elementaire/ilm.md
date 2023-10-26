@@ -691,7 +691,7 @@ GET observability-time-series/_ilm/explain
 }
 ```
 
-On peut observer les différentes informations de nos index concernant ILM appliquée deçu.
+On peut observer les différentes informations de nos index concernant ILM appliquée dessus.
 
 
 Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez mettre en place une politique de gestion du cylce de vie de vos index. Vous avez également exploré les différentes composants d'une politique de gestion d'index au travers des settings, mappings, template et data stream.

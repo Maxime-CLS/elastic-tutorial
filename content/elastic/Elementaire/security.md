@@ -29,7 +29,8 @@ POST /_security/role/read_observability
         "traces-apm*,apm-*,logs-apm*,apm-*,metrics-apm*,apm-*"
       ],
       "privileges": [
-        "read"
+        "read",
+        "view_index_metadata"
       ],
       "allow_restricted_indices": false
     }
@@ -258,65 +259,6 @@ Vérifions la configuration du role :
 ```
 GET /_security/role/admin_observability
 ```
-
-```
-{
-  "admin_observability" : {
-    "cluster" : [
-      "create_snapshot",
-      "manage_ccr",
-      "manage_ilm",
-      "manage_saml",
-      "manage_watcher",
-      "monitor",
-      "read_ilm"
-    ],
-    "indices" : [
-      {
-        "names" : [
-          "metricbeat-*",
-          "filebeat-*",
-          "uptime-*",
-          "apm-*",
-          "heartbeat-*"
-        ],
-        "privileges" : [
-          "read",
-          "monitor",
-          "create",
-          "write",
-          "delete",
-          "delete_index"
-        ],
-        "allow_restricted_indices" : false
-      }
-    ],
-    "applications" : [
-      {
-        "application" : "kibana-.kibana",
-        "privileges" : [
-          "feature_logs.all",
-          "feature_infrastructure.all",
-          "feature_apm.all",
-          "feature_uptime.all",
-          "feature_observabilityCases.all",
-          "feature_dev_tools.all",
-          "feature_indexPatterns.read"
-        ],
-        "resources" : [
-          "space:default"
-        ]
-      }
-    ],
-    "run_as" : [ ],
-    "metadata" : { },
-    "transient_metadata" : {
-      "enabled" : true
-    }
-  }
-}
-```
-
 
 Ensuite vous allez définir un utilisateur qui aura l'habilitation de lire les données d'observabilité grace au role précédament crée.
 
