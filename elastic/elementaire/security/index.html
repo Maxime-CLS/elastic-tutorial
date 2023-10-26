@@ -1,8 +1,8 @@
-<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.119.0"><meta name=description content="Tutoriel sur Elastic"><meta name=author content="Maxime Calves"><link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png><title>Lab - Habilitation :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1698304693 rel=stylesheet><link href=/elastic-tutorial/css/fontawesome-all.min.css?1698304693 rel=stylesheet><link href=/elastic-tutorial/css/hybrid.css?1698304693 rel=stylesheet><link href=/elastic-tutorial/css/featherlight.min.css?1698304693 rel=stylesheet><link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1698304693 rel=stylesheet><link href=/elastic-tutorial/css/auto-complete.css?1698304693 rel=stylesheet><link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1698304693 rel=stylesheet><link href=/elastic-tutorial/css/theme.css?1698304693 rel=stylesheet><link href=/elastic-tutorial/css/tabs.css?1698304693 rel=stylesheet><link href=/elastic-tutorial/css/hugo-theme.css?1698304693 rel=stylesheet><link href=/elastic-tutorial/css/theme-blue.css?1698304693 rel=stylesheet><script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1698304693></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/elementaire/security/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><img src=../../../../elastic-tutorial/media/logo.png></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.119.0"><meta name=description content="Tutoriel sur Elastic"><meta name=author content="Maxime Calves"><link rel=icon href=/elastic-tutorial/images/favicon.png type=image/png><title>Lab - Habilitation :: Elastic Tutoriel</title><link href=/elastic-tutorial/css/nucleus.css?1698305215 rel=stylesheet><link href=/elastic-tutorial/css/fontawesome-all.min.css?1698305215 rel=stylesheet><link href=/elastic-tutorial/css/hybrid.css?1698305215 rel=stylesheet><link href=/elastic-tutorial/css/featherlight.min.css?1698305215 rel=stylesheet><link href=/elastic-tutorial/css/perfect-scrollbar.min.css?1698305215 rel=stylesheet><link href=/elastic-tutorial/css/auto-complete.css?1698305215 rel=stylesheet><link href=/elastic-tutorial/css/atom-one-dark-reasonable.css?1698305215 rel=stylesheet><link href=/elastic-tutorial/css/theme.css?1698305215 rel=stylesheet><link href=/elastic-tutorial/css/tabs.css?1698305215 rel=stylesheet><link href=/elastic-tutorial/css/hugo-theme.css?1698305215 rel=stylesheet><link href=/elastic-tutorial/css/theme-blue.css?1698305215 rel=stylesheet><script src=/elastic-tutorial/js/jquery-3.3.1.min.js?1698305215></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/elastic-tutorial/elastic/elementaire/security/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><img src=../../../../elastic-tutorial/media/logo.png></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
 <input data-search-input id=search-by type=search placeholder=Search...>
-<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1698304693></script>
-<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1698304693></script>
-<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script><script type=text/javascript src=/elastic-tutorial/js/search.js?1698304693></script></div><div class=highlightable><ul class=topics><li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/elastic-tutorial/js/lunr.min.js?1698305215></script>
+<script type=text/javascript src=/elastic-tutorial/js/auto-complete.js?1698305215></script>
+<script type=text/javascript>var baseurl="https://maxime-cls.github.io/elastic-tutorial/"</script><script type=text/javascript src=/elastic-tutorial/js/search.js?1698305215></script></div><div class=highlightable><ul class=topics><li data-nav-id=/elastic-tutorial/elastic/ title=Elastic class="dd-item
 parent"><a href=/elastic-tutorial/elastic/>Elastic
 <i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/prerequis/ title=Prérequis class=dd-item><a href=/elastic-tutorial/elastic/prerequis/>Prérequis
 <i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/elastic-tutorial/elastic/prerequis/installation/ title=Installation class=dd-item><a href=/elastic-tutorial/elastic/prerequis/installation/>Installation
@@ -202,61 +202,6 @@ Cette création sera faite via API d&rsquo;Elasticsearch. Pour cela vous allez o
   }
 }
 </code></pre><p>Vérifions la configuration du role :</p><pre tabindex=0><code>GET /_security/role/admin_observability
-</code></pre><pre tabindex=0><code>{
-  &#34;admin_observability&#34; : {
-    &#34;cluster&#34; : [
-      &#34;create_snapshot&#34;,
-      &#34;manage_ccr&#34;,
-      &#34;manage_ilm&#34;,
-      &#34;manage_saml&#34;,
-      &#34;manage_watcher&#34;,
-      &#34;monitor&#34;,
-      &#34;read_ilm&#34;
-    ],
-    &#34;indices&#34; : [
-      {
-        &#34;names&#34; : [
-          &#34;metricbeat-*&#34;,
-          &#34;filebeat-*&#34;,
-          &#34;uptime-*&#34;,
-          &#34;apm-*&#34;,
-          &#34;heartbeat-*&#34;
-        ],
-        &#34;privileges&#34; : [
-          &#34;read&#34;,
-          &#34;monitor&#34;,
-          &#34;create&#34;,
-          &#34;write&#34;,
-          &#34;delete&#34;,
-          &#34;delete_index&#34;
-        ],
-        &#34;allow_restricted_indices&#34; : false
-      }
-    ],
-    &#34;applications&#34; : [
-      {
-        &#34;application&#34; : &#34;kibana-.kibana&#34;,
-        &#34;privileges&#34; : [
-          &#34;feature_logs.all&#34;,
-          &#34;feature_infrastructure.all&#34;,
-          &#34;feature_apm.all&#34;,
-          &#34;feature_uptime.all&#34;,
-          &#34;feature_observabilityCases.all&#34;,
-          &#34;feature_dev_tools.all&#34;,
-          &#34;feature_indexPatterns.read&#34;
-        ],
-        &#34;resources&#34; : [
-          &#34;space:default&#34;
-        ]
-      }
-    ],
-    &#34;run_as&#34; : [ ],
-    &#34;metadata&#34; : { },
-    &#34;transient_metadata&#34; : {
-      &#34;enabled&#34; : true
-    }
-  }
-}
 </code></pre><p>Ensuite vous allez définir un utilisateur qui aura l&rsquo;habilitation de lire les données d&rsquo;observabilité grace au role précédament crée.</p><pre tabindex=0><code>POST /_security/user/admin_observability
 {
   &#34;password&#34; : &#34;admin_password&#34;,
@@ -303,14 +248,14 @@ GET heartbeat-*/_search
   &#34;status&#34; : 403
 }
 </code></pre><h2 id=a-vous-de-jouez--1>A vous de jouez !</h2><p>A vous de corriger les habilitations de l&rsquo;administrateur pour la création d&rsquo;un index, voici quelque lien utile pour votre problème :</p><ul><li><a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</a></li><li><a href=https://www.elastic.co/guide/en/kibana/current/kibana-role-management.html>https://www.elastic.co/guide/en/kibana/current/kibana-role-management.html</a></li><li><a href=https://www.elastic.co/guide/en/elasticsearch/reference/8.0/security-privileges.html#privileges-list-indices>https://www.elastic.co/guide/en/elasticsearch/reference/8.0/security-privileges.html#privileges-list-indices</a></li></ul><p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez créer et mettre à jour des roles pour vos utilisateurs. Vous avez également exploré les différentes habilitations possibles sur Elasticsearch.</p><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/elastic-tutorial/elastic/elementaire/ title=Elementaire><i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/elastic-tutorial/elastic/elementaire/ilm/ title="Lab - Index Lifecycle Policy" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1698304693></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1698304693></script>
-<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1698304693></script>
-<script src=/elastic-tutorial/js/jquery.sticky.js?1698304693></script>
-<script src=/elastic-tutorial/js/featherlight.min.js?1698304693></script>
-<script src=/elastic-tutorial/js/highlight.pack.js?1698304693></script>
-<script>hljs.initHighlightingOnLoad()</script><script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1698304693></script>
-<script src=/elastic-tutorial/js/learn.js?1698304693></script>
-<script src=/elastic-tutorial/js/hugo-learn.js?1698304693></script>
-<script src=/elastic-tutorial/mermaid/mermaid.js?1698304693></script>
+<a class="nav nav-next" href=/elastic-tutorial/elastic/elementaire/ilm/ title="Lab - Index Lifecycle Policy" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/elastic-tutorial/js/clipboard.min.js?1698305215></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.min.js?1698305215></script>
+<script src=/elastic-tutorial/js/perfect-scrollbar.jquery.min.js?1698305215></script>
+<script src=/elastic-tutorial/js/jquery.sticky.js?1698305215></script>
+<script src=/elastic-tutorial/js/featherlight.min.js?1698305215></script>
+<script src=/elastic-tutorial/js/highlight.pack.js?1698305215></script>
+<script>hljs.initHighlightingOnLoad()</script><script src=/elastic-tutorial/js/modernizr.custom-3.6.0.js?1698305215></script>
+<script src=/elastic-tutorial/js/learn.js?1698305215></script>
+<script src=/elastic-tutorial/js/hugo-learn.js?1698305215></script>
+<script src=/elastic-tutorial/mermaid/mermaid.js?1698305215></script>
 <script>mermaid.initialize({startOnLoad:!0})</script></body></html>
