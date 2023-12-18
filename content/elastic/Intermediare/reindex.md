@@ -41,6 +41,7 @@ curl --location --request POST 'https://localhost:9200/bank/account/_bulk?pretty
 --header 'Content-Type: application/x-ndjson' \
 --header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
  --data-binary @accounts.json
+```
 
 Ecrivez un script de chargement des données nommée load_data_shakespeare.sh
 
@@ -90,6 +91,8 @@ Exécuter le script.
 ./load_data_account.sh
 >>>>>>> 5544809a1e80114a48e4d1479587e1b391b48b41
 ```
+
+```
 #!/bin/bash
 
 <<<<<<< HEAD
@@ -102,7 +105,6 @@ bulk_data=$'\n'
 
 echo "Reading logs events from $input..."
 
-```
 while read -r log_event
 do
   let "counter=counter+1"
@@ -137,8 +139,8 @@ Exécuter le script.
 ./load_data_account.sh
 ```
 
-=======
->>>>>>> 5544809a1e80114a48e4d1479587e1b391b48b41
+>5544809a1e80114a48e4d1479587e1b391b48b41
+
 Ecrivez un script de chargement des données nommée load_data_shakespeare.sh
 
 ```
