@@ -45,7 +45,7 @@ Cliquez sur FIND OWNERS et VETERINARIANS pour générer des données de performa
 
 Cliquez sur ERROR pour générer des erreurs qui seront envoyées au serveur APM. 
 
-Vous avez constaté des dysfonctionnements ? Ne vous inquiétez pas, nous verrons cela par la suite.
+**Vous avez constaté des dysfonctionnements ? Ne vous inquiétez pas, nous verrons cela par la suite.**
 
 Lancez l'application APM pour commencer à explorer les données collectées.
 
