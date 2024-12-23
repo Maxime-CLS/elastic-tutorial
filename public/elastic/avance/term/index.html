@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Préparation PUT /shakespeare { &#34;mappings&#34;: { &#34;properties&#34;: { &#34;speaker&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;play_name&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;line_id&#34;: {&#34;type&#34;: &#34;integer&#34;}, &#34;speech_number&#34;: {&#34;type&#34;: &#34;integer&#34;} } } } curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/shakespeare/doc/_bulk?pretty&#39; --data-binary @shakespeare_6.0.json GET _cat/nodes?v GET _cat/indices?v ## API Search Recherche plusieurs terms (match) Renvoie les documents qui correspondent à un texte, un nombre, une date ou une valeur booléenne fournis. Le texte fourni est analysé avant de correspondre.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Labs - Query niveau I :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Préparation PUT /shakespeare { &#34;mappings&#34;: { &#34;properties&#34;: { &#34;speaker&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;play_name&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;line_id&#34;: {&#34;type&#34;: &#34;integer&#34;}, &#34;speech_number&#34;: {&#34;type&#34;: &#34;integer&#34;} } } } curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/shakespeare/doc/_bulk?pretty&#39; --data-binary @shakespeare_6.0.json GET _cat/nodes?v GET _cat/indices?v ## API Search Recherche plusieurs terms (match) Renvoie les documents qui correspondent à un texte, un nombre, une date ou une valeur booléenne fournis. Le texte fourni est analysé avant de correspondre.">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/avance/term/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Labs - Query niveau I :: Elastic Tutoriel">
+    <meta property="og:description" content="Préparation PUT /shakespeare { &#34;mappings&#34;: { &#34;properties&#34;: { &#34;speaker&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;play_name&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;line_id&#34;: {&#34;type&#34;: &#34;integer&#34;}, &#34;speech_number&#34;: {&#34;type&#34;: &#34;integer&#34;} } } } curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/shakespeare/doc/_bulk?pretty&#39; --data-binary @shakespeare_6.0.json GET _cat/nodes?v GET _cat/indices?v ## API Search Recherche plusieurs terms (match) Renvoie les documents qui correspondent à un texte, un nombre, une date ou une valeur booléenne fournis. Le texte fourni est analysé avant de correspondre.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-04-29T10:10:47+02:00">
+    <meta property="article:modified_time" content="2020-04-29T10:10:47+02:00">
+    <meta itemprop="name" content="Labs - Query niveau I :: Elastic Tutoriel">
+    <meta itemprop="description" content="Préparation PUT /shakespeare { &#34;mappings&#34;: { &#34;properties&#34;: { &#34;speaker&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;play_name&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;line_id&#34;: {&#34;type&#34;: &#34;integer&#34;}, &#34;speech_number&#34;: {&#34;type&#34;: &#34;integer&#34;} } } } curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/shakespeare/doc/_bulk?pretty&#39; --data-binary @shakespeare_6.0.json GET _cat/nodes?v GET _cat/indices?v ## API Search Recherche plusieurs terms (match) Renvoie les documents qui correspondent à un texte, un nombre, une date ou une valeur booléenne fournis. Le texte fourni est analysé avant de correspondre.">
+    <meta itemprop="datePublished" content="2020-04-29T10:10:47+02:00">
+    <meta itemprop="dateModified" content="2020-04-29T10:10:47+02:00">
+    <meta itemprop="wordCount" content="452">
+    <title>Labs - Query niveau I :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/avance/term/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#préparation">Préparation</a>
+      <ul>
+        <li><a href="#recherche-plusieurs-terms-match">Recherche plusieurs terms (match)</a></li>
+        <li><a href="#recherche-une-phrase-en-entière-match-phrase">Recherche une phrase en entière (match phrase)</a></li>
+        <li><a href="#recherche-un-term-dans-un-champs-spécifique-multi-match">Recherche un term dans un champs spécifique (multi match)</a></li>
+        <li><a href="#recherche-plusieurs-terms-dans-un-champs-spécifique-query-string">Recherche plusieurs terms dans un champs spécifique (query string)</a></li>
+        <li><a href="#recherche-un-term-dans-un-champs-spécifique-sans-utiliser-un-analyseur-de-texte-term">Recherche un term dans un champs spécifique sans utiliser un analyseur de texte (term)</a></li>
+        <li><a href="#recherche-plusieurs-terms-dans-un-champs-spécifique-sans-utiliser-un-analyseur-de-texte-terms">Recherche plusieurs terms dans un champs spécifique sans utiliser un analyseur de texte (terms)</a></li>
+        <li><a href="#recherche-une-valeur-entre-40-et-50-dans-un-champs-spécifique-range">Recherche une valeur entre 40 et 50 dans un champs spécifique (range)</a></li>
+        <li><a href="#recherche-une-valeur-wildcard-dans-un-champs-spécifique-wildcard">Recherche une valeur wildcard dans un champs spécifique (wildcard)</a></li>
+        <li><a href="#recherche-une-valeur-avec-une-regexp-dans-un-champs-spécifique-regexp">Recherche une valeur avec une regexp dans un champs spécifique (regexp)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/avance/index.html"><span itemprop="name">Avancé</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Labs - Query niveau I</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/avance/index.html" title="Avancé (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/avance/sort/index.html" title="Labs - Query niveau II (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="labs---query-niveau-i">Labs - Query niveau I</h1>
+
+<h2 id="préparation">Préparation</h2>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT /shakespeare
+{
+ &#34;mappings&#34;: {
+   &#34;properties&#34;: {
+    &#34;speaker&#34;: {&#34;type&#34;: &#34;keyword&#34;},
+    &#34;play_name&#34;: {&#34;type&#34;: &#34;keyword&#34;},
+    &#34;line_id&#34;: {&#34;type&#34;: &#34;integer&#34;},
+    &#34;speech_number&#34;: {&#34;type&#34;: &#34;integer&#34;}
+   }
+ }
+}
+
+
+curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json
+curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/shakespeare/doc/_bulk?pretty&#39; --data-binary @shakespeare_6.0.json
+
+
+GET _cat/nodes?v
+
+GET _cat/indices?v
+
+
+## API Search</code></pre></div>
+<h3 id="recherche-plusieurs-terms-match">Recherche plusieurs terms (match)</h3>
+<p>Renvoie les documents qui correspondent à un texte, un nombre, une date ou une valeur booléenne fournis. Le texte fourni est analysé avant de correspondre.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;match&#34;: {
+            &#34;text_entry&#34;: &#34;to be or not to be&#34;
+        }
+    }
+}</code></pre></div>
+<h3 id="recherche-une-phrase-en-entière-match-phrase">Recherche une phrase en entière (match phrase)</h3>
+<p>La requête match_phrase analyse le texte et crée une requête de phrase à partir du texte analysé.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;match_phrase&#34;: {
+            &#34;text_entry&#34;: &#34;to be or not to be&#34;
+        }
+    }
+}</code></pre></div>
+<h3 id="recherche-un-term-dans-un-champs-spécifique-multi-match">Recherche un term dans un champs spécifique (multi match)</h3>
+<p>La requête multi_match s&rsquo;appuie sur la requête match pour permettre les requêtes multi-champs.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;multi_match&#34;: {
+            &#34;query&#34;: &#34;Crime&#34;,
+            &#34;fields&#34;: [&#34;text_entry&#34;, &#34;relatedContent.og:description&#34;]
+        }
+    }
+}</code></pre></div>
+<h3 id="recherche-plusieurs-terms-dans-un-champs-spécifique-query-string">Recherche plusieurs terms dans un champs spécifique (query string)</h3>
+<p>Renvoie les documents basés sur une chaîne de requête fournie, en utilisant un analyseur syntaxique strict.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;query_string&#34;: {
+            &#34;default_field&#34;: &#34;text_entry&#34;,
+            &#34;query&#34;: &#34;(romeo AND juliet) OR (mother AND father)&#34;
+        }
+    }
+}</code></pre></div>
+<h3 id="recherche-un-term-dans-un-champs-spécifique-sans-utiliser-un-analyseur-de-texte-term">Recherche un term dans un champs spécifique sans utiliser un analyseur de texte (term)</h3>
+<p>Retourne les documents qui contiennent un terme exact dans un champ fourni.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;term&#34;: {
+            &#34;speaker&#34;: {
+                &#34;value&#34;: &#34;ROMEO&#34;
+            }
+        }
+    }
+}</code></pre></div>
+<h3 id="recherche-plusieurs-terms-dans-un-champs-spécifique-sans-utiliser-un-analyseur-de-texte-terms">Recherche plusieurs terms dans un champs spécifique sans utiliser un analyseur de texte (terms)</h3>
+<p>Retourne les documents qui contiennent un terme exact dans un champ fourni.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;terms&#34;: {
+            &#34;speaker&#34;: [
+                &#34;ROMEO&#34;,
+                &#34;JUILIET&#34;,
+                &#34;HAMLET&#34;
+            ]
+        }
+    }
+}</code></pre></div>
+<h3 id="recherche-une-valeur-entre-40-et-50-dans-un-champs-spécifique-range">Recherche une valeur entre 40 et 50 dans un champs spécifique (range)</h3>
+<p>Renvoie les documents qui contiennent des termes compris dans une plage donnée.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;range&#34;: {
+            &#34;age&#34;: {
+                &#34;gte&#34;: 40,
+                &#34;lt&#34;: 50
+            }
+        }
+    }
+}</code></pre></div>
+<h3 id="recherche-une-valeur-wildcard-dans-un-champs-spécifique-wildcard">Recherche une valeur wildcard dans un champs spécifique (wildcard)</h3>
+<p>Renvoie les documents qui contiennent des termes correspondant à un motif de caractère générique.</p>
+<p>Un opérateur wildcard est un caractère de remplacement qui correspond à un ou plusieurs caractères. Par exemple, l&rsquo;opérateur wildcard * correspond à zéro ou plusieurs caractères. Vous pouvez combiner des opérateurs wildcard avec d&rsquo;autres caractères pour créer un motif wildcard.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;wildcard&#34;: {
+            &#34;city.keyword&#34;: {
+                &#34;value&#34;: &#34;*ville&#34;
+            }
+        }
+    }
+}</code></pre></div>
+<h3 id="recherche-une-valeur-avec-une-regexp-dans-un-champs-spécifique-regexp">Recherche une valeur avec une regexp dans un champs spécifique (regexp)</h3>
+<p>Renvoie les documents qui contiennent des termes correspondant à une expression régulière.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _search
+{
+    &#34;query&#34;: {
+        &#34;regexp&#34;: {
+            &#34;email.keyword&#34;: &#34;.*@xurban\\.com&#34;
+        }
+    }
+}</code></pre></div>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu">
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/avance/term/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/term/index.html">Labs - Query niveau I<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/avance/sort/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/sort/index.html">Labs - Query niveau II<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/avance/query/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/query/index.html">Labs - Query niveau III<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/avance/tp_query/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/tp_query/index.html">TP : Définir et exécuter des requêtes de recherche dans Elasticsearch<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/avance/fleet/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/fleet/index.html">Bonus - Fleet &amp; Elastic Agent<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/avance/term/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

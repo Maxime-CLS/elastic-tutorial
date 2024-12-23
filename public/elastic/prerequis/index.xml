@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Prérequis :: Elastic Tutoriel</title>
+    <link>http://localhost:1313/elastic-tutorial/elastic/prerequis/index.html</link>
+    <description></description>
+    <generator>Hugo</generator>
+    <language>fr-FR</language>
+    <lastBuildDate>Fri, 26 Jun 2020 15:17:20 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/elastic-tutorial/elastic/prerequis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Installation</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/prerequis/installation/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/prerequis/installation/index.html</guid>
+      <description>Prérequis Machine de 8 CPU, 16Go de RAM et 100Go de disque Ubuntu ou Debian ou Docker Desktop for MacOs Docker &amp; Docker-Compose Exécuter la commande ci-dessous sudo vi /etc/sysctl.conf Ajouter en fin de fichier la ligne suivante :&#xA;vm.max_map_count=262144 Vérification de votre environnement de travail Docker docker version Vous devez obtenir une réponse similaire :&#xA;Client:&#xD;Version: 27.4.0&#xD;API version: 1.47&#xD;Go version: go1.22.10&#xD;Git commit: bde2b89&#xD;Built: Sat Dec 7 10:35:43 2024&#xD;OS/Arch: darwin/arm64&#xD;Context: desktop-linux&#xD;Server: Docker Desktop 4.37.1 (178610)&#xD;Engine:&#xD;Version: 27.4.0&#xD;API version: 1.47 (minimum version 1.24)&#xD;Go version: go1.22.10&#xD;Git commit: 92a8393&#xD;Built: Sat Dec 7 10:38:33 2024&#xD;OS/Arch: linux/arm64&#xD;Experimental: false&#xD;containerd:&#xD;Version: 1.7.21&#xD;GitCommit: 472731909fa34bd7bc9c087e4c27943f9835f111&#xD;runc:&#xD;Version: 1.1.13&#xD;GitCommit: v1.1.13-0-g58aa920&#xD;docker-init:&#xD;Version: 0.19.0&#xD;GitCommit: de40ad0 Si vous avez un retour vous indiquant que la commande docker n’est pas reconnu, veuillez l’installer.</description>
+    </item>
+  </channel>
+</rss>

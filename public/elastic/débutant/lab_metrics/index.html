@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques système et NGINX. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
+Infrastructure Lancer Kibana pour commencer à explorer les métriques qui ont été inclus dans le processus de configuration.
+Accédez à Observability &gt; Infrastructure via le menu principal">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lab - Metrics :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques système et NGINX. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
+Infrastructure Lancer Kibana pour commencer à explorer les métriques qui ont été inclus dans le processus de configuration.
+Accédez à Observability &gt; Infrastructure via le menu principal">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Lab - Metrics :: Elastic Tutoriel">
+    <meta property="og:description" content="Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques système et NGINX. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
+Infrastructure Lancer Kibana pour commencer à explorer les métriques qui ont été inclus dans le processus de configuration.
+Accédez à Observability &gt; Infrastructure via le menu principal">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-06-26T15:17:20+02:00">
+    <meta property="article:modified_time" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="name" content="Lab - Metrics :: Elastic Tutoriel">
+    <meta itemprop="description" content="Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques système et NGINX. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
+Infrastructure Lancer Kibana pour commencer à explorer les métriques qui ont été inclus dans le processus de configuration.
+Accédez à Observability &gt; Infrastructure via le menu principal">
+    <meta itemprop="datePublished" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="dateModified" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="wordCount" content="619">
+    <title>Lab - Metrics :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#infrastructure">Infrastructure</a>
+      <ul>
+        <li><a href="#host">Host</a></li>
+        <li><a href="#docker">Docker</a></li>
+      </ul>
+    </li>
+    <li><a href="#dashboard">Dashboard</a>
+      <ul>
+        <li><a href="#docker-1">Docker</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><span itemprop="name">Débutant</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Lab - Metrics</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/index.html" title="Lab - Logs (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/index.html" title="Lab - APM (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="lab---metrics">Lab - Metrics</h1>
+
+<p>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques système et NGINX. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.</p>
+<h2 id="infrastructure">Infrastructure</h2>
+<p>Lancer Kibana pour commencer à explorer les métriques qui ont été inclus dans le processus de configuration.</p>
+<p>Accédez à Observability &gt; Infrastructure via le menu principal</p>
+<p><a href="#R-image-e46a77801ca01df2fbd42a235d2e277d" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/menu.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e46a77801ca01df2fbd42a235d2e277d"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/menu.png"></a></p>
+<p>La vue Infrastructure dans Elastic Observability permet de surveiller et d&rsquo;analyser les métriques de votre infrastructure en temps réel. Voici ce que vous y trouverez :</p>
+<p>Inventaire de l&rsquo;infrastructure : Une vue basée sur les métriques de l&rsquo;ensemble de votre infrastructure, regroupée par les ressources surveillées, comme les serveurs, les conteneurs Docker, et les pods Kubernetes1.</p>
+<p>Explorateur de métriques : Un outil pour créer des visualisations de séries temporelles basées sur l&rsquo;agrégation de vos métriques, permettant de comparer différentes métriques et de les décomposer par champ2.</p>
+<p>Vue des hôtes : Une interface conviviale pour visualiser les métriques des hôtes, aidant à diagnostiquer les pics problématiques et à identifier les utilisations élevées des ressources2.</p>
+<p>Ces fonctionnalités vous aident à obtenir une vue complète et détaillée de la performance et de la santé de votre infrastructure.</p>
+<p><a href="#R-image-a04ffd0bd9367df3a943e5ba7a95cba2" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/inventory.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a04ffd0bd9367df3a943e5ba7a95cba2"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/inventory.png"></a></p>
+<h3 id="host">Host</h3>
+<p>En cliquant sur un hôte dans la vue Infrastructure d&rsquo;Elastic Observability, vous pouvez observer les éléments suivants :</p>
+<ul>
+<li>Détails des métriques : Une vue détaillée des métriques de l&rsquo;hôte, incluant l&rsquo;utilisation du CPU, de la mémoire, des disques, et des réseaux.</li>
+<li>Historique des performances : Visualisation des tendances de performance sur différentes périodes pour identifier les anomalies et les pics d&rsquo;utilisation.</li>
+<li>Informations contextuelles : Métadonnées et informations supplémentaires sur l&rsquo;hôte, telles que le système d&rsquo;exploitation, les versions des logiciels, et les configurations réseau.</li>
+</ul>
+<p>Ces fonctionnalités permettent une analyse approfondie et une gestion efficace de la performance et de la santé de vos hôtes.</p>
+<p><a href="#R-image-c174ec936c38c52916fe0804a722756d" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/inventory-hosts.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c174ec936c38c52916fe0804a722756d"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/inventory-hosts.png"></a></p>
+<h3 id="docker">Docker</h3>
+<p>Maintenant appliquez un filtre pour observer uniquement les conteneurs Docker :</p>
+<p><a href="#R-image-38f7ca04aafd618b4878bbfd308518d0" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/inventory-filter.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-38f7ca04aafd618b4878bbfd308518d0"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/inventory-filter.png"></a></p>
+<p><a href="#R-image-d3bd58f06c7393f8f0242d100fa2cea7" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/inventory-docker.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d3bd58f06c7393f8f0242d100fa2cea7"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/inventory-docker.png"></a></p>
+<p>En cliquant sur un conteneur dans la vue Infrastructure d&rsquo;Elastic Observability, vous pouvez observer les éléments suivants :</p>
+<ul>
+<li>Détails des métriques : Une vue détaillée des métriques du conteneur, incluant l&rsquo;utilisation du CPU, de la mémoire, des E/S disque, et des réseaux.</li>
+<li>Logs associés : Accès direct aux logs pertinents pour le conteneur sélectionné, facilitant le diagnostic des problèmes.</li>
+<li>Historique des performances : Visualisation des tendances de performance sur différentes périodes pour identifier les anomalies et les pics d&rsquo;utilisation.</li>
+<li>Informations contextuelles : Métadonnées et informations supplémentaires sur le conteneur, telles que l&rsquo;image Docker utilisée, les labels, et les configurations réseau.</li>
+</ul>
+<p>Ces fonctionnalités permettent une analyse approfondie et une gestion efficace de la performance et de la santé de vos conteneurs Docker.</p>
+<p><a href="#R-image-2684bab326a9e3ab9e7a76990e2741e6" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/metrics-nginx-overview.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2684bab326a9e3ab9e7a76990e2741e6"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/metrics-nginx-overview.png"></a>
+<a href="#R-image-0dfc2af89b8c5e40232a5f572e137eda" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/metrics-nginx-metadata.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0dfc2af89b8c5e40232a5f572e137eda"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/metrics-nginx-metadata.png"></a>
+<a href="#R-image-d100460e5c63e6dbe9cc2389b10dc18d" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/metrics-nginx-metrics.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d100460e5c63e6dbe9cc2389b10dc18d"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/metrics-nginx-metrics.png"></a>
+<a href="#R-image-2bb4313866a64ec2cfc012467828c51f" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/metrics-nginx-logs.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2bb4313866a64ec2cfc012467828c51f"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/metrics-nginx-logs.png"></a></p>
+<h2 id="dashboard">Dashboard</h2>
+<h3 id="docker-1">Docker</h3>
+<p>Lancer Kibana pour commencer à explorer les métriques qui ont été inclus dans le processus de configuration.</p>
+<p>Accédez à Analytics &gt; Dashboard via le menu principal</p>
+<p><a href="#R-image-dd43cba8d058b4907982acc8351451fe" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/menu-dashboard.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-dd43cba8d058b4907982acc8351451fe"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/menu-dashboard.png"></a></p>
+<p>Recherche un tableau de bord pour Docker :</p>
+<p><a href="#R-image-da32ddd1d1d945216b9943edcefba1db" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/dashboard-search.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-da32ddd1d1d945216b9943edcefba1db"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/dashboard-search.png"></a></p>
+<p>Le tableau de bord [Metrics Docker] Overview dans l&rsquo;intégration Docker d&rsquo;Elastic fournit une vue d&rsquo;ensemble des performances et de l&rsquo;état de vos conteneurs Docker. Voici ce que vous y trouverez :</p>
+<ul>
+<li>Utilisation du CPU : Visualisation de l&rsquo;utilisation du CPU par conteneur, permettant d&rsquo;identifier les conteneurs gourmands en ressources1.</li>
+<li>Utilisation de la mémoire : Suivi de la consommation de mémoire pour chaque conteneur, aidant à détecter les fuites de mémoire et les usages excessifs2.</li>
+<li>E/S disque : Surveillance des opérations d&rsquo;entrée/sortie disque, utile pour comprendre les performances de stockage1.</li>
+<li>Trafic réseau : Analyse du trafic réseau entrant et sortant des conteneurs, permettant de surveiller la bande passante utilisée2.</li>
+<li>Statut des conteneurs : Informations sur l&rsquo;état de santé et le statut des conteneurs, facilitant la gestion et le dépannage1.</li>
+</ul>
+<p>Ce tableau de bord centralise les métriques essentielles pour une gestion efficace et une surveillance proactive de vos environnements Docker.</p>
+<p><a href="#R-image-02e37d748ffb5ae7ae7a8a42f27bf33e" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/dashboard-docker.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-02e37d748ffb5ae7ae7a8a42f27bf33e"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/metrics/dashboard-docker.png"></a></p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu">
+            <li class="" data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/lab_integration/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_integration/index.html">Lab - Integration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/index.html">Lab - Logs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/index.html">Lab - Metrics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/index.html">Lab - APM<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/index.html">Lab - Synthetics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu"></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

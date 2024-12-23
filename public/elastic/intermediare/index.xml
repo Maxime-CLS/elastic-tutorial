@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Intermediare :: Elastic Tutoriel</title>
+    <link>http://localhost:1313/elastic-tutorial/elastic/intermediare/index.html</link>
+    <description></description>
+    <generator>Hugo</generator>
+    <language>fr-FR</language>
+    <lastBuildDate>Fri, 26 Jun 2020 15:17:20 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/elastic-tutorial/elastic/intermediare/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lab - Alertes</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/intermediare/alerting/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/intermediare/alerting/index.html</guid>
+      <description>Vous êtes le nouvel administrateur d’un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que aucune alerte n’est remonter sur l’état de la plateforme Elastic. Vos supérieurs vous demandent de donner la priorité à construire une solution d’alerting permettant de fournir des indicateurs de fiabilisés la plateforme.&#xA;Dans ce laboratoire pratique, vous aurez l’occasion de :&#xA;Utiliser les API _security pour créer une API Key. utiliser l’API actions/connectors pour créer un connecteur de donnée Utiliser l’API alerting/rule pour mettre rapidement en place des alertes. Créer des alertes avec le module Rules &amp; Connector Créer une API Key Utilisez l’outil de console Kibana pour exécuter ce qui suit :</description>
+    </item>
+    <item>
+      <title>Labs - Index et ALias</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/intermediare/index_alias/index.html</link>
+      <pubDate>Wed, 29 Apr 2020 10:10:47 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/intermediare/index_alias/index.html</guid>
+      <description>Description Dans Elasticsearch, les données que nous indexons sont stockées dans un index. Le mot “index” est utilisé à la fois comme un verbe et un nom. Essentiellement, nous effectuons une opération d’indexation afin de stocker des données dans un index. Cependant, avant de pouvoir le faire, nous devons d’abord comprendre la structure d’un index et comment en définir un pour répondre à des besoins spécifiques. Dans ce laboratoire pratique, vous allez définir des index Elasticsearch en effectuant les tâches suivantes :</description>
+    </item>
+    <item>
+      <title>Labs - Mapping</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/intermediare/mapping/index.html</link>
+      <pubDate>Wed, 29 Apr 2020 10:10:47 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/intermediare/mapping/index.html</guid>
+      <description>Description Les modèles dynamiques dans Elasticsearch permettent d’indexer très facilement les données sans avoir à créer des mappages explicites pour chaque champ. Cependant, il peut arriver que vous préfériez créer des mappages explicites, ou même désactiver complètement le mappage dynamique, afin d’avoir un contrôle plus étroit de la structure de votre index et des exigences en matière de type de données. Dans cette activité d’apprentissage, vous avez l’occasion de créer des mappages de champ explicites pour un index contenant des données de journal. Plus précisément, vous allez vous exercer à</description>
+    </item>
+    <item>
+      <title>Labs - Index Template et Mapping</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/intermediare/template_mapping/index.html</link>
+      <pubDate>Wed, 29 Apr 2020 10:10:47 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/intermediare/template_mapping/index.html</guid>
+      <description>Description L’une des fonctionnalités les plus conviviales d’Elasticsearch est le mappage dynamique. Le mappage dynamique est le mécanisme utilisé par Elasticsearch pour détecter les champs et les mettre en correspondance avec un type de données approprié. À l’aide de modèles d’index, nous pouvons définir la structure d’une série d’index pour répondre à des exigences spécifiques ou remplacer et contrôler le comportement du mappage dynamique. Avec le mappage dynamique, nous pouvons sauter le processus de définition explicite de chaque champ possible et de son type de données et indiquer à Elasticsearch comment détecter les types de données souhaités au fur et à mesure qu’ils sont découverts pendant l’indexation. En conséquence, le mappage dynamique nous permet d’être opérationnel très rapidement avec nos données. Dans ce laboratoire pratique, vous allez effectuer les tâches suivantes :</description>
+    </item>
+    <item>
+      <title>Labs - Reindex</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/intermediare/reindex/index.html</link>
+      <pubDate>Wed, 29 Apr 2020 10:10:47 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/intermediare/reindex/index.html</guid>
+      <description>Description Que vous ayez besoin de modifier le mappage d’un index existant ou de prendre un sous-ensemble de données d’un index et de le copier dans un autre, l’API _reindex d’Elasticsearch vous couvre. Avec l’API _reindex, vous pouvez prendre toutes les données ou seulement un sous-ensemble de données d’un index et les copier dans un autre. Dans ce laboratoire pratique, vous aurez l’occasion de faire les exercices suivants :&#xA;Réindexer un sous-ensemble de données d’un index vers un nouvel index. Créer un pipeline de nœuds d’ingestion Transformer les données pendant le processus de réindexation Vous travaillez en tant que bibliothécaire de recherche et vous étudiez actuellement les œuvres de Shakespeare, en particulier Roméo et Juliette. Vous avez un cluster Elasticsearch à 6 nœuds et les œuvres complètes de Shakespeare, que vous utilisez pour votre analyse littéraire. Actuellement, les œuvres complètes de Shakespeare sont indexées dans un seul index appelé shakespeare, mais, comme vous vous concentrez actuellement sur la pièce Roméo et Juliette, vous préférez copier cette pièce dans son propre index.</description>
+    </item>
+    <item>
+      <title>Labs - CRUD</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/intermediare/crud_documents/index.html</link>
+      <pubDate>Wed, 29 Apr 2020 10:10:47 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/intermediare/crud_documents/index.html</guid>
+      <description>Description Quelle que soit la façon dont vous comptez utiliser Elasticsearch, il est essentiel de comprendre comment créer, mettre à jour et supprimer rapidement des documents dans Elasticsearch. Dans cette activité d’apprentissage, vous allez effectuer les tâches suivantes :&#xA;Créer des documents dans Elasticsearch Mettre à jour des documents existants dans Elasticsearch Supprimer des documents d’un index Elasticsearch Vous travaillez en tant qu’administrateur Elasticsearch pour une société bancaire. Un récent échec de déploiement et un retour en arrière de votre logiciel bancaire ont désynchronisé certaines actions qui ont été prises sur quelques comptes. Pour corriger rapidement la désynchronisation, on vous demande d’effectuer des opérations CRUD manuelles sur l’index bancaire dans Elasticsearch.</description>
+    </item>
+  </channel>
+</rss>

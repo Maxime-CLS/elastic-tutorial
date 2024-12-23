@@ -33,30 +33,30 @@ docker version
 Vous devez obtenir une réponse similaire :
 
 ```
-Client: Docker Engine - Community
- Version:           24.0.2
- API version:       1.43
- Go version:        go1.20.4
- Git commit:        cb74dfc
- Built:             Thu May 25 21:52:13 2023
- OS/Arch:           linux/amd64
- Context:           default
+Client:
+ Version:           27.4.0
+ API version:       1.47
+ Go version:        go1.22.10
+ Git commit:        bde2b89
+ Built:             Sat Dec  7 10:35:43 2024
+ OS/Arch:           darwin/arm64
+ Context:           desktop-linux
 
-Server: Docker Engine - Community
+Server: Docker Desktop 4.37.1 (178610)
  Engine:
-  Version:          24.0.2
-  API version:      1.43 (minimum version 1.12)
-  Go version:       go1.20.4
-  Git commit:       659604f
-  Built:            Thu May 25 21:52:13 2023
-  OS/Arch:          linux/amd64
+  Version:          27.4.0
+  API version:      1.47 (minimum version 1.24)
+  Go version:       go1.22.10
+  Git commit:       92a8393
+  Built:            Sat Dec  7 10:38:33 2024
+  OS/Arch:          linux/arm64
   Experimental:     false
  containerd:
-  Version:          1.6.21
-  GitCommit:        3dce8eb055cbb6872793272b4f20ed16117344f8
+  Version:          1.7.21
+  GitCommit:        472731909fa34bd7bc9c087e4c27943f9835f111
  runc:
-  Version:          1.1.7
-  GitCommit:        v1.1.7-0-g860f061
+  Version:          1.1.13
+  GitCommit:        v1.1.13-0-g58aa920
  docker-init:
   Version:          0.19.0
   GitCommit:        de40ad0
@@ -86,42 +86,54 @@ docker compose version
 Vous devez obtenir une réponse similaire :
 
 ```
-Docker Compose version v2.7.0
+Docker Compose version v2.31.0-desktop.2
 ```
 
 ### Déployer la stack Elasticsearch Kibana dans Docker avec TLS activé
 
 Si les fonctions de sécurité sont activées, vous devez configurer le chiffrement TLS (Transport Layer Security) pour la couche de transport d'Elasticsearch. Bien qu'il soit possible d'utiliser une licence d'essai sans configurer TLS, nous vous conseillons de sécuriser votre pile dès le départ.
 
+#### Architecture 
+
+![image.png](/elastic-tutorial/images/attachments/prerequis/architecture.png)
+
+L'architecture de l'Elastic Stack, composée de Elastic Agent, Fleet Server, Elasticsearch, Kibana et le Package Registry, est conçue pour offrir une solution complète de collecte, gestion et analyse des données. Voici une description de chaque composant :
+
+Elastic Agent : Un agent unifié qui collecte des métriques et des logs à partir de diverses sources. Il peut être déployé sur des serveurs, des conteneurs, et des environnements cloud pour centraliser la collecte de données.
+
+Fleet Server : Un composant central qui gère les Elastic Agents. Il distribue les configurations, collecte les informations de statut et coordonne les mises à jour des agents. Fleet Server permet une gestion centralisée et simplifiée des agents.
+
+Elasticsearch : Le moteur de recherche et d'analyse distribué qui stocke et indexe les données collectées. Il permet des recherches rapides et des analyses approfondies grâce à ses capacités de traitement de données en temps réel.
+
+Kibana : L'interface utilisateur pour visualiser et analyser les données stockées dans Elasticsearch. Kibana offre des tableaux de bord interactifs, des outils de visualisation et des capacités de gestion des alertes.
+
+Package Registry : Un dépôt de paquets qui contient des intégrations prêtes à l'emploi pour diverses sources de données. Il permet de télécharger et de mettre à jour facilement les intégrations nécessaires pour collecter des données spécifiques.
+
+
+#### Description du projet Elastic Platform
+
 Pour obtenir un cluster Elasticsearch et Kibana opérationnel dans Docker avec la sécurité activée, vous pouvez utiliser Docker Compose :
 
-
-**instances.yml** identifie les instances pour lesquelles vous devez créer des certificats.
-**elastic-docker-tls.yml** est un fichier Docker Compose qui met en place un cluster Elasticsearch à trois nœuds et une instance Kibana avec TLS activé afin que vous puissiez voir comment les choses fonctionnent. Cette configuration tout-en-un est un moyen pratique de mettre en place votre premier cluster de développement avant de construire un déploiement distribué avec plusieurs hôtes.
-**beats-docker.yml** est un fichier Docker Compose qui met en place les agents de collecte avec TLS activé afin que vous puissiez voir comment les choses fonctionnent.
+**docker-compose.yml** est un fichier Docker Compose qui met en place un noeud Elasticsearch, une instance Kibana, une instance Fleet Server, une instance de Package Registry et une instance de Elastic Agent avec TLS activé afin que vous puissiez voir comment les choses fonctionnent. Cette configuration tout-en-un est un moyen pratique de mettre en place votre premier déploiement de développement.
 
 Voici l'arborscence :
 
 ```
+./
+├── README.md
 ├── app
 │   ├── artificial_load.sh
 │   ├── conf
 │   │   └── default.conf
 │   └── petclinic.yml
 └── elastic-stack
-    ├── beats
-    │   ├── beats-docker.yml
-    │   └── conf
-    │       ├── filebeat.yml
-    │       ├── heartbeat.yml
-    │       └── metricbeat.yml
     ├── data
     │   ├── accounts.json
     │   ├── logs.json
     │   └── shakespeare.json
-    ├── elastic-docker-tls.yml
-    └── instances.yml
-
+    ├── docker-compose.yml
+    ├── elastic-container.sh
+    └── kibana.yml
 ```
 
 Télécharger la projet contenant la plateforme Elastic :
@@ -134,7 +146,29 @@ Démarrer la stack Elastic
 
 ```
 cd elastic-platform/elastic-stack
-docker compose -f elastic-docker-tls.yml up -d
+chmod +x elastic-container.sh
+./elastic-container start
+```
+
+```
+ ⠿ Container elasticsearch-security-setup  Healthy 7.3s
+ ⠿ Container elasticsearch                 Healthy 39.3s
+ ⠿ Container kibana                        Healthy 59.3s
+ ⠿ Container elastic-agent                 Started 59.7s
+
+Kibana is up. Proceeding
+
+Waiting 40 seconds for Fleet Server setup
+
+Populating Fleet Settings
+
+Populating Synthetics Monitor
+
+READY SET GO!
+
+Browse to https://localhost:5601
+Username: elastic
+Passphrase: elastic!
 ```
 
 Vérifiez a présence des volumes
@@ -145,43 +179,10 @@ docker volume ls
 
 ```
 DRIVER    VOLUME NAME
-local     es_certs
-local     es_esdata01
-local     es_esdata02
-local     es_esdata03
-local     es_kibanadata
-```
-
-Vérifiez la présence des certificats
-
-```
-sudo ls -R /var/lib/docker/volumes/es_certs/_data/
-```
-
-```
-/var/lib/docker/volumes/es_certs/_data/:
-ca  ca.zip  certs.zip  es01  es02  es03  fleet-server  instances.yml  kibana  package-registry
-
-/var/lib/docker/volumes/es_certs/_data/ca:
-ca.crt	ca.key
-
-/var/lib/docker/volumes/es_certs/_data/es01:
-es01.crt  es01.key
-
-/var/lib/docker/volumes/es_certs/_data/es02:
-es02.crt  es02.key
-
-/var/lib/docker/volumes/es_certs/_data/es03:
-es03.crt  es03.key
-
-/var/lib/docker/volumes/es_certs/_data/fleet-server:
-fleet-server.crt  fleet-server.key
-
-/var/lib/docker/volumes/es_certs/_data/kibana:
-kibana.crt  kibana.key
-
-/var/lib/docker/volumes/es_certs/_data/package-registry:
-package-registry.crt  package-registry.key
+local     elastic-stack_certs
+local     elastic-stack_esdata01
+local     elastic-stack_fleetserverdata
+local     elastic-stack_kibanadata
 ```
 
 Vérifier l'état du service Elasticsearch : 
@@ -191,8 +192,8 @@ curl -k -u 'elastic:elastic' "https://localhost:9200/_cat/health?v"
 ```
 
 ```
-epoch      timestamp cluster        status node.total node.data shards pri relo init unassign pending_tasks max_task_wait_time active_shards_percent
-1702918059 16:47:39  docker-cluster green           3         3    141  70    0    0        0             0                  -                100.0%
+epoch      timestamp cluster        status node.total node.data shards pri relo init unassign unassign.pri pending_tasks max_task_wait_time active_shards_percent
+1734951114 10:51:54  docker-cluster yellow          1         1     88  88    0    0       50            0             0                  -                 63.8%
 ```
 
 Vérifier l'état du service Kibana :
@@ -214,22 +215,6 @@ Ouvrez Kibana pour charger les données de l'échantillon et interagir avec le c
 
 Comme SSL est également activé pour les communications entre Kibana et les navigateurs clients, vous devez accéder à Kibana via le protocole HTTPS.
 
-
-Ouvrez le menu de droit et cliquez sur "Stack Monitorng"
-
-![image.png](/elastic-tutorial/images/attachments/prerequis/stack_monitoring.png)
-
-
-Cliquez sur l'option "Or, set up with self monitoring"
-
-![image.png](/elastic-tutorial/images/attachments/prerequis/enable_monitoring.png)
-
-
-![image.png](/elastic-tutorial/images/attachments/prerequis/turn_on_monitoring.png)
-
-![image.png](/elastic-tutorial/images/attachments/prerequis/monitoring.png)
-
-
 ### Déployer une application blanche
 
 ```
@@ -237,24 +222,14 @@ cd ../app
 docker compose -f petclinic.yml up -d
 ```
 
-Si vous êtes sur MacOs avec une processeurs de la famille M. Vous devez modifier l'image docker pour le service mysql avec : **image: mariadb:10.6.4-focal**
-
 Accédez à la application blanche en cliquant [ici](http://localhost:8081)
 
 ![image.png](/elastic-tutorial/images/attachments/prerequis/petclinic.png)
 
-### Déployer les agents de collectes
+
+Maintenant, ouvrez une nouvelle fenêtre de terminal et exécutez le script suivant pour simuler la charge sur votre serveur NGINX.
 
 ```
-cd ../elastic-stack
-docker compose -f beats/beats-docker.yml up -d
-```
-
-
-### Labs Avancés
-
-#### Télécharger des données d'exemples
-
-```
-git clone https://github.com/Maxime-CLS/elastic-data-tutorial.git
+cd elastic-platform/app/
+./artificial_load.sh
 ```

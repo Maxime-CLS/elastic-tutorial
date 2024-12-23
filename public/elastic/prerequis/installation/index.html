@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Prérequis Machine de 8 CPU, 16Go de RAM et 100Go de disque Ubuntu ou Debian ou Docker Desktop for MacOs Docker &amp; Docker-Compose Exécuter la commande ci-dessous sudo vi /etc/sysctl.conf Ajouter en fin de fichier la ligne suivante :
+vm.max_map_count=262144 Vérification de votre environnement de travail Docker docker version Vous devez obtenir une réponse similaire :
+Client:Version: 27.4.0API version: 1.47Go version: go1.22.10Git commit: bde2b89Built: Sat Dec 7 10:35:43 2024OS/Arch: darwin/arm64Context: desktop-linuxServer: Docker Desktop 4.37.1 (178610)Engine:Version: 27.4.0API version: 1.47 (minimum version 1.24)Go version: go1.22.10Git commit: 92a8393Built: Sat Dec 7 10:38:33 2024OS/Arch: linux/arm64Experimental: falsecontainerd:Version: 1.7.21GitCommit: 472731909fa34bd7bc9c087e4c27943f9835f111runc:Version: 1.1.13GitCommit: v1.1.13-0-g58aa920docker-init:Version: 0.19.0GitCommit: de40ad0 Si vous avez un retour vous indiquant que la commande docker n’est pas reconnu, veuillez l’installer.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Installation :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Prérequis Machine de 8 CPU, 16Go de RAM et 100Go de disque Ubuntu ou Debian ou Docker Desktop for MacOs Docker &amp; Docker-Compose Exécuter la commande ci-dessous sudo vi /etc/sysctl.conf Ajouter en fin de fichier la ligne suivante :
+vm.max_map_count=262144 Vérification de votre environnement de travail Docker docker version Vous devez obtenir une réponse similaire :
+Client:Version: 27.4.0API version: 1.47Go version: go1.22.10Git commit: bde2b89Built: Sat Dec 7 10:35:43 2024OS/Arch: darwin/arm64Context: desktop-linuxServer: Docker Desktop 4.37.1 (178610)Engine:Version: 27.4.0API version: 1.47 (minimum version 1.24)Go version: go1.22.10Git commit: 92a8393Built: Sat Dec 7 10:38:33 2024OS/Arch: linux/arm64Experimental: falsecontainerd:Version: 1.7.21GitCommit: 472731909fa34bd7bc9c087e4c27943f9835f111runc:Version: 1.1.13GitCommit: v1.1.13-0-g58aa920docker-init:Version: 0.19.0GitCommit: de40ad0 Si vous avez un retour vous indiquant que la commande docker n’est pas reconnu, veuillez l’installer.">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/prerequis/installation/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Installation :: Elastic Tutoriel">
+    <meta property="og:description" content="Prérequis Machine de 8 CPU, 16Go de RAM et 100Go de disque Ubuntu ou Debian ou Docker Desktop for MacOs Docker &amp; Docker-Compose Exécuter la commande ci-dessous sudo vi /etc/sysctl.conf Ajouter en fin de fichier la ligne suivante :
+vm.max_map_count=262144 Vérification de votre environnement de travail Docker docker version Vous devez obtenir une réponse similaire :
+Client:Version: 27.4.0API version: 1.47Go version: go1.22.10Git commit: bde2b89Built: Sat Dec 7 10:35:43 2024OS/Arch: darwin/arm64Context: desktop-linuxServer: Docker Desktop 4.37.1 (178610)Engine:Version: 27.4.0API version: 1.47 (minimum version 1.24)Go version: go1.22.10Git commit: 92a8393Built: Sat Dec 7 10:38:33 2024OS/Arch: linux/arm64Experimental: falsecontainerd:Version: 1.7.21GitCommit: 472731909fa34bd7bc9c087e4c27943f9835f111runc:Version: 1.1.13GitCommit: v1.1.13-0-g58aa920docker-init:Version: 0.19.0GitCommit: de40ad0 Si vous avez un retour vous indiquant que la commande docker n’est pas reconnu, veuillez l’installer.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-06-26T15:17:20+02:00">
+    <meta property="article:modified_time" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="name" content="Installation :: Elastic Tutoriel">
+    <meta itemprop="description" content="Prérequis Machine de 8 CPU, 16Go de RAM et 100Go de disque Ubuntu ou Debian ou Docker Desktop for MacOs Docker &amp; Docker-Compose Exécuter la commande ci-dessous sudo vi /etc/sysctl.conf Ajouter en fin de fichier la ligne suivante :
+vm.max_map_count=262144 Vérification de votre environnement de travail Docker docker version Vous devez obtenir une réponse similaire :
+Client:Version: 27.4.0API version: 1.47Go version: go1.22.10Git commit: bde2b89Built: Sat Dec 7 10:35:43 2024OS/Arch: darwin/arm64Context: desktop-linuxServer: Docker Desktop 4.37.1 (178610)Engine:Version: 27.4.0API version: 1.47 (minimum version 1.24)Go version: go1.22.10Git commit: 92a8393Built: Sat Dec 7 10:38:33 2024OS/Arch: linux/arm64Experimental: falsecontainerd:Version: 1.7.21GitCommit: 472731909fa34bd7bc9c087e4c27943f9835f111runc:Version: 1.1.13GitCommit: v1.1.13-0-g58aa920docker-init:Version: 0.19.0GitCommit: de40ad0 Si vous avez un retour vous indiquant que la commande docker n’est pas reconnu, veuillez l’installer.">
+    <meta itemprop="datePublished" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="dateModified" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="wordCount" content="1321">
+    <title>Installation :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/prerequis/installation/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#prérequis">Prérequis</a>
+      <ul>
+        <li><a href="#vérification-de-votre-environnement-de-travail">Vérification de votre environnement de travail</a></li>
+        <li><a href="#déployer-la-stack-elasticsearch-kibana-dans-docker-avec-tls-activé">Déployer la stack Elasticsearch Kibana dans Docker avec TLS activé</a></li>
+        <li><a href="#déployer-une-application-blanche">Déployer une application blanche</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/prerequis/index.html"><span itemprop="name">Prérequis</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Installation</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/prerequis/index.html" title="Prérequis (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html" title="Débutant (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="installation">Installation</h1>
+
+<h2 id="prérequis">Prérequis</h2>
+<ul>
+<li>Machine de 8 CPU, 16Go de RAM et 100Go de disque</li>
+<li>Ubuntu ou Debian ou Docker Desktop for MacOs</li>
+<li><a href="https://docs.docker.com/engine/install/ubuntu/" rel="external" target="_blank">Docker</a> &amp; <a href="https://docs.docker.com/compose/install/" rel="external" target="_blank">Docker-Compose</a></li>
+<li>Exécuter la commande ci-dessous</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo vi /etc/sysctl.conf</code></pre></div>
+<p>Ajouter en fin de fichier la ligne suivante :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>vm.max_map_count=262144</code></pre></div>
+<h3 id="vérification-de-votre-environnement-de-travail">Vérification de votre environnement de travail</h3>
+<h4 id="docker">Docker</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>docker version</code></pre></div>
+<p>Vous devez obtenir une réponse similaire :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>Client:
+ Version:           27.4.0
+ API version:       1.47
+ Go version:        go1.22.10
+ Git commit:        bde2b89
+ Built:             Sat Dec  7 10:35:43 2024
+ OS/Arch:           darwin/arm64
+ Context:           desktop-linux
+
+Server: Docker Desktop 4.37.1 (178610)
+ Engine:
+  Version:          27.4.0
+  API version:      1.47 (minimum version 1.24)
+  Go version:       go1.22.10
+  Git commit:       92a8393
+  Built:            Sat Dec  7 10:38:33 2024
+  OS/Arch:          linux/arm64
+  Experimental:     false
+ containerd:
+  Version:          1.7.21
+  GitCommit:        472731909fa34bd7bc9c087e4c27943f9835f111
+ runc:
+  Version:          1.1.13
+  GitCommit:        v1.1.13-0-g58aa920
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0</code></pre></div>
+<p>Si vous avez un retour vous indiquant que la commande docker n&rsquo;est pas reconnu, veuillez l&rsquo;installer.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh ./get-docker.sh</code></pre></div>
+<p>Si vous rencontrez des difficultés à utiliser la commande docker sans le sudo, veuillez ajouter cette configruation :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo groupadd docker
+sudo usermod -aG docker $USER
+docker run hello-world</code></pre></div>
+<h4 id="docker-compose">Docker Compose</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>docker compose version</code></pre></div>
+<p>Vous devez obtenir une réponse similaire :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>Docker Compose version v2.31.0-desktop.2</code></pre></div>
+<h3 id="déployer-la-stack-elasticsearch-kibana-dans-docker-avec-tls-activé">Déployer la stack Elasticsearch Kibana dans Docker avec TLS activé</h3>
+<p>Si les fonctions de sécurité sont activées, vous devez configurer le chiffrement TLS (Transport Layer Security) pour la couche de transport d&rsquo;Elasticsearch. Bien qu&rsquo;il soit possible d&rsquo;utiliser une licence d&rsquo;essai sans configurer TLS, nous vous conseillons de sécuriser votre pile dès le départ.</p>
+<h4 id="architecture">Architecture</h4>
+<p><a href="#R-image-2b922bf3653dd9f76dc6bda94787ef3d" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/prerequis/architecture.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2b922bf3653dd9f76dc6bda94787ef3d"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/prerequis/architecture.png"></a></p>
+<p>L&rsquo;architecture de l&rsquo;Elastic Stack, composée de Elastic Agent, Fleet Server, Elasticsearch, Kibana et le Package Registry, est conçue pour offrir une solution complète de collecte, gestion et analyse des données. Voici une description de chaque composant :</p>
+<p>Elastic Agent : Un agent unifié qui collecte des métriques et des logs à partir de diverses sources. Il peut être déployé sur des serveurs, des conteneurs, et des environnements cloud pour centraliser la collecte de données.</p>
+<p>Fleet Server : Un composant central qui gère les Elastic Agents. Il distribue les configurations, collecte les informations de statut et coordonne les mises à jour des agents. Fleet Server permet une gestion centralisée et simplifiée des agents.</p>
+<p>Elasticsearch : Le moteur de recherche et d&rsquo;analyse distribué qui stocke et indexe les données collectées. Il permet des recherches rapides et des analyses approfondies grâce à ses capacités de traitement de données en temps réel.</p>
+<p>Kibana : L&rsquo;interface utilisateur pour visualiser et analyser les données stockées dans Elasticsearch. Kibana offre des tableaux de bord interactifs, des outils de visualisation et des capacités de gestion des alertes.</p>
+<p>Package Registry : Un dépôt de paquets qui contient des intégrations prêtes à l&rsquo;emploi pour diverses sources de données. Il permet de télécharger et de mettre à jour facilement les intégrations nécessaires pour collecter des données spécifiques.</p>
+<h4 id="description-du-projet-elastic-platform">Description du projet Elastic Platform</h4>
+<p>Pour obtenir un cluster Elasticsearch et Kibana opérationnel dans Docker avec la sécurité activée, vous pouvez utiliser Docker Compose :</p>
+<p><strong>docker-compose.yml</strong> est un fichier Docker Compose qui met en place un noeud Elasticsearch, une instance Kibana, une instance Fleet Server, une instance de Package Registry et une instance de Elastic Agent avec TLS activé afin que vous puissiez voir comment les choses fonctionnent. Cette configuration tout-en-un est un moyen pratique de mettre en place votre premier déploiement de développement.</p>
+<p>Voici l&rsquo;arborscence :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>./
+├── README.md
+├── app
+│   ├── artificial_load.sh
+│   ├── conf
+│   │   └── default.conf
+│   └── petclinic.yml
+└── elastic-stack
+    ├── data
+    │   ├── accounts.json
+    │   ├── logs.json
+    │   └── shakespeare.json
+    ├── docker-compose.yml
+    ├── elastic-container.sh
+    └── kibana.yml</code></pre></div>
+<p>Télécharger la projet contenant la plateforme Elastic :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>git clone https://github.com/Maxime-CLS/elastic-platform.git</code></pre></div>
+<p>Démarrer la stack Elastic</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cd elastic-platform/elastic-stack
+chmod +x elastic-container.sh
+./elastic-container start</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code> ⠿ Container elasticsearch-security-setup  Healthy 7.3s
+ ⠿ Container elasticsearch                 Healthy 39.3s
+ ⠿ Container kibana                        Healthy 59.3s
+ ⠿ Container elastic-agent                 Started 59.7s
+
+Kibana is up. Proceeding
+
+Waiting 40 seconds for Fleet Server setup
+
+Populating Fleet Settings
+
+Populating Synthetics Monitor
+
+READY SET GO!
+
+Browse to https://localhost:5601
+Username: elastic
+Passphrase: elastic!</code></pre></div>
+<p>Vérifiez a présence des volumes</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>docker volume ls</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>DRIVER    VOLUME NAME
+local     elastic-stack_certs
+local     elastic-stack_esdata01
+local     elastic-stack_fleetserverdata
+local     elastic-stack_kibanadata</code></pre></div>
+<p>Vérifier l&rsquo;état du service Elasticsearch :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl -k -u &#39;elastic:elastic&#39; &#34;https://localhost:9200/_cat/health?v&#34;  </code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>epoch      timestamp cluster        status node.total node.data shards pri relo init unassign unassign.pri pending_tasks max_task_wait_time active_shards_percent
+1734951114 10:51:54  docker-cluster yellow          1         1     88  88    0    0       50            0             0                  -                 63.8%</code></pre></div>
+<p>Vérifier l&rsquo;état du service Kibana :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl -k -u &#39;elastic:elastic&#39; &#34;https://localhost:5601/api/status&#34;  </code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{&#34;name&#34;:&#34;c4d5cf0d9f00&#34;,&#34;uuid&#34;:&#34;e41c4029-8e86-4348-b498-1fcad701af99&#34;,&#34;version&#34;:{&#34;number&#34;:&#34;8.9.0&#34;,&#34;build_hash&#34;:&#34;beb56356c5c037441f89264361302513ff5bd9f8&#34;,&#34;build_number&#34;:64715,&#34;build_snapshot&#34;:false,&#34;build_date&#34;:&#34;2023-07-19T11:08:05.801Z&#34;},&#34;status&#34;:{&#34;overall&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All services are available&#34;},&#34;core&#34;:{&#34;elasticsearch&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;Elasticsearch is available&#34;,&#34;meta&#34;:{&#34;warningNodes&#34;:[],&#34;incompatibleNodes&#34;:[]}},&#34;savedObjects&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;SavedObjects service has completed migrations and is available&#34;,&#34;meta&#34;:{&#34;migratedIndices&#34;:{&#34;migrated&#34;:0,&#34;skipped&#34;:0,&#34;patched&#34;:6}}}},&#34;plugins&#34;:{&#34;licensing&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;License fetched&#34;},&#34;banners&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;customBranding&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;features&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;globalSearch&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;mapsEms&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;globalSearchProviders&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;guidedOnboarding&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;home&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;console&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;grokdebugger&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;management&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;painlessLab&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;searchprofiler&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;advancedSettings&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;cloudDataMigration&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;spaces&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;eventLog&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;security&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;cloudLinks&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;data&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;encryptedSavedObjects&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;files&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;lists&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;snapshotRestore&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;telemetry&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;actions&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;dataViewEditor&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;dataViewFieldEditor&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;ecsDataQualityDashboard&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;fileUpload&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;filesManagement&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;licenseManagement&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;savedObjects&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;telemetryManagementSection&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;unifiedFieldList&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;ingestPipelines&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;notifications&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;savedObjectsTaggingOss&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;watcher&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;savedObjectsManagement&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;savedObjectsTagging&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;savedSearch&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;embeddable&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;globalSearchBar&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;unifiedSearch&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;dataViewManagement&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;imageEmbeddable&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;navigation&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;presentationUtil&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;uiActionsEnhanced&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;controls&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;embeddableEnhanced&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionError&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionImage&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionMetric&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionRepeatImage&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionRevealImage&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionShape&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;graph&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;kibanaOverview&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;urlDrilldown&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visualizations&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;dashboard&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;eventAnnotation&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionGauge&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionHeatmap&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionLegacyMetricVis&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionMetricVis&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionPartitionVis&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionTagcloud&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visDefaultEditor&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeHeatmap&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeMarkdown&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeMetric&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeTable&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeTagcloud&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeTimelion&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeTimeseries&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeVega&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeVislib&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeXy&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;dashboardEnhanced&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressionXY&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;inputControlVis&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;triggersActionsUi&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypeGauge&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visTypePie&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;lens&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;ruleRegistry&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;stackAlerts&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;stackConnectors&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;transform&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;aiops&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;cases&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;discover&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;maps&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;dataVisualizer&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;discoverEnhanced&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;observabilityShared&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;reporting&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;threatIntelligence&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;timelines&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;canvas&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;cloudSecurityPosture&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;exploratoryView&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;indexManagement&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;ml&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;osquery&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;reportingExportTypes&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;sessionView&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;indexLifecycleManagement&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;kubernetesSecurity&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;observability&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;remoteClusters&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;rollup&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;cloudDefend&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;crossClusterReplication&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;infra&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;observabilityOnboarding&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;synthetics&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;apm&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;enterpriseSearch&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;monitoring&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;securitySolution&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;upgradeAssistant&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;essSecurity&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;logstash&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;ux&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;alerting&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;Alerting is (probably) ready&#34;},&#34;fleet&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;Fleet is available&#34;},&#34;assetManager&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;bfetch&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;cloudChatProvider&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;contentManagement&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;customIntegrations&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;esUiShared&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;expressions&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;fieldFormats&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;ftrApis&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;kibanaReact&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;kibanaUtils&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;licenseApiGuard&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;monitoringCollection&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;runtimeFields&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;savedObjectsFinder&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;screenshotMode&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;share&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;textBasedLanguages&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;translations&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;unifiedHistogram&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;urlForwarding&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;usageCollection&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;visualizationUiComponents&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;charts&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;cloud&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;dataViews&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;devTools&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;inspector&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;kibanaUsageCollection&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;newsfeed&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;telemetryCollectionManager&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;screenshotting&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;telemetryCollectionXpack&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;uiActions&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;},&#34;taskManager&#34;:{&#34;level&#34;:&#34;available&#34;,&#34;summary&#34;:&#34;All dependencies are available&#34;}}},&#34;metrics&#34;:{&#34;last_updated&#34;:&#34;2023-12-18T16:49:08.209Z&#34;,&#34;collection_interval_in_millis&#34;:5000,&#34;os&#34;:{&#34;platform&#34;:&#34;linux&#34;,&#34;platformRelease&#34;:&#34;linux-5.10.104-linuxkit&#34;,&#34;load&#34;:{&#34;1m&#34;:3.2,&#34;5m&#34;:2.94,&#34;15m&#34;:1.43},&#34;memory&#34;:{&#34;total_in_bytes&#34;:8232878080,&#34;free_in_bytes&#34;:2566930432,&#34;used_in_bytes&#34;:5665947648},&#34;uptime_in_millis&#34;:412100,&#34;distro&#34;:&#34;Ubuntu&#34;,&#34;distroRelease&#34;:&#34;Ubuntu-20.04&#34;,&#34;cpu&#34;:{&#34;cfs_quota_micros&#34;:-1,&#34;cfs_period_micros&#34;:100000,&#34;control_group&#34;:&#34;/&#34;,&#34;stat&#34;:{&#34;number_of_elapsed_periods&#34;:0,&#34;number_of_times_throttled&#34;:0,&#34;time_throttled_nanos&#34;:0}},&#34;cpuacct&#34;:{&#34;control_group&#34;:&#34;/&#34;,&#34;usage_nanos&#34;:28507965}},&#34;process&#34;:{&#34;memory&#34;:{&#34;heap&#34;:{&#34;total_in_bytes&#34;:321679360,&#34;used_in_bytes&#34;:276047768,&#34;size_limit&#34;:2197815296},&#34;resident_set_size_in_bytes&#34;:438738944},&#34;pid&#34;:7,&#34;event_loop_delay&#34;:10.360001729729731,&#34;event_loop_delay_histogram&#34;:{&#34;min&#34;:9.05216,&#34;max&#34;:24.985599,&#34;mean&#34;:10.360001729729731,&#34;exceeds&#34;:0,&#34;stddev&#34;:1.1859023333624192,&#34;fromTimestamp&#34;:&#34;2023-12-18T16:49:03.209Z&#34;,&#34;lastUpdatedAt&#34;:&#34;2023-12-18T16:49:08.206Z&#34;,&#34;percentiles&#34;:{&#34;50&#34;:10.108927,&#34;75&#34;:10.207231,&#34;95&#34;:11.214847,&#34;99&#34;:13.344767}},&#34;event_loop_utilization&#34;:{&#34;active&#34;:103.03160799999023,&#34;idle&#34;:4894.009978000016,&#34;utilization&#34;:0.02061852122436791},&#34;uptime_in_millis&#34;:201649.885175},&#34;processes&#34;:[{&#34;memory&#34;:{&#34;heap&#34;:{&#34;total_in_bytes&#34;:321679360,&#34;used_in_bytes&#34;:276047768,&#34;size_limit&#34;:2197815296},&#34;resident_set_size_in_bytes&#34;:438738944},&#34;pid&#34;:7,&#34;event_loop_delay&#34;:10.360001729729731,&#34;event_loop_delay_histogram&#34;:{&#34;min&#34;:9.05216,&#34;max&#34;:24.985599,&#34;mean&#34;:10.360001729729731,&#34;exceeds&#34;:0,&#34;stddev&#34;:1.1859023333624192,&#34;fromTimestamp&#34;:&#34;2023-12-18T16:49:03.209Z&#34;,&#34;lastUpdatedAt&#34;:&#34;2023-12-18T16:49:08.206Z&#34;,&#34;percentiles&#34;:{&#34;50&#34;:10.108927,&#34;75&#34;:10.207231,&#34;95&#34;:11.214847,&#34;99&#34;:13.344767}},&#34;event_loop_utilization&#34;:{&#34;active&#34;:103.03160799999023,&#34;idle&#34;:4894.009978000016,&#34;utilization&#34;:0.02061852122436791},&#34;uptime_in_millis&#34;:201649.885175}],&#34;response_times&#34;:{&#34;avg_in_millis&#34;:0,&#34;max_in_millis&#34;:0},&#34;concurrent_connections&#34;:0,&#34;requests&#34;:{&#34;disconnects&#34;:0,&#34;total&#34;:0,&#34;statusCodes&#34;:{},&#34;status_codes&#34;:{}},&#34;elasticsearch_client&#34;:{&#34;totalActiveSockets&#34;:0,&#34;totalIdleSockets&#34;:3,&#34;totalQueuedRequests&#34;:0}}}%</code></pre></div>
+<p>Ouvrez Kibana pour charger les données de l&rsquo;échantillon et interagir avec le cluster : <a href="https://localhost:5601" rel="external" target="_blank">Kibana</a></p>
+<p><a href="#R-image-06e91d8b7e831054b99cfd64f72857f1" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/prerequis/kibana_connexion.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-06e91d8b7e831054b99cfd64f72857f1"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/prerequis/kibana_connexion.png"></a></p>
+<p><strong>username :</strong> elastic<br>
+<strong>password :</strong> elastic</p>
+<p>Comme SSL est également activé pour les communications entre Kibana et les navigateurs clients, vous devez accéder à Kibana via le protocole HTTPS.</p>
+<h3 id="déployer-une-application-blanche">Déployer une application blanche</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cd ../app
+docker compose -f petclinic.yml up -d</code></pre></div>
+<p>Accédez à la application blanche en cliquant <a href="http://localhost:8081" rel="external" target="_blank">ici</a></p>
+<p><a href="#R-image-947c7da09f5053f0916799ac6928d87f" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/prerequis/petclinic.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-947c7da09f5053f0916799ac6928d87f"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/prerequis/petclinic.png"></a></p>
+<p>Maintenant, ouvrez une nouvelle fenêtre de terminal et exécutez le script suivant pour simuler la charge sur votre serveur NGINX.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cd elastic-platform/app/
+./artificial_load.sh</code></pre></div>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu">
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/prerequis/installation/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/installation/index.html">Installation<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu"></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/prerequis/installation/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

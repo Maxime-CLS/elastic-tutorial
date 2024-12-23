@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Description Les modèles dynamiques dans Elasticsearch permettent d’indexer très facilement les données sans avoir à créer des mappages explicites pour chaque champ. Cependant, il peut arriver que vous préfériez créer des mappages explicites, ou même désactiver complètement le mappage dynamique, afin d’avoir un contrôle plus étroit de la structure de votre index et des exigences en matière de type de données. Dans cette activité d’apprentissage, vous avez l’occasion de créer des mappages de champ explicites pour un index contenant des données de journal. Plus précisément, vous allez vous exercer à">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Labs - Mapping :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Description Les modèles dynamiques dans Elasticsearch permettent d’indexer très facilement les données sans avoir à créer des mappages explicites pour chaque champ. Cependant, il peut arriver que vous préfériez créer des mappages explicites, ou même désactiver complètement le mappage dynamique, afin d’avoir un contrôle plus étroit de la structure de votre index et des exigences en matière de type de données. Dans cette activité d’apprentissage, vous avez l’occasion de créer des mappages de champ explicites pour un index contenant des données de journal. Plus précisément, vous allez vous exercer à">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/intermediare/mapping/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Labs - Mapping :: Elastic Tutoriel">
+    <meta property="og:description" content="Description Les modèles dynamiques dans Elasticsearch permettent d’indexer très facilement les données sans avoir à créer des mappages explicites pour chaque champ. Cependant, il peut arriver que vous préfériez créer des mappages explicites, ou même désactiver complètement le mappage dynamique, afin d’avoir un contrôle plus étroit de la structure de votre index et des exigences en matière de type de données. Dans cette activité d’apprentissage, vous avez l’occasion de créer des mappages de champ explicites pour un index contenant des données de journal. Plus précisément, vous allez vous exercer à">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-04-29T10:10:47+02:00">
+    <meta property="article:modified_time" content="2020-04-29T10:10:47+02:00">
+    <meta itemprop="name" content="Labs - Mapping :: Elastic Tutoriel">
+    <meta itemprop="description" content="Description Les modèles dynamiques dans Elasticsearch permettent d’indexer très facilement les données sans avoir à créer des mappages explicites pour chaque champ. Cependant, il peut arriver que vous préfériez créer des mappages explicites, ou même désactiver complètement le mappage dynamique, afin d’avoir un contrôle plus étroit de la structure de votre index et des exigences en matière de type de données. Dans cette activité d’apprentissage, vous avez l’occasion de créer des mappages de champ explicites pour un index contenant des données de journal. Plus précisément, vous allez vous exercer à">
+    <meta itemprop="datePublished" content="2020-04-29T10:10:47+02:00">
+    <meta itemprop="dateModified" content="2020-04-29T10:10:47+02:00">
+    <meta itemprop="wordCount" content="952">
+    <title>Labs - Mapping :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/intermediare/mapping/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#description">Description</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/intermediare/index.html"><span itemprop="name">Intermediare</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Labs - Mapping</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/intermediare/index_alias/index.html" title="Labs - Index et ALias (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/intermediare/template_mapping/index.html" title="Labs - Index Template et Mapping (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="labs---mapping">Labs - Mapping</h1>
+
+<h2 id="description">Description</h2>
+<p>Les modèles dynamiques dans Elasticsearch permettent d&rsquo;indexer très facilement les données sans avoir à créer des mappages explicites pour chaque champ. Cependant, il peut arriver que vous préfériez créer des mappages explicites, ou même désactiver complètement le mappage dynamique, afin d&rsquo;avoir un contrôle plus étroit de la structure de votre index et des exigences en matière de type de données. Dans cette activité d&rsquo;apprentissage, vous avez l&rsquo;occasion de créer des mappages de champ explicites pour un index contenant des données de journal. Plus précisément, vous allez vous exercer à</p>
+<ul>
+<li>Créer des champs de chaîne de caractères analysés avec un analyseur spécifique.</li>
+<li>Créer des champs de chaîne de caractères non analysés avec des limites de caractères</li>
+<li>Créer des mappages de champs geo_point</li>
+<li>Créer des mappages de champs numériques</li>
+<li>Créer des mappages de champs de date</li>
+<li>Créer des mappages de champs IP</li>
+<li>Créer des mappages de champs d&rsquo;imbrication (objets)</li>
+<li>Réindexer des données d&rsquo;un index dans un autre avec des mappings différents.</li>
+</ul>
+<p>Vous travaillez en tant qu&rsquo;administrateur Elasticsearch pour un cluster à 6 nœuds et vous êtes chargé de corriger certains mappages de champs pour un index contenant des données de journal. Les données de journal actuelles ont été ingérées sans aucune préparation et la plupart des champs créés ne sont pas du type souhaité. L&rsquo;index logs existant devra être réindexé dans un nouvel index appelé tuto-logs_new. Vous êtes chargé de créer l&rsquo;index tuto-logs_new avec les exigences de mappage suivantes :</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Field</th>
+          <th style="text-align: left">Datatype</th>
+          <th style="text-align: left">Character Limit</th>
+          <th style="text-align: left">Analyzer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">@message</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">standard</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">@tags</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">@timestamp</td>
+          <td style="text-align: left">date</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">@version</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">agent</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">standard</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">agent.keyword</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">bytes</td>
+          <td style="text-align: left">long</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">clientip</td>
+          <td style="text-align: left">ip</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">extension</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">geo.coordinates</td>
+          <td style="text-align: left">geo_point</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">geo.dest</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">geo.src</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">geo.srcdest</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">headings</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">host</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">ip</td>
+          <td style="text-align: left">ip</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">links</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">machine.os</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">machine.ram</td>
+          <td style="text-align: left">long</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">memory</td>
+          <td style="text-align: left">long</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">phpmemory</td>
+          <td style="text-align: left">long</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">referer</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.article:modified_time</td>
+          <td style="text-align: left">date</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.article:published_time</td>
+          <td style="text-align: left">date</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.article:section</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.article:tag</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.og:description</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">standard</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.og:image</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.og:image:height</td>
+          <td style="text-align: left">long</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.og:image:height</td>
+          <td style="text-align: left">long</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.og:site_name</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.og:title</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">standard</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.og:title.keyword</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.og:type</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.og:url</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">simple</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.og:url.keyword</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.twitter:card</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.twitter:description</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">standard</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.twitter:image</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.twitter:site</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.twitter:title</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">standard</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.twitter:title.keyword</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.twitter:title.keyword</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">relatedContent.url.keyword</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">request</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">simple</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">request.keyword</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">response</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">response</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">128</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">spaces</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">whitespace</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">url</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">simple</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">url.keyword</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">256</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">utc_time</td>
+          <td style="text-align: left">date</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">xss</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">standard</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">xss.keyword</td>
+          <td style="text-align: left">keyword</td>
+          <td style="text-align: left">512</td>
+          <td style="text-align: left"></td>
+      </tr>
+  </tbody>
+</table>
+<p>L&rsquo;index tuto-logs_new doit conserver les mêmes paramètres d&rsquo;index que l&rsquo;index logs pour le nombre de shards primaires et de replica. Une fois que l&rsquo;index tuto-logs_new a été créé, vous pouvez réindexer les documents dans le nouvel index.</p>
+<p>Ecrivez un script de chargement des données nommée load_data_logs.sh</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>#!/bin/bash
+
+input=&#34;logs.json&#34;
+output=&#34;bulk.log&#34;
+counter=0
+max_rows=500
+create=&#39;{&#34;create&#34;: {}}&#39;
+bulk_data=$&#39;\n&#39;
+
+echo &#34;Reading logs events from $input...&#34;
+
+while read -r log_event
+do
+  let &#34;counter=counter+1&#34;
+  bulk_data+=&#34;$create&#34;$&#39;\n&#39;&#34;$log_event&#34;$&#39;\n&#39;
+  if [ $counter -eq $max_rows ]
+  then
+       echo &#34;Indexing $counter documents...&#34;
+       bulk_data+=$&#39;\n&#39;
+       echo &#34;$bulk_data&#34; | tee temp.json &gt; /dev/null
+       curl -XPOST &#39;https://elastic:nonprodpwd@localhost:9200/tuto-logs/_bulk&#39; -H &#39;Content-Type: application/json&#39; --insecure --data-binary @temp.json &gt; &#34;$output&#34;
+       rm -rf temp.json
+       counter=0
+       bulk_data=$&#39;\n&#39;
+  fi
+done &lt; &#34;$input&#34;
+
+if [ $counter -lt $max_rows ] &amp;&amp; [ $counter -gt 0 ]
+then
+       echo &#34;Indexing $counter documents...&#34;
+       bulk_data+=$&#39;\n&#39;
+       echo &#34;$bulk_data&#34; | tee temp.json &gt; /dev/null
+       curl -XPOST &#39;https://elastic:nonprodpwd@localhost:9200/tuto-logs/_bulk&#39; -H &#39;Content-Type: application/json&#39; --insecure --data-binary @temp.json &gt; &#34;$output&#34;
+       rm -rf temp.json
+fi</code></pre></div>
+<p>Modifier le password d&rsquo;Elasticsearch.</p>
+<p>Exécuter le script.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>./load_data_logs.sh</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT tuto-logs_new
+{
+  &#34;mappings&#34;: {
+    &#34;properties&#34;: {
+      &#34;@message&#34;: {
+        &#34;type&#34;: &#34;text&#34;
+      },
+      &#34;@tags&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 128
+      },
+      &#34;@timestamp&#34;: {
+        &#34;type&#34;: &#34;date&#34;
+      },
+      &#34;@version&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
+      },
+      &#34;agent&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
+          }
+        }
+      },
+      &#34;bytes&#34;: {
+        &#34;type&#34;: &#34;long&#34;
+      },
+      &#34;clientip&#34;: {
+        &#34;type&#34;: &#34;ip&#34;
+      },
+      &#34;extension&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
+      },
+      &#34;geo&#34;: {
+        &#34;properties&#34;: {
+          &#34;coordinates&#34;: {
+            &#34;type&#34;: &#34;geo_point&#34;
+          },
+          &#34;dest&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
+          },
+          &#34;src&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
+          },
+          &#34;srcdest&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
+          }
+        }
+      },
+      &#34;headings&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
+      },
+      &#34;host&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
+      },
+      &#34;ip&#34;: {
+        &#34;type&#34;: &#34;ip&#34;
+      },
+      &#34;links&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
+      },
+      &#34;machine&#34;: {
+        &#34;properties&#34;: {
+          &#34;os&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
+          },
+          &#34;ram&#34;: {
+            &#34;type&#34;: &#34;long&#34;
+          }
+        }
+      },
+      &#34;memory&#34;: {
+        &#34;type&#34;: &#34;long&#34;
+      },
+      &#34;phpmemory&#34;: {
+        &#34;type&#34;: &#34;long&#34;
+      },
+      &#34;referer&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 256
+      },
+      &#34;relatedContent&#34;: {
+        &#34;properties&#34;: {
+          &#34;article:modified_time&#34;: {
+            &#34;type&#34;: &#34;date&#34;
+          },
+          &#34;article:published_time&#34;: {
+            &#34;type&#34;: &#34;date&#34;
+          },
+          &#34;article:section&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
+          },
+          &#34;article:tag&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
+          },
+          &#34;og:description&#34;: {
+            &#34;type&#34;: &#34;text&#34;
+          },
+          &#34;og:image&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
+          },
+          &#34;og:image:height&#34;: {
+            &#34;type&#34;: &#34;long&#34;
+          },
+          &#34;og:image:width&#34;: {
+            &#34;type&#34;: &#34;long&#34;
+          },
+          &#34;og:site_name&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
+          },
+          &#34;og:title&#34;: {
+            &#34;type&#34;: &#34;text&#34;,
+            &#34;fields&#34;: {
+              &#34;keyword&#34;: {
+                &#34;type&#34;: &#34;keyword&#34;,
+                &#34;ignore_above&#34;: 256
+              }
+            }
+          },
+          &#34;og:type&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
+          },
+          &#34;og:url&#34;: {
+            &#34;type&#34;: &#34;text&#34;,
+            &#34;analyzer&#34;: &#34;simple&#34;,
+            &#34;fields&#34;: {
+              &#34;keyword&#34;: {
+                &#34;type&#34;: &#34;keyword&#34;,
+                &#34;ignore_above&#34;: 256
+              }
+            }
+          },
+          &#34;twitter:card&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
+          },
+          &#34;twitter:description&#34;: {
+            &#34;type&#34;: &#34;text&#34;
+          },
+          &#34;twitter:image&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
+          },
+          &#34;twitter:site&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 128
+          },
+          &#34;twitter:title&#34;: {
+            &#34;type&#34;: &#34;text&#34;,
+            &#34;fields&#34;: {
+              &#34;keyword&#34;: {
+                &#34;type&#34;: &#34;keyword&#34;,
+                &#34;ignore_above&#34;: 128
+              }
+            }
+          },
+          &#34;url&#34;: {
+            &#34;type&#34;: &#34;text&#34;,
+            &#34;analyzer&#34;: &#34;simple&#34;,
+            &#34;fields&#34;: {
+              &#34;keyword&#34;: {
+                &#34;type&#34;: &#34;keyword&#34;,
+                &#34;ignore_above&#34;: 256
+              }
+            }
+          }
+        }
+      },
+      &#34;request&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;analyzer&#34;: &#34;simple&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
+          }
+        }
+      },
+      &#34;response&#34;: {
+        &#34;type&#34;: &#34;keyword&#34;,
+        &#34;ignore_above&#34;: 128
+      },
+      &#34;spaces&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;analyzer&#34;: &#34;whitespace&#34;
+      },
+      &#34;url&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;analyzer&#34;: &#34;simple&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 256
+          }
+        }
+      },
+      &#34;utc_time&#34;: {
+        &#34;type&#34;: &#34;date&#34;
+      },
+      &#34;xss&#34;: {
+        &#34;type&#34;: &#34;text&#34;,
+        &#34;fields&#34;: {
+          &#34;keyword&#34;: {
+            &#34;type&#34;: &#34;keyword&#34;,
+            &#34;ignore_above&#34;: 512
+          }
+        }
+      }
+    }
+  },
+  &#34;settings&#34;: {
+    &#34;number_of_shards&#34;: 4,
+    &#34;number_of_replicas&#34;: 3
+  }
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>POST _reindex
+{
+  &#34;source&#34;: {
+    &#34;index&#34;: &#34;tuto-logs&#34;
+  },
+  &#34;dest&#34;: {
+    &#34;index&#34;: &#34;tuto-logs_new&#34;
+  }
+}</code></pre></div>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu">
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/alerting/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/alerting/index.html">Lab - Alertes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/index_alias/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index_alias/index.html">Labs - Index et ALias<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/intermediare/mapping/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/mapping/index.html">Labs - Mapping<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/template_mapping/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/template_mapping/index.html">Labs - Index Template et Mapping<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/reindex/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/reindex/index.html">Labs - Reindex<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/crud_documents/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/crud_documents/index.html">Labs - CRUD<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu"></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/intermediare/mapping/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

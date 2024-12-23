@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques des disponibilités des services. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
+Expérience Utilisateur Naviguer dans l’application Petclinic quelque instant pour générer un traffic utilisateur sur un navigateur web.
+Accédez à Observability &gt; User Experience via le menu principal">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lab - Synthetics :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques des disponibilités des services. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
+Expérience Utilisateur Naviguer dans l’application Petclinic quelque instant pour générer un traffic utilisateur sur un navigateur web.
+Accédez à Observability &gt; User Experience via le menu principal">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Lab - Synthetics :: Elastic Tutoriel">
+    <meta property="og:description" content="Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques des disponibilités des services. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
+Expérience Utilisateur Naviguer dans l’application Petclinic quelque instant pour générer un traffic utilisateur sur un navigateur web.
+Accédez à Observability &gt; User Experience via le menu principal">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-06-26T15:17:20+02:00">
+    <meta property="article:modified_time" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="name" content="Lab - Synthetics :: Elastic Tutoriel">
+    <meta itemprop="description" content="Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques des disponibilités des services. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.
+Expérience Utilisateur Naviguer dans l’application Petclinic quelque instant pour générer un traffic utilisateur sur un navigateur web.
+Accédez à Observability &gt; User Experience via le menu principal">
+    <meta itemprop="datePublished" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="dateModified" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="wordCount" content="705">
+    <title>Lab - Synthetics :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#expérience-utilisateur">Expérience Utilisateur</a></li>
+    <li><a href="#synthetics">Synthetics</a>
+      <ul>
+        <li><a href="#sonde-de-surveillance">Sonde de surveillance</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-vous-de-jouez-">A vous de jouez !</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><span itemprop="name">Débutant</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Lab - Synthetics</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/index.html" title="Lab - APM (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/elementaire/index.html" title="Elementaire (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="lab---synthetics">Lab - Synthetics</h1>
+
+<p>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques des disponibilités des services. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.</p>
+<h2 id="expérience-utilisateur">Expérience Utilisateur</h2>
+<p>Naviguer dans l&rsquo;application Petclinic quelque instant pour générer un traffic utilisateur sur un navigateur web.</p>
+<p>Accédez à Observability &gt; User Experience via le menu principal</p>
+<p><a href="#R-image-b8f95cf2d8a5756dff3e6120df97e80b" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/synthetics/menu.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b8f95cf2d8a5756dff3e6120df97e80b"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/synthetics/menu.png"></a></p>
+<p>La fonctionnalité User Experience dans Elastic Observability permet de quantifier et d&rsquo;analyser la performance perçue de vos applications web en conditions réelles. Voici ce que vous y trouverez :</p>
+<ul>
+<li>Métriques de performance : Collecte des données sur des indicateurs clés comme le temps de chargement des pages, la stabilité visuelle et l&rsquo;interactivité, en utilisant les Core Web Vitals de Google.</li>
+<li>Analyse détaillée : Permet de filtrer et d&rsquo;explorer les données par URL, système d&rsquo;exploitation, navigateur et localisation pour comprendre comment différents utilisateurs vivent l&rsquo;expérience de votre site.</li>
+<li>Surveillance en temps réel : Utilise l&rsquo;agent Real User Monitoring (RUM) pour capturer les métriques de performance à chaque visite de page, offrant une vue précise et actuelle de l&rsquo;expérience utilisateur1.</li>
+</ul>
+<p>Cette fonctionnalité aide à identifier et à résoudre les problèmes de performance, améliorant ainsi l&rsquo;expérience globale des utilisateurs de votre application web.</p>
+<p><a href="#R-image-d716442fa3e71afe5ae3ec24fe4b8ada" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/synthetics/user-experience.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d716442fa3e71afe5ae3ec24fe4b8ada"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/synthetics/user-experience.png"></a></p>
+<h2 id="synthetics">Synthetics</h2>
+<h3 id="sonde-de-surveillance">Sonde de surveillance</h3>
+<p>Accédez à Observability &gt; Synthetics via le menu principal</p>
+<p><a href="#R-image-98e3a94b417fca1ede72325ad2ef6aa5" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/synthetics/menu.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-98e3a94b417fca1ede72325ad2ef6aa5"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/synthetics/menu.png"></a></p>
+<p>La vue Synthetics Overview dans Elastic Observability offre une vue d&rsquo;ensemble des performances et de la disponibilité de vos services web. Voici ce que vous y trouverez :</p>
+<ul>
+<li>Statut des moniteurs : Un aperçu du statut actuel de tous les moniteurs, indiquant si les services sont opérationnels ou rencontrent des problèmes.</li>
+<li>Erreurs et alertes : Le nombre d&rsquo;erreurs survenues au cours des dernières heures et les alertes générées, permettant de détecter rapidement les problèmes.</li>
+<li>Détails des moniteurs : Informations sur chaque moniteur, y compris la localisation, le type de moniteur (HTTP, TCP, ICMP, navigateur), et la durée moyenne des tests.</li>
+<li>Filtres et recherche : Options pour filtrer les moniteurs par statut, type, localisation, et plus encore, facilitant la navigation et l&rsquo;analyse.</li>
+</ul>
+<p>Cette vue permet de surveiller efficacement la disponibilité et les performances de vos services, en identifiant rapidement les problèmes potentiels.</p>
+<p>Accédez à Management &gt; Nginx Availability via les onglets</p>
+<p><a href="#R-image-0cfb14dc8de8d43ce8bc7f2fe79fed0f" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/synthetics/synthetics-nginx.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0cfb14dc8de8d43ce8bc7f2fe79fed0f"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/synthetics/synthetics-nginx.png"></a></p>
+<p>La vue d&rsquo;un moniteur HTTP dans Elastic Observability permet de surveiller la disponibilité et les performances de vos endpoints HTTP. Voici ce que vous y trouverez :</p>
+<ul>
+<li>Statut des requêtes : Affiche le statut des requêtes HTTP (succès, échec) pour chaque point de terminaison surveillé.</li>
+<li>Temps de réponse : Visualisation des temps de réponse des requêtes, permettant d&rsquo;identifier les lenteurs et les pics de latence.</li>
+<li>Détails des erreurs : Informations détaillées sur les erreurs rencontrées, y compris les codes de statut HTTP et les messages d&rsquo;erreur.</li>
+<li>Historique des vérifications : Un historique des vérifications effectuées, montrant les tendances et les variations de performance au fil du temps1.</li>
+</ul>
+<p>Ces fonctionnalités aident à assurer la fiabilité et la performance de vos services web en identifiant rapidement les problèmes potentiels.</p>
+<p>Retourner dans la vue Management et sélectionner &ldquo;Home -&gt; Show Vets journey&rdquo;</p>
+<p><a href="#R-image-c2882f853201c2af566d63f865b2a557" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/synthetics/synthetics-browser.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c2882f853201c2af566d63f865b2a557"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/synthetics/synthetics-browser.png"></a></p>
+<p>La vue d&rsquo;un moniteur navigateur (browser monitor) dans Elastic Observability permet de surveiller les performances et la disponibilité de vos applications web en simulant les interactions des utilisateurs. Voici ce que vous y trouverez :</p>
+<ul>
+<li>Statut des tests : Affiche le statut des tests de navigation (succès, échec) pour chaque parcours utilisateur simulé.</li>
+<li>Temps de chargement des pages : Visualisation des temps de chargement des différentes pages visitées, aidant à identifier les lenteurs.</li>
+<li>Détails des erreurs : Informations détaillées sur les erreurs rencontrées, y compris les messages d&rsquo;erreur et les étapes du parcours où elles se produisent.</li>
+<li>Captures d&rsquo;écran et vidéos : Captures d&rsquo;écran et enregistrements vidéo des sessions de test, permettant de visualiser exactement ce que les utilisateurs voient.</li>
+</ul>
+<p>Ces fonctionnalités aident à garantir que vos applications web fonctionnent correctement et offrent une expérience utilisateur optimale.</p>
+<h2 id="a-vous-de-jouez-">A vous de jouez !</h2>
+<p>On peut constater au travers des autres parcours utilisateurs que l&rsquo;application n&rsquo;a pas le comportement attendu. Proposer moi une analyse permettant de comprendre l&rsquo;origine du problème grace a la solution Elastic. Et proposer moi une solution pour corriger le dysfonctionnement.</p>
+<p>L&rsquo;analyse doit suivre le format d&rsquo;un post mortem. Voici un exemple de post mortem : <a href="https://sre.google/sre-book/example-postmortem/" rel="external" target="_blank">https://sre.google/sre-book/example-postmortem/</a></p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu">
+            <li class="" data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/lab_integration/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_integration/index.html">Lab - Integration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/index.html">Lab - Logs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/index.html">Lab - Metrics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/index.html">Lab - APM<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/index.html">Lab - Synthetics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu"></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

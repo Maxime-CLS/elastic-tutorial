@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Vous êtes le nouvel administrateur d’un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que aucune alerte n’est remonter sur l’état de la plateforme Elastic. Vos supérieurs vous demandent de donner la priorité à construire une solution d’alerting permettant de fournir des indicateurs de fiabilisés la plateforme.
+Dans ce laboratoire pratique, vous aurez l’occasion de :
+Utiliser les API _security pour créer une API Key. utiliser l’API actions/connectors pour créer un connecteur de donnée Utiliser l’API alerting/rule pour mettre rapidement en place des alertes. Créer des alertes avec le module Rules &amp; Connector Créer une API Key Utilisez l’outil de console Kibana pour exécuter ce qui suit :">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lab - Alertes :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Vous êtes le nouvel administrateur d’un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que aucune alerte n’est remonter sur l’état de la plateforme Elastic. Vos supérieurs vous demandent de donner la priorité à construire une solution d’alerting permettant de fournir des indicateurs de fiabilisés la plateforme.
+Dans ce laboratoire pratique, vous aurez l’occasion de :
+Utiliser les API _security pour créer une API Key. utiliser l’API actions/connectors pour créer un connecteur de donnée Utiliser l’API alerting/rule pour mettre rapidement en place des alertes. Créer des alertes avec le module Rules &amp; Connector Créer une API Key Utilisez l’outil de console Kibana pour exécuter ce qui suit :">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/intermediare/alerting/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Lab - Alertes :: Elastic Tutoriel">
+    <meta property="og:description" content="Vous êtes le nouvel administrateur d’un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que aucune alerte n’est remonter sur l’état de la plateforme Elastic. Vos supérieurs vous demandent de donner la priorité à construire une solution d’alerting permettant de fournir des indicateurs de fiabilisés la plateforme.
+Dans ce laboratoire pratique, vous aurez l’occasion de :
+Utiliser les API _security pour créer une API Key. utiliser l’API actions/connectors pour créer un connecteur de donnée Utiliser l’API alerting/rule pour mettre rapidement en place des alertes. Créer des alertes avec le module Rules &amp; Connector Créer une API Key Utilisez l’outil de console Kibana pour exécuter ce qui suit :">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-06-26T15:17:20+02:00">
+    <meta property="article:modified_time" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="name" content="Lab - Alertes :: Elastic Tutoriel">
+    <meta itemprop="description" content="Vous êtes le nouvel administrateur d’un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que aucune alerte n’est remonter sur l’état de la plateforme Elastic. Vos supérieurs vous demandent de donner la priorité à construire une solution d’alerting permettant de fournir des indicateurs de fiabilisés la plateforme.
+Dans ce laboratoire pratique, vous aurez l’occasion de :
+Utiliser les API _security pour créer une API Key. utiliser l’API actions/connectors pour créer un connecteur de donnée Utiliser l’API alerting/rule pour mettre rapidement en place des alertes. Créer des alertes avec le module Rules &amp; Connector Créer une API Key Utilisez l’outil de console Kibana pour exécuter ce qui suit :">
+    <meta itemprop="datePublished" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="dateModified" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="wordCount" content="772">
+    <title>Lab - Alertes :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/intermediare/alerting/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#créer-des-alertes-avec-le-module-rules--connector">Créer des alertes avec le module Rules &amp; Connector</a>
+      <ul>
+        <li><a href="#créer-une-api-key">Créer une API Key</a></li>
+        <li><a href="#créer-un-connecteur-server-log">Créer un connecteur Server Log</a></li>
+        <li><a href="#récupérer-lid-du-connecteur">Récupérer l&rsquo;ID du connecteur</a></li>
+        <li><a href="#créer-une-alerte-sur-la-consommation-des-ressources">Créer une alerte sur la consommation des ressources</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/intermediare/index.html"><span itemprop="name">Intermediare</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Lab - Alertes</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/intermediare/index.html" title="Intermediare (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/intermediare/index_alias/index.html" title="Labs - Index et ALias (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="lab---alertes">Lab - Alertes</h1>
+
+<p>Vous êtes le nouvel administrateur d&rsquo;un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que aucune alerte n&rsquo;est remonter sur l&rsquo;état de la plateforme Elastic. Vos supérieurs vous demandent de donner la priorité à construire une solution d&rsquo;alerting permettant de fournir des indicateurs de fiabilisés la plateforme.</p>
+<p>Dans ce laboratoire pratique, vous aurez l&rsquo;occasion de :</p>
+<ul>
+<li>Utiliser les API _security pour créer une API Key.</li>
+<li>utiliser l&rsquo;API actions/connectors pour créer un connecteur de donnée</li>
+<li>Utiliser l&rsquo;API alerting/rule pour mettre rapidement en place des alertes.</li>
+</ul>
+<h2 id="créer-des-alertes-avec-le-module-rules--connector">Créer des alertes avec le module Rules &amp; Connector</h2>
+<h3 id="créer-une-api-key">Créer une API Key</h3>
+<p>Utilisez l&rsquo;outil de console Kibana pour exécuter ce qui suit :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>POST /_security/api_key
+{
+  &#34;name&#34;: &#34;my-api-key&#34;,
+  &#34;expiration&#34;: &#34;30d&#34;,
+  &#34;metadata&#34;: {
+    &#34;application&#34;: &#34;my-application&#34;,
+    &#34;environment&#34;: {
+       &#34;level&#34;: 1,
+       &#34;trusted&#34;: true,
+       &#34;tags&#34;: [&#34;prod&#34;, &#34;pprod&#34;]
+    }
+  }
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;id&#34; : &#34;uiVdOn8BIwAgRd-L1SZa&#34;,
+  &#34;name&#34; : &#34;my-api-key&#34;,
+  &#34;expiration&#34; : 1648543702335,
+  &#34;api_key&#34; : &#34;AuXI4K3aSZ2jDYUbycs-8g&#34;,
+  &#34;encoded&#34; : &#34;dWlWZE9uOEJJd0FnUmQtTDFTWmE6QXVYSTRLM2FTWjJqRFlVYnljcy04Zw==&#34;
+}</code></pre></div>
+<h3 id="créer-un-connecteur-server-log">Créer un connecteur Server Log</h3>
+<p>Utilisez l&rsquo;outil POSTMAN pour exécuter ce qui suit :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl --location --request POST &#39;https://localhost:5601/api/actions/connector&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: APIKey YnlSTU9uOEJJd0FnUmQtTE9PQXc6em52akIyQlNRdHlPc3R4ODhTNFg3QQ==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;name&#34;: &#34;Monitoring: Write to Kibana log TEST&#34;,
+  &#34;config&#34;: {},
+  &#34;connector_type_id&#34;: &#34;.server-log&#34;
+}&#39;</code></pre></div>
+<h3 id="récupérer-lid-du-connecteur">Récupérer l&rsquo;ID du connecteur</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl --location --request GET &#39;https://localhost:5601/api/actions/connectors&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: APIKey YnlSTU9uOEJJd0FnUmQtTE9PQXc6em52akIyQlNRdHlPc3R4ODhTNFg3QQ==&#39; \
+--data-raw &#39;&#39;</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+        &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+        &#34;name&#34;: &#34;Monitoring: Write to Kibana log&#34;,
+        &#34;config&#34;: {},
+        &#34;connector_type_id&#34;: &#34;.server-log&#34;,
+        &#34;is_preconfigured&#34;: false,
+        &#34;referenced_by_count&#34;: 1,
+        &#34;is_missing_secrets&#34;: false
+}</code></pre></div>
+<p>Vous pouvez maintenant voir dans l&rsquo;interface Kibana le connecteur :</p>
+<p><a href="#R-image-50e4405335cab03ec1aacd61bf058279" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/intermediare/connectors.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-50e4405335cab03ec1aacd61bf058279"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/intermediare/connectors.png"></a></p>
+<h3 id="créer-une-alerte-sur-la-consommation-des-ressources">Créer une alerte sur la consommation des ressources</h3>
+<h4 id="cpu-usage">CPU Usage</h4>
+<p>Dans l&rsquo;outil POSTMAN changer la méthode d&rsquo;authentification en Basic Auth et renseigner le login et password de l&rsquo;utilisateur elastic.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+            &#34;enabled&#34;: true,
+            &#34;tags&#34;: [&#34;monitoring&#34;, &#34;cpu&#34;],
+            &#34;consumer&#34;: &#34;monitoring&#34;,
+            &#34;name&#34;: &#34;CPU Usage&#34;,
+            &#34;throttle&#34;: &#34;1d&#34;,
+            &#34;schedule&#34;: {
+                &#34;interval&#34;: &#34;1m&#34;
+            },
+            &#34;params&#34;: {
+                &#34;threshold&#34;: 85,
+                &#34;duration&#34;: &#34;5m&#34;
+            },
+            &#34;rule_type_id&#34;: &#34;monitoring_alert_cpu_usage&#34;,
+            &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+            &#34;actions&#34;: [
+                {
+                    &#34;group&#34;: &#34;default&#34;,
+                    &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+                    &#34;params&#34;: {
+                        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
+                    }
+                }
+            ]
+        }
+&#39;</code></pre></div>
+<h4 id="disk-usage">Disk Usage</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;Disk Usage&#34;,
+  &#34;throttle&#34;: &#34;1d&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
+  },
+  &#34;params&#34;: {
+    &#34;threshold&#34;: 80,
+    &#34;duration&#34;: &#34;5m&#34;
+  },
+  &#34;rule_type_id&#34;: &#34;monitoring_alert_disk_usage&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
+    {
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
+      }
+    }
+  ]
+}&#39;</code></pre></div>
+<h4 id="experiation-de-la-licence">Experiation de la licence</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;License expiration&#34;,
+  &#34;throttle&#34;: &#34;1d&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
+  },
+  &#34;params&#34;: {},
+  &#34;rule_type_id&#34;: &#34;monitoring_alert_license_expiration&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
+    {
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
+      }
+    }
+  ]
+}&#39;</code></pre></div>
+<h4 id="etat-de-santé-du-cluster">Etat de santé du cluster</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;Cluster health&#34;,
+  &#34;throttle&#34;: &#34;1d&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
+  },
+  &#34;params&#34;: {},
+  &#34;rule_type_id&#34;: &#34;monitoring_alert_cluster_health&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
+    {
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
+      }
+    }
+  ]
+}&#39;</code></pre></div>
+<h4 id="thread-pool-write-rejections">Thread pool write rejections</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;Thread pool write rejections&#34;,
+  &#34;throttle&#34;: &#34;1d&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
+  },
+  &#34;params&#34;: {
+    &#34;threshold&#34;: 300,
+    &#34;duration&#34;: &#34;5m&#34;
+  },
+  &#34;rule_type_id&#34;: &#34;monitoring_alert_thread_pool_write_rejections&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
+    {
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
+      }
+    }
+  ]
+}&#39;</code></pre></div>
+<h4 id="thread-pool-search-rejections">Thread pool search rejections</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;Thread pool search rejections&#34;,
+  &#34;throttle&#34;: &#34;1d&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
+  },
+  &#34;params&#34;: {
+    &#34;threshold&#34;: 300,
+    &#34;duration&#34;: &#34;5m&#34;
+  },
+  &#34;rule_type_id&#34;: &#34;monitoring_alert_thread_pool_search_rejections&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
+    {
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
+      }
+    }
+  ]
+}&#39;</code></pre></div>
+<h4 id="shard-size">Shard size</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>curl --location --request POST &#39;https://localhost:5601/api/alerting/rule&#39; \
+--header &#39;kbn-xsrf: true&#39; \
+--header &#39;Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==&#39; \
+--header &#39;Content-Type: text/plain&#39; \
+--data-raw &#39;{
+  &#34;enabled&#34;: true,
+  &#34;tags&#34;: [],
+  &#34;consumer&#34;: &#34;monitoring&#34;,
+  &#34;name&#34;: &#34;Shard size&#34;,
+  &#34;throttle&#34;: &#34;12h&#34;,
+  &#34;schedule&#34;: {
+    &#34;interval&#34;: &#34;1m&#34;
+  },
+  &#34;params&#34;: {
+    &#34;indexPattern&#34;: &#34;*&#34;,
+    &#34;threshold&#34;: 55
+  },
+  &#34;rule_type_id&#34;: &#34;monitoring_shard_size&#34;,
+  &#34;notify_when&#34;: &#34;onThrottleInterval&#34;,
+  &#34;actions&#34;: [
+    {
+      &#34;group&#34;: &#34;default&#34;,
+      &#34;id&#34;: &#34;6c65f7f0-97a6-11ec-b236-41c39a1728b8&#34;,
+      &#34;params&#34;: {
+        &#34;message&#34;: &#34;{{context.internalShortMessage}}&#34;
+      }
+    }
+  ]
+}&#39;</code></pre></div>
+<p>Vous pouvez maintenant voir dans l&rsquo;interface Kibana les alertes :</p>
+<p><a href="#R-image-849b7e4419adc710c9bef3cd93859a7b" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/intermediare/rules.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-849b7e4419adc710c9bef3cd93859a7b"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/intermediare/rules.png"></a></p>
+<p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez créer des connecteurs et des alertes et les indexer dans Elasticsearch.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu">
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/intermediare/alerting/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/alerting/index.html">Lab - Alertes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/index_alias/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index_alias/index.html">Labs - Index et ALias<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/mapping/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/mapping/index.html">Labs - Mapping<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/template_mapping/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/template_mapping/index.html">Labs - Index Template et Mapping<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/reindex/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/reindex/index.html">Labs - Reindex<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/crud_documents/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/crud_documents/index.html">Labs - CRUD<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu"></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/intermediare/alerting/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

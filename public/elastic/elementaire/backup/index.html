@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="La haute disponibilité et la redondance d’Elasticsearch en font une plateforme stable et fiable pour le stockage de quantités massives de données. Toutefois, pour vous protéger contre les erreurs humaines et les catastrophes naturelles, vous devez toujours sauvegarder vos données Elasticsearch. L’endroit où vous stockez vos sauvegardes de données Elasticsearch est entièrement à votre discrétion. Dans ce laboratoire pratique, nous utiliserons le système de fichiers local pour démontrer comment :
+Créer des dépôts instantanés Sauvegarder des index spécifiques Restaurer des données à partir d’un instantané Créez le référentiel “observability_repo”. Utilisez l’outil DevTool Kibana pour exécuter ce qui suit :">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lab - Backup & Restore :: Elastic Tutoriel">
+    <meta name="twitter:description" content="La haute disponibilité et la redondance d’Elasticsearch en font une plateforme stable et fiable pour le stockage de quantités massives de données. Toutefois, pour vous protéger contre les erreurs humaines et les catastrophes naturelles, vous devez toujours sauvegarder vos données Elasticsearch. L’endroit où vous stockez vos sauvegardes de données Elasticsearch est entièrement à votre discrétion. Dans ce laboratoire pratique, nous utiliserons le système de fichiers local pour démontrer comment :
+Créer des dépôts instantanés Sauvegarder des index spécifiques Restaurer des données à partir d’un instantané Créez le référentiel “observability_repo”. Utilisez l’outil DevTool Kibana pour exécuter ce qui suit :">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/elementaire/backup/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Lab - Backup & Restore :: Elastic Tutoriel">
+    <meta property="og:description" content="La haute disponibilité et la redondance d’Elasticsearch en font une plateforme stable et fiable pour le stockage de quantités massives de données. Toutefois, pour vous protéger contre les erreurs humaines et les catastrophes naturelles, vous devez toujours sauvegarder vos données Elasticsearch. L’endroit où vous stockez vos sauvegardes de données Elasticsearch est entièrement à votre discrétion. Dans ce laboratoire pratique, nous utiliserons le système de fichiers local pour démontrer comment :
+Créer des dépôts instantanés Sauvegarder des index spécifiques Restaurer des données à partir d’un instantané Créez le référentiel “observability_repo”. Utilisez l’outil DevTool Kibana pour exécuter ce qui suit :">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-06-26T15:17:20+02:00">
+    <meta property="article:modified_time" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="name" content="Lab - Backup & Restore :: Elastic Tutoriel">
+    <meta itemprop="description" content="La haute disponibilité et la redondance d’Elasticsearch en font une plateforme stable et fiable pour le stockage de quantités massives de données. Toutefois, pour vous protéger contre les erreurs humaines et les catastrophes naturelles, vous devez toujours sauvegarder vos données Elasticsearch. L’endroit où vous stockez vos sauvegardes de données Elasticsearch est entièrement à votre discrétion. Dans ce laboratoire pratique, nous utiliserons le système de fichiers local pour démontrer comment :
+Créer des dépôts instantanés Sauvegarder des index spécifiques Restaurer des données à partir d’un instantané Créez le référentiel “observability_repo”. Utilisez l’outil DevTool Kibana pour exécuter ce qui suit :">
+    <meta itemprop="datePublished" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="dateModified" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="wordCount" content="514">
+    <title>Lab - Backup &amp; Restore :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/elementaire/backup/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+        <li><a href="#slm-policy">SLM Policy</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/elementaire/index.html"><span itemprop="name">Elementaire</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Lab - Backup &amp; Restore</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/elementaire/ilm/index.html" title="Lab - Index Lifecycle Policy (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/elementaire/diagnostic/index.html" title="Lab - Diagnostic (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="lab---backup--restore">Lab - Backup &amp; Restore</h1>
+
+<p>La haute disponibilité et la redondance d&rsquo;Elasticsearch en font une plateforme stable et fiable pour le stockage de quantités massives de données. Toutefois, pour vous protéger contre les erreurs humaines et les catastrophes naturelles, vous devez toujours sauvegarder vos données Elasticsearch. L&rsquo;endroit où vous stockez vos sauvegardes de données Elasticsearch est entièrement à votre discrétion. Dans ce laboratoire pratique, nous utiliserons le système de fichiers local pour démontrer comment :</p>
+<ul>
+<li>Créer des dépôts instantanés</li>
+<li>Sauvegarder des index spécifiques</li>
+<li>Restaurer des données à partir d&rsquo;un instantané</li>
+</ul>
+<h4 id="créez-le-référentiel-observability_repo">Créez le référentiel &ldquo;observability_repo&rdquo;.</h4>
+<p>Utilisez l&rsquo;outil DevTool Kibana pour exécuter ce qui suit :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT _snapshot/observability_repo?verify=false
+{
+  &#34;type&#34;: &#34;fs&#34;,
+  &#34;settings&#34;: {
+    &#34;location&#34;: &#34;/usr/share/elasticsearch/snapshots/&#34;
+  }
+}</code></pre></div>
+<h4 id="sauvegarde-de-lindex-observability-time-series">Sauvegarde de l&rsquo;index &ldquo;observability-time-series&rdquo;</h4>
+<p>Utilisez l&rsquo;outil de console Kibana pour exécuter ce qui suit :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT _snapshot/observability_repo/observability?wait_for_completion=true
+{
+  &#34;indices&#34;: &#34;observability-time-series&#34;,
+  &#34;include_global_state&#34;: false
+}</code></pre></div>
+<h4 id="restaurez-lindex-observability-time-series-en-tant-que-observability-time-series_restored">Restaurez l&rsquo;index &ldquo;observability-time-series&rdquo; en tant que &ldquo;observability-time-series_restored&rdquo;</h4>
+<p>Utilisez l&rsquo;outil de console Kibana pour exécuter ce qui suit :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>POST _snapshot/observability_repo/observability/_restore
+{
+  &#34;indices&#34;: &#34;observability-time-series&#34;,
+  &#34;rename_pattern&#34;: &#34;(.+)&#34;,
+  &#34;rename_replacement&#34;: &#34;$1_restored&#34;
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;accepted&#34; : true
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _cat/indices</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>green  open metricbeat-7.17.0-2022.02.22-000001                      WBLcTqYORtS5LJyFttVBXQ 1  1  22122    0  67.6mb  34.8mb
+green  open apm-7.17.0-error-000001                                  TuCoez2IQP6xmRJl70TKvw 1  1   1842    0   4.7mb   2.3mb
+yellow open .ds-observability-time-series-2022.02.22-000002          xKbIQkulR0mMwv8aCbR5Og 1 10      1    0  12.3kb   4.1kb
+yellow open .ds-observability-time-series-2022.02.22-000001          i_sIi8P2SUu6mNmlsMjv3Q 1 10     16    0  19.4kb   6.5kb
+green  open apm-7.17.0-transaction-000001                            O14qvTcvQyOOIp8kIGGpKg 1  1  17027    0    25mb  11.1mb
+green  open .apm-agent-configuration                                 jkaqvfq0Sy25CHaLDswUUA 1  1      0    0    452b    226b
+green  open apm-7.17.0-metric-000001                                 mXYNU6V9SU2tlAmODIjPHQ 1  1   4497    0   4.7mb   2.3mb
+green  open apm-7.17.0-span-000001                                   iOVtWj8iRL6b-YbxROQ9ig 1  1  75766    0  44.5mb  19.8mb
+green  open apm-7.17.0-onboarding-2022.02.22                         dJ8FT0LvSn2HTUynoxWtbQ 1  1      1    0  16.1kb     8kb
+green  open apm-7.17.0-profile-000001                                dQEJ37KkSzmQr4DVKLQnAw 1  1      0    0    452b    226b
+green  open filebeat-7.17.0-2022.02.22-000001                        hN3UWBgXRYm9KA66iHfayQ 1  1 236916    0 279.3mb 138.5mb
+green  open .ds-observability-time-series-2022.02.22-000001_restored _WQSy8o3QTi6l4inCqpA8Q 1  1     16    0  13.1kb   6.5kb
+green  open .security-7                                              o2VUY0seRxSefLHyOge4rQ 1  1     60    0 531.1kb 295.6kb
+green  open .kibana_7.17.0_001                                       J_lf9M3zRjmHgMdRhwcqLw 1  1   4424  328   8.1mb     4mb
+green  open .apm-custom-link                                         fnAtCfqXSsOCN7dqyGQT8A 1  1      0    0    452b    226b
+green  open .ds-observability-time-series-2022.02.22-000002_restored SUVTggxqRMODlSz4pE3gEw 1  1      1    0   8.3kb   4.1kb
+green  open heartbeat-7.17.0-2022.02.22-000001                       U50p8dOMSz2jhWz7kHRDnw 1  1    648    0   2.6mb   1.3mb
+green  open .async-search                                            JjeGtgVgTYKlJ8PsvmwL7Q 1  1      0    0   6.9kb   3.4kb
+green  open .kibana_task_manager_7.17.0_001                          x63yGuhDSaudkMeqtmxANA 1  1     18 1122 753.7kb 368.6kb</code></pre></div>
+<h3 id="slm-policy">SLM Policy</h3>
+<p>La gestion du cycle de vie des instantanés (SLM) est le moyen le plus simple de sauvegarder régulièrement un cluster. Une politique SLM prend automatiquement des instantanés selon une planification prédéfinie. La politique peut également supprimer les instantanés en fonction des règles de rétention que vous définissez.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT _slm/policy/daily-observability-snapshots
+{
+  &#34;name&#34;: &#34;&lt;observability-{now/d}&gt;&#34;,
+  &#34;schedule&#34;: &#34;0 30 1 * * ?&#34;,
+  &#34;repository&#34;: &#34;observability_repo&#34;,
+  &#34;config&#34;: {
+    &#34;indices&#34;: [
+      &#34;observability-time-series&#34;
+    ]
+  },
+  &#34;retention&#34;: {
+    &#34;expire_after&#34;: &#34;30d&#34;,
+    &#34;min_count&#34;: 15,
+    &#34;max_count&#34;: 30
+  }
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _slm/policy/daily-observability-snapshots</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;daily-observability-snpashots&#34; : {
+    &#34;version&#34; : 1,
+    &#34;modified_date_millis&#34; : 1645547161680,
+    &#34;policy&#34; : {
+      &#34;name&#34; : &#34;&lt;observability-{now/d}&gt;&#34;,
+      &#34;schedule&#34; : &#34;0 30 1 * * ?&#34;,
+      &#34;repository&#34; : &#34;observability_repo&#34;,
+      &#34;config&#34; : {
+        &#34;indices&#34; : [
+          &#34;observability-time-series&#34;
+        ]
+      },
+      &#34;retention&#34; : {
+        &#34;expire_after&#34; : &#34;30d&#34;,
+        &#34;min_count&#34; : 15,
+        &#34;max_count&#34; : 30
+      }
+    },
+    &#34;next_execution_millis&#34; : 1645579800000,
+    &#34;stats&#34; : {
+      &#34;policy&#34; : &#34;daily-observability-snpashots&#34;,
+      &#34;snapshots_taken&#34; : 0,
+      &#34;snapshots_failed&#34; : 0,
+      &#34;snapshots_deleted&#34; : 0,
+      &#34;snapshot_deletion_failures&#34; : 0
+    }
+  }
+}</code></pre></div>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu">
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/security/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/security/index.html">Lab - Habilitation<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/ilm/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/ilm/index.html">Lab - Index Lifecycle Policy<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/elementaire/backup/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/backup/index.html">Lab - Backup &amp; Restore<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/diagnostic/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/diagnostic/index.html">Lab - Diagnostic<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu"></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/elementaire/backup/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

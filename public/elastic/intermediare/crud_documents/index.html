@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Description Quelle que soit la façon dont vous comptez utiliser Elasticsearch, il est essentiel de comprendre comment créer, mettre à jour et supprimer rapidement des documents dans Elasticsearch. Dans cette activité d’apprentissage, vous allez effectuer les tâches suivantes :
+Créer des documents dans Elasticsearch Mettre à jour des documents existants dans Elasticsearch Supprimer des documents d’un index Elasticsearch Vous travaillez en tant qu’administrateur Elasticsearch pour une société bancaire. Un récent échec de déploiement et un retour en arrière de votre logiciel bancaire ont désynchronisé certaines actions qui ont été prises sur quelques comptes. Pour corriger rapidement la désynchronisation, on vous demande d’effectuer des opérations CRUD manuelles sur l’index bancaire dans Elasticsearch.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Labs - CRUD :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Description Quelle que soit la façon dont vous comptez utiliser Elasticsearch, il est essentiel de comprendre comment créer, mettre à jour et supprimer rapidement des documents dans Elasticsearch. Dans cette activité d’apprentissage, vous allez effectuer les tâches suivantes :
+Créer des documents dans Elasticsearch Mettre à jour des documents existants dans Elasticsearch Supprimer des documents d’un index Elasticsearch Vous travaillez en tant qu’administrateur Elasticsearch pour une société bancaire. Un récent échec de déploiement et un retour en arrière de votre logiciel bancaire ont désynchronisé certaines actions qui ont été prises sur quelques comptes. Pour corriger rapidement la désynchronisation, on vous demande d’effectuer des opérations CRUD manuelles sur l’index bancaire dans Elasticsearch.">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/intermediare/crud_documents/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Labs - CRUD :: Elastic Tutoriel">
+    <meta property="og:description" content="Description Quelle que soit la façon dont vous comptez utiliser Elasticsearch, il est essentiel de comprendre comment créer, mettre à jour et supprimer rapidement des documents dans Elasticsearch. Dans cette activité d’apprentissage, vous allez effectuer les tâches suivantes :
+Créer des documents dans Elasticsearch Mettre à jour des documents existants dans Elasticsearch Supprimer des documents d’un index Elasticsearch Vous travaillez en tant qu’administrateur Elasticsearch pour une société bancaire. Un récent échec de déploiement et un retour en arrière de votre logiciel bancaire ont désynchronisé certaines actions qui ont été prises sur quelques comptes. Pour corriger rapidement la désynchronisation, on vous demande d’effectuer des opérations CRUD manuelles sur l’index bancaire dans Elasticsearch.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-04-29T10:10:47+02:00">
+    <meta property="article:modified_time" content="2020-04-29T10:10:47+02:00">
+    <meta itemprop="name" content="Labs - CRUD :: Elastic Tutoriel">
+    <meta itemprop="description" content="Description Quelle que soit la façon dont vous comptez utiliser Elasticsearch, il est essentiel de comprendre comment créer, mettre à jour et supprimer rapidement des documents dans Elasticsearch. Dans cette activité d’apprentissage, vous allez effectuer les tâches suivantes :
+Créer des documents dans Elasticsearch Mettre à jour des documents existants dans Elasticsearch Supprimer des documents d’un index Elasticsearch Vous travaillez en tant qu’administrateur Elasticsearch pour une société bancaire. Un récent échec de déploiement et un retour en arrière de votre logiciel bancaire ont désynchronisé certaines actions qui ont été prises sur quelques comptes. Pour corriger rapidement la désynchronisation, on vous demande d’effectuer des opérations CRUD manuelles sur l’index bancaire dans Elasticsearch.">
+    <meta itemprop="datePublished" content="2020-04-29T10:10:47+02:00">
+    <meta itemprop="dateModified" content="2020-04-29T10:10:47+02:00">
+    <meta itemprop="wordCount" content="257">
+    <title>Labs - CRUD :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/intermediare/crud_documents/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li><a href="#description">Description</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/intermediare/index.html"><span itemprop="name">Intermediare</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Labs - CRUD</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/intermediare/reindex/index.html" title="Labs - Reindex (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/avance/index.html" title="Avancé (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="labs---crud">Labs - CRUD</h1>
+
+<h2 id="description">Description</h2>
+<p>Quelle que soit la façon dont vous comptez utiliser Elasticsearch, il est essentiel de comprendre comment créer, mettre à jour et supprimer rapidement des documents dans Elasticsearch. Dans cette activité d&rsquo;apprentissage, vous allez effectuer les tâches suivantes :</p>
+<ul>
+<li>Créer des documents dans Elasticsearch</li>
+<li>Mettre à jour des documents existants dans Elasticsearch</li>
+<li>Supprimer des documents d&rsquo;un index Elasticsearch</li>
+</ul>
+<p>Vous travaillez en tant qu&rsquo;administrateur Elasticsearch pour une société bancaire. Un récent échec de déploiement et un retour en arrière de votre logiciel bancaire ont désynchronisé certaines actions qui ont été prises sur quelques comptes. Pour corriger rapidement la désynchronisation, on vous demande d&rsquo;effectuer des opérations CRUD manuelles sur l&rsquo;index bancaire dans Elasticsearch.</p>
+<p>Un compte doit être ajouté avec les données client suivantes :</p>
+<ul>
+<li>Numéro de compte : 1000</li>
+<li>Solde : 65 536</li>
+<li>Prénom : Jean</li>
+<li>Nom de famille : Doe</li>
+<li>Age : 23 ans</li>
+<li>Sexe : masculin Homme</li>
+<li>Adresse : 125 Bear Creek Pkwy</li>
+<li>Employeur : Linux Academy</li>
+<li>Courriel : <a href="mailto:john@linuxacademy.com" rel="external" target="_blank">john@linuxacademy.com</a></li>
+<li>Ville : Keller</li>
+<li>Etat : TX</li>
+</ul>
+<p>Le compte 100 a changé d&rsquo;adresse et les champs suivants doivent être mis à jour :</p>
+<ul>
+<li>Adresse : 1600 Pennsylvania Ave NW</li>
+<li>Ville : Washington</li>
+<li>Etat : DC</li>
+</ul>
+<h4 id="créer-account-1000">Créer Account 1000</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT bank/_doc/1000
+{
+  &#34;account_number&#34;: 1000,
+  &#34;balance&#34;: 65536,
+  &#34;firstname&#34;: &#34;John&#34;,
+  &#34;lastname&#34;: &#34;Doe&#34;,
+  &#34;age&#34;: 23,
+  &#34;gender&#34;: &#34;M&#34;,
+  &#34;address&#34;: &#34;125 Bear Creek Pkwy&#34;,
+  &#34;employer&#34;: &#34;Linux Academy&#34;,
+  &#34;email&#34;: &#34;john@linuxacademy.com&#34;,
+  &#34;city&#34;: &#34;Keller&#34;,
+  &#34;state&#34;: &#34;TX&#34;
+}</code></pre></div>
+<h4 id="mise-à-jour-account-100">Mise à jour Account 100</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>POST bank/_update/100/
+{
+  &#34;doc&#34;: {
+    &#34;address&#34;: &#34;1600 Pennsylvania Ave NW&#34;,
+    &#34;city&#34;: &#34;Washington&#34;,
+    &#34;state&#34;: &#34;DC&#34;
+  }
+}</code></pre></div>
+<h4 id="supprimer-accounts-1-et-10">Supprimer accounts 1 et 10</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>DELETE bank/_doc/1
+DELETE bank/_doc/10</code></pre></div>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu">
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/alerting/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/alerting/index.html">Lab - Alertes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/index_alias/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index_alias/index.html">Labs - Index et ALias<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/mapping/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/mapping/index.html">Labs - Mapping<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/template_mapping/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/template_mapping/index.html">Labs - Index Template et Mapping<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/intermediare/reindex/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/reindex/index.html">Labs - Reindex<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/intermediare/crud_documents/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/crud_documents/index.html">Labs - CRUD<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu"></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/intermediare/crud_documents/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

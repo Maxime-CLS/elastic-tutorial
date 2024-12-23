@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Roles Kibana Les rôles sont un ensemble de privilèges qui vous permettent d’effectuer des actions dans Kibana et Elasticsearch. Les utilisateurs ne reçoivent pas directement de privilèges, mais se voient plutôt attribuer un ou plusieurs rôles qui décrivent le niveau d’accès souhaité. Lorsque vous attribuez plusieurs rôles à un utilisateur, ce dernier reçoit une union des privilèges des rôles. Cela signifie que vous ne pouvez pas réduire les privilèges d’un utilisateur en lui attribuant un rôle supplémentaire. Vous devez plutôt supprimer ou modifier l’un de ses rôles existants.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lab - Habilitation :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Roles Kibana Les rôles sont un ensemble de privilèges qui vous permettent d’effectuer des actions dans Kibana et Elasticsearch. Les utilisateurs ne reçoivent pas directement de privilèges, mais se voient plutôt attribuer un ou plusieurs rôles qui décrivent le niveau d’accès souhaité. Lorsque vous attribuez plusieurs rôles à un utilisateur, ce dernier reçoit une union des privilèges des rôles. Cela signifie que vous ne pouvez pas réduire les privilèges d’un utilisateur en lui attribuant un rôle supplémentaire. Vous devez plutôt supprimer ou modifier l’un de ses rôles existants.">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/elementaire/security/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Lab - Habilitation :: Elastic Tutoriel">
+    <meta property="og:description" content="Roles Kibana Les rôles sont un ensemble de privilèges qui vous permettent d’effectuer des actions dans Kibana et Elasticsearch. Les utilisateurs ne reçoivent pas directement de privilèges, mais se voient plutôt attribuer un ou plusieurs rôles qui décrivent le niveau d’accès souhaité. Lorsque vous attribuez plusieurs rôles à un utilisateur, ce dernier reçoit une union des privilèges des rôles. Cela signifie que vous ne pouvez pas réduire les privilèges d’un utilisateur en lui attribuant un rôle supplémentaire. Vous devez plutôt supprimer ou modifier l’un de ses rôles existants.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-06-26T15:17:20+02:00">
+    <meta property="article:modified_time" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="name" content="Lab - Habilitation :: Elastic Tutoriel">
+    <meta itemprop="description" content="Roles Kibana Les rôles sont un ensemble de privilèges qui vous permettent d’effectuer des actions dans Kibana et Elasticsearch. Les utilisateurs ne reçoivent pas directement de privilèges, mais se voient plutôt attribuer un ou plusieurs rôles qui décrivent le niveau d’accès souhaité. Lorsque vous attribuez plusieurs rôles à un utilisateur, ce dernier reçoit une union des privilèges des rôles. Cela signifie que vous ne pouvez pas réduire les privilèges d’un utilisateur en lui attribuant un rôle supplémentaire. Vous devez plutôt supprimer ou modifier l’un de ses rôles existants.">
+    <meta itemprop="datePublished" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="dateModified" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="wordCount" content="832">
+    <title>Lab - Habilitation :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/elementaire/security/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#roles-kibana">Roles Kibana</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-vous-de-jouez-">A vous de jouez !</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#a-vous-de-jouez--1">A vous de jouez !</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/elementaire/index.html"><span itemprop="name">Elementaire</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Lab - Habilitation</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/elementaire/index.html" title="Elementaire (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/elementaire/ilm/index.html" title="Lab - Index Lifecycle Policy (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="lab---habilitation">Lab - Habilitation</h1>
+
+<h3 id="roles-kibana">Roles Kibana</h3>
+<p>Les rôles sont un ensemble de privilèges qui vous permettent d&rsquo;effectuer des actions dans Kibana et Elasticsearch. Les utilisateurs ne reçoivent pas directement de privilèges, mais se voient plutôt attribuer un ou plusieurs rôles qui décrivent le niveau d&rsquo;accès souhaité. Lorsque vous attribuez plusieurs rôles à un utilisateur, ce dernier reçoit une union des privilèges des rôles. Cela signifie que vous ne pouvez pas réduire les privilèges d&rsquo;un utilisateur en lui attribuant un rôle supplémentaire. Vous devez plutôt supprimer ou modifier l&rsquo;un de ses rôles existants.</p>
+<p><a href="#R-image-2c56fcc6159850797d67f7ff2b25ee44" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/role-based-access-control.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2c56fcc6159850797d67f7ff2b25ee44"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/role-based-access-control.png"></a></p>
+<h4 id="user-observability">User Observability</h4>
+<p>Vous allez créer un role pour les utilisateurs qui doivent consulter les différentes informations de leurs applications sur le menu <strong>Observability</strong>.
+Cette création sera faite via API d&rsquo;Elasticsearch. Pour cela vous allez ouvrir un dans le menu Kibana Management -&gt; DevTool.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>POST /_security/role/read_observability
+{
+  &#34;cluster&#34;: [],
+  &#34;indices&#34;: [
+    {
+      &#34;names&#34;: [
+        &#34;metricbeat-*&#34;,
+        &#34;filebeat-*&#34;,
+        &#34;traces-apm*,apm-*,logs-apm*,apm-*,metrics-apm*,apm-*&#34;
+      ],
+      &#34;privileges&#34;: [
+        &#34;read&#34;,
+        &#34;view_index_metadata&#34;
+      ],
+      &#34;allow_restricted_indices&#34;: false
+    }
+  ],
+  &#34;applications&#34;: [
+    {
+      &#34;application&#34;: &#34;kibana-.kibana&#34;,
+      &#34;privileges&#34;: [
+        &#34;feature_logs.read&#34;,
+        &#34;feature_infrastructure.read&#34;,
+        &#34;feature_apm.read&#34;,
+        &#34;feature_uptime.read&#34;,
+        &#34;feature_observabilityCases.read&#34;
+      ],
+      &#34;resources&#34;: [
+        &#34;space:default&#34;
+      ]
+    }
+  ],
+  &#34;run_as&#34;: [],
+  &#34;metadata&#34;: {},
+  &#34;transient_metadata&#34;: {
+    &#34;enabled&#34;: true
+  }
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;role&#34; : {
+    &#34;created&#34; : true
+  }
+}</code></pre></div>
+<p>Vérifions la configuration du role :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET /_security/role/read_observability</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;read_observability&#34; : {
+    &#34;cluster&#34; : [ ],
+    &#34;indices&#34; : [
+      {
+        &#34;names&#34; : [
+          &#34;metricbeat-*&#34;,
+          &#34;filebeat-*&#34;,
+          &#34;traces-apm*,apm-*,logs-apm*,apm-*,metrics-apm*,apm-*&#34;
+        ],
+        &#34;privileges&#34; : [
+          &#34;read&#34;
+        ],
+        &#34;allow_restricted_indices&#34; : false
+      }
+    ],
+    &#34;applications&#34; : [
+      {
+        &#34;application&#34; : &#34;kibana-.kibana&#34;,
+        &#34;privileges&#34; : [
+          &#34;feature_logs.read&#34;,
+          &#34;feature_infrastructure.read&#34;,
+          &#34;feature_apm.read&#34;,
+          &#34;feature_uptime.read&#34;,
+          &#34;feature_observabilityCases.read&#34;
+        ],
+        &#34;resources&#34; : [
+          &#34;space:default&#34;
+        ]
+      }
+    ],
+    &#34;run_as&#34; : [ ],
+    &#34;metadata&#34; : { },
+    &#34;transient_metadata&#34; : {
+      &#34;enabled&#34; : true
+    }
+  }
+}</code></pre></div>
+<p>Ensuite vous allez définir un utilisateur qui aura l&rsquo;habilitation de lire les données d&rsquo;observabilité grace au role précédament crée.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>POST /_security/user/user_observability
+{
+  &#34;username&#34;: &#34;user_observability&#34;,
+  &#34;password&#34;: &#34;test1234&#34;,
+  &#34;roles&#34;: [
+    &#34;read_observability&#34;
+  ],
+  &#34;full_name&#34;: &#34;&#34;,
+  &#34;email&#34;: &#34;&#34;,
+  &#34;metadata&#34;: {},
+  &#34;enabled&#34;: true
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;created&#34; : true
+}</code></pre></div>
+<p>Vérifions la configuration du role :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET /_security/user/user_observability</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;user_observability&#34; : {
+    &#34;username&#34; : &#34;user_observability&#34;,
+    &#34;roles&#34; : [
+      &#34;read_observability&#34;
+    ],
+    &#34;full_name&#34; : &#34;&#34;,
+    &#34;email&#34; : &#34;&#34;,
+    &#34;metadata&#34; : { },
+    &#34;enabled&#34; : true
+  }
+}</code></pre></div>
+<p>Maintenant ouvrez une page de votre navigateur privé pour vous connectez à Kibana avec cet utilisateur : <a href="https://localhost:5601" rel="external" target="_blank">Accerder à Kibana</a></p>
+<p><a href="#R-image-7b514cca5b11adb737bf62ef7508a477" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/user_authentification.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7b514cca5b11adb737bf62ef7508a477"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/user_authentification.png"></a></p>
+<p>Sélectionnez dans le menu <strong>Observability</strong></p>
+<p><a href="#R-image-94f3e8e9b2b319f29d7f33d03b1dd735" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/user_menu.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-94f3e8e9b2b319f29d7f33d03b1dd735"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/user_menu.png"></a></p>
+<p>Puis observer que l&rsquo;utilisateur ne voit pas les données de type <strong>APM</strong> et <strong>Uptime</strong>.</p>
+<p><a href="#R-image-a7ad7e3660a5a4c6f2399a516862c658" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/bug_user_habilitation.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a7ad7e3660a5a4c6f2399a516862c658"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/bug_user_habilitation.png"></a></p>
+<h2 id="a-vous-de-jouez-">A vous de jouez !</h2>
+<p>A vous de corriger les habilitations de l&rsquo;utilisateur pour la lecture de données manquantes, voici quelque lien utile pour votre problème :</p>
+<ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html" rel="external" target="_blank">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/kibana/current/kibana-role-management.html" rel="external" target="_blank">https://www.elastic.co/guide/en/kibana/current/kibana-role-management.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.0/security-privileges.html#privileges-list-indices" rel="external" target="_blank">https://www.elastic.co/guide/en/elasticsearch/reference/8.0/security-privileges.html#privileges-list-indices</a></li>
+</ul>
+<hr>
+<h4 id="administrator-observability">Administrator Observability</h4>
+<p>Vous allez créer un role pour les administrateurs qui doivent consulter/modifier/supprimer les différentes informations de leurs applications sur le menu <strong>Observability</strong>.
+Cette création sera faite via API d&rsquo;Elasticsearch. Pour cela vous allez ouvrir un dans le menu Kibana Management -&gt; DevTool.</p>
+<p>Corriger l&rsquo;erreur dans le role administrateur que vous avez trouver sur le role user, puis exécuter cette requete :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>POST /_security/role/admin_observability
+{
+  &#34;cluster&#34;: [
+    &#34;create_snapshot&#34;,
+    &#34;manage_ccr&#34;,
+    &#34;manage_ilm&#34;,
+    &#34;manage_saml&#34;,
+    &#34;manage_watcher&#34;,
+    &#34;monitor&#34;,
+    &#34;read_ilm&#34;
+  ],
+  &#34;indices&#34;: [
+    {
+      &#34;names&#34;: [
+        &#34;metricbeat-*&#34;,
+        &#34;filebeat-*&#34;,
+        &#34;traces-apm*,apm-*,logs-apm*,apm-*,metrics-apm*,apm-*&#34;
+      ],
+      &#34;privileges&#34;: [
+        &#34;read&#34;,
+        &#34;monitor&#34;,
+        &#34;create&#34;,
+        &#34;write&#34;,
+        &#34;delete&#34;,
+        &#34;delete_index&#34;
+      ],
+      &#34;allow_restricted_indices&#34;: false
+    }
+  ],
+  &#34;applications&#34;: [
+    {
+      &#34;application&#34;: &#34;kibana-.kibana&#34;,
+      &#34;privileges&#34;: [
+        &#34;feature_logs.all&#34;,
+        &#34;feature_infrastructure.all&#34;,
+        &#34;feature_apm.all&#34;,
+        &#34;feature_uptime.all&#34;,
+        &#34;feature_observabilityCases.all&#34;,
+        &#34;feature_dev_tools.all&#34;,
+        &#34;feature_indexPatterns.read&#34;
+      ],
+      &#34;resources&#34;: [
+        &#34;space:default&#34;
+      ]
+    }
+  ],
+  &#34;run_as&#34;: [],
+  &#34;metadata&#34;: {},
+  &#34;transient_metadata&#34;: {
+    &#34;enabled&#34;: true
+  }
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;role&#34; : {
+    &#34;created&#34; : true
+  }
+}</code></pre></div>
+<p>Vérifions la configuration du role :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET /_security/role/admin_observability</code></pre></div>
+<p>Ensuite vous allez définir un utilisateur qui aura l&rsquo;habilitation de lire les données d&rsquo;observabilité grace au role précédament crée.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>POST /_security/user/admin_observability
+{
+  &#34;password&#34; : &#34;admin_password&#34;,
+  &#34;roles&#34;: [
+    &#34;admin_observability&#34;
+  ],
+  &#34;full_name&#34;: &#34;&#34;,
+  &#34;email&#34;: &#34;&#34;,
+  &#34;metadata&#34;: {},
+  &#34;enabled&#34;: true
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;created&#34; : true
+}</code></pre></div>
+<p>Vérifions la configuration du role :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET /_security/user/user_observability</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;user_observability&#34; : {
+    &#34;username&#34; : &#34;user_observability&#34;,
+    &#34;roles&#34; : [
+      &#34;read_observability&#34;
+    ],
+    &#34;full_name&#34; : &#34;&#34;,
+    &#34;email&#34; : &#34;&#34;,
+    &#34;metadata&#34; : { },
+    &#34;enabled&#34; : true
+  }
+}</code></pre></div>
+<p>Maintenant ouvrez une page de votre navigateur privé pour vous connectez à Kibana avec cet utilisateur : <a href="https://localhost:5601" rel="external" target="_blank">Accerder à Kibana</a></p>
+<p><a href="#R-image-7480664bf3a8b7532455820620e402a9" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/admin_login.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7480664bf3a8b7532455820620e402a9"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/admin_login.png"></a></p>
+<p>Sélectionnez dans le menu <strong>Observability</strong></p>
+<p><a href="#R-image-ba2a604e42dbce090e4a2c58bb1ea447" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/user_menu.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ba2a604e42dbce090e4a2c58bb1ea447"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/user_menu.png"></a></p>
+<p>Puis observer que l&rsquo;utilisateur ne voit pas les données de type <strong>APM</strong> et <strong>Uptime</strong>.</p>
+<p><a href="#R-image-e2ef115e55ba4a459893fa4548867b81" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/admin_observability.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e2ef115e55ba4a459893fa4548867b81"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/elementaire/admin_observability.png"></a></p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET apm-*/_search
+GET metricbeat-*/_search
+GET filebeat-*/_search
+GET heartbeat-*/_search</code></pre></div>
+<p>Maintenant l&rsquo;administrateur souhaite créer un index dans Elasticsearch afin de regrouper les données en un point d&rsquo;accès</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT my-index-observability</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;error&#34; : {
+    &#34;root_cause&#34; : [
+      {
+        &#34;type&#34; : &#34;security_exception&#34;,
+        &#34;reason&#34; : &#34;action [indices:admin/create] is unauthorized for user [admin_observability] with roles [admin_observability], this action is granted by the index privileges [create_index,manage,all]&#34;
+      }
+    ],
+    &#34;type&#34; : &#34;security_exception&#34;,
+    &#34;reason&#34; : &#34;action [indices:admin/create] is unauthorized for user [admin_observability] with roles [admin_observability], this action is granted by the index privileges [create_index,manage,all]&#34;
+  },
+  &#34;status&#34; : 403
+}</code></pre></div>
+<h2 id="a-vous-de-jouez--1">A vous de jouez !</h2>
+<p>A vous de corriger les habilitations de l&rsquo;administrateur pour la création d&rsquo;un index, voici quelque lien utile pour votre problème :</p>
+<ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html" rel="external" target="_blank">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/kibana/current/kibana-role-management.html" rel="external" target="_blank">https://www.elastic.co/guide/en/kibana/current/kibana-role-management.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.0/security-privileges.html#privileges-list-indices" rel="external" target="_blank">https://www.elastic.co/guide/en/elasticsearch/reference/8.0/security-privileges.html#privileges-list-indices</a></li>
+</ul>
+<p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez créer et mettre à jour des roles pour vos utilisateurs. Vous avez également exploré les différentes habilitations possibles sur Elasticsearch.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu">
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/elementaire/security/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/security/index.html">Lab - Habilitation<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/ilm/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/ilm/index.html">Lab - Index Lifecycle Policy<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/backup/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/backup/index.html">Lab - Backup &amp; Restore<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/diagnostic/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/diagnostic/index.html">Lab - Diagnostic<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu"></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/elementaire/security/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elastic :: Elastic Tutoriel</title>
+    <link>http://localhost:1313/elastic-tutorial/elastic/index.html</link>
+    <description></description>
+    <generator>Hugo</generator>
+    <language>fr-FR</language>
+    <lastBuildDate>Mon, 04 May 2020 08:52:59 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/elastic-tutorial/elastic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prérequis</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/prerequis/index.html</link>
+      <pubDate>Mon, 04 May 2020 08:52:59 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/prerequis/index.html</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Débutant</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/index.html</link>
+      <pubDate>Mon, 04 May 2020 08:52:59 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/index.html</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Elementaire</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/elementaire/index.html</link>
+      <pubDate>Mon, 04 May 2020 08:52:59 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/elementaire/index.html</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Intermediare</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/intermediare/index.html</link>
+      <pubDate>Mon, 04 May 2020 08:52:59 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/intermediare/index.html</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Avancé</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/avance/index.html</link>
+      <pubDate>Mon, 04 May 2020 08:52:59 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/avance/index.html</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

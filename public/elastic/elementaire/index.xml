@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elementaire :: Elastic Tutoriel</title>
+    <link>http://localhost:1313/elastic-tutorial/elastic/elementaire/index.html</link>
+    <description></description>
+    <generator>Hugo</generator>
+    <language>fr-FR</language>
+    <lastBuildDate>Fri, 26 Jun 2020 15:17:20 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/elastic-tutorial/elastic/elementaire/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lab - Habilitation</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/elementaire/security/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/elementaire/security/index.html</guid>
+      <description>Roles Kibana Les rôles sont un ensemble de privilèges qui vous permettent d’effectuer des actions dans Kibana et Elasticsearch. Les utilisateurs ne reçoivent pas directement de privilèges, mais se voient plutôt attribuer un ou plusieurs rôles qui décrivent le niveau d’accès souhaité. Lorsque vous attribuez plusieurs rôles à un utilisateur, ce dernier reçoit une union des privilèges des rôles. Cela signifie que vous ne pouvez pas réduire les privilèges d’un utilisateur en lui attribuant un rôle supplémentaire. Vous devez plutôt supprimer ou modifier l’un de ses rôles existants.</description>
+    </item>
+    <item>
+      <title>Lab - Index Lifecycle Policy</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/elementaire/ilm/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/elementaire/ilm/index.html</guid>
+      <description>Vous pouvez configurer des politiques de gestion du cycle de vie des index (ILM) pour gérer automatiquement les index en fonction de vos exigences en matière de performances, de résilience et de rétention. Par exemple, vous pouvez utiliser ILM pour :&#xA;Faire tourner un nouvel index lorsqu’un index atteint une certaine taille ou un certain nombre de documents. créer un nouvel index chaque jour, semaine ou mois et archiver les précédents supprimer les index périmés pour appliquer les normes de conservation des données. Vous pouvez créer et gérer les politiques de cycle de vie des index via Kibana Management ou les API ILM. Lorsque vous activez la gestion du cycle de vie des index pour Beats ou le plugin de sortie Logstash Elasticsearch, des politiques par défaut sont configurées automatiquement.</description>
+    </item>
+    <item>
+      <title>Lab - Backup &amp; Restore</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/elementaire/backup/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/elementaire/backup/index.html</guid>
+      <description>La haute disponibilité et la redondance d’Elasticsearch en font une plateforme stable et fiable pour le stockage de quantités massives de données. Toutefois, pour vous protéger contre les erreurs humaines et les catastrophes naturelles, vous devez toujours sauvegarder vos données Elasticsearch. L’endroit où vous stockez vos sauvegardes de données Elasticsearch est entièrement à votre discrétion. Dans ce laboratoire pratique, nous utiliserons le système de fichiers local pour démontrer comment :&#xA;Créer des dépôts instantanés Sauvegarder des index spécifiques Restaurer des données à partir d’un instantané Créez le référentiel “observability_repo”. Utilisez l’outil DevTool Kibana pour exécuter ce qui suit :</description>
+    </item>
+    <item>
+      <title>Lab - Diagnostic</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/elementaire/diagnostic/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/elementaire/diagnostic/index.html</guid>
+      <description>Vous êtes le nouvel administrateur d’un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que plusieurs index sont dans un état jaune. Vos supérieurs vous demandent de donner la priorité au dépannage des problèmes d’allocation d’index avant toute autre tâche.&#xA;Lorsqu’ils sont configurés correctement, les clusters Elasticsearch sont hautement disponibles et tolérants aux pannes. Cela ne signifie pas nécessairement qu’ils sont imperméables aux pannes. L’erreur humaine et la défaillance matérielle sont toujours possibles. Le dépannage des problèmes de disponibilité des données sur un système distribué peut être un défi. Prenons le temps de démystifier certaines routines de dépannage de base lorsque vous remarquez des index jaunes dans votre cluster Elasticsearch. Dans ce laboratoire pratique, vous aurez l’occasion de :</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Débutant :: Elastic Tutoriel</title>
+    <link>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/index.html</link>
+    <description></description>
+    <generator>Hugo</generator>
+    <language>fr-FR</language>
+    <lastBuildDate>Fri, 26 Jun 2020 15:17:20 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lab - Integration</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_integration/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_integration/index.html</guid>
+      <description>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez faciliter la collecte, l’analyse et la visualisation des données provenant de diverses sources.&#xA;Elastic Agent, lorsqu’il est configuré avec Fleet Server, permet une gestion centralisée des agents Elastic. Voici un aperçu de son fonctionnement :&#xA;Fleet Server : C’est un composant de l’Elastic Stack qui agit comme un serveur central pour gérer plusieurs connexions d’Elastic Agents. Il est responsable de la mise à jour des politiques des agents, de la collecte des informations de statut et de la coordination des actions entre les agents.</description>
+    </item>
+    <item>
+      <title>Lab - Logs</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_logs/index.html</guid>
+      <description>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez lire les fichiers journaux NGINX avec Kibana.&#xA;Explore Lancer Kibana pour commencer à explorer les logs qui ont été inclus dans le processus de configuration.&#xA;Accédez à Observability &gt; Logs via le menu principal&#xA;La console Explore dans Observability Logs d’Elastic permet de rechercher, filtrer et analyser les logs en temps réel. Voici ce que vous y trouverez :</description>
+    </item>
+    <item>
+      <title>Lab - Metrics</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_metrics/index.html</guid>
+      <description>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques système et NGINX. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.&#xA;Infrastructure Lancer Kibana pour commencer à explorer les métriques qui ont été inclus dans le processus de configuration.&#xA;Accédez à Observability &gt; Infrastructure via le menu principal</description>
+    </item>
+    <item>
+      <title>Lab - APM</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_apm/index.html</guid>
+      <description>Objectif : Dans ce laboratoire, vous apprendrez comment il est facile d’utiliser APM pour instrumenter les applications afin de collecter des informations détaillées sur les performances ainsi que les erreurs et les envoyer à votre déploiement Elasticsearch. Vous explorerez également l’application APM Kibana et verrez avec quelle facilité vous pouvez surveiller les performances des applications.&#xA;L’application Petclinic contient des variables d’environnement pour contacter le serveur APM :</description>
+    </item>
+    <item>
+      <title>Lab - Synthetics</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/d%C3%A9butant/lab_uptime/index.html</guid>
+      <description>Objectif : Dans ce laboratoire, vous explorerez la facilité avec laquelle vous pouvez obtenir des métriques des disponibilités des services. Vous explorerez également les tableaux de bord Kibana et verrez avec quelle facilité vous pouvez surveiller ces métriques.&#xA;Expérience Utilisateur Naviguer dans l’application Petclinic quelque instant pour générer un traffic utilisateur sur un navigateur web.&#xA;Accédez à Observability &gt; User Experience via le menu principal</description>
+    </item>
+  </channel>
+</rss>

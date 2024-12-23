@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Vous êtes le nouvel administrateur d’un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que plusieurs index sont dans un état jaune. Vos supérieurs vous demandent de donner la priorité au dépannage des problèmes d’allocation d’index avant toute autre tâche.
+Lorsqu’ils sont configurés correctement, les clusters Elasticsearch sont hautement disponibles et tolérants aux pannes. Cela ne signifie pas nécessairement qu’ils sont imperméables aux pannes. L’erreur humaine et la défaillance matérielle sont toujours possibles. Le dépannage des problèmes de disponibilité des données sur un système distribué peut être un défi. Prenons le temps de démystifier certaines routines de dépannage de base lorsque vous remarquez des index jaunes dans votre cluster Elasticsearch. Dans ce laboratoire pratique, vous aurez l’occasion de :">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lab - Diagnostic :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Vous êtes le nouvel administrateur d’un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que plusieurs index sont dans un état jaune. Vos supérieurs vous demandent de donner la priorité au dépannage des problèmes d’allocation d’index avant toute autre tâche.
+Lorsqu’ils sont configurés correctement, les clusters Elasticsearch sont hautement disponibles et tolérants aux pannes. Cela ne signifie pas nécessairement qu’ils sont imperméables aux pannes. L’erreur humaine et la défaillance matérielle sont toujours possibles. Le dépannage des problèmes de disponibilité des données sur un système distribué peut être un défi. Prenons le temps de démystifier certaines routines de dépannage de base lorsque vous remarquez des index jaunes dans votre cluster Elasticsearch. Dans ce laboratoire pratique, vous aurez l’occasion de :">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/elementaire/diagnostic/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Lab - Diagnostic :: Elastic Tutoriel">
+    <meta property="og:description" content="Vous êtes le nouvel administrateur d’un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que plusieurs index sont dans un état jaune. Vos supérieurs vous demandent de donner la priorité au dépannage des problèmes d’allocation d’index avant toute autre tâche.
+Lorsqu’ils sont configurés correctement, les clusters Elasticsearch sont hautement disponibles et tolérants aux pannes. Cela ne signifie pas nécessairement qu’ils sont imperméables aux pannes. L’erreur humaine et la défaillance matérielle sont toujours possibles. Le dépannage des problèmes de disponibilité des données sur un système distribué peut être un défi. Prenons le temps de démystifier certaines routines de dépannage de base lorsque vous remarquez des index jaunes dans votre cluster Elasticsearch. Dans ce laboratoire pratique, vous aurez l’occasion de :">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-06-26T15:17:20+02:00">
+    <meta property="article:modified_time" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="name" content="Lab - Diagnostic :: Elastic Tutoriel">
+    <meta itemprop="description" content="Vous êtes le nouvel administrateur d’un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que plusieurs index sont dans un état jaune. Vos supérieurs vous demandent de donner la priorité au dépannage des problèmes d’allocation d’index avant toute autre tâche.
+Lorsqu’ils sont configurés correctement, les clusters Elasticsearch sont hautement disponibles et tolérants aux pannes. Cela ne signifie pas nécessairement qu’ils sont imperméables aux pannes. L’erreur humaine et la défaillance matérielle sont toujours possibles. Le dépannage des problèmes de disponibilité des données sur un système distribué peut être un défi. Prenons le temps de démystifier certaines routines de dépannage de base lorsque vous remarquez des index jaunes dans votre cluster Elasticsearch. Dans ce laboratoire pratique, vous aurez l’occasion de :">
+    <meta itemprop="datePublished" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="dateModified" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="wordCount" content="769">
+    <title>Lab - Diagnostic :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/elementaire/diagnostic/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#résolution-du-problème-de-lindex-observability-time-series">Résolution du problème de l&rsquo;index &ldquo;observability-time-series&rdquo;.</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-vous-de-jouez-">A vous de jouez !</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/elementaire/index.html"><span itemprop="name">Elementaire</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Lab - Diagnostic</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/elementaire/backup/index.html" title="Lab - Backup &amp; Restore (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/intermediare/index.html" title="Intermediare (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="lab---diagnostic">Lab - Diagnostic</h1>
+
+<p>Vous êtes le nouvel administrateur d&rsquo;un cluster Elasticsearch à 3 nœuds. En prenant possession du cluster, vous constatez que plusieurs index sont dans un état jaune. Vos supérieurs vous demandent de donner la priorité au dépannage des problèmes d&rsquo;allocation d&rsquo;index avant toute autre tâche.</p>
+<p>Lorsqu&rsquo;ils sont configurés correctement, les clusters Elasticsearch sont hautement disponibles et tolérants aux pannes. Cela ne signifie pas nécessairement qu&rsquo;ils sont imperméables aux pannes. L&rsquo;erreur humaine et la défaillance matérielle sont toujours possibles. Le dépannage des problèmes de disponibilité des données sur un système distribué peut être un défi. Prenons le temps de démystifier certaines routines de dépannage de base lorsque vous remarquez des index jaunes dans votre cluster Elasticsearch. Dans ce laboratoire pratique, vous aurez l&rsquo;occasion de :</p>
+<ul>
+<li>Utiliser les API _cat pour obtenir rapidement des informations vitales sur votre cluster.</li>
+<li>utiliser l&rsquo;API _cluster/allocation/explain pour découvrir pourquoi un index est ou n&rsquo;est pas alloué</li>
+<li>Utiliser l&rsquo;API _settings pour mettre rapidement à jour les paramètres d&rsquo;index.</li>
+</ul>
+<h3 id="résolution-du-problème-de-lindex-observability-time-series">Résolution du problème de l&rsquo;index &ldquo;observability-time-series&rdquo;.</h3>
+<p>Utilisez l&rsquo;outil de console Kibana pour exécuter ce qui suit :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _cat/indices?v</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>health status index                                                    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   metricbeat-7.17.0-2022.02.22-000001                      WBLcTqYORtS5LJyFttVBXQ   1   1     956609            0      1.8gb        915.3mb
+green  open   apm-7.17.0-error-000001                                  TuCoez2IQP6xmRJl70TKvw   1   1       4994            0     19.9mb          9.9mb
+yellow open   .ds-observability-time-series-2022.02.22-000002          xKbIQkulR0mMwv8aCbR5Og   1  10          1            0     12.5kb          4.1kb
+yellow open   .ds-observability-time-series-2022.02.22-000001          i_sIi8P2SUu6mNmlsMjv3Q   1  10         16            0     19.6kb          6.5kb
+green  open   apm-7.17.0-transaction-000001                            O14qvTcvQyOOIp8kIGGpKg   1   1     163280            0    130.7mb         62.3mb
+green  open   apm-7.17.0-metric-000001                                 mXYNU6V9SU2tlAmODIjPHQ   1   1     265903            0       73mb         36.4mb
+green  open   .apm-agent-configuration                                 jkaqvfq0Sy25CHaLDswUUA   1   1          0            0       452b           226b
+green  open   apm-7.17.0-span-000001                                   iOVtWj8iRL6b-YbxROQ9ig   1   1     505334            0    377.8mb        153.4mb
+green  open   apm-7.17.0-onboarding-2022.02.22                         dJ8FT0LvSn2HTUynoxWtbQ   1   1          1            0     16.1kb            8kb
+green  open   apm-7.17.0-profile-000001                                dQEJ37KkSzmQr4DVKLQnAw   1   1          0            0       452b           226b
+green  open   .security-7                                              o2VUY0seRxSefLHyOge4rQ   1   1         60            0    531.1kb        295.6kb
+green  open   .ds-observability-time-series-2022.02.22-000001_restored _WQSy8o3QTi6l4inCqpA8Q   1   1         16            0     13.1kb          6.5kb
+green  open   filebeat-7.17.0-2022.02.22-000001                        hN3UWBgXRYm9KA66iHfayQ   1   1    2453406            0      3.2gb          1.6gb
+green  open   .kibana_7.17.0_001                                       J_lf9M3zRjmHgMdRhwcqLw   1   1       4439         1913      8.3mb          4.1mb
+green  open   .apm-custom-link                                         fnAtCfqXSsOCN7dqyGQT8A   1   1          0            0       452b           226b
+green  open   .ds-observability-time-series-2022.02.22-000002_restored SUVTggxqRMODlSz4pE3gEw   1   1          1            0      8.3kb          4.1kb
+green  open   heartbeat-7.17.0-2022.02.22-000001                       U50p8dOMSz2jhWz7kHRDnw   1   1      25386            0     29.5mb         14.7mb
+green  open   .async-search                                            JjeGtgVgTYKlJ8PsvmwL7Q   1   1          0            0      3.7kb           249b
+green  open   .kibana_task_manager_7.17.0_001                          x63yGuhDSaudkMeqtmxANA   1   1         18        43080     15.2mb          7.6mb</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _cat/nodes?v</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ip         heap.percent ram.percent cpu load_1m load_5m load_15m node.role   master name
+172.20.0.4           61          97  33    3.53    2.21     1.66 cdfhilmrstw *      es01
+172.20.0.3           73          97  33    3.53    2.21     1.66 cdfhilmrstw -      es03
+172.20.0.2           68          97  33    3.53    2.21     1.66 cdfhilmrstw -      es02</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _cluster/allocation/explain</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;note&#34; : &#34;No shard was specified in the explain API request, so this response explains a randomly chosen unassigned shard. There may be other unassigned shards in this cluster which cannot be assigned for different reasons. It may not be possible to assign this shard until one of the other shards is assigned correctly. To explain the allocation of other shards (whether assigned or unassigned) you must specify the target shard in the request to this API.&#34;,
+  &#34;index&#34; : &#34;.ds-observability-time-series-2022.02.22-000001&#34;,
+  &#34;shard&#34; : 0,
+  &#34;primary&#34; : false,
+  &#34;current_state&#34; : &#34;unassigned&#34;,
+  &#34;unassigned_info&#34; : {
+    &#34;reason&#34; : &#34;INDEX_CREATED&#34;,
+    &#34;at&#34; : &#34;2022-02-22T16:18:00.719Z&#34;,
+    &#34;last_allocation_status&#34; : &#34;no_attempt&#34;
+  },
+  &#34;can_allocate&#34; : &#34;no&#34;,
+  &#34;allocate_explanation&#34; : &#34;cannot allocate because allocation is not permitted to any of the nodes&#34;,
+  &#34;node_allocation_decisions&#34; : [
+    {
+      &#34;node_id&#34; : &#34;8T5zcuSbRbugyhTN5hxzHQ&#34;,
+      &#34;node_name&#34; : &#34;es02&#34;,
+      &#34;transport_address&#34; : &#34;172.20.0.2:9300&#34;,
+      &#34;node_attributes&#34; : {
+        &#34;ml.machine_memory&#34; : &#34;8312127488&#34;,
+        &#34;ml.max_open_jobs&#34; : &#34;512&#34;,
+        &#34;xpack.installed&#34; : &#34;true&#34;,
+        &#34;ml.max_jvm_size&#34; : &#34;268435456&#34;,
+        &#34;transform.node&#34; : &#34;true&#34;
+      },
+      &#34;node_decision&#34; : &#34;no&#34;,
+      &#34;weight_ranking&#34; : 1,
+      &#34;deciders&#34; : [
+        {
+          &#34;decider&#34; : &#34;same_shard&#34;,
+          &#34;decision&#34; : &#34;NO&#34;,
+          &#34;explanation&#34; : &#34;a copy of this shard is already allocated to this node [[.ds-observability-time-series-2022.02.22-000001][0], node[8T5zcuSbRbugyhTN5hxzHQ], [R], s[STARTED], a[id=rj9XVRi9Te2vqQgIIwsb8Q]]&#34;
+        }
+      ]
+    },
+    {
+      &#34;node_id&#34; : &#34;QjZ5OxRQRxSGEq9fHq39ug&#34;,
+      &#34;node_name&#34; : &#34;es01&#34;,
+      &#34;transport_address&#34; : &#34;172.20.0.4:9300&#34;,
+      &#34;node_attributes&#34; : {
+        &#34;ml.machine_memory&#34; : &#34;8312127488&#34;,
+        &#34;xpack.installed&#34; : &#34;true&#34;,
+        &#34;transform.node&#34; : &#34;true&#34;,
+        &#34;ml.max_open_jobs&#34; : &#34;512&#34;,
+        &#34;ml.max_jvm_size&#34; : &#34;268435456&#34;
+      },
+      &#34;node_decision&#34; : &#34;no&#34;,
+      &#34;weight_ranking&#34; : 2,
+      &#34;deciders&#34; : [
+        {
+          &#34;decider&#34; : &#34;same_shard&#34;,
+          &#34;decision&#34; : &#34;NO&#34;,
+          &#34;explanation&#34; : &#34;a copy of this shard is already allocated to this node [[.ds-observability-time-series-2022.02.22-000001][0], node[QjZ5OxRQRxSGEq9fHq39ug], [R], s[STARTED], a[id=1Hb2K_nMTHqGP3LqlhDnjQ]]&#34;
+        }
+      ]
+    },
+    {
+      &#34;node_id&#34; : &#34;g9m0hRGUS1isZhC9CVdhgw&#34;,
+      &#34;node_name&#34; : &#34;es03&#34;,
+      &#34;transport_address&#34; : &#34;172.20.0.3:9300&#34;,
+      &#34;node_attributes&#34; : {
+        &#34;ml.machine_memory&#34; : &#34;8312127488&#34;,
+        &#34;ml.max_open_jobs&#34; : &#34;512&#34;,
+        &#34;xpack.installed&#34; : &#34;true&#34;,
+        &#34;ml.max_jvm_size&#34; : &#34;268435456&#34;,
+        &#34;transform.node&#34; : &#34;true&#34;
+      },
+      &#34;node_decision&#34; : &#34;no&#34;,
+      &#34;weight_ranking&#34; : 3,
+      &#34;deciders&#34; : [
+        {
+          &#34;decider&#34; : &#34;same_shard&#34;,
+          &#34;decision&#34; : &#34;NO&#34;,
+          &#34;explanation&#34; : &#34;a copy of this shard is already allocated to this node [[.ds-observability-time-series-2022.02.22-000001][0], node[g9m0hRGUS1isZhC9CVdhgw], [P], s[STARTED], a[id=iwUIWrc0S5SSE2R52VK8Mg]]&#34;
+        }
+      ]
+    }
+  ]
+}</code></pre></div>
+<h2 id="a-vous-de-jouez-">A vous de jouez !</h2>
+<p>Expliquer le problème que rencontre le cluster Elasticsearch et la solution que vous proposez pour corriger ce comportement.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu">
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/security/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/security/index.html">Lab - Habilitation<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/ilm/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/ilm/index.html">Lab - Index Lifecycle Policy<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/backup/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/backup/index.html">Lab - Backup &amp; Restore<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/elementaire/diagnostic/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/diagnostic/index.html">Lab - Diagnostic<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu"></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/elementaire/diagnostic/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

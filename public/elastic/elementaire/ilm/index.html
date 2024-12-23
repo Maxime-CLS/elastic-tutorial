@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Vous pouvez configurer des politiques de gestion du cycle de vie des index (ILM) pour gérer automatiquement les index en fonction de vos exigences en matière de performances, de résilience et de rétention. Par exemple, vous pouvez utiliser ILM pour :
+Faire tourner un nouvel index lorsqu’un index atteint une certaine taille ou un certain nombre de documents. créer un nouvel index chaque jour, semaine ou mois et archiver les précédents supprimer les index périmés pour appliquer les normes de conservation des données. Vous pouvez créer et gérer les politiques de cycle de vie des index via Kibana Management ou les API ILM. Lorsque vous activez la gestion du cycle de vie des index pour Beats ou le plugin de sortie Logstash Elasticsearch, des politiques par défaut sont configurées automatiquement.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lab - Index Lifecycle Policy :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Vous pouvez configurer des politiques de gestion du cycle de vie des index (ILM) pour gérer automatiquement les index en fonction de vos exigences en matière de performances, de résilience et de rétention. Par exemple, vous pouvez utiliser ILM pour :
+Faire tourner un nouvel index lorsqu’un index atteint une certaine taille ou un certain nombre de documents. créer un nouvel index chaque jour, semaine ou mois et archiver les précédents supprimer les index périmés pour appliquer les normes de conservation des données. Vous pouvez créer et gérer les politiques de cycle de vie des index via Kibana Management ou les API ILM. Lorsque vous activez la gestion du cycle de vie des index pour Beats ou le plugin de sortie Logstash Elasticsearch, des politiques par défaut sont configurées automatiquement.">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/elementaire/ilm/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Lab - Index Lifecycle Policy :: Elastic Tutoriel">
+    <meta property="og:description" content="Vous pouvez configurer des politiques de gestion du cycle de vie des index (ILM) pour gérer automatiquement les index en fonction de vos exigences en matière de performances, de résilience et de rétention. Par exemple, vous pouvez utiliser ILM pour :
+Faire tourner un nouvel index lorsqu’un index atteint une certaine taille ou un certain nombre de documents. créer un nouvel index chaque jour, semaine ou mois et archiver les précédents supprimer les index périmés pour appliquer les normes de conservation des données. Vous pouvez créer et gérer les politiques de cycle de vie des index via Kibana Management ou les API ILM. Lorsque vous activez la gestion du cycle de vie des index pour Beats ou le plugin de sortie Logstash Elasticsearch, des politiques par défaut sont configurées automatiquement.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-06-26T15:17:20+02:00">
+    <meta property="article:modified_time" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="name" content="Lab - Index Lifecycle Policy :: Elastic Tutoriel">
+    <meta itemprop="description" content="Vous pouvez configurer des politiques de gestion du cycle de vie des index (ILM) pour gérer automatiquement les index en fonction de vos exigences en matière de performances, de résilience et de rétention. Par exemple, vous pouvez utiliser ILM pour :
+Faire tourner un nouvel index lorsqu’un index atteint une certaine taille ou un certain nombre de documents. créer un nouvel index chaque jour, semaine ou mois et archiver les précédents supprimer les index périmés pour appliquer les normes de conservation des données. Vous pouvez créer et gérer les politiques de cycle de vie des index via Kibana Management ou les API ILM. Lorsque vous activez la gestion du cycle de vie des index pour Beats ou le plugin de sortie Logstash Elasticsearch, des politiques par défaut sont configurées automatiquement.">
+    <meta itemprop="datePublished" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="dateModified" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="wordCount" content="1904">
+    <title>Lab - Index Lifecycle Policy :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/elementaire/ilm/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#ilm-settings">ILM Settings</a></li>
+        <li><a href="#ilm-policy">ILM Policy</a></li>
+        <li><a href="#components-template">Components Template</a></li>
+        <li><a href="#index-template">Index Template</a></li>
+        <li><a href="#créer-votre-data-stream">Créer votre Data Stream</a></li>
+        <li><a href="#ajouter-des-données-dans-le-data-stream">Ajouter des données dans le Data Stream</a></li>
+        <li><a href="#mettre-à-jours-les-données-data-stream">Mettre à jours les données Data Stream</a></li>
+        <li><a href="#ilm-check">ILM Check</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/elementaire/index.html"><span itemprop="name">Elementaire</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Lab - Index Lifecycle Policy</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/elementaire/security/index.html" title="Lab - Habilitation (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/elementaire/backup/index.html" title="Lab - Backup &amp; Restore (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="lab---index-lifecycle-policy">Lab - Index Lifecycle Policy</h1>
+
+<p>Vous pouvez configurer des politiques de gestion du cycle de vie des index (ILM) pour gérer automatiquement les index en fonction de vos exigences en matière de performances, de résilience et de rétention. Par exemple, vous pouvez utiliser ILM pour :</p>
+<ul>
+<li>Faire tourner un nouvel index lorsqu&rsquo;un index atteint une certaine taille ou un certain nombre de documents.</li>
+<li>créer un nouvel index chaque jour, semaine ou mois et archiver les précédents</li>
+<li>supprimer les index périmés pour appliquer les normes de conservation des données.</li>
+</ul>
+<p>Vous pouvez créer et gérer les politiques de cycle de vie des index via Kibana Management ou les API ILM. Lorsque vous activez la gestion du cycle de vie des index pour Beats ou le plugin de sortie Logstash Elasticsearch, des politiques par défaut sont configurées automatiquement.</p>
+<p>La mise en place de règle de gestion permet :</p>
+<ul>
+<li>Augmenter les <strong>performances</strong> de recherche et/ou de visualisation</li>
+<li>Obtenir une meilleure <strong>résilience</strong> de ses données</li>
+<li>De définir des standards de <strong>rétention</strong>.</li>
+</ul>
+<p>L&rsquo;avantage de la fonctionnalité ILM est d&rsquo;automatiser cette gestion avec des règles simple d&rsquo;usage.</p>
+<p><a href="#R-image-77a31c32feeedda41bf226b4425810b0" class="lightbox-link"><img alt="ILM" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://www.elastic.co/guide/en/elasticsearch/reference/current/images/ilm/index-lifecycle-policies.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-77a31c32feeedda41bf226b4425810b0"><img alt="ILM" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://www.elastic.co/guide/en/elasticsearch/reference/current/images/ilm/index-lifecycle-policies.png"></a></p>
+<h3 id="ilm-settings">ILM Settings</h3>
+<p>Par défaut sur votre cluster la fonctionnalité ILM est configuré à un interval de vérification de 10 minutes.</p>
+<p>Ce paramètre peut être modifié dans des contexts <strong>hors prod</strong>.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _cluster/settings
+
+PUT _cluster/settings
+{
+	&#34;persistent&#34;:{
+		&#34;indices.lifecycle.poll_interval&#34;: &#34;1s&#34;
+	}
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;acknowledged&#34; : true,
+  &#34;persistent&#34; : {
+    &#34;indices&#34; : {
+      &#34;lifecycle&#34; : {
+        &#34;poll_interval&#34; : &#34;1s&#34;
+      }
+    }
+  },
+  &#34;transient&#34; : { }
+}</code></pre></div>
+<h3 id="ilm-policy">ILM Policy</h3>
+<p>La définition d&rsquo;une règle intègre plusieurs paramètres :</p>
+<ul>
+<li>Phase : Il existe plusieurs type de phase hot, warm et cold.</li>
+<li>Rollover : Le roulement d&rsquo;un index s&rsquo;applique avec au moins un de ces paramètres : max_age, max_size, max_docs.</li>
+<li>Delete : La rétention d&rsquo;un index avec la fonction de suppression.</li>
+</ul>
+<p>Il est recommander d&rsquo;effectuer dans la phase <strong>hot</strong> une rotation d&rsquo;index sur les paramètres suivant :</p>
+<ul>
+<li>Logs :
+<ul>
+<li>max_age : 15d</li>
+<li>max_size : 45gb</li>
+</ul>
+</li>
+<li>Metric :
+<ul>
+<li>max_age : 15d</li>
+<li>max_size : 40gb</li>
+</ul>
+</li>
+</ul>
+<p>Et une deuxième recommandation est d&rsquo;effectuer une retention d&rsquo;index égale à 90 jours.</p>
+<p>Cela permet d&rsquo;augmenter les performances de l&rsquo;index et d&rsquo;optimiser les recherches.</p>
+<p>Pour notre besoin d&rsquo;aujourd&rsquo;hui, nous allons préparer une ILM avec une phase très courte. Ouvrez dans le menu Kibana le DevTool.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT _ilm/policy/observability-policy
+{
+  &#34;policy&#34;: {
+    &#34;phases&#34;: {
+      &#34;hot&#34;: {
+        &#34;actions&#34;: {
+          &#34;rollover&#34;: {
+            &#34;max_docs&#34;: 10
+          },
+          &#34;set_priority&#34;: {
+            &#34;priority&#34;: 50
+          }
+        }
+      },
+      &#34;delete&#34;: {
+        &#34;min_age&#34;: &#34;60d&#34;,
+        &#34;actions&#34;: {
+          &#34;delete&#34;: {}
+        }
+      }
+    }
+  }
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;acknowledged&#34; : true
+}</code></pre></div>
+<h3 id="components-template">Components Template</h3>
+<h4 id="settings">Settings</h4>
+<p>Nous allons configurer des paramètres par défaut pour tous les index ELasticsearch qui seront créé.</p>
+<p>Il est recommandé d&rsquo;avoir les paramètres de réplications suivant :</p>
+<ul>
+<li>shard : 1</li>
+<li>replicas : 1</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT _component_template/observability-settings
+{
+  &#34;template&#34;: {
+    &#34;settings&#34;: {
+      &#34;number_of_shards&#34;: 1,
+      &#34;number_of_replicas&#34;: 10,
+      &#34;index.lifecycle.name&#34;: &#34;observability-policy&#34;
+    }
+  },
+  &#34;_meta&#34;: {
+    &#34;description&#34;: &#34;Settings for Observability data&#34;
+  }
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;acknowledged&#34; : true
+}</code></pre></div>
+<h4 id="mapping">Mapping</h4>
+<p>NOus allons configurer un mapping des champs par défaut pour toutes les données d&rsquo;observabilité.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT _component_template/observability-mappings
+{
+  &#34;template&#34;: {
+    &#34;mappings&#34;: {
+      &#34;properties&#34;: {
+        &#34;@timestamp&#34;: {
+          &#34;type&#34;: &#34;date&#34;,
+          &#34;format&#34;: &#34;date_optional_time||epoch_millis&#34;
+        },
+        &#34;message&#34;: {
+          &#34;type&#34;: &#34;wildcard&#34;
+        }
+      }
+    }
+  },
+  &#34;_meta&#34;: {
+    &#34;description&#34;: &#34;Mappings for @timestamp and message fields&#34;
+  }
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;acknowledged&#34; : true
+}</code></pre></div>
+<h3 id="index-template">Index Template</h3>
+<p>L&rsquo;index template est une fonctionnalité permettant de définir des paramètres par défaut à vos index.
+Cela permet d&rsquo;automatiser la gestion des index en appliquant des configurations de réplications, de règles de gestion automatiquement.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT _index_template/observability-template
+{
+  &#34;index_patterns&#34;: [&#34;observability-*&#34;],
+  &#34;data_stream&#34;: { },
+  &#34;composed_of&#34;: [ &#34;observability-mappings&#34;, &#34;observability-settings&#34; ],
+  &#34;priority&#34;: 500,
+  &#34;_meta&#34;: {
+    &#34;description&#34;: &#34;Template for my time series data&#34;
+  }
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;acknowledged&#34; : true
+}</code></pre></div>
+<h3 id="créer-votre-data-stream">Créer votre Data Stream</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT _data_stream/observability-time-series</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;acknowledged&#34; : true
+}</code></pre></div>
+<h3 id="ajouter-des-données-dans-le-data-stream">Ajouter des données dans le Data Stream</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>PUT observability-time-series/_bulk
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:21:15.000Z&#34;,&#34;message&#34;:&#34;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&#34;GET /images/bg.jpg HTTP/1.0\&#34; 200 24736&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:25:42.000Z&#34;,&#34;message&#34;:&#34;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&#34;GET /favicon.ico HTTP/1.0\&#34; 200 3638&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:21:15.000Z&#34;,&#34;message&#34;:&#34;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&#34;GET /images/bg.jpg HTTP/1.0\&#34; 200 24736&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:25:42.000Z&#34;,&#34;message&#34;:&#34;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&#34;GET /favicon.ico HTTP/1.0\&#34; 200 3638&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:21:15.000Z&#34;,&#34;message&#34;:&#34;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&#34;GET /images/bg.jpg HTTP/1.0\&#34; 200 24736&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:25:42.000Z&#34;,&#34;message&#34;:&#34;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&#34;GET /favicon.ico HTTP/1.0\&#34; 200 3638&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:21:15.000Z&#34;,&#34;message&#34;:&#34;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&#34;GET /images/bg.jpg HTTP/1.0\&#34; 200 24736&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:25:42.000Z&#34;,&#34;message&#34;:&#34;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&#34;GET /favicon.ico HTTP/1.0\&#34; 200 3638&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:21:15.000Z&#34;,&#34;message&#34;:&#34;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&#34;GET /images/bg.jpg HTTP/1.0\&#34; 200 24736&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:25:42.000Z&#34;,&#34;message&#34;:&#34;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&#34;GET /favicon.ico HTTP/1.0\&#34; 200 3638&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:21:15.000Z&#34;,&#34;message&#34;:&#34;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&#34;GET /images/bg.jpg HTTP/1.0\&#34; 200 24736&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:25:42.000Z&#34;,&#34;message&#34;:&#34;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&#34;GET /favicon.ico HTTP/1.0\&#34; 200 3638&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:21:15.000Z&#34;,&#34;message&#34;:&#34;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&#34;GET /images/bg.jpg HTTP/1.0\&#34; 200 24736&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:25:42.000Z&#34;,&#34;message&#34;:&#34;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&#34;GET /favicon.ico HTTP/1.0\&#34; 200 3638&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:21:15.000Z&#34;,&#34;message&#34;:&#34;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&#34;GET /images/bg.jpg HTTP/1.0\&#34; 200 24736&#34;}
+{&#34;create&#34;:{}}
+{&#34;@timestamp&#34;:&#34;2099-05-06T16:25:42.000Z&#34;,&#34;message&#34;:&#34;192.0.2.255 - - [06/May/2099:16:25:42 +0000] \&#34;GET /favicon.ico HTTP/1.0\&#34; 200 3638&#34;}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;took&#34; : 12,
+  &#34;errors&#34; : false,
+  &#34;items&#34; : [
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;HggBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 0,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;HwgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 1,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;IAgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 2,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;IQgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 3,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;IggBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 4,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;IwgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 5,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;JAgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 6,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;JQgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 7,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;JggBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 8,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;JwgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 9,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;KAgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 10,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;KQgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 11,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;KggBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 12,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;KwgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 13,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;LAgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 14,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    },
+    {
+      &#34;create&#34; : {
+        &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;_type&#34; : &#34;_doc&#34;,
+        &#34;_id&#34; : &#34;LQgBHn8BzEvhAp6LaS34&#34;,
+        &#34;_version&#34; : 1,
+        &#34;result&#34; : &#34;created&#34;,
+        &#34;_shards&#34; : {
+          &#34;total&#34; : 2,
+          &#34;successful&#34; : 2,
+          &#34;failed&#34; : 0
+        },
+        &#34;_seq_no&#34; : 15,
+        &#34;_primary_term&#34; : 1,
+        &#34;status&#34; : 201
+      }
+    }
+  ]
+}</code></pre></div>
+<h3 id="mettre-à-jours-les-données-data-stream">Mettre à jours les données Data Stream</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>POST observability-time-series/_doc
+{
+  &#34;@timestamp&#34;: &#34;2099-05-06T16:21:15.000Z&#34;,
+  &#34;message&#34;: &#34;192.0.2.42 - - [06/May/2099:16:21:15 +0000] \&#34;GET /images/bg.jpg HTTP/1.0\&#34; 200 24736&#34;
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;_index&#34; : &#34;.ds-observability-time-series-2022.02.21-000002&#34;,
+  &#34;_type&#34; : &#34;_doc&#34;,
+  &#34;_id&#34; : &#34;ZQgCHn8BzEvhAp6LozUb&#34;,
+  &#34;_version&#34; : 1,
+  &#34;result&#34; : &#34;created&#34;,
+  &#34;_shards&#34; : {
+    &#34;total&#34; : 2,
+    &#34;successful&#34; : 2,
+    &#34;failed&#34; : 0
+  },
+  &#34;_seq_no&#34; : 0,
+  &#34;_primary_term&#34; : 1
+}</code></pre></div>
+<p>On constate que le nom de l&rsquo;index est différent <strong>.ds-observability-time-series-2022.02.21-000002</strong>, il y a eu une rotation automatique de l&rsquo;index. On constate alors que la politique de rotation est bien appliquée.</p>
+<h3 id="ilm-check">ILM Check</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _ilm/status</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;operation_mode&#34; : &#34;RUNNING&#34;
+}</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET _ilm/policy/observability-policy</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;observability-policy&#34; : {
+    &#34;version&#34; : 1,
+    &#34;modified_date&#34; : &#34;2022-02-21T20:35:02.304Z&#34;,
+    &#34;policy&#34; : {
+      &#34;phases&#34; : {
+        &#34;hot&#34; : {
+          &#34;min_age&#34; : &#34;0ms&#34;,
+          &#34;actions&#34; : {
+            &#34;rollover&#34; : {
+              &#34;max_docs&#34; : 10
+            },
+            &#34;set_priority&#34; : {
+              &#34;priority&#34; : 50
+            }
+          }
+        },
+        &#34;delete&#34; : {
+          &#34;min_age&#34; : &#34;60d&#34;,
+          &#34;actions&#34; : {
+            &#34;delete&#34; : {
+              &#34;delete_searchable_snapshot&#34; : true
+            }
+          }
+        }
+      }
+    },
+    &#34;in_use_by&#34; : {
+      &#34;indices&#34; : [
+        &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+        &#34;.ds-observability-time-series-2022.02.21-000002&#34;
+      ],
+      &#34;data_streams&#34; : [
+        &#34;observability-time-series&#34;
+      ],
+      &#34;composable_templates&#34; : [
+        &#34;observability-template&#34;
+      ]
+    }
+  }
+}</code></pre></div>
+<p>On retrouve la configuration de notre ILM ainsi que les index rattachés.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>GET observability-time-series/_ilm/explain</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>{
+  &#34;indices&#34; : {
+    &#34;.ds-observability-time-series-2022.02.21-000001&#34; : {
+      &#34;index&#34; : &#34;.ds-observability-time-series-2022.02.21-000001&#34;,
+      &#34;managed&#34; : true,
+      &#34;policy&#34; : &#34;observability-policy&#34;,
+      &#34;lifecycle_date_millis&#34; : 1645475884407,
+      &#34;age&#34; : &#34;4.91m&#34;,
+      &#34;phase&#34; : &#34;hot&#34;,
+      &#34;phase_time_millis&#34; : 1645475859767,
+      &#34;action&#34; : &#34;complete&#34;,
+      &#34;action_time_millis&#34; : 1645475885210,
+      &#34;step&#34; : &#34;complete&#34;,
+      &#34;step_time_millis&#34; : 1645475885210,
+      &#34;phase_execution&#34; : {
+        &#34;policy&#34; : &#34;observability-policy&#34;,
+        &#34;phase_definition&#34; : {
+          &#34;min_age&#34; : &#34;0ms&#34;,
+          &#34;actions&#34; : {
+            &#34;rollover&#34; : {
+              &#34;max_docs&#34; : 10
+            },
+            &#34;set_priority&#34; : {
+              &#34;priority&#34; : 50
+            }
+          }
+        },
+        &#34;version&#34; : 1,
+        &#34;modified_date_in_millis&#34; : 1645475702304
+      }
+    },
+    &#34;.ds-observability-time-series-2022.02.21-000002&#34; : {
+      &#34;index&#34; : &#34;.ds-observability-time-series-2022.02.21-000002&#34;,
+      &#34;managed&#34; : true,
+      &#34;policy&#34; : &#34;observability-policy&#34;,
+      &#34;lifecycle_date_millis&#34; : 1645475884525,
+      &#34;age&#34; : &#34;4.91m&#34;,
+      &#34;phase&#34; : &#34;hot&#34;,
+      &#34;phase_time_millis&#34; : 1645475884809,
+      &#34;action&#34; : &#34;rollover&#34;,
+      &#34;action_time_millis&#34; : 1645475885210,
+      &#34;step&#34; : &#34;check-rollover-ready&#34;,
+      &#34;step_time_millis&#34; : 1645475885210,
+      &#34;phase_execution&#34; : {
+        &#34;policy&#34; : &#34;observability-policy&#34;,
+        &#34;phase_definition&#34; : {
+          &#34;min_age&#34; : &#34;0ms&#34;,
+          &#34;actions&#34; : {
+            &#34;rollover&#34; : {
+              &#34;max_docs&#34; : 10
+            },
+            &#34;set_priority&#34; : {
+              &#34;priority&#34; : 50
+            }
+          }
+        },
+        &#34;version&#34; : 1,
+        &#34;modified_date_in_millis&#34; : 1645475702304
+      }
+    }
+  }
+}</code></pre></div>
+<p>On peut observer les différentes informations de nos index concernant ILM appliquée dessus.</p>
+<p>Résumé : Dans ce laboratoire, vous avez exploré la facilité avec laquelle vous pouvez mettre en place une politique de gestion du cylce de vie de vos index. Vous avez également exploré les différentes composants d&rsquo;une politique de gestion d&rsquo;index au travers des settings, mappings, template et data stream.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu">
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/security/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/security/index.html">Lab - Habilitation<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/elementaire/ilm/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/ilm/index.html">Lab - Index Lifecycle Policy<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/backup/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/backup/index.html">Lab - Backup &amp; Restore<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/elementaire/diagnostic/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/diagnostic/index.html">Lab - Diagnostic<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu"></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/elementaire/ilm/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

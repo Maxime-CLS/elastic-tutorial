@@ -1,0 +1,18 @@
+baseURL = "https://maxime-cls.github.io/elastic-tutorial/"
+title = "Elastic Tutoriel"
+theme = "hugo-theme-relearn"
+languageCode = "fr-FR"
+languageName = "Français"
+
+[module]
+  [[module.imports]]
+    path = 'github.com/McShelby/hugo-theme-relearn'
+
+[params]
+themeVariant = ['blue']
+showVisitedLinks = true
+disableSearch = false
+disableLandingPageButton = true
+
+[outputs]
+home = ["HTML", "RSS", 'search', 'searchpage']

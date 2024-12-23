@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/elastic-tutorial/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=elastic-tutorial/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 7.2.1+f1701957c30daae7cd133bec5a7968480563ce9f">
+    <meta name="description" content="Serveur Fleet Fleet Server est un composant de la pile Elastic utilisé pour gérer de manière centralisée les agents Elastic. Il est lancé en tant que partie d’un agent Elastic sur un hôte destiné à servir de serveur. Un processus Fleet Server peut prendre en charge de nombreuses connexions d’agents Elastic et sert de plan de contrôle pour la mise à jour des stratégies d’agents, la collecte d’informations d’état et la coordination des actions entre les agents Elastic.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Bonus - Fleet & Elastic Agent :: Elastic Tutoriel">
+    <meta name="twitter:description" content="Serveur Fleet Fleet Server est un composant de la pile Elastic utilisé pour gérer de manière centralisée les agents Elastic. Il est lancé en tant que partie d’un agent Elastic sur un hôte destiné à servir de serveur. Un processus Fleet Server peut prendre en charge de nombreuses connexions d’agents Elastic et sert de plan de contrôle pour la mise à jour des stratégies d’agents, la collecte d’informations d’état et la coordination des actions entre les agents Elastic.">
+    <meta property="og:url" content="http://localhost:1313/elastic-tutorial/elastic/avance/fleet/index.html">
+    <meta property="og:site_name" content="Elastic Tutoriel">
+    <meta property="og:title" content="Bonus - Fleet & Elastic Agent :: Elastic Tutoriel">
+    <meta property="og:description" content="Serveur Fleet Fleet Server est un composant de la pile Elastic utilisé pour gérer de manière centralisée les agents Elastic. Il est lancé en tant que partie d’un agent Elastic sur un hôte destiné à servir de serveur. Un processus Fleet Server peut prendre en charge de nombreuses connexions d’agents Elastic et sert de plan de contrôle pour la mise à jour des stratégies d’agents, la collecte d’informations d’état et la coordination des actions entre les agents Elastic.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Elastic">
+    <meta property="article:published_time" content="2020-06-26T15:17:20+02:00">
+    <meta property="article:modified_time" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="name" content="Bonus - Fleet & Elastic Agent :: Elastic Tutoriel">
+    <meta itemprop="description" content="Serveur Fleet Fleet Server est un composant de la pile Elastic utilisé pour gérer de manière centralisée les agents Elastic. Il est lancé en tant que partie d’un agent Elastic sur un hôte destiné à servir de serveur. Un processus Fleet Server peut prendre en charge de nombreuses connexions d’agents Elastic et sert de plan de contrôle pour la mise à jour des stratégies d’agents, la collecte d’informations d’état et la coordination des actions entre les agents Elastic.">
+    <meta itemprop="datePublished" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="dateModified" content="2020-06-26T15:17:20+02:00">
+    <meta itemprop="wordCount" content="622">
+    <title>Bonus - Fleet &amp; Elastic Agent :: Elastic Tutoriel</title>
+    <link href="/elastic-tutorial/images/favicon.png?1734964279" rel="icon" type="image/png">
+    <link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/fontawesome-all.min.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elastic-tutorial/css/auto-complete.css?1734964279" rel="stylesheet"></noscript>
+    <link href="/elastic-tutorial/css/perfect-scrollbar.min.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/theme.css?1734964279" rel="stylesheet">
+    <link href="/elastic-tutorial/css/format-html.css?1734964279" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/elastic-tutorial';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'blue' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/elastic-tutorial/elastic/avance/fleet/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#serveur-fleet">Serveur Fleet</a></li>
+        <li><a href="#serveur-apm">Serveur APM</a></li>
+        <li><a href="#intégration-du-module-apm">Intégration du module APM</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/index.html"><span itemprop="name">Elastic Tutoriel</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/index.html"><span itemprop="name">Elastic</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/elastic-tutorial/elastic/avance/index.html"><span itemprop="name">Avancé</span></a><meta itemprop="position" content="3">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Bonus - Fleet &amp; Elastic Agent</span><meta itemprop="position" content="4"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elastic-tutorial/elastic/avance/tp_query/index.html" title="TP : Définir et exécuter des requêtes de recherche dans Elasticsearch (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><span class="topbar-control"><i class="fa-fw fas fa-chevron-right"></i></span>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable elastic" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="bonus---fleet--elastic-agent">Bonus - Fleet &amp; Elastic Agent</h1>
+
+<h3 id="serveur-fleet">Serveur Fleet</h3>
+<p>Fleet Server est un composant de la pile Elastic utilisé pour gérer de manière centralisée les agents Elastic. Il est lancé en tant que partie d&rsquo;un agent Elastic sur un hôte destiné à servir de serveur. Un processus Fleet Server peut prendre en charge de nombreuses connexions d&rsquo;agents Elastic et sert de plan de contrôle pour la mise à jour des stratégies d&rsquo;agents, la collecte d&rsquo;informations d&rsquo;état et la coordination des actions entre les agents Elastic.</p>
+<p>Fleet Server est le mécanisme utilisé par les agents Elastic pour communiquer avec Elasticsearch :</p>
+<ul>
+<li>Lorsqu&rsquo;une nouvelle politique d&rsquo;agent est créée, elle est enregistrée dans Elasticsearch.</li>
+<li>Pour s&rsquo;inscrire à la politique, les agents Elastic envoient une demande à Fleet Server, en utilisant la clé d&rsquo;inscription générée pour l&rsquo;authentification.</li>
+<li>Le serveur Fleet reçoit la demande et extrait la politique d&rsquo;agent d&rsquo;Elasticsearch, puis l&rsquo;envoie à tous les agents Elastic inscrits à cette politique.</li>
+<li>L&rsquo;agent Elastic utilise les informations de configuration de la politique pour collecter et envoyer des données à Elasticsearch.</li>
+<li>Elastic Agent vérifie les mises à jour auprès de Fleet Server, en maintenant une connexion ouverte.</li>
+<li>Lorsqu&rsquo;une politique est mise à jour, Fleet Server récupère la politique mise à jour dans Elasticsearch et l&rsquo;envoie aux agents Elastic connectés.</li>
+</ul>
+<p><a href="#R-image-f95d414f4b9b18b1d1345d65ebdb0f51" class="lightbox-link"><img alt="fleet" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://www.elastic.co/guide/en/fleet/current/images/fleet-server-communication.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f95d414f4b9b18b1d1345d65ebdb0f51"><img alt="fleet" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://www.elastic.co/guide/en/fleet/current/images/fleet-server-communication.png"></a></p>
+<p>Ajoutez les deux services ci-dessous dans le fichier <strong>elastic-docker-tls.yml</strong>  :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>  package-registry:
+    image: docker.elastic.co/package-registry/distribution:${VERSION}
+    container_name: package-registry
+    ports:
+      - 443
+    environment:
+       - EPR_ADDRESS=0.0.0.0:443
+       - EPR_TLS_KEY=$CERTS_DIR/package-registry/package-registry.key
+       - EPR_TLS_CERT=$CERTS_DIR/package-registry/package-registry.crt
+    healthcheck:
+      test: curl --cacert $CERTS_DIR/ca/ca.crt -s https://localhost/health &gt;/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      retries: 100
+      interval: 5s
+    volumes:
+        - certs:$CERTS_DIR
+    networks:
+       - elastic
+  fleet-server:
+    image: docker.elastic.co/beats/elastic-agent:${VERSION}
+    container_name: fleet-server
+    ports:
+      - 8220:8220
+    healthcheck:
+      test: [&#34;CMD-SHELL&#34;, &#34;curl -s -k https://localhost:8220/api/status | grep -q &#39;HEALTHY&#39;&#34;]
+      retries: 300
+      interval: 1s
+    environment:
+      FLEET_SERVER_ENABLE: &#34;1&#34;
+      ELASTICSEARCH_HOST: &#34;https://es01:9200&#34;
+      ELASTICSEARCH_CA: $CERTS_DIR/ca/ca.crt
+      ELASTICSEARCH_USERNAME: elastic
+      ELASTICSEARCH_PASSWORD: CHANGEME
+      FLEET_URL: &#34;https://fleet-server:8220&#34;
+      FLEET_SERVER_CERT: $CERTS_DIR/fleet-server/fleet-server.crt
+      FLEET_SERVER_CERT_KEY: $CERTS_DIR/fleet-server/fleet-server.key
+      KIBANA_FLEET_SETUP: &#34;true&#34;
+      KIBANA_HOST: &#34;https://kib01:5601&#34;
+      KIBANA_USERNAME: elastic
+      KIBANA_PASSWORD: CHANGEME
+      KIBANA_CA: $CERTS_DIR/ca/ca.crt
+    depends_on:
+      es01: { condition: service_healthy }
+      kib01: { condition: service_healthy }
+    volumes:
+      - certs:$CERTS_DIR
+    networks:
+        - elastic</code></pre></div>
+<p>Définissez <strong>ELASTICSEARCH_PASSWORD</strong> et <strong>KIBANA_PASSWORD</strong> dans le fichier <strong>elastic-docker-tls.yml</strong> avec le mot de passe généré pour l&rsquo;utilisateur elastic.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>fleet-server:
+    image: docker.elastic.co/beats/elastic-agent:${VERSION}
+    container_name: fleet-server
+    ports:
+      - 8220:8220
+    healthcheck:
+      test: [&#34;CMD-SHELL&#34;, &#34;curl -s -k https://localhost:8220/api/status | grep -q &#39;HEALTHY&#39;&#34;]
+      retries: 300
+      interval: 1s
+    environment:
+      FLEET_SERVER_ENABLE: &#34;1&#34;
+      ELASTICSEARCH_HOST: &#34;https://es01:9200&#34;
+      ELASTICSEARCH_CA: $CERTS_DIR/ca/ca.crt
+      ELASTICSEARCH_USERNAME: elastic
+      ELASTICSEARCH_PASSWORD: CHANGEME
+      FLEET_URL: &#34;https://fleet-server:8220&#34;
+      FLEET_SERVER_CERT: $CERTS_DIR/fleet-server/fleet-server.crt
+      FLEET_SERVER_CERT_KEY: $CERTS_DIR/fleet-server/fleet-server.key
+      KIBANA_FLEET_SETUP: &#34;true&#34;
+      KIBANA_HOST: &#34;https://kib01:5601&#34;
+      KIBANA_USERNAME: elastic
+      KIBANA_PASSWORD: CHANGEME
+      KIBANA_CA: $CERTS_DIR/ca/ca.crt</code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0"><code>docker-compose -f elastic-docker-tls.yml up -d</code></pre></div>
+<p>Vérifiez la connexion entre le serveur Fleet et Kibana :</p>
+<p><strong>Management</strong> -&gt; <strong>Fleet</strong></p>
+<p><a href="#R-image-819d35a4b6a7ddebcb894a4d6ff2411c" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/prerequis/fleet.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-819d35a4b6a7ddebcb894a4d6ff2411c"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/prerequis/fleet.png"></a></p>
+<h3 id="serveur-apm">Serveur APM</h3>
+<p>Ajoutez le service ELastic Agent dans le fichier <strong>elastic-docker-tls.yml</strong>  : :</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>  elastic-agent:
+    image: docker.elastic.co/beats/elastic-agent-complete:${VERSION}
+    container_name: elastic-agent
+    restart: always
+    user: root # note, synthetic browser monitors require this set to `elastic-agent`
+    environment:
+      FLEET_ENROLL: 1
+      FLEET_URL: &#34;https://fleet-server:8220&#34;
+      FLEET_TOKEN_POLICY_NAME: &#34;Default policy&#34;
+      FLEET_CA: $CERTS_DIR/ca/ca.crt
+      KIBANA_FLEET_HOST: https://kib01:5601
+      KIBANA_FLEET_USERNAME: elastic
+      KIBANA_FLEET_PASSWORD: CHANGEME
+      KIBANA_FLEET_CA: $CERTS_DIR/ca/ca.crt
+    depends_on:
+       es01: { condition: service_healthy }
+       fleet-server: { condition: service_healthy }
+    volumes:
+       - certs:$CERTS_DIR
+       - /var/run/docker.sock:/var/run/docker.sock:ro
+       - /var/log:/var/log:ro
+       - /var/lib/docker/containers:/var/lib/docker/containers:ro
+       - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+       - /proc:/hostfs/proc:ro
+       - /:/hostfs:ro
+    networks:
+       - elastic</code></pre></div>
+<p>Modifier la configuration par défaut des agents elastic via le serveur fleet sur l&rsquo;interface Kibana :</p>
+<p><strong>Management</strong> -&gt; <strong>Fleet</strong></p>
+<p>Cliquez sur <strong>Fleet settings</strong></p>
+<p><a href="#R-image-23f849452ef34aa8f246b410c4b7e736" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/fleet_settings.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-23f849452ef34aa8f246b410c4b7e736"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/fleet_settings.png"></a></p>
+<p><strong>Fleet Server Hosts</strong></p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>https://fleet-server:8220</code></pre></div>
+<p><strong>Elasticsearch Output Configuration (YAML)</strong></p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ssl.certificate_authorities: [&#34;/usr/share/elasticsearch/config/certificates/ca/ca.crt&#34;]</code></pre></div>
+<p><a href="#R-image-741736b81844860bcd8558ae12575027" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/fleet_settings_configuration.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-741736b81844860bcd8558ae12575027"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/fleet_settings_configuration.png"></a></p>
+<p>Définissez KIBANA_FLEET_PASSWORD dans le fichier elastic-docker-tls.yml avec le mot de passe généré pour l&rsquo;utilisateur elastic.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>  elastic-agent:
+    image: docker.elastic.co/beats/elastic-agent-complete:${VERSION}
+    container_name: elastic-agent
+    restart: always
+    user: root # note, synthetic browser monitors require this set to `elastic-agent`
+    environment:
+      FLEET_ENROLL: 1
+      FLEET_URL: &#34;https://fleet-server:8220&#34;
+      FLEET_TOKEN_POLICY_NAME: &#34;Default policy&#34;
+      FLEET_CA: $CERTS_DIR/ca/ca.crt
+      KIBANA_FLEET_HOST: https://kib01:5601
+      KIBANA_FLEET_USERNAME: elastic
+      KIBANA_FLEET_PASSWORD: CHANGEME
+      KIBANA_FLEET_CA: $CERTS_DIR/ca/ca.crt
+    depends_on:
+       es01: { condition: service_healthy }
+       fleet-server: { condition: service_healthy }
+    volumes:
+       - certs:$CERTS_DIR
+       - /var/run/docker.sock:/var/run/docker.sock:ro
+       - /var/log:/var/log:ro
+       - /var/lib/docker/containers:/var/lib/docker/containers:ro
+       - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+       - /proc:/hostfs/proc:ro
+       - /:/hostfs:ro
+    networks:
+       - elastic</code></pre></div>
+<p>Après quelques minutes vous devez voir apparaitre l&rsquo;agent elastic sur l&rsquo;interface Kibana.</p>
+<p><a href="#R-image-cb89651ecdfff97d6bac8dad06fad8f8" class="lightbox-link"><img alt="image.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/fleet_agent_elastic.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cb89651ecdfff97d6bac8dad06fad8f8"><img alt="image.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elastic-tutorial/images/attachments/debutant/fleet_agent_elastic.png"></a></p>
+<h3 id="intégration-du-module-apm">Intégration du module APM</h3>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="../../../../elastic-tutorial/media/logo.png">
+
+        </div>
+        <script>
+          window.index_js_url="/elastic-tutorial/searchindex.en.js?1734964279";
+        </script>
+        <search><form action="/elastic-tutorial/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/elastic-tutorial/js/auto-complete.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.stemmer.support.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.multi.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/lunr/lunr.fr.min.js?1734964279" defer></script>
+        <script src="/elastic-tutorial/js/search.js?1734964279" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/elastic-tutorial/elastic/index.html"><a class="padding" href="/elastic-tutorial/elastic/index.html">Elastic<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-2fb215aa6c2816b68182f3c5e462709d" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/prerequis/index.html"><a class="padding" href="/elastic-tutorial/elastic/prerequis/index.html">Prérequis<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-7086fcf5927fdb5d7a9a37ad70a1a771" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/d%C3%A9butant/index.html"><a class="padding" href="/elastic-tutorial/elastic/d%C3%A9butant/index.html">Débutant<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-0f3b6ae35e8a87de7075d0ca1838acd6" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/elementaire/index.html"><a class="padding" href="/elastic-tutorial/elastic/elementaire/index.html">Elementaire<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-f37e63f6fad9a20a67e4f3b500605734" class="collapsible-menu"></ul></li>
+            <li class="alwaysopen " data-nav-id="/elastic-tutorial/elastic/intermediare/index.html"><a class="padding" href="/elastic-tutorial/elastic/intermediare/index.html">Intermediare<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-348359be13e47e9a81a0cfee40b1c861" class="collapsible-menu"></ul></li>
+            <li class="parent alwaysopen " data-nav-id="/elastic-tutorial/elastic/avance/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/index.html">Avancé<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-493e259adad922ccab6b5f9f0da2deb7" class="collapsible-menu">
+            <li class="" data-nav-id="/elastic-tutorial/elastic/avance/term/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/term/index.html">Labs - Query niveau I<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/avance/sort/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/sort/index.html">Labs - Query niveau II<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/avance/query/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/query/index.html">Labs - Query niveau III<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="" data-nav-id="/elastic-tutorial/elastic/avance/tp_query/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/tp_query/index.html">TP : Définir et exécuter des requêtes de recherche dans Elasticsearch<i class="fa-fw fas fa-check read-icon"></i></a></li>
+            <li class="active " data-nav-id="/elastic-tutorial/elastic/avance/fleet/index.html"><a class="padding" href="/elastic-tutorial/elastic/avance/fleet/index.html">Bonus - Fleet &amp; Elastic Agent<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elastic-tutorial/elastic/avance/fleet/index.html" lang="fr-FR" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elastic-tutorial/js/clipboard.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/perfect-scrollbar.min.js?1734964279" defer></script>
+    <script src="/elastic-tutorial/js/theme.js?1734964279" defer></script>
+  </body>
+</html>

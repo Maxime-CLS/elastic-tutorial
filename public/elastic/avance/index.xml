@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Avancé :: Elastic Tutoriel</title>
+    <link>http://localhost:1313/elastic-tutorial/elastic/avance/index.html</link>
+    <description></description>
+    <generator>Hugo</generator>
+    <language>fr-FR</language>
+    <lastBuildDate>Fri, 26 Jun 2020 15:17:20 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/elastic-tutorial/elastic/avance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Labs - Query niveau I</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/avance/term/index.html</link>
+      <pubDate>Wed, 29 Apr 2020 10:10:47 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/avance/term/index.html</guid>
+      <description>Préparation PUT /shakespeare { &#34;mappings&#34;: { &#34;properties&#34;: { &#34;speaker&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;play_name&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;line_id&#34;: {&#34;type&#34;: &#34;integer&#34;}, &#34;speech_number&#34;: {&#34;type&#34;: &#34;integer&#34;} } } } curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/shakespeare/doc/_bulk?pretty&#39; --data-binary @shakespeare_6.0.json GET _cat/nodes?v GET _cat/indices?v ## API Search Recherche plusieurs terms (match) Renvoie les documents qui correspondent à un texte, un nombre, une date ou une valeur booléenne fournis. Le texte fourni est analysé avant de correspondre.</description>
+    </item>
+    <item>
+      <title>Labs - Query niveau II</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/avance/sort/index.html</link>
+      <pubDate>Wed, 29 Apr 2020 10:10:47 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/avance/sort/index.html</guid>
+      <description>Préparation PUT /shakespeare { &#34;mappings&#34;: { &#34;properties&#34;: { &#34;speaker&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;play_name&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;line_id&#34;: {&#34;type&#34;: &#34;integer&#34;}, &#34;speech_number&#34;: {&#34;type&#34;: &#34;integer&#34;} } } } curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/shakespeare/doc/_bulk?pretty&#39; --data-binary @shakespeare_6.0.json GET _cat/nodes?v GET _cat/indices?v Sort Permet d’ajouter un ou plusieurs tris sur des champs spécifiques. Chaque tri peut également être inversé. Le tri est défini au niveau de chaque champ, avec un nom de champ spécial pour _score pour trier par score, et _doc pour trier par ordre d’index.</description>
+    </item>
+    <item>
+      <title>Labs - Query niveau III</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/avance/query/index.html</link>
+      <pubDate>Wed, 29 Apr 2020 10:10:47 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/avance/query/index.html</guid>
+      <description>Préparation PUT /shakespeare { &#34;mappings&#34;: { &#34;properties&#34;: { &#34;speaker&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;play_name&#34;: {&#34;type&#34;: &#34;keyword&#34;}, &#34;line_id&#34;: {&#34;type&#34;: &#34;integer&#34;}, &#34;speech_number&#34;: {&#34;type&#34;: &#34;integer&#34;} } } } curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/bank/account/_bulk?pretty&#39; --data-binary @accounts.json curl -H &#39;Content-Type: application/x-ndjson&#39; -XPOST &#39;localhost:9200/shakespeare/doc/_bulk?pretty&#39; --data-binary @shakespeare_6.0.json GET _cat/nodes?v GET _cat/indices?v API Search ### Recherche un terms via un boolean GET _search { &#34;query&#34;: { &#34;bool&#34;: { &#34;must&#34;: [ { &#34;term&#34;: { &#34;gender.keyword&#34;: { &#34;value&#34;: &#34;F&#34; } } } ] } } } Recherche un terms via un boolean et ne pas recherche un term dans les résultats GET _search { &#34;query&#34;: { &#34;bool&#34;: { &#34;must&#34;: [ { &#34;term&#34;: { &#34;gender.keyword&#34;: { &#34;value&#34;: &#34;F&#34; } } } ], &#34;must_not&#34;: [ { &#34;term&#34;: { &#34;state.keyword&#34;: { &#34;value&#34;: &#34;RI&#34; } } } ] } } } Recherche un terms via un boolean, ne pas rechercher un term dans les résultats et de rechercher des résultats avec au moins un des terms GET _search { &#34;query&#34;: { &#34;bool&#34;: { &#34;must&#34;: [ { &#34;term&#34;: { &#34;gender.keyword&#34;: { &#34;value&#34;: &#34;F&#34; } } } ], &#34;must_not&#34;: [ { &#34;term&#34;: { &#34;state.keyword&#34;: { &#34;value&#34;: &#34;RI&#34; } } } ], &#34;should&#34;: [ { &#34;term&#34;: { &#34;lastname.keyword&#34;: { &#34;value&#34;: &#34;Meyers&#34; } } }, { &#34;term&#34;: { &#34;lastname.keyword&#34;: { &#34;value&#34;: &#34;Owens&#34; } } } ], &#34;minimum_should_match&#34;: 1 } } } Recherche un terms via un boolean, ne pas rechercher un term dans les résultats, de rechercher des résultats avec au moins un des terms et un filtre sur la ville GET _search { &#34;query&#34;: { &#34;bool&#34;: { &#34;must&#34;: [ { &#34;term&#34;: { &#34;gender.keyword&#34;: { &#34;_name&#34;: &#34;gender&#34;, &#34;value&#34;: &#34;F&#34; } } } ], &#34;must_not&#34;: [ { &#34;term&#34;: { &#34;state.keyword&#34;: { &#34;_name&#34;: &#34;state&#34;, &#34;value&#34;: &#34;RI&#34; } } } ], &#34;should&#34;: [ { &#34;term&#34;: { &#34;lastname.keyword&#34;: { &#34;_name&#34;: &#34;lastname_1&#34;, &#34;value&#34;: &#34;Meyers&#34; } } }, { &#34;term&#34;: { &#34;lastname.keyword&#34;: { &#34;_name&#34;: &#34;lastname_2&#34;, &#34;value&#34;: &#34;Owens&#34; } } } ], &#34;minimum_should_match&#34;: 1, &#34;filter&#34;: { &#34;term&#34;: { &#34;city.keyword&#34;: &#34;Jacksonburg&#34; } } } } } Meme requete qu’au dessus avec le meme score GET _search { &#34;query&#34;: { &#34;bool&#34;: { &#34;must&#34;: [ { &#34;term&#34;: { &#34;gender.keyword&#34;: { &#34;_name&#34;: &#34;gender&#34;, &#34;value&#34;: &#34;F&#34; } } } ], &#34;should&#34;: [ { &#34;term&#34;: { &#34;lastname.keyword&#34;: { &#34;_name&#34;: &#34;lastname_1&#34;, &#34;value&#34;: &#34;Meyers&#34; } } } ], &#34;minimum_should_match&#34;: 1, &#34;filter&#34;: { &#34;term&#34;: { &#34;city.keyword&#34;: &#34;Jacksonburg&#34; } } } } }</description>
+    </item>
+    <item>
+      <title>TP : Définir et exécuter des requêtes de recherche dans Elasticsearch</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/avance/tp_query/index.html</link>
+      <pubDate>Wed, 29 Apr 2020 10:10:47 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/avance/tp_query/index.html</guid>
+      <description>Description Savoir comment collecter, analyser, enrichir et indexer des données dans Elasticsearch est important, mais savoir comment poser des questions précises sur les données est encore plus crucial. Après tout, vous ne pouvez pas épeler “Elasticsearch” sans “recherche” ! Que vous utilisiez Elasticsearch pour la recherche de sites, la recherche de produits, l’analyse opérationnelle ou la veille stratégique, savoir formuler des requêtes de recherche complexes est essentiel pour tirer de la valeur de toutes ces données que vous avez réussi à collecter, analyser, enrichir et indexer. Dans ce laboratoire pratique, vous allez effectuer les tâches suivantes :</description>
+    </item>
+    <item>
+      <title>Bonus - Fleet &amp; Elastic Agent</title>
+      <link>http://localhost:1313/elastic-tutorial/elastic/avance/fleet/index.html</link>
+      <pubDate>Fri, 26 Jun 2020 15:17:20 +0200</pubDate>
+      <guid>http://localhost:1313/elastic-tutorial/elastic/avance/fleet/index.html</guid>
+      <description>Serveur Fleet Fleet Server est un composant de la pile Elastic utilisé pour gérer de manière centralisée les agents Elastic. Il est lancé en tant que partie d’un agent Elastic sur un hôte destiné à servir de serveur. Un processus Fleet Server peut prendre en charge de nombreuses connexions d’agents Elastic et sert de plan de contrôle pour la mise à jour des stratégies d’agents, la collecte d’informations d’état et la coordination des actions entre les agents Elastic.</description>
+    </item>
+  </channel>
+</rss>
