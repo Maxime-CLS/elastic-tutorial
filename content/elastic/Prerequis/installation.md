@@ -147,7 +147,7 @@ Démarrer la stack Elastic
 ```
 cd elastic-platform/elastic-stack
 chmod +x elastic-container.sh
-./elastic-container start
+./elastic-container.sh start
 ```
 
 ```
