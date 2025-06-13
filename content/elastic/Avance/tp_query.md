@@ -21,6 +21,7 @@ Vous travaillez en tant que consultant Elasticsearch et avez été engagé par u
 
 ### Préparation
 
+Les fichiers de données sont stockées dans elastic-stack/data.
 
 ```
 PUT /shakespeare

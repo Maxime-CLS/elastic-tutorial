@@ -7,6 +7,8 @@ weight: 10
 
 ## Préparation
 
+Les fichiers de données sont stockées dans elastic-stack/data.
+
 ```
 PUT /shakespeare
 {

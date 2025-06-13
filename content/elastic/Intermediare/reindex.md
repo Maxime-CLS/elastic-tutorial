@@ -13,14 +13,16 @@ Que vous ayez besoin de modifier le mappage d'un index existant ou de prendre un
 * Créer un pipeline de nœuds d'ingestion
 * Transformer les données pendant le processus de réindexation
 
-Vous travaillez en tant que bibliothécaire de recherche et vous étudiez actuellement les œuvres de Shakespeare, en particulier Roméo et Juliette. Vous avez un cluster Elasticsearch à 6 nœuds et les œuvres complètes de Shakespeare, que vous utilisez pour votre analyse littéraire. Actuellement, les œuvres complètes de Shakespeare sont indexées dans un seul index appelé shakespeare, mais, comme vous vous concentrez actuellement sur la pièce Roméo et Juliette, vous préférez copier cette pièce dans son propre index.
+Vous travaillez en tant que bibliothécaire de recherche et vous étudiez actuellement les œuvres de Shakespeare, en particulier Roméo et Juliette. Vous avez un cluster Elasticsearch à 1 nœud et les œuvres complètes de Shakespeare, que vous utilisez pour votre analyse littéraire. Actuellement, les œuvres complètes de Shakespeare sont indexées dans un seul index appelé shakespeare, mais, comme vous vous concentrez actuellement sur la pièce Roméo et Juliette, vous préférez copier cette pièce dans son propre index.
 
-Pour ce faire, vous devrez d'abord créer un nouvel index appelé romeo_and_juliet avec les mêmes mappages de champs que l'index shakespeare. Comme votre cluster Elasticsearch à 3 nœuds ne compte que 4 nœuds de données, vous souhaitez créer l'index romeo_and_juliet avec 4 shards primaires et 3 shards répliques pour une réplication maximale. Une fois l'index romeo_and_juliet créé, vous devrez utiliser l'API _reindex pour copier tous les documents dont le nom de pièce est "Romeo and Juliet" vers l'index romeo_and_juliet.
+Pour ce faire, vous devrez d'abord créer un nouvel index appelé romeo_and_juliet avec les mêmes mappages de champs que l'index shakespeare. Vous souhaitez créer l'index romeo_and_juliet avec 4 shards primaires et 3 shards répliques pour une réplication maximale. Une fois l'index romeo_and_juliet créé, vous devrez utiliser l'API _reindex pour copier tous les documents dont le nom de pièce est "Romeo and Juliet" vers l'index romeo_and_juliet.
 
 En plus de copier les données de la pièce Roméo et Juliette dans son propre index, vous souhaitez également modifier les données en cours de route pendant le processus de réindexation. Plus précisément, vous voulez prendre le contenu du champ text_entry et stocker chaque mot délimité par des espaces dans un tableau appelé word_array. En outre, vous voulez ajouter un champ word_count qui est égal au nombre de mots dans le champ word_array. Enfin, comme l'index ne contiendra que les données relatives à la pièce Roméo et Juliette, nous pouvons supprimer le champ play_name. Tout ceci peut être accompli avec un pipeline de nœuds d'acquisition utilisant les processeurs split, script et remove.
 
 
 #### Préparation des données
+
+Les fichiers de données sont stockées dans elastic-stack/data.
 
 ```
 PUT /shakespeare
@@ -37,6 +39,7 @@ PUT /shakespeare
 ```
 
 ```
+cd elastic-stack/data
 curl --location --request POST 'https://localhost:9200/bank/account/_bulk?pretty' \
 --header 'Content-Type: application/x-ndjson' \
 --header 'Authorization: Basic ZWxhc3RpYzpXc1dnVkFUaUUxSWxsd2tEUXlQbw==' \
